@@ -14,100 +14,102 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gabinet Gracja</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="assets/css/styles.min.css">
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 
 <body>
-<nav class="navbar navbar-dark navbar-expand-md" style="background-color:#2d2d2d;color:rgb(255,255,255);font-weight:100;text-transform:uppercase;">
-    <div class="container"><a class="navbar-brand" href="#"><img src="assets/img/LOGO.png" style="margin:-46px;"></a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span></button>
-        <div class="collapse navbar-collapse"
-             id="navcol-1">
-            <ul class="nav navbar-nav ml-auto">
-                <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">Strona Główna</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">Oferta zabiegowa</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">Oferta sprzedażowa</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">Kontakt</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="logowanie.jsp" style="color:#ffffff;">Logowanie</a></li>
-            </ul>
+
+<div id="navbar-placeholder">
+
+</div>
+
+<script>
+    $(function(){
+        $("#navbar-placeholder").load("navbar.jsp");
+    });
+</script>
+
+<section style="margin-bottom:30px;">
+    <div id="promo-section" style="height:290px;margin-top:-42px;margin-bottom:-40px;">
+        <div class="jumbotron" style="background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;margin-top:21px;max-width:800px;margin-right:auto;margin-left:auto;">
+            <h1 style="color:rgb(255,255,255);height:37px;">Gabinet Kosmetyczny "Gracja"</h1>
+            <p style="min-height:0px;">Gabinet "Gracja" w ciągu 15 lat zdobył zaufanie wielu stałych klientek. Nasza kadra wciąż podnosi swoje kwalifikacje co w połączeniu z wieloletnim doświadczeniem pozwala na profesjonalne wykonywanie wszystkich naszych zabiegów.</p>
         </div>
     </div>
-</nav>
-<div id="promo-section">
-    <div class="jumbotron" style="background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;margin-top:21px;max-width:800px;margin-right:auto;margin-left:auto;">
-        <h1 style="color:rgb(255,255,255);height:73px;">Gabinet Kosmetyczny "Gracja"</h1>
-        <p style="min-height:none;">Gabinet "Gracja" w ciągu 15 lat zdobył zaufanie wielu stałych klientek. Nasza kadra wciąż podnosi swoje kwalifikacje co w połączeniu z wieloletnim doświadczeniem pozwala na profesjonalne wykonywanie wszystkich naszych zabiegów.</p>
-    </div>
-    <section id="team" class="bg-light-gray" style="height:398px;max-height:341px;margin-top:-128px;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;margin-top:21px;max-width:800px;margin-right:auto;margin-left:auto;border-radius:20px;">
-        <h2 class="section-heading" style="color:rgb(255,255,255);">Nasz zespół</h2>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-4">
-                    <div class="team-member"><img class="rounded-circle img-fluid" src="assets/img/Aleksandra_Krzys_Profil.jpg">
-                        <h4>Aleksandra Krzyś</h4>
-                        <ul class="list-inline social-buttons"></ul>
-                    </div>
+</section>
+<section id="team" class="bg-light-gray" style="height:400px;max-height:341px;margin-top:-128px;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:0;padding-top:20px;margin-top:0;max-width:800px;margin-right:auto;margin-left:auto;border-radius:20px;margin-bottom:30px;">
+    <h2 class="section-heading col-xl-4" style="color:rgb(255,255,255);margin-right:auto;margin-left:auto;text-align:center;">Nasz zespół</h2>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="team-member"><img class="rounded-circle img-fluid" src="assets/img/Aleksandra_Krzys_Profil.jpg">
+                    <h4>Aleksandra Krzyś</h4>
                 </div>
-                <div class="col-sm-4">
-                    <div class="team-member"><img class="rounded-circle img-fluid" src="assets/img/Anna%20Wąsik.jpg">
-                        <h4>Anna Wąsik</h4>
-                        <ul class="list-inline social-buttons"></ul>
-                    </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="team-member"><img class="rounded-circle img-fluid" src="assets/img/Anna%20Wąsik.jpg">
+                    <h4>Anna Wąsik</h4>
                 </div>
-                <div class="col-sm-4">
-                    <div class="team-member"><img class="rounded-circle img-fluid" src="assets/img/Joanna%20Lewioda.jpg">
-                        <h4>Joanna Lewioda</h4>
-                        <ul class="list-inline social-buttons"></ul>
-                    </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="team-member"><img class="rounded-circle img-fluid" src="assets/img/Joanna%20Lewioda.jpg">
+                    <h4>Joanna Lewioda</h4>
                 </div>
             </div>
         </div>
-    </section>
-</div>
-<div class="footer-clean" style="color:rgb(0,0,0);">
-    <footer>
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-sm-4 col-md-3 item">
-                    <h3>Usługi</h3>
-                    <ul>
-                        <li>&nbsp;</li>
-                        <li><a href="#">Oferta zabiegowa</a></li>
-                        <li><a href="#">Oferta sprzedażowa</a></li>
-                        <li></li>
-                    </ul>
+    </div>
+</section>
+
+<section id="uslugi" class="bg-light-gray" style="height:400px;max-height:341px;margin-top:-128px;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;margin-top:0;max-width:800px;margin-right:auto;margin-left:auto;border-radius:20px;margin-bottom:30px;">
+    <h2 class="section-heading" style="color:rgb(255,255,255);margin-right:auto;margin-left:auto;text-align:center;margin-bottom:28px;">Najczęściej wybierane usługi</h2>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="uslugi"><img class="img-thumbnail img-fluid" src="assets/img/u1.jpg" id="usluga">
+                    <h4>Kosmetyka&nbsp;<br>dłoni i ciała<br></h4>
                 </div>
-                <div class="col-sm-4 col-md-3 item">
-                    <h3>O nas</h3>
-                    <ul>
-                        <li>&nbsp;</li>
-                        <li><a href="#">Aktualności</a></li>
-                        <li><a href="#">Kontakt</a></li>
-                        <li></li>
-                    </ul>
+            </div>
+            <div class="col-sm-4">
+                <div class="uslugi"><img class="img-thumbnail img-fluid" src="assets/img/u2.jpg" id="usluga">
+                    <h4>Karboksyterapia&nbsp;<br>ciała i twarzy</h4>
                 </div>
-                <div class="col-sm-4 col-md-3 item">
-                    <h3>Gabinet Kosmetyczny "Gracja"</h3>
-                    <ul>
-                        <li><a href="#" style="color:rgb(0,0,0);">Al. Jana Pawła II 13a/2</a></li>
-                        <li>37-450 Stalowa Wola</li>
-                        <li>tel.: (15) 842 94 19</li>
-                        <li>10.00-18.00 pn-pt<br></li>
-                        <li></li>
-                    </ul>
-                </div>
-                <div class="col-lg-3 item social"><a href="https://www.facebook.com/Gracja-Gabinet-Kosmetyczny-255745234516172/"><i class="icon ion-social-facebook"></i></a><a href="https://www.instagram.com/gabinet.gracja/"><i class="icon ion-social-instagram-outline"></i></a>
-                    <a
-                            href="mailto:info@gabinetgracja.com.pl"><i class="icon ion-email"></i></a><a href="https://www.messenger.com/t/255745234516172"><i class="icon ion-android-mail"></i></a>
-                    <p class="copyright" style="width:281px;">Gabinet Kosmetyczny "Gracja" Anna Wasik</p>
+            </div>
+            <div class="col-sm-4">
+                <div class="uslugi"><img class="img-thumbnail img-fluid" src="assets/img/u3.jpg" id="usluga">
+                    <h4>Makijaże okolicznościowe<br></h4>
                 </div>
             </div>
         </div>
-    </footer>
+    </div>
+</section>
+<a id="kontakt_gracja"></a>
+<section id="kontakt" class="bg-light-gray" style="margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:800px;margin-right:auto;margin-left:auto;border-radius:20px;margin-bottom:30px;">
+    <form form action="mailing.php" method="post">
+        <h2 class="text-center" style="height:53px;">Skontaktuj się z nami</h2>
+        <div class="form-group"><input class="form-control" type="text" name="imie" required="" placeholder="Imię i nazwisko" style="margin:0;width:500px;margin-left:145px;"></div>
+        <div class="form-group"><input class="form-control" type="email" name="email" required="" placeholder="Twój e-mail" style="margin:0;width:500px;margin-left:145px;"></div>
+        <div class="form-group"><textarea class="form-control" rows="6" name="tresc" required="" placeholder="Wiadomość" minlength="10" style="margin:0;width:500px;margin-left:145px;"></textarea></div>
+        <div class="form-group"><button class="btn btn-primary" type="submit" style="margin:0;width:265px;margin-left:267px;">Wyślij</button></div>
+    </form>
+</section>
+
+<!--Footer bar-->
+<div id="footer-placeholder">
+
 </div>
+
+<script>
+    $(function(){
+        $("#footer-placeholder").load("footer.jsp");
+    });
+</script>
+<!--end of Footer bar-->
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
-</body>
 
+</body>
 </html>
