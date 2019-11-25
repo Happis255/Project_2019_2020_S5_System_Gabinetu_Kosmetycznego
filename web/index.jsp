@@ -16,7 +16,7 @@
     <title>Gabinet Gracja</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-    <link rel="stylesheet" href="assets/css/styles.min.css">
+    <link rel="stylesheet" href="assets/css/styles.min.css?v=1.1">
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 
