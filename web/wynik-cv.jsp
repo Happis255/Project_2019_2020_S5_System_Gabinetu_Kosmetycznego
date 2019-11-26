@@ -33,9 +33,7 @@
 
 <section id="kontakt" class="bg-light-gray" style="margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:800px;margin-right:auto;margin-left:auto;border-radius:20px;margin-bottom:229px;margin-top:180px;">
 
-    <h2 class="text-center" style="height:53px;">Nie powiodło się dodawanie pliku CV</h2>
-    <h5 class="text-center" style="height:99px;margin-right:50px;margin-left:50px;"><br>Upewnij się, czy twój plik CV posiada format .PDF, .DOC&nbsp;<br>bądź .DOCX oraz czy plik nie przekracza rozmiaru 50MB.<br></h5>
-    <div class="form-group"><a href="wyslij-cv.jsp"><button class="btn btn-primary" type="submit" style="margin:0;width:265px;margin-left:267px;">Powrót do strony CV</button></a></div>
+    <div>${requestScope.message}</div>
 
 </section>
 

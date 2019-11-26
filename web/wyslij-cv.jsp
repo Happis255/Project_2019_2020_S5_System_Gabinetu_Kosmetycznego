@@ -45,7 +45,7 @@
         <div class="form-group"><input class="form-control" type="text" name="miejscowosc" required="" placeholder="Miejscowość" style="margin:0;width:500px;margin-left:145px;"></div>
         <div class="form-group"><input class="form-control" type="text" name="kod-pocztowy" required="" placeholder="Kod pocztowy" style="margin:0;width:500px;margin-left:145px;"></div>
         <div class="form-group"><label style="font-size:17px;margin-left:101px;">Twoje CV</label></div>
-        <div class="form-group"><input type="file" name="file" id="fileToUpload" style="margin:0px;margin-left:146px;" accept="application/pdf, application/msword, application/rtf, text/rtf"></div>
+        <div class="form-group"><input type="file" name="file" id="fileToUpload" required="" style="margin:0px;margin-left:146px;" accept="application/pdf, application/msword, application/rtf, text/rtf"></div>
         <div class="form-group"><button class="btn btn-primary" name="submit" type="submit" style="margin:0;width:265px;margin-left:267px;">Wyślij</button></div>
     </form>
 </section>
