@@ -66,7 +66,7 @@
             Oba hasła muszą być identyczne.
         </div>
     </div>
-    <div class="form-group"><button class="btn btn-primary" type="submit" style="margin:0;width:265px;margin-left:267px;">Utwórz kartę klienta</button></div>
+    <div class="form-group"><button class="btn btn-primary" type="submit" style="margin:0;width:265px;margin-left:267px;">Utwórz kartę informacyjną</button></div>
 </form>
 </section>
 
