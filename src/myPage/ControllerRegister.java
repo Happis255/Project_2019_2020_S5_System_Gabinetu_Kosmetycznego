@@ -27,7 +27,6 @@ public class ControllerRegister extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String repeatPassword = request.getParameter("repeatPassword");
-        int typKonta = Integer.parseInt(request.getParameter("typKonta"));
 
         if(password.compareTo(repeatPassword) != 0){
             System.out.println("hasla nie sa takie same");
@@ -47,7 +46,7 @@ public class ControllerRegister extends HttpServlet {
         Encrypter pws = new Encrypter();
         String encryptedPasswd = pws.encrypt(password);
 
-        dataSource.createClientDB(new Client(username), new Account(encryptedPasswd));
+        dataSource.createClientDB(new Client(username, encryptedPasswd));
 
         response.sendRedirect("logowanie.jsp");
     }

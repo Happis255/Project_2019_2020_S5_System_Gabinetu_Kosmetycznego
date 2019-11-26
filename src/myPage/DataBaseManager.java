@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 
 public class DataBaseManager {
-    private final static String DB_URL = "jdbc:mysql://127.0.0.1:3306/id11689767_projektgabinetgracja";
+    private final static String DB_URL = "jdbc:mysql://127.0.0.1:3306/projektgabinetgracjadb";
     private final static String USER_NAME = "root";
     private final static String USER_PASSWD = "";
     private final static String DB_DRIVER = "com.mysql.jdbc.Driver";
@@ -25,7 +25,9 @@ public class DataBaseManager {
                     "telefon, e_mail, ilosc_punktow, id_karty, id_statusu, id_konta) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"));
             statements.put("getAccount", connection.prepareStatement("select * from konto where "));
             statements.put("addAccount", connection.prepareStatement("insert into konto (id_konta, haslo, typ_konta) values (?, ?, ?)"));
-            statements.put("procedureAddAccount", connection.prepareStatement("{call utworz_klienta(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}"));
+            statements.put("createClient_P", connection.prepareStatement("{call utworz_klienta(?, ?, ?, ?, ?, ?, ?, ?, ?)}"));
+            statements.put("createClientCard_P", connection.prepareStatement("{call utworz_karte_klienta(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}"));
+            statements.put("assignClientCard_P", connection.prepareStatement("{call przypisz_karte_klienta(?)}"));
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
