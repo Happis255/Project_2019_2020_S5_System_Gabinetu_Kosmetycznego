@@ -24,9 +24,9 @@ public class ControllerRegister extends HttpServlet {
             return;
         }
 
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        String repeatPassword = request.getParameter("repeatPassword");
+        String username = request.getParameter("e-mail");
+        String password = request.getParameter("haslo");
+        String repeatPassword = request.getParameter("powtorz-haslo");
 
         if(password.compareTo(repeatPassword) != 0){
             System.out.println("hasla nie sa takie same");
