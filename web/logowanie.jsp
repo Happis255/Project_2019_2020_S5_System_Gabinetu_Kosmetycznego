@@ -34,9 +34,9 @@
 <!--end of navbar bar-->
 
     <section id="logowanie" class="bg-light-gray" style="margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:800px;margin-right:auto;margin-left:auto;border-radius:20px;margin-bottom:155px;margin-top:60px;">
-        <form method="post" action="waliduj.jsp" onsubmit="code(this)">
+        <form method="post" action="UserLogin" onsubmit="code(this)">
             <h2 class="text-center" style="height:53px;">Zaloguj się do systemu</h2>
-            <div class="form-group"><label style="font-size:17px;margin-left:123px;">E-Mail</label><input class="form-control" type="email" name="name" required="" placeholder="E-Mail" style="width:500px;margin:0px;margin-left:145px;"><label style="font-size:17px;margin-left:123px;margin-top:16px;">Hasło</label>
+            <div class="form-group"><label style="font-size:17px;margin-left:123px;">E-Mail</label><input class="form-control" type="email" name="username" required="" placeholder="E-Mail" style="width:500px;margin:0px;margin-left:145px;"><label style="font-size:17px;margin-left:123px;margin-top:16px;">Hasło</label>
                 <input class="form-control" type="password" name="password" placeholder="Hasło" style="margin:0;margin-left:145px;width:500px;">
                 <button class="btn btn-primary" type="submit" style="margin:0;width:265px;margin-left:267px;margin-top:50px;">Zaloguj się</button>
             </div>
