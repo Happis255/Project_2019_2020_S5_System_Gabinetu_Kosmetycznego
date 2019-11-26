@@ -359,3 +359,15 @@ section#team h3.section-subheading{
     border-color: #2d2d2d;
 }
 
+#RODO {
+    font-weight:300;
+}
+
+a {
+    color:white;
+}
+
+a:hover {
+    color:#2d2d2d;
+}
+

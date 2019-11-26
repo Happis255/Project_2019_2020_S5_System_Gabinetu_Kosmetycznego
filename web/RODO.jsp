@@ -40,7 +40,7 @@
     }
 </script>
 
-    <section id="kontakt" class="bg-light-gray" style="margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:27px;padding-top:-73px;max-width:800px;margin-right:auto;margin-left:auto;border-radius:20px;margin-bottom:56px;margin-top:50px;">
+    <section id="RODO" class="bg-light-gray" style="margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:27px;padding-top:-73px;max-width:800px;margin-right:auto;margin-left:auto;border-radius:20px;margin-bottom:56px;">
         <div>
             <h3 class="text-center" style="height:38px;margin-bottom:63px;"><br>Klauzula zgody na przetwarzanie<br>danych osobowych</strong><br><br></h3>
             <h6 class="text-center" style="font-weight: 100;height:auto;margin-right:50px;margin-left:50px;"><br><br>Od&nbsp;25.05.2018r.&nbsp;obowiązuje europejskie rozporządzenie o ochronie&nbsp;<br>danych osobowych zwane&nbsp;RODO. W związku z powyższym zgodnie&nbsp;<br>z art. 13 ust. 1 i ust. 2 ogólnego rozporządzenia o ochronie danych&nbsp;<br>osobowych

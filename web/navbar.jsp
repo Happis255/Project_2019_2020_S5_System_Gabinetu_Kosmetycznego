@@ -14,7 +14,7 @@
 
 <body>
 <nav class="navbar navbar-dark navbar-expand-md" style="background-color:#2d2d2d;color:rgb(255,255,255);font-weight:100;text-transform:uppercase;margin:0;margin-bottom:30px;">
-    <div class="container"><a class="navbar-brand" href="index.jsp"><img src="assets/img/LOGO.png" style="margin:-46px;"></a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span></button>
+    <div class="container"><a class="navbar-brand" href="index.jsp"><img src="assets/img/LOGO.png"></a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span></button>
         <div class="collapse navbar-collapse"
              id="navcol-1">
             <ul class="nav navbar-nav ml-auto">
