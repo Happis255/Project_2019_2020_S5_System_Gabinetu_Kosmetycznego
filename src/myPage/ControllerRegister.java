@@ -7,6 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @WebServlet(description = "kontroler do obsługi logowania klientow", urlPatterns = { "/UserRegister" })
 public class ControllerRegister extends HttpServlet {
@@ -24,18 +28,35 @@ public class ControllerRegister extends HttpServlet {
             return;
         }
 
-        String username = request.getParameter("e-mail");
-        String password = request.getParameter("haslo");
-        String repeatPassword = request.getParameter("powtorz-haslo");
+        Client inputData = new Client();
+        inputData.setE_mail(request.getParameter("e-mail"));
+        inputData.setHaslo(request.getParameter("haslo"));
+        inputData.setHasloPowtorz(request.getParameter("powtorz-haslo"));
+        inputData.setImie(request.getParameter("imie"));
+        inputData.setNazwisko(request.getParameter("nazwisko"));
+        System.out.println(request.getParameter("data-urodzenia"));
 
-        if(password.compareTo(repeatPassword) != 0){
+        try {
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date date = dateFormat.parse(request.getParameter("data-urodzenia"));
+            inputData.setData_urodzenia(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        inputData.setTelefon(Integer.parseInt(request.getParameter("telefon")));
+        inputData.setUlica(request.getParameter("ulica"));
+        inputData.setKod_pocztowy(Integer.parseInt(request.getParameter("kod")));
+        inputData.setMiejscowosc(request.getParameter("miejscowosc"));
+
+        if(inputData.getHaslo().compareTo(inputData.getHasloPowtorz()) != 0){
             System.out.println("hasla nie sa takie same");
             response.sendRedirect("rejestracja.jsp");
             return;
         }
 
         DataSource dataSource = new DataSource();
-        User user = dataSource.getUserDB(username);
+        User user = dataSource.getUserDB(inputData.getE_mail());
 
         if(user != null){
             System.out.println("urzytkownik o podanym niku juz istnieje");
@@ -44,9 +65,11 @@ public class ControllerRegister extends HttpServlet {
         }
 
         Encrypter pws = new Encrypter();
-        String encryptedPasswd = pws.encrypt(password);
+        String encryptedPasswd = pws.encrypt(inputData.getHaslo());
+        inputData.setHaslo(encryptedPasswd);
+        inputData.setHasloPowtorz(encryptedPasswd);
 
-        dataSource.createClientDB(new Client(username, encryptedPasswd));
+        dataSource.createClientDB(inputData);
 
         response.sendRedirect("logowanie.jsp");
     }
