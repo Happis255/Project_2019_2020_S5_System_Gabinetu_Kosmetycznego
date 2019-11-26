@@ -25,6 +25,8 @@ public class Client {
     private String p_rodzaj_jakosc;
     private String p_wrazliwosc;
     private String p_inne_uwagi;
+    private String haslo;
+    private String hasloPowtorz;
 
     public Client(){
         this.imie = "";
@@ -49,6 +51,8 @@ public class Client {
         this.p_rodzaj_jakosc = "";
         this.p_wrazliwosc = "";
         this.p_inne_uwagi = "";
+        this.haslo = "";
+        this.hasloPowtorz = "";
     }
 
     public Client(
@@ -59,7 +63,7 @@ public class Client {
             //String miejscowosc,
             //Date data_urodzenia,
             //int telefon,
-            String e_mail
+            String e_mail,
             //int ilosc_punktow,
             //boolean p_p1,
             //boolean p_p2,
@@ -74,92 +78,107 @@ public class Client {
             //String p_rodzaj_jakosc,
             //String p_wrazliwosc,
             //String p_inne_uwagi
+            String haslo
+            //String hasloPowtorz;
     ){
         this();
         this.e_mail = e_mail;
+        this.haslo = haslo;
     }
 
-    String getImie() {
+    public String getImie() {
         return imie;
     }
 
-    String getNazwisko() {
+    public String getNazwisko() {
         return nazwisko;
     }
 
-    String getUlica() {
+    public String getUlica() {
         return ulica;
     }
 
-    int getKod_pocztowy() {
+    public int getKod_pocztowy() {
         return kod_pocztowy;
     }
 
-    String getMiejscowosc() {
+    public String getMiejscowosc() {
         return miejscowosc;
     }
 
-    Date getData_urodzenia() {
+    public Date getData_urodzenia() {
         return data_urodzenia;
     }
 
-    int getTelefon() {
+    public int getTelefon() {
         return telefon;
     }
 
-    String getE_mail() {
+    public String getE_mail() {
         return e_mail;
     }
 
-    boolean getP_p1() {
+    public int getIlosc_punktow() {
+        return ilosc_punktow;
+    }
+
+    public boolean isP_p1() {
         return p_p1;
     }
 
-    boolean getP_p2() {
+    public boolean isP_p2() {
         return p_p2;
     }
 
-    boolean getP_p3() {
+    public boolean isP_p3() {
         return p_p3;
     }
 
-    boolean getP_p4() {
+    public boolean isP_p4() {
         return p_p4;
     }
 
-    boolean getP_p5() {
+    public boolean isP_p5() {
         return p_p5;
     }
 
-    boolean getP_p6() {
+    public boolean isP_p6() {
         return p_p6;
     }
 
-    boolean getP_p7() {
+    public boolean isP_p7() {
         return p_p7;
     }
 
-    boolean getP_p8() {
+    public boolean isP_p8() {
         return p_p8;
     }
 
-    boolean getP_p9() {
+    public boolean isP_p9() {
         return p_p9;
     }
 
-    String getP_ocena_skory() {
+    public String getP_ocena_skory() {
         return p_ocena_skory;
     }
 
-    String getP_rodzaj_jakosc() {
+    public String getP_rodzaj_jakosc() {
         return p_rodzaj_jakosc;
     }
 
-    String getP_wrazliwosc() {
+    public String getP_wrazliwosc() {
         return p_wrazliwosc;
     }
 
-    String getP_inne_uwagi() {
+    public String getP_inne_uwagi() {
         return p_inne_uwagi;
+    }
+
+    public String getHaslo() {
+        return haslo;
+    }
+
+    public String getHasloPowtorz() {
+        return hasloPowtorz;
     }
 }

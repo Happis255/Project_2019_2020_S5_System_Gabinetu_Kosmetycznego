@@ -35,14 +35,14 @@ public class DataSource {
         return user;
     }
 
-    public void createClientDB(Client client, Account account){
+    public void createClientDB(Client client){
         PreparedStatement exeStatement;
         int result;
 
         try{
-            exeStatement = statements.get("procedureAddAccount");
+            exeStatement = statements.get("createClient_P");
             exeStatement.setString(1, client.getE_mail());
-            exeStatement.setString(2, account.getHaslo());
+            exeStatement.setString(2, client.getHaslo());
             exeStatement.setString(3, client.getImie());
             exeStatement.setString(4, client.getNazwisko());
             exeStatement.setString(5, client.getUlica());
@@ -51,19 +51,26 @@ public class DataSource {
             java.sql.Date sqlDate = new java.sql.Date(client.getData_urodzenia().getTime());
             exeStatement.setDate(8, sqlDate);
             exeStatement.setInt(9, client.getTelefon());
-            exeStatement.setBoolean(10, client.getP_p1());
-            exeStatement.setBoolean(11, client.getP_p2());
-            exeStatement.setBoolean(12, client.getP_p3());
-            exeStatement.setBoolean(13, client.getP_p4());
-            exeStatement.setBoolean(14, client.getP_p5());
-            exeStatement.setBoolean(15, client.getP_p6());
-            exeStatement.setBoolean(16, client.getP_p7());
-            exeStatement.setBoolean(17, client.getP_p8());
-            exeStatement.setBoolean(18, client.getP_p9());
-            exeStatement.setString(19, client.getP_ocena_skory());
-            exeStatement.setString(20, client.getP_rodzaj_jakosc());
-            exeStatement.setString(21, client.getP_wrazliwosc());
-            exeStatement.setString(22, client.getP_inne_uwagi());
+            result = exeStatement.executeUpdate();
+
+            exeStatement = statements.get("createClientCard_P");
+            exeStatement.setBoolean(1, client.isP_p1());
+            exeStatement.setBoolean(2, client.isP_p2());
+            exeStatement.setBoolean(3, client.isP_p3());
+            exeStatement.setBoolean(4, client.isP_p4());
+            exeStatement.setBoolean(5, client.isP_p5());
+            exeStatement.setBoolean(6, client.isP_p6());
+            exeStatement.setBoolean(7, client.isP_p7());
+            exeStatement.setBoolean(8, client.isP_p8());
+            exeStatement.setBoolean(9, client.isP_p9());
+            exeStatement.setString(10, client.getP_ocena_skory());
+            exeStatement.setString(11, client.getP_rodzaj_jakosc());
+            exeStatement.setString(12, client.getP_wrazliwosc());
+            exeStatement.setString(13, client.getP_inne_uwagi());
+            result = exeStatement.executeUpdate();
+
+            exeStatement = statements.get("assignClientCard_P");
+            exeStatement.setString(1, client.getE_mail());
             result = exeStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

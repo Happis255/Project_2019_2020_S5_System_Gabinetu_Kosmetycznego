@@ -15,7 +15,6 @@
     <br /> <input type="text" name="username" placeholder="e_mail"/><br />
     <br /> <input type="password" name="password" placeholder="haslo"/><br />
     <br /> <input type="password" name="repeatPassword" placeholder="powtorz haslo"/><br />
-    <br /> <input type="password" name="typKonta" placeholder="typ_konta"/><br />
     <input type="submit" value="zarejestruj">
 </form>
 </body>
