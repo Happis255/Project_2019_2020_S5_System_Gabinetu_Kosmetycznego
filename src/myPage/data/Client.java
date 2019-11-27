@@ -18,7 +18,7 @@ public class Client {
     private String imie;
     private String nazwisko;
     private String ulica;
-    private int kod_pocztowy;
+    private String kod_pocztowy;
     private String miejscowosc;
     private Date data_urodzenia;
     private int telefon;
@@ -45,7 +45,7 @@ public class Client {
         this.imie = "";
         this.nazwisko = "";
         this.ulica = "";
-        this.kod_pocztowy = 0;
+        this.kod_pocztowy = "";
         this.miejscowosc = "";
         this.data_urodzenia = new Date();
         this.telefon = 0;
@@ -123,11 +123,11 @@ public class Client {
         this.ulica = ulica;
     }
 
-    public int getKod_pocztowy() {
+    public String getKod_pocztowy() {
         return kod_pocztowy;
     }
 
-    public void setKod_pocztowy(int kod_pocztowy) {
+    public void setKod_pocztowy(String kod_pocztowy) {
         this.kod_pocztowy = kod_pocztowy;
     }
 

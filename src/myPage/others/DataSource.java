@@ -29,8 +29,6 @@ public class DataSource {
 
         if (resultSet.next())
             user = new User(resultSet.getString("e_mail"), resultSet.getString("haslo"));
-        else
-            throw new DBReadWriteException();
 
         return user;
     }
@@ -38,20 +36,6 @@ public class DataSource {
     public void createClientDB(Client client) throws DBReadWriteException, SQLException{
         PreparedStatement exeStatement;
         int result;
-
-        exeStatement = statements.get("createClient_P");
-        exeStatement.setString(1, client.getE_mail());
-        exeStatement.setString(2, client.getHaslo());
-        exeStatement.setString(3, client.getImie());
-        exeStatement.setString(4, client.getNazwisko());
-        exeStatement.setString(5, client.getUlica());
-        exeStatement.setInt(6, client.getKod_pocztowy());
-        exeStatement.setString(7, client.getMiejscowosc());
-        exeStatement.setDate(8, DateTransformer.getSqlDate(client.getData_urodzenia()));
-        exeStatement.setInt(9, client.getTelefon());
-        result = exeStatement.executeUpdate();
-        if(result != 1)
-            throw new DBReadWriteException(result + " rows add with execute: createClient_P");
 
         exeStatement = statements.get("createClientCard_P");
         exeStatement.setBoolean(1, client.isP_p1());
@@ -70,6 +54,20 @@ public class DataSource {
         result = exeStatement.executeUpdate();
         if(result != 1)
             throw new DBReadWriteException(result + " rows add with execute: createClientCard_P");
+
+        exeStatement = statements.get("createClient_P");
+        exeStatement.setString(1, client.getE_mail());
+        exeStatement.setString(2, client.getHaslo());
+        exeStatement.setString(3, client.getImie());
+        exeStatement.setString(4, client.getNazwisko());
+        exeStatement.setString(5, client.getUlica());
+        exeStatement.setString(6, client.getKod_pocztowy());
+        exeStatement.setString(7, client.getMiejscowosc());
+        exeStatement.setDate(8, DateTransformer.getSqlDate(client.getData_urodzenia()));
+        exeStatement.setInt(9, client.getTelefon());
+        result = exeStatement.executeUpdate();
+        if(result != 1)
+            throw new DBReadWriteException(result + " rows add with execute: createClient_P");
 
         exeStatement = statements.get("assignClientCard_P");
         exeStatement.setString(1, client.getE_mail());
@@ -92,7 +90,7 @@ public class DataSource {
             client.setImie(resultSet.getString("imie"));
             client.setNazwisko(resultSet.getString("nazwisko"));
             client.setUlica(resultSet.getString("ulica"));
-            client.setKod_pocztowy(resultSet.getInt("kod_pocztowy"));
+            client.setKod_pocztowy(resultSet.getString("kod_pocztowy"));
             client.setMiejscowosc(resultSet.getString("miejscowosc"));
             client.setData_urodzenia(DateTransformer.getJavaDate(resultSet.getDate("data_urodzenia")));
             client.setTelefon(resultSet.getInt("telefon"));

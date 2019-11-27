@@ -53,7 +53,7 @@ public class ControllerRegister extends HttpServlet {
 
         inputData.setTelefon(Integer.parseInt(request.getParameter("telefon")));
         inputData.setUlica(request.getParameter("ulica"));
-        inputData.setKod_pocztowy(Integer.parseInt(request.getParameter("kod")));
+        inputData.setKod_pocztowy(request.getParameter("kod"));
         inputData.setMiejscowosc(request.getParameter("miejscowosc"));
 
         if(inputData.getHaslo().compareTo(inputData.getHasloPowtorz()) != 0){
