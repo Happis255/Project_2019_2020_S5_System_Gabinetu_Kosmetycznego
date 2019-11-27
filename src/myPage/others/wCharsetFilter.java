@@ -1,4 +1,4 @@
-package myPage;
+package myPage.others;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
@@ -6,7 +6,7 @@ import java.io.IOException;
 
 /* Wymagany do działania strony w UTF 8 */
 @WebServlet(name = "CharsetFilter ")
-public class CharsetFilter implements Filter {
+public class wCharsetFilter implements Filter {
 
     private String encoding;
 

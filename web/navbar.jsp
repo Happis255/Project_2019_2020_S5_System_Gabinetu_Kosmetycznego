@@ -22,7 +22,13 @@
                 <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">Oferta zabiegowa</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">Oferta sprzedażowa</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="index.jsp#kontakt" style="color:#ffffff;">Kontakt</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="logowanie.jsp" style="color:#ffffff;">Logowanie</a></li>
+                <% if(session.getAttribute("userData") == null){ %>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="logowanie.jsp" style="color:#ffffff;">Logowanie</a></li>
+                <% }else{ %>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="UserLogin" style="color:#ffffff;">WYLOGUJ</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="account.jsp" style="color:#ffffff;">Moje Konto</a></li>
+                <% } %>
+
             </ul>
         </div>
     </div>

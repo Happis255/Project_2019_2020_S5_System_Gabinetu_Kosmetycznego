@@ -1,8 +1,20 @@
-package myPage;
+package myPage.data;
 
 import java.util.Date;
 
 public class Client {
+    public enum TypKonta{
+        PRACOWNIK(1),
+        ADMINISTRATOR(2),
+        KLIENT(3);
+
+        private int val;
+
+        TypKonta(int val){
+            this.val=val;
+        }
+    }
+
     private String imie;
     private String nazwisko;
     private String ulica;
@@ -27,6 +39,7 @@ public class Client {
     private String p_inne_uwagi;
     private String haslo;
     private String hasloPowtorz;
+    private TypKonta typ_konta;
 
     public Client(){
         this.imie = "";
@@ -276,5 +289,44 @@ public class Client {
 
     public void setHasloPowtorz(String hasloPowtorz) {
         this.hasloPowtorz = hasloPowtorz;
+    }
+
+    public TypKonta getTyp_konta() {
+        return typ_konta;
+    }
+
+    public void setTyp_konta(String typKonta) {
+        switch (typKonta){
+            case "KLIENT":
+                typ_konta = TypKonta.KLIENT;
+                break;
+            case "PRACOWNIK":
+                typ_konta = TypKonta.PRACOWNIK;
+                break;
+            case "ADMINISTRATOR":
+                typ_konta = TypKonta.ADMINISTRATOR;
+                break;
+            default:
+                break;
+        }
+    }
+
+    public String getTyp_konta_String(){
+        String string;
+            switch (typ_konta){
+                case KLIENT:
+                    string = "KLIENT";
+                    break;
+                case PRACOWNIK:
+                    string = "PRACOWNIK";
+                    break;
+                case ADMINISTRATOR:
+                    string = "ADMINISTRATOR";
+                    break;
+                default:
+                    string = "nieznany";
+                    break;
+            }
+        return string;
     }
 }

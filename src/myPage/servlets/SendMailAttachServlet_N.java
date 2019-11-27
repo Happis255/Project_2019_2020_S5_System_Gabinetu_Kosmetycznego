@@ -1,12 +1,4 @@
-package myPage;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+package myPage.servlets;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -16,12 +8,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
-@WebServlet("/SendMailAttachServlet_CV")
+@WebServlet("/SendMailAttachServlet_N")
 @MultipartConfig(   fileSizeThreshold = 1024 * 1024 * 2,
                     maxFileSize = 1024 * 1024 * 50,         // 50MB
                     maxRequestSize = 1024 * 1024 * 50)      // 50MB
-public class SendMailAttachServlet_CV extends HttpServlet {
+public class SendMailAttachServlet_N extends HttpServlet {
     private String host;
     private String port;
     private String user;
@@ -41,22 +40,18 @@ public class SendMailAttachServlet_CV extends HttpServlet {
 
         request.setCharacterEncoding("UTF-8");
         String recipient = "projektgracja2019@gmail.com";
-        String subject = "[M - CV] Nowe zgłoszenie o pracę od: " + request.getParameter("imie-nazwisko") + ".";
+        String subject = "[M - W] Nowa wiadomość od: " + request.getParameter("imie") + ".";
         String content = "<head>" +
                 "  <meta charset=\"UTF-8\">" +
-                "</head>" +  "Imię i nazwisko: " + request.getParameter("imie-nazwisko") + "<br/>" +
-        "Data urodzenia: " + request.getParameter("data-urodzenia") + "<br/>" +
-        "E-Mail: " + request.getParameter("e-mail") + "<br/>" +
-        "Telefon kontaktowy: " + request.getParameter("telefon") + "<br/>" +
-        "Adres: "  + request.getParameter("ulica") + " " +  request.getParameter("Numer-domu") + "<br/>" +
-                     request.getParameter("kod-pocztowy") + " " +  request.getParameter("miejscowosc");
+                "</head>" +  "Imię i nazwisko: " + request.getParameter("imie") + "<br/>" +
+        "E-Mail: " + request.getParameter("email") + "<br/>" + request.getParameter("tresc");
         String resultMessage = "";
         try {
-            EmailUtility_CV.sendEmailWithAttachment(host, port, user, pass, recipient, subject, content, uploadedFiles);
-            resultMessage = "<h2 class=\"text-center\" style=\"height:53px;\">Wysyłanie mail'a z CV powiodło się</h2><h5 class=\"text-center\" style=\"height:99px;margin-right:50px;margin-left:50px;\"><br>W ciągu 7 dni skontaktuje się z tobą pracownik gabinetu <br>w celu umówienia się na rozmowę kwalifikacyjną.<br></h5> <div class=\"form-group\"><a href=\"index.jsp\"><button class=\"btn btn-primary\" type=\"submit\" style=\"margin:0;width:265px;margin-left:267px;\">Powrót do strony głównej</button></a></div>";;
+            EmailUtility_N.sendEmailWithAttachment(host, port, user, pass, recipient, subject, content, uploadedFiles);
+            resultMessage = "<h2 class=\"text-center\" style=\"height:53px;\">Wiadomośc została wysłana</h2><h5 class=\"text-center\" style=\"height:99px;margin-right:50px;margin-left:50px;\"><br>W ciągu 7 dni skontaktuje się z tobą pracownik gabinetu<br>odpowiadając na mail podany w formularzu.<br></h5> <div class=\"form-group\"><a href=\"index.jsp\"><button class=\"btn btn-primary\" type=\"submit\" style=\"margin:0;width:265px;margin-left:267px;\">Powrót do strony głównej</button></a></div>";;
         } catch (Exception ex) {
             ex.printStackTrace();
-            resultMessage = "<h2 class=\"text-center\" style=\"height:53px;\">Wysyłanie mail'a z CV nie powiodło się</h2><h5 class=\"text-center\" style=\"height:99px;margin-right:50px;margin-left:50px;\"><br>Upewnij się, czy twój plik CV posiada format .PDF, .DOC&nbsp;<br>bądź .DOCX oraz czy plik nie przekracza rozmiaru 50MB.<br></h5> <div class=\"form-group\"><a href=\"wyslij-cv.jsp\"><button class=\"btn btn-primary\" type=\"submit\" style=\"margin:0;width:265px;margin-left:267px;\">Powrót do strony CV</button></a></div>";
+            resultMessage = "<h2 class=\"text-center\" style=\"height:53px;\">Wystąpił błąd przy podczas wysyłania wiadomości</h2><h5 class=\"text-center\" style=\"height:99px;margin-right:50px;margin-left:50px;\"><br>Prosimy o skontaktowanie się z nami telefonicznie - 15 842 94 19<br>bądź poprzez aplikację Messenger'a.<br></h5> <div class=\"form-group\"><a href=\"wyslij-cv.jsp\"><button class=\"btn btn-primary\" type=\"submit\" style=\"margin:0;width:265px;margin-left:267px;\">Powrót do strony głównej</button></a></div>";
         } finally {
             deleteUploadFiles(uploadedFiles);
             request.setAttribute("message", resultMessage);

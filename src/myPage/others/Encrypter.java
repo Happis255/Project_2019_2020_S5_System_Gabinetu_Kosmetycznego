@@ -1,8 +1,4 @@
-package myPage;
-
-import java.io.UnsupportedEncodingException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+package myPage.others;
 
 public class Encrypter {
     public String encrypt(String pass) {

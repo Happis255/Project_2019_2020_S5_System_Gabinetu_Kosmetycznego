@@ -1,4 +1,4 @@
-package myPage;
+package myPage.others;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -21,13 +21,11 @@ public class DataBaseManager {
             statements = new HashMap<>();
             connection = DriverManager.getConnection(DB_URL, USER_NAME, USER_PASSWD);
             statements.put("getClient", connection.prepareStatement("select * from konto join klient on konto.id_konta=klient.id_konta where klient.e_mail=?"));
-            statements.put("addClient", connection.prepareStatement("insert into klient (id_klienta, imie, nazwisko, ulica, kod_pocztowy, miejscowosc, data_urodzenia, " +
-                    "telefon, e_mail, ilosc_punktow, id_karty, id_statusu, id_konta) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"));
-            statements.put("getAccount", connection.prepareStatement("select * from konto where "));
-            statements.put("addAccount", connection.prepareStatement("insert into konto (id_konta, haslo, typ_konta) values (?, ?, ?)"));
             statements.put("createClient_P", connection.prepareStatement("{call utworz_klienta(?, ?, ?, ?, ?, ?, ?, ?, ?)}"));
             statements.put("createClientCard_P", connection.prepareStatement("{call utworz_karte_klienta(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}"));
             statements.put("assignClientCard_P", connection.prepareStatement("{call przypisz_karte_klienta(?)}"));
+            statements.put("getAccountData", connection.prepareStatement("select kl.imie, kl.nazwisko, kl.ulica, kl.kod_pocztowy, kl.miejscowosc, kl.data_urodzenia, "+
+                    "kl.telefon, kl.e_mail, kl.ilosc_punktow, kt.typ_konta from konto kt join klient kl on kt.id_konta=kl.id_konta where kl.e_mail = ?"));
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }

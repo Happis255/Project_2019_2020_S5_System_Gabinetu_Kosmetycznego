@@ -1,4 +1,4 @@
-package myPage;
+package myPage.data;
 
 public class SessionData {
     private String nick;
@@ -13,5 +13,9 @@ public class SessionData {
 
     public void setNick(String nick) {
         this.nick = nick;
+    }
+
+    public String toString(){
+        return "Nick:"+nick+"\n";
     }
 }

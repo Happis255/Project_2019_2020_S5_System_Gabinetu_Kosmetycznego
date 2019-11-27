@@ -1,4 +1,10 @@
-package myPage;
+package myPage.servlets;
+
+import myPage.data.Client;
+import myPage.exceptions.DBReadWriteException;
+import myPage.others.DataSource;
+import myPage.others.Encrypter;
+import myPage.data.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -7,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -55,8 +62,19 @@ public class ControllerRegister extends HttpServlet {
             return;
         }
 
-        DataSource dataSource = new DataSource();
-        User user = dataSource.getUserDB(inputData.getE_mail());
+        DataSource dataSource;
+        User user;
+        try {
+            dataSource = new DataSource();
+            user = dataSource.getUserDB(inputData.getE_mail());
+        } catch (DBReadWriteException | SQLException e) {
+            System.out.println("[ERR] DB Error");
+            System.out.println(e);
+            e.printStackTrace();
+            session.invalidate();
+            response.sendRedirect("index.jsp");
+            return;
+        }
 
         if(user != null){
             System.out.println("urzytkownik o podanym niku juz istnieje");
@@ -69,7 +87,16 @@ public class ControllerRegister extends HttpServlet {
         inputData.setHaslo(encryptedPasswd);
         inputData.setHasloPowtorz(encryptedPasswd);
 
-        dataSource.createClientDB(inputData);
+        try {
+            dataSource.createClientDB(inputData);
+        } catch (DBReadWriteException | SQLException e) {
+            System.out.println("[ERR] DB Error");
+            System.out.println(e);
+            e.printStackTrace();
+            session.invalidate();
+            response.sendRedirect("index.jsp");
+            return;
+        }
 
         response.sendRedirect("logowanie.jsp");
     }

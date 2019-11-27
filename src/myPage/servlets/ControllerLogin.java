@@ -1,4 +1,10 @@
-package myPage;
+package myPage.servlets;
+
+import myPage.exceptions.DBReadWriteException;
+import myPage.others.DataSource;
+import myPage.others.Encrypter;
+import myPage.data.SessionData;
+import myPage.data.User;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.SQLException;
 
 @WebServlet(description = "kontroler do obsługi logowania klientow", urlPatterns = { "/UserLogin" })
 public class ControllerLogin extends HttpServlet {
@@ -41,8 +48,14 @@ public class ControllerLogin extends HttpServlet {
         Encrypter pws = new Encrypter();
         String encryptedPasswd = pws.encrypt(password);
 
-        DataSource dataSource = new DataSource();
-        User user = dataSource.getUserDB(username);
+        DataSource dataSource;
+        User user = null;
+        try {
+            dataSource = new DataSource();
+            user = dataSource.getUserDB(username);
+        } catch (DBReadWriteException | SQLException e) {
+            e.printStackTrace();
+        }
 
         if(user != null){
             session = request.getSession();
@@ -52,18 +65,19 @@ public class ControllerLogin extends HttpServlet {
             session.setAttribute("userData", sessionData);
             loginAttempts = 0;
             System.out.println("zalogowano");
-            url = "test.jsp";
+            url = "index.jsp";
         } else{
             ++loginAttempts;
             System.out.println("errorLogowania");
-            url = "test.jsp";
+            url = "index.jsp";
         }
         RequestDispatcher dispatcher = request.getRequestDispatcher(url);
         dispatcher.forward(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        request.getSession().invalidate();
+        response.sendRedirect("index.jsp");
     }
 
     /*

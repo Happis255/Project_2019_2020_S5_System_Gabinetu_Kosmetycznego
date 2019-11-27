@@ -1,4 +1,4 @@
-package myPage;
+package myPage.data;
 
 public class User {
     private String nick;
