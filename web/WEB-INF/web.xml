@@ -25,6 +25,8 @@
         <param-value>Projekt_2019</param-value>
     </context-param>
 
+
+
     <jsp-config>
         <jsp-property-group>
             <url-pattern>*.jsp</url-pattern>

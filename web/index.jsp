@@ -87,7 +87,7 @@
 </section>
 <a id="kontakt_gracja"></a>
 <section id="kontakt" class="bg-light-gray" style="margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:800px;margin-right:auto;margin-left:auto;border-radius:20px;margin-bottom:30px;">
-    <form form action="mailing.php" method="post">
+    <form form action="SendMailAttachServlet_N" method="post" enctype="multipart/form-data">
         <h2 class="text-center" style="height:53px;">Skontaktuj się z nami</h2>
         <div class="form-group"><input class="form-control" type="text" name="imie" required="" placeholder="Imię i nazwisko" style="margin:0;width:500px;margin-left:145px;"></div>
         <div class="form-group"><input class="form-control" type="email" name="email" required="" placeholder="Twój e-mail" style="margin:0;width:500px;margin-left:145px;"></div>

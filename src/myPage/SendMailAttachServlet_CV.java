@@ -17,11 +17,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-@WebServlet("/SendMailAttachServlet")
+@WebServlet("/SendMailAttachServlet_CV")
 @MultipartConfig(   fileSizeThreshold = 1024 * 1024 * 2,
                     maxFileSize = 1024 * 1024 * 50,         // 50MB
                     maxRequestSize = 1024 * 1024 * 50)      // 50MB
-public class SendMailAttachServlet extends HttpServlet {
+public class SendMailAttachServlet_CV extends HttpServlet {
     private String host;
     private String port;
     private String user;
@@ -52,7 +52,7 @@ public class SendMailAttachServlet extends HttpServlet {
                      request.getParameter("kod-pocztowy") + " " +  request.getParameter("miejscowosc");
         String resultMessage = "";
         try {
-            EmailUtility.sendEmailWithAttachment(host, port, user, pass, recipient, subject, content, uploadedFiles);
+            EmailUtility_CV.sendEmailWithAttachment(host, port, user, pass, recipient, subject, content, uploadedFiles);
             resultMessage = "<h2 class=\"text-center\" style=\"height:53px;\">Wysyłanie mail'a z CV powiodło się</h2><h5 class=\"text-center\" style=\"height:99px;margin-right:50px;margin-left:50px;\"><br>W ciągu 7 dni skontaktuje się z tobą pracownik gabinetu <br>w celu umówienia się na rozmowę kwalifikacyjną.<br></h5> <div class=\"form-group\"><a href=\"index.jsp\"><button class=\"btn btn-primary\" type=\"submit\" style=\"margin:0;width:265px;margin-left:267px;\">Powrót do strony głównej</button></a></div>";;
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -60,7 +60,7 @@ public class SendMailAttachServlet extends HttpServlet {
         } finally {
             deleteUploadFiles(uploadedFiles);
             request.setAttribute("message", resultMessage);
-            getServletContext().getRequestDispatcher("/wynik-cv.jsp").forward(
+            getServletContext().getRequestDispatcher("/wynik-wiadomosc.jsp").forward(
                     request, response);
         }
     }

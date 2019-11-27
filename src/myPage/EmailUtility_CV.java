@@ -18,7 +18,7 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
-public class EmailUtility {
+public class EmailUtility_CV {
 
     public static void sendEmailWithAttachment(String host, String port,
                                                final String userName, final String password, String toAddress,
