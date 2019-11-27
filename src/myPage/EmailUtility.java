@@ -24,6 +24,19 @@ public class EmailUtility {
                                                final String userName, final String password, String toAddress,
                                                String subject, String message, List<File> attachedFiles)
                                                throws AddressException, MessagingException {
+
+        String filename, ext = "";
+
+        if (attachedFiles != null && attachedFiles.size() > 0) {
+            for (File aFile : attachedFiles) {
+                filename = aFile.getName();
+                ext = filename.substring(filename.lastIndexOf('.') + 1);
+                if (!ext.equals("pdf") && !ext.equals("doc") && !ext.equals("docx") && !ext.equals("PDF") && !ext.equals("DOC") && !ext.equals("DOCX")) {
+                    throw new MessagingException();
+                }
+            }
+        }
+
         Properties properties = new Properties();
         properties.put("mail.smtp.host", host);
         properties.put("mail.smtp.port", port);
@@ -53,7 +66,6 @@ public class EmailUtility {
 
         Multipart multipart = new MimeMultipart();
         multipart.addBodyPart(messageBodyPart);
-
 
         if (attachedFiles != null && attachedFiles.size() > 0) {
             for (File aFile : attachedFiles) {

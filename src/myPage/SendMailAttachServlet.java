@@ -38,6 +38,7 @@ public class SendMailAttachServlet extends HttpServlet {
                           HttpServletResponse response) throws ServletException, IOException {
 
         List<File> uploadedFiles = saveUploadedFiles(request);
+
         request.setCharacterEncoding("UTF-8");
         String recipient = "projektgracja2019@gmail.com";
         String subject = "[M - CV] Nowe zgłoszenie o pracę od: " + request.getParameter("imie-nazwisko") + ".";
@@ -51,8 +52,7 @@ public class SendMailAttachServlet extends HttpServlet {
                      request.getParameter("kod-pocztowy") + " " +  request.getParameter("miejscowosc");
         String resultMessage = "";
         try {
-            EmailUtility.sendEmailWithAttachment(host, port, user, pass,
-                    recipient, subject, content, uploadedFiles);
+            EmailUtility.sendEmailWithAttachment(host, port, user, pass, recipient, subject, content, uploadedFiles);
             resultMessage = "<h2 class=\"text-center\" style=\"height:53px;\">Wysyłanie mail'a z CV powiodło się</h2><h5 class=\"text-center\" style=\"height:99px;margin-right:50px;margin-left:50px;\"><br>W ciągu 7 dni skontaktuje się z tobą pracownik gabinetu <br>w celu umówienia się na rozmowę kwalifikacyjną.<br></h5> <div class=\"form-group\"><a href=\"index.jsp\"><button class=\"btn btn-primary\" type=\"submit\" style=\"margin:0;width:265px;margin-left:267px;\">Powrót do strony głównej</button></a></div>";;
         } catch (Exception ex) {
             ex.printStackTrace();
