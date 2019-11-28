@@ -29,6 +29,8 @@ public class DataSource {
 
         if (resultSet.next())
             user = new User(resultSet.getString("e_mail"), resultSet.getString("haslo"));
+        //else
+        //    throw new DBReadWriteException();
 
         return user;
     }
