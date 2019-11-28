@@ -24,5 +24,6 @@
     <orderEntry type="library" name="javax.mail" level="project" />
     <orderEntry type="library" name="Java EE 6" level="project" />
     <orderEntry type="library" name="mysql-connector-java-5.1.48" level="project" />
+    <orderEntry type="library" name="mysql" level="project" />
   </component>
 </module>

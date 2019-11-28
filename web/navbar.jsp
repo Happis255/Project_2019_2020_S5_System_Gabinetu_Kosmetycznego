@@ -25,8 +25,8 @@
                 <% if(session.getAttribute("userData") == null){ %>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="logowanie.jsp" style="color:#ffffff;">Logowanie</a></li>
                 <% }else{ %>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="UserLogin" style="color:#ffffff;">WYLOGUJ</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="account.jsp" style="color:#ffffff;">Moje Konto</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="account.jsp" style="color:#ffffff;">Moje Konto</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="UserLogin" style="color:#ffffff;">WYLOGUJ</a></li>
                 <% } %>
 
             </ul>

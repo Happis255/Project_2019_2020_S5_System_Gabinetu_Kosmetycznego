@@ -19,6 +19,11 @@
 
 <body>
 
+<%
+response.setCharacterEncoding("UTF-8");
+request.setCharacterEncoding("UTF-8");
+%>
+
 <!--Nabar bar-->
 <div id="navbar-placeholder">
 
