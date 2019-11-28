@@ -21,8 +21,8 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="Tomcat 9.0.29" level="application_server_libraries" />
     <orderEntry type="library" name="Java EE 6-Java EE 6" level="project" />
-    <orderEntry type="library" name="mysql-connector-java-5.1.48" level="project" />
     <orderEntry type="library" name="javax.mail" level="project" />
     <orderEntry type="library" name="Java EE 6" level="project" />
+    <orderEntry type="library" name="mysql-connector-java-5.1.48" level="project" />
   </component>
 </module>
