@@ -31,7 +31,7 @@
                 <div class="col-sm-4 col-md-3 item">
                     <h3>O nas</h3>
                     <ul>
-                        <li><a href="#">Aktualności</a></li>
+                        <li><a href="aktualnosci.jsp">Aktualności</a></li>
                         <li><a href="index.jsp#kontakt">Skontaktuj się z nami</a></li>
                         <li><a href="wyslij-cv.jsp">Wyślij swoje CV</a></li>
                     </ul>

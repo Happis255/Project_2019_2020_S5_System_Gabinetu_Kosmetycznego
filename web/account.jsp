@@ -53,8 +53,8 @@ DANE KTWOJEGO KONTA:
         out.println("telefon:" + client.getTelefon()); %> <br> <%
         out.println("e_mail:" + client.getE_mail()); %> <br> <%
         out.println("ilosc_punktow:" + client.getIlosc_punktow()); %> <br> <%
-        out.println("typ_konta:" + client.getTyp_konta_String()); %> <br><br> <%
-    %>
+    out.println("typ_konta:" + client.getTyp_konta_String()); %> <br><br> <%
+%>
 
 <a href="index.jsp">RETURN</a>
 

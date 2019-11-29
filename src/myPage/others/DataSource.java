@@ -1,5 +1,6 @@
 package myPage.others;
 
+import myPage.data.Aktualnosci;
 import myPage.data.Client;
 import myPage.data.User;
 import myPage.exceptions.DBReadWriteException;
@@ -34,6 +35,8 @@ public class DataSource {
 
         return user;
     }
+
+    /* Metody wykorzystywane do komunikacji z bazą danych */
 
     public void createClientDB(Client client) throws DBReadWriteException, SQLException{
         PreparedStatement exeStatement;
@@ -104,5 +107,25 @@ public class DataSource {
         }
 
         return client;
+    }
+
+    public Aktualnosci getAktualnosci() throws DBReadWriteException, SQLException{
+
+        PreparedStatement exeStatement;
+        ResultSet resultSet;
+        Aktualnosci aktualnosc = new Aktualnosci();
+        exeStatement = statements.get("pobierz_dzisiaj_aktualnosci_P");
+
+        /* Pobieramy wynik zapytania */
+        resultSet = exeStatement.executeQuery();
+
+        /* Uzupełniamy klasę wynikami
+        *  Każdy wiersz z treścią i każdy wiersz z tytulem trzeba umiescic w stosie w klasie Aktualnosc */
+        while (resultSet.next()){
+            aktualnosc.setID(resultSet.getInt("id_aktualnosci"));
+            aktualnosc.setTytul(resultSet.getString("tytul"));
+            aktualnosc.setTresc(resultSet.getString("tresc"));
+        }
+        return aktualnosc;
     }
 }
