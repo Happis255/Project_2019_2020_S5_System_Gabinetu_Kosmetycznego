@@ -1,6 +1,7 @@
 package myPage.servlets;
 
 import myPage.data.Client;
+import myPage.data.ErrorMessage;
 import myPage.data.SessionData;
 import myPage.exceptions.DBReadWriteException;
 import myPage.others.DataSource;
@@ -56,7 +57,10 @@ public class ControllerLogin extends HttpServlet {
         } catch (DBReadWriteException e) {
             client = null;
         }catch (SQLException e) {
-            e.printStackTrace();
+            ErrorMessage errorMessage = new ErrorMessage(e);
+            session.setAttribute("errorMessage", errorMessage);
+            response.sendRedirect("errorPage.jsp");
+            return;
         }
 
         if(client != null){

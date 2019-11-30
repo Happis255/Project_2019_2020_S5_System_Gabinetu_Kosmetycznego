@@ -1,6 +1,7 @@
 package myPage.servlets;
 
 import myPage.data.Client;
+import myPage.data.ErrorMessage;
 import myPage.exceptions.DBReadWriteException;
 import myPage.others.DataSource;
 import myPage.others.Encrypter;
@@ -47,7 +48,10 @@ public class ControllerRegister extends HttpServlet {
             Date date = dateFormat.parse(request.getParameter("data-urodzenia"));
             inputData.setData_urodzenia(date);
         } catch (ParseException e) {
-            e.printStackTrace();
+            ErrorMessage errorMessage = new ErrorMessage(e);
+            session.setAttribute("errorMessage", errorMessage);
+            response.sendRedirect("errorPage.jsp");
+            return;
         }
 
         inputData.setTelefon(Integer.parseInt(request.getParameter("telefon")));
@@ -68,11 +72,9 @@ public class ControllerRegister extends HttpServlet {
         } catch (DBReadWriteException e) {
             client = null;
         }catch (SQLException e) {
-            System.out.println("[ERR] DB Error");
-            System.out.println(e);
-            e.printStackTrace();
-            session.invalidate();
-            response.sendRedirect("index.jsp");
+            ErrorMessage errorMessage = new ErrorMessage(e);
+            session.setAttribute("errorMessage", errorMessage);
+            response.sendRedirect("errorPage.jsp");
             return;
         }
 
@@ -90,11 +92,9 @@ public class ControllerRegister extends HttpServlet {
         try {
             dataSource.createClientDB(inputData);
         } catch (DBReadWriteException | SQLException e) {
-            System.out.println("[ERR] DB Error");
-            System.out.println(e);
-            e.printStackTrace();
-            session.invalidate();
-            response.sendRedirect("index.jsp");
+            ErrorMessage errorMessage = new ErrorMessage(e);
+            session.setAttribute("errorMessage", errorMessage);
+            response.sendRedirect("errorPage.jsp");
             return;
         }
 
@@ -104,6 +104,4 @@ public class ControllerRegister extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
-
-
 }
