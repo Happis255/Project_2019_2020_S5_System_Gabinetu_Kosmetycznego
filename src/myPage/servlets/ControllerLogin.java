@@ -1,10 +1,10 @@
 package myPage.servlets;
 
+import myPage.data.Client;
+import myPage.data.SessionData;
 import myPage.exceptions.DBReadWriteException;
 import myPage.others.DataSource;
 import myPage.others.Encrypter;
-import myPage.data.SessionData;
-import myPage.data.User;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -49,19 +49,21 @@ public class ControllerLogin extends HttpServlet {
         String encryptedPasswd = pws.encrypt(password);
 
         DataSource dataSource;
-        User user = null;
+        Client client = null;
         try {
             dataSource = new DataSource();
-            user = dataSource.getUserDB(username);
-        } catch (DBReadWriteException | SQLException e) {
+            client = dataSource.getClientDateDB(username);
+        } catch (DBReadWriteException e) {
+            client = null;
+        }catch (SQLException e) {
             e.printStackTrace();
         }
 
-        if(user != null){
+        if(client != null){
             session = request.getSession();
             session.invalidate();
             session = request.getSession(true);
-            SessionData sessionData = new SessionData(username);
+            SessionData sessionData = new SessionData(username, client.getTyp_konta());
             session.setAttribute("userData", sessionData);
             loginAttempts = 0;
             System.out.println("zalogowano");

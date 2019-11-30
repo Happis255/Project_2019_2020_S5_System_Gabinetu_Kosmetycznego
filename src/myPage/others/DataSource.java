@@ -2,11 +2,11 @@ package myPage.others;
 
 import myPage.data.Aktualnosci;
 import myPage.data.Client;
-import myPage.data.User;
 import myPage.exceptions.DBReadWriteException;
 
-import java.sql.*;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 
@@ -19,25 +19,7 @@ public class DataSource {
         statements = DataBaseManager.getStatements();
     }
 
-    public User getUserDB(String e_mail) throws DBReadWriteException, SQLException{
-        PreparedStatement exeStatement;
-        ResultSet resultSet;
-        User user = null;
-
-        exeStatement = statements.get("getClient");
-        exeStatement.setString(1, e_mail);
-        resultSet = exeStatement.executeQuery();
-
-        if (resultSet.next())
-            user = new User(resultSet.getString("e_mail"), resultSet.getString("haslo"));
-        //else
-        //    throw new DBReadWriteException();
-
-        return user;
-    }
-
     /* Metody wykorzystywane do komunikacji z bazą danych */
-
     public void createClientDB(Client client) throws DBReadWriteException, SQLException{
         PreparedStatement exeStatement;
         int result;
@@ -127,5 +109,33 @@ public class DataSource {
             aktualnosc.setTresc(resultSet.getString("tresc"));
         }
         return aktualnosc;
+    }
+
+    public Client[] getAllAccountsWithTagDB(Client.TypKonta accountType)throws SQLException{
+        Client[] clients;
+        PreparedStatement exeStatement;
+        ResultSet resultSet;
+        String str = Client.TypKonta.getStringVal(accountType);
+
+        exeStatement = statements.get("getAllAccountsWithTag");
+        exeStatement.setString(1, str);
+        resultSet = exeStatement.executeQuery();
+
+        resultSet.last();
+        int numOfRows = resultSet.getRow();
+        clients = new Client[numOfRows];
+        resultSet.beforeFirst();
+
+        int i=0;
+        while (resultSet.next()){
+            clients[i] = new Client();
+            clients[i].setE_mail(resultSet.getString("e_mail"));
+            clients[i].setImie(resultSet.getString("imie"));
+            clients[i].setNazwisko(resultSet.getString("nazwisko"));
+            clients[i].setTyp_konta(resultSet.getString("typ_konta"));
+            ++i;
+        }
+
+        return clients;
     }
 }

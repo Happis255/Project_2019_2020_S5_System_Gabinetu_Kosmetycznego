@@ -23,7 +23,11 @@
                 <div class="col-sm-4 col-md-3 item">
                     <h3>Usługi</h3>
                     <ul>
-                        <li><a href="logowanie.jsp">Logowanie</a></li>
+                        <% if(session.getAttribute("userData") == null){ %>
+                            <li><a href="logowanie.jsp">Logowanie</a></li>
+                        <% }else{ %>
+                            <li><a href="account.jsp">Moje konto</a></li>
+                        <% } %>
                         <li><a href="#">Oferta usługowa</a></li>
                         <li><a href="#">Oferta sprzedażowa</a></li>
                     </ul>

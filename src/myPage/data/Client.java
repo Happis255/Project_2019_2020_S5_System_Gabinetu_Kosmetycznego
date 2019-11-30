@@ -13,6 +13,25 @@ public class Client {
         TypKonta(int val){
             this.val=val;
         }
+
+        public static String getStringVal(TypKonta accountType){
+            String str;
+            switch (accountType){
+                case ADMINISTRATOR:
+                    str = "ADMINISTRATOR";
+                    break;
+                case PRACOWNIK:
+                    str = "PRACOWNIK";
+                    break;
+                case KLIENT:
+                    str = "KLIENT";
+                    break;
+                default:
+                    str = null;
+                    break;
+            }
+            return str;
+        }
     }
 
     private String imie;
@@ -42,11 +61,11 @@ public class Client {
     private TypKonta typ_konta;
 
     public Client(){
-        this.imie = "";
-        this.nazwisko = "";
-        this.ulica = "";
-        this.kod_pocztowy = "";
-        this.miejscowosc = "";
+        this.imie = "-";
+        this.nazwisko = "-";
+        this.ulica = "-";
+        this.kod_pocztowy = "-";
+        this.miejscowosc = "-";
         this.data_urodzenia = new Date();
         this.telefon = 0;
         this.e_mail = "";
@@ -60,43 +79,12 @@ public class Client {
         this.p_p7 = true;
         this.p_p8 = true;
         this.p_p9 = true;
-        this.p_ocena_skory = "";
-        this.p_rodzaj_jakosc = "";
-        this.p_wrazliwosc = "";
-        this.p_inne_uwagi = "";
-        this.haslo = "";
-        this.hasloPowtorz = "";
-    }
-
-    public Client(
-            //String imie,
-            //String nazwisko,
-            //String ulica,
-            //int kod_pocztowy,
-            //String miejscowosc,
-            //Date data_urodzenia,
-            //int telefon,
-            String e_mail,
-            //int ilosc_punktow,
-            //boolean p_p1,
-            //boolean p_p2,
-            //boolean p_p3,
-            //boolean p_p4,
-            //boolean p_p5,
-            //boolean p_p6,
-            //boolean p_p7,
-            //boolean p_p8,
-            //boolean p_p9,
-            //String p_ocena_skory,
-            //String p_rodzaj_jakosc,
-            //String p_wrazliwosc,
-            //String p_inne_uwagi
-            String haslo
-            //String hasloPowtorz;
-    ){
-        this();
-        this.e_mail = e_mail;
-        this.haslo = haslo;
+        this.p_ocena_skory = "-";
+        this.p_rodzaj_jakosc = "-";
+        this.p_wrazliwosc = "-";
+        this.p_inne_uwagi = "-";
+        this.haslo = "-";
+        this.hasloPowtorz = "-";
     }
 
     public String getImie() {
@@ -295,6 +283,25 @@ public class Client {
         return typ_konta;
     }
 
+    public String getTyp_konta_String(){
+        String string;
+        switch (typ_konta){
+            case KLIENT:
+                string = "KLIENT";
+                break;
+            case PRACOWNIK:
+                string = "PRACOWNIK";
+                break;
+            case ADMINISTRATOR:
+                string = "ADMINISTRATOR";
+                break;
+            default:
+                string = "nieznany";
+                break;
+        }
+        return string;
+    }
+
     public void setTyp_konta(String typKonta) {
         switch (typKonta){
             case "KLIENT":
@@ -309,24 +316,5 @@ public class Client {
             default:
                 break;
         }
-    }
-
-    public String getTyp_konta_String(){
-        String string;
-            switch (typ_konta){
-                case KLIENT:
-                    string = "KLIENT";
-                    break;
-                case PRACOWNIK:
-                    string = "PRACOWNIK";
-                    break;
-                case ADMINISTRATOR:
-                    string = "ADMINISTRATOR";
-                    break;
-                default:
-                    string = "nieznany";
-                    break;
-            }
-        return string;
     }
 }

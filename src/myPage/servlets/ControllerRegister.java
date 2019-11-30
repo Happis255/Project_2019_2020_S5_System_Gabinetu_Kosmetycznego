@@ -4,7 +4,6 @@ import myPage.data.Client;
 import myPage.exceptions.DBReadWriteException;
 import myPage.others.DataSource;
 import myPage.others.Encrypter;
-import myPage.data.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -62,12 +61,13 @@ public class ControllerRegister extends HttpServlet {
             return;
         }
 
-        DataSource dataSource;
-        User user;
+        DataSource dataSource = new DataSource();
+        Client client;
         try {
-            dataSource = new DataSource();
-            user = dataSource.getUserDB(inputData.getE_mail());
-        } catch (DBReadWriteException | SQLException e) {
+            client = dataSource.getClientDateDB(inputData.getE_mail());
+        } catch (DBReadWriteException e) {
+            client = null;
+        }catch (SQLException e) {
             System.out.println("[ERR] DB Error");
             System.out.println(e);
             e.printStackTrace();
@@ -76,7 +76,7 @@ public class ControllerRegister extends HttpServlet {
             return;
         }
 
-        if(user != null){
+        if(client != null){
             System.out.println("urzytkownik o podanym niku juz istnieje");
             response.sendRedirect("rejestracja.jsp");
             return;
