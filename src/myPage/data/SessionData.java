@@ -2,10 +2,10 @@ package myPage.data;
 
 public class SessionData {
     private String nick;
-    private Client.TypKonta accoutType;
+    private TypKonta accoutType;
     private ErrorMessage errorMessage;
 
-    public SessionData(String nick, Client.TypKonta accountType){
+    public SessionData(String nick, TypKonta accountType){
         this.nick = nick;
         this.accoutType = accountType;
     }
@@ -18,11 +18,11 @@ public class SessionData {
         this.nick = nick;
     }
 
-    public Client.TypKonta getAccoutType() {
+    public TypKonta getAccoutType() {
         return accoutType;
     }
 
-    public void setAccoutType(Client.TypKonta accoutType) {
+    public void setAccoutType(TypKonta accoutType) {
         this.accoutType = accoutType;
     }
 
@@ -35,6 +35,6 @@ public class SessionData {
     }
 
     public String toString(){
-        return "Nick:"+nick+" AccountType:"+ Client.TypKonta.getStringVal(accoutType) +"\n";
+        return "Nick:"+nick+" AccountType:"+ TypKonta.getStringVal(accoutType) +"\n";
     }
 }

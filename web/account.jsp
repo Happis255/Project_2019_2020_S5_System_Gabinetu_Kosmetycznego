@@ -1,9 +1,10 @@
-<%@ page import="myPage.data.Client" %>
-<%@ page import="myPage.others.DataSource" %>
-<%@ page import="myPage.data.SessionData" %>
+<%@ page import="myPage.data.*" %>
 <%@ page import="myPage.exceptions.DBReadWriteException" %>
+<%@ page import="myPage.exceptions.NoResultsException" %>
+<%@ page import="myPage.others.DataSource" %>
+<%@ page import="myPage.others.HTMLFilter" %>
 <%@ page import="java.sql.SQLException" %>
-<%@ page import="myPage.others.HTMLFilter" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: ppisk
   Date: 27.11.2019
@@ -16,18 +17,21 @@
     <title>Title</title>
 </head>
 <body>
-konto :)
-
-DANE KTWOJEGO KONTA:
+<% SessionData sessionData = (SessionData)session.getAttribute("userData"); %>
+konto :) <br>
+<% out.println("TYP KONTA: " + TypKonta.getStringVal(sessionData.getAccoutType())); %>
+<br>DANE KTWOJEGO KONTA:
     <%
-        Client client;
+        User user = null;
         DataSource dataSource = new DataSource();
-        SessionData sessionData = (SessionData)session.getAttribute("userData");
 
         try {
-            if(sessionData == null) throw new NullPointerException();
-            client = dataSource.getClientDateDB(sessionData.getNick());
-            if(client == null) throw  new NullPointerException();
+            if(sessionData.getAccoutType() == TypKonta.KLIENT){
+                user = dataSource.getClientDB(sessionData.getNick());
+            }else{
+                user = dataSource.getPracownikDB(sessionData.getNick());
+            }
+            if(user == null) throw  new NoResultsException();
         } catch (DBReadWriteException | SQLException e) {
             System.out.println("[ERR] DB Error");
             System.out.println(e);
@@ -45,24 +49,30 @@ DANE KTWOJEGO KONTA:
         }
 
         %> <br><br> <%
-        out.println("Imie:" + client.getImie()); %> <br> <%
-        out.println("Nazwisko:" + client.getNazwisko()); %> <br> <%
-        out.println("Ulica:" + client.getUlica()); %> <br> <%
-        out.println("kod_pocztowy:" + client.getKod_pocztowy()); %> <br> <%
-        out.println("miejscowosc:" + client.getMiejscowosc()); %> <br> <%
-        out.println("data_urodzenia:" + client.getData_urodzenia()); %> <br> <%
-        out.println("telefon:" + client.getTelefon()); %> <br> <%
-        out.println("e_mail:" + client.getE_mail()); %> <br> <%
-        out.println("ilosc_punktow:" + client.getIlosc_punktow()); %> <br> <%
-        out.println("typ_konta:" + client.getTyp_konta_String()); %> <br><br> <%
+        out.println("Imie:" + user.getImie()); %> <br> <%
+        out.println("Nazwisko:" + user.getNazwisko()); %> <br> <%
+        out.println("Ulica:" + user.getUlica()); %> <br> <%
+        out.println("kod_pocztowy:" + user.getKod_pocztowy()); %> <br> <%
+        out.println("miejscowosc:" + user.getMiejscowosc()); %> <br> <%
+        out.println("data_urodzenia:" + user.getData_urodzenia()); %> <br> <%
+        out.println("telefon:" + user.getTelefon()); %> <br> <%
+        out.println("e_mail:" + user.getE_mail()); %> <br> <%
+        out.println("typ_konta:" + user.getTyp_konta_String()); %> <br> <%
+        if(user instanceof Client){
+            out.println("ilosc_punktow:" + ((Client)user).getIlosc_punktow());
+        }else{
+            out.println("pesel:" + ((Pracownik)user).getPesel()); %> <br> <%
+            out.println("data_zatrudnienia:" + ((Pracownik)user).getData_zatrudnienia()); %> <br> <%
+            out.println("certyfikaty:" + ((Pracownik)user).getCertyfikaty());
+        }
+        %> <br><br> <%
 
-
-        Client[] clients;
-        Client[] workers; //na razie zakłądam ze pracwonicy różnią się tylko id_konta (póżniej sie to zmieni)
-        Client[] admins;  //na razie zakłądam ze admini różnią się tylko id_konta (póżniej sie to zmieni)
-        if(sessionData.getAccoutType() == Client.TypKonta.PRACOWNIK){
+        User[] clients = null;
+        User[] workers = null; //na razie zakłądam ze pracwonicy różnią się tylko id_konta (póżniej sie to zmieni)
+        User[] admins = null;  //na razie zakłądam ze admini różnią się tylko id_konta (póżniej sie to zmieni)
+        if(sessionData.getAccoutType() == TypKonta.PRACOWNIK){
             try {
-                clients = dataSource.getAllAccountsWithTagDB(Client.TypKonta.KLIENT);
+                clients = dataSource.getAllAccountsBasicDataWithTagDB(TypKonta.KLIENT);
             } catch (SQLException e) {
                 System.out.println("[ERR] DB Error");
                 System.out.println(e);
@@ -80,16 +90,16 @@ DANE KTWOJEGO KONTA:
             }
 
             out.println("KLIENCI:" + HTMLFilter.addBR());
-            for (Client c : clients) {
-                out.println(c.getE_mail() + "    " + c.getImie() + "    " + c.getNazwisko() + HTMLFilter.addBR());
+            for (User u : clients) {
+                out.println(u.getE_mail() + "    " + u.getImie() + "    " + u.getNazwisko() + HTMLFilter.addBR());
             }
         }
 
-        if(sessionData.getAccoutType() == Client.TypKonta.ADMINISTRATOR){
+        if(sessionData.getAccoutType() == TypKonta.ADMINISTRATOR){
             try {
-                clients = dataSource.getAllAccountsWithTagDB(Client.TypKonta.KLIENT);
-                workers = dataSource.getAllAccountsWithTagDB(Client.TypKonta.PRACOWNIK);
-                admins = dataSource.getAllAccountsWithTagDB(Client.TypKonta.ADMINISTRATOR);
+                clients = dataSource.getAllAccountsBasicDataWithTagDB(TypKonta.KLIENT);
+                workers = dataSource.getAllAccountsBasicDataWithTagDB(TypKonta.PRACOWNIK);
+                admins = dataSource.getAllAccountsBasicDataWithTagDB(TypKonta.ADMINISTRATOR);
             } catch (SQLException e) {
                 System.out.println("[ERR] DB Error");
                 System.out.println(e);
@@ -107,16 +117,16 @@ DANE KTWOJEGO KONTA:
             }
 
             out.println(HTMLFilter.addBR() + "KLIENCI:" + HTMLFilter.addBR());
-            for (Client c : clients) {
-                out.println(c.getE_mail() + "    " + c.getImie() + "    " + c.getNazwisko() + HTMLFilter.addBR());
+            for (User u : clients) {
+                out.println(u.getE_mail() + "    " + u.getImie() + "    " + u.getNazwisko() + HTMLFilter.addBR());
             }
             out.println(HTMLFilter.addBR() + "PRACOWNICY:" + HTMLFilter.addBR());
-            for (Client w : workers) {
-                out.println(w.getE_mail() + "    " + w.getImie() + "    " + w.getNazwisko() + HTMLFilter.addBR());
+            for (User u : workers) {
+                out.println(u.getE_mail() + "    " + u.getImie() + "    " + u.getNazwisko() + HTMLFilter.addBR());
             }
             out.println(HTMLFilter.addBR() + "ADMINI:" + HTMLFilter.addBR());
-            for (Client a : admins) {
-                out.println(a.getE_mail() + "    " + a.getImie() + "    " + a.getNazwisko() + HTMLFilter.addBR());
+            for (User u : admins) {
+                out.println(u.getE_mail() + "    " + u.getImie() + "    " + u.getNazwisko() + HTMLFilter.addBR());
             }
         }
 

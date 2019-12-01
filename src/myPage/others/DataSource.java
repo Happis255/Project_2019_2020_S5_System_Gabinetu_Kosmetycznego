@@ -1,8 +1,8 @@
 package myPage.others;
 
-import myPage.data.Aktualnosci;
-import myPage.data.Client;
+import myPage.data.*;
 import myPage.exceptions.DBReadWriteException;
+import myPage.exceptions.NoResultsException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -63,7 +63,7 @@ public class DataSource {
             throw new DBReadWriteException(result + " rows add with execute: assignClientCard_P");
     }
 
-    public Client getClientDateDB(String e_mail) throws DBReadWriteException, SQLException{
+    public Client getClientDB(String e_mail) throws NoResultsException, SQLException{
         PreparedStatement exeStatement;
         ResultSet resultSet;
         Client client;
@@ -74,24 +74,16 @@ public class DataSource {
 
         if (resultSet.next()){
             client = new Client();
-            client.setImie(resultSet.getString("imie"));
-            client.setNazwisko(resultSet.getString("nazwisko"));
-            client.setUlica(resultSet.getString("ulica"));
-            client.setKod_pocztowy(resultSet.getString("kod_pocztowy"));
-            client.setMiejscowosc(resultSet.getString("miejscowosc"));
-            client.setData_urodzenia(DateTransformer.getJavaDate(resultSet.getDate("data_urodzenia")));
-            client.setTelefon(resultSet.getInt("telefon"));
-            client.setE_mail(resultSet.getString("e_mail"));
+            getUser(client, resultSet);
             client.setIlosc_punktow(resultSet.getInt("ilosc_punktow"));
-            client.setTyp_konta(resultSet.getString("typ_konta"));
         }else{
-            throw new DBReadWriteException();
+            throw new NoResultsException();
         }
 
         return client;
     }
 
-    public Aktualnosci getAktualnosci() throws DBReadWriteException, SQLException{
+    public Aktualnosci getAktualnosci() throws NoResultsException, SQLException{
 
         PreparedStatement exeStatement;
         ResultSet resultSet;
@@ -103,6 +95,11 @@ public class DataSource {
 
         /* Uzupełniamy klasę wynikami
         *  Każdy wiersz z treścią i każdy wiersz z tytulem trzeba umiescic w stosie w klasie Aktualnosc */
+        resultSet.last();
+        if(resultSet.getRow() == 0)
+            throw new NoResultsException();
+        resultSet.beforeFirst();
+
         while (resultSet.next()){
             aktualnosc.setID(resultSet.getInt("id_aktualnosci"));
             aktualnosc.setTytul(resultSet.getString("tytul"));
@@ -111,31 +108,87 @@ public class DataSource {
         return aktualnosc;
     }
 
-    public Client[] getAllAccountsWithTagDB(Client.TypKonta accountType)throws SQLException{
-        Client[] clients;
+    public User[] getAllAccountsBasicDataWithTagDB(TypKonta accountType)throws SQLException{
+        User[] users;
         PreparedStatement exeStatement;
         ResultSet resultSet;
-        String str = Client.TypKonta.getStringVal(accountType);
+        String str = TypKonta.getStringVal(accountType);
 
-        exeStatement = statements.get("getAllAccountsWithTag");
+        exeStatement = statements.get("getAllAccountsBasicDataWithTag");
         exeStatement.setString(1, str);
         resultSet = exeStatement.executeQuery();
 
         resultSet.last();
         int numOfRows = resultSet.getRow();
-        clients = new Client[numOfRows];
+        users = new User[numOfRows];
         resultSet.beforeFirst();
 
         int i=0;
         while (resultSet.next()){
-            clients[i] = new Client();
-            clients[i].setE_mail(resultSet.getString("e_mail"));
-            clients[i].setImie(resultSet.getString("imie"));
-            clients[i].setNazwisko(resultSet.getString("nazwisko"));
-            clients[i].setTyp_konta(resultSet.getString("typ_konta"));
+            users[i] = new User();
+            users[i].setE_mail(resultSet.getString("e_mail"));
+            users[i].setImie(resultSet.getString("imie"));
+            users[i].setNazwisko(resultSet.getString("nazwisko"));
+            users[i].setTyp_konta(resultSet.getString("typ_konta"));
             ++i;
         }
 
-        return clients;
+        return users;
+    }
+
+    public User getUserDB(String e_mail) throws NoResultsException, SQLException{
+        PreparedStatement exeStatement;
+        ResultSet resultSet;
+        User user;
+
+        exeStatement = statements.get("getUser");
+        exeStatement.setString(1, e_mail);
+        resultSet = exeStatement.executeQuery();
+
+        if (resultSet.next()){
+            user = new User();
+            user.setE_mail(resultSet.getString("e_mail"));
+            user.setTyp_konta(resultSet.getString("typ_konta"));
+            user.setHaslo(resultSet.getString("haslo"));
+        }else{
+            throw new NoResultsException();
+        }
+
+        return user;
+    }
+
+    public Pracownik getPracownikDB(String e_mail) throws NoResultsException, SQLException{
+        PreparedStatement exeStatement;
+        ResultSet resultSet;
+        Pracownik worker;
+
+        exeStatement = statements.get("getWorker");
+        exeStatement.setString(1, e_mail);
+        resultSet = exeStatement.executeQuery();
+
+        if (resultSet.next()){
+            worker = new Pracownik();
+            getUser(worker, resultSet);
+            worker.setPesel(resultSet.getInt("pesel"));
+            worker.setData_zatrudnienia(DateTransformer.getJavaDate(resultSet.getDate("data_zatrudnienia")));
+            worker.setCertyfikaty(resultSet.getString("certyfikaty"));
+
+        }else{
+            throw new NoResultsException();
+        }
+
+        return worker;
+    }
+
+    private void getUser(User user, ResultSet resultSet) throws SQLException {
+        user.setImie(resultSet.getString("imie"));
+        user.setNazwisko(resultSet.getString("nazwisko"));
+        user.setUlica(resultSet.getString("ulica"));
+        user.setKod_pocztowy(resultSet.getString("kod_pocztowy"));
+        user.setMiejscowosc(resultSet.getString("miejscowosc"));
+        user.setData_urodzenia(DateTransformer.getJavaDate(resultSet.getDate("data_urodzenia")));
+        user.setTelefon(resultSet.getInt("telefon"));
+        user.setE_mail(resultSet.getString("e_mail"));
+        user.setTyp_konta(resultSet.getString("typ_konta"));
     }
 }

@@ -1,13 +1,12 @@
 package myPage.servlets;
 
-import myPage.data.Client;
 import myPage.data.ErrorMessage;
 import myPage.data.SessionData;
-import myPage.exceptions.DBReadWriteException;
+import myPage.data.User;
+import myPage.exceptions.NoResultsException;
 import myPage.others.DataSource;
 import myPage.others.Encrypter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -47,38 +46,42 @@ public class ControllerLogin extends HttpServlet {
         String password = request.getParameter("password");
 
         Encrypter pws = new Encrypter();
-        String encryptedPasswd = pws.encrypt(password);
+        password = pws.encrypt(password);
 
         DataSource dataSource;
-        Client client = null;
+        User user = null;
         try {
             dataSource = new DataSource();
-            client = dataSource.getClientDateDB(username);
-        } catch (DBReadWriteException e) {
-            client = null;
-        }catch (SQLException e) {
+            user = dataSource.getUserDB(username);
+        } catch (NoResultsException e) {
+            ++loginAttempts;
+            System.out.println("error logowania");
+            url = "index.jsp";
+            response.sendRedirect(url);
+            return;
+        } catch (SQLException e) {
             ErrorMessage errorMessage = new ErrorMessage(e);
             session.setAttribute("errorMessage", errorMessage);
             response.sendRedirect("errorPage.jsp");
             return;
         }
 
-        if(client != null){
+        if(user.getHaslo().matches(password)){
             session = request.getSession();
             session.invalidate();
             session = request.getSession(true);
-            SessionData sessionData = new SessionData(username, client.getTyp_konta());
+            SessionData sessionData = new SessionData(user.getE_mail(), user.getTyp_konta());
             session.setAttribute("userData", sessionData);
             loginAttempts = 0;
             System.out.println("zalogowano");
             url = "index.jsp";
-        } else{
+        } else {
             ++loginAttempts;
-            System.out.println("errorLogowania");
+            System.out.println("bledne haslo");
             url = "index.jsp";
         }
-        RequestDispatcher dispatcher = request.getRequestDispatcher(url);
-        dispatcher.forward(request, response);
+
+        response.sendRedirect(url);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

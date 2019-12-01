@@ -2,7 +2,9 @@ package myPage.servlets;
 
 import myPage.data.Client;
 import myPage.data.ErrorMessage;
+import myPage.data.User;
 import myPage.exceptions.DBReadWriteException;
+import myPage.exceptions.NoResultsException;
 import myPage.others.DataSource;
 import myPage.others.Encrypter;
 
@@ -35,10 +37,25 @@ public class ControllerRegister extends HttpServlet {
             return;
         }
 
+        DataSource dataSource = new DataSource();
+        User user;
+        try {
+            user = dataSource.getUserDB(request.getParameter("e-mail"));
+        } catch (NoResultsException e) {
+            System.out.println("urzytkownik o podanym niku juz istnieje");
+            response.sendRedirect("rejestracja.jsp");
+            return;
+        } catch (SQLException e) {
+            ErrorMessage errorMessage = new ErrorMessage(e);
+            session.setAttribute("errorMessage", errorMessage);
+            response.sendRedirect("errorPage.jsp");
+            return;
+        }
+
         Client inputData = new Client();
         inputData.setE_mail(request.getParameter("e-mail"));
         inputData.setHaslo(request.getParameter("haslo"));
-        inputData.setHasloPowtorz(request.getParameter("powtorz-haslo"));
+        //inputData.setHasloPowtorz(request.getParameter("powtorz-haslo"));
         inputData.setImie(request.getParameter("imie"));
         inputData.setNazwisko(request.getParameter("nazwisko"));
         System.out.println(request.getParameter("data-urodzenia"));
@@ -59,35 +76,18 @@ public class ControllerRegister extends HttpServlet {
         inputData.setKod_pocztowy(request.getParameter("kod"));
         inputData.setMiejscowosc(request.getParameter("miejscowosc"));
 
+        /*
         if(inputData.getHaslo().compareTo(inputData.getHasloPowtorz()) != 0){
             System.out.println("hasla nie sa takie same");
             response.sendRedirect("rejestracja.jsp");
             return;
         }
-
-        DataSource dataSource = new DataSource();
-        Client client;
-        try {
-            client = dataSource.getClientDateDB(inputData.getE_mail());
-        } catch (DBReadWriteException e) {
-            client = null;
-        }catch (SQLException e) {
-            ErrorMessage errorMessage = new ErrorMessage(e);
-            session.setAttribute("errorMessage", errorMessage);
-            response.sendRedirect("errorPage.jsp");
-            return;
-        }
-
-        if(client != null){
-            System.out.println("urzytkownik o podanym niku juz istnieje");
-            response.sendRedirect("rejestracja.jsp");
-            return;
-        }
+        */
 
         Encrypter pws = new Encrypter();
         String encryptedPasswd = pws.encrypt(inputData.getHaslo());
         inputData.setHaslo(encryptedPasswd);
-        inputData.setHasloPowtorz(encryptedPasswd);
+        //inputData.setHasloPowtorz(encryptedPasswd);
 
         try {
             dataSource.createClientDB(inputData);
