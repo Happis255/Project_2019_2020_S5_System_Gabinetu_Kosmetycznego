@@ -1,9 +1,8 @@
 <%@ page import="myPage.data.*" %>
 <%@ page import="myPage.exceptions.DBReadWriteException" %>
 <%@ page import="myPage.exceptions.NoResultsException" %>
-<%@ page import="myPage.others.DataSource" %>
-<%@ page import="myPage.others.HTMLFilter" %>
 <%@ page import="java.sql.SQLException" %>
+<%@ page import="myPage.others.*" %>
 <%--
   Created by IntelliJ IDEA.
   User: ppisk
@@ -23,13 +22,15 @@ konto :) <br>
 <br>DANE KTWOJEGO KONTA:
     <%
         User user = null;
-        DataSource dataSource = new DataSource();
+        DataSourceClient dataSourceClient = new DataSourceClient();
+        DataSourcePracownik dataSourceWorker = new DataSourcePracownik();
+        DataSourceAdmin dataSourceAdmin = new DataSourceAdmin();
 
         try {
             if(sessionData.getAccoutType() == TypKonta.KLIENT){
-                user = dataSource.getClientDB(sessionData.getNick());
+                user = dataSourceClient.getClientDB(sessionData.getNick());
             }else{
-                user = dataSource.getPracownikDB(sessionData.getNick());
+                user = dataSourceWorker.getPracownikDB(sessionData.getNick());
             }
             if(user == null) throw  new NoResultsException();
         } catch (DBReadWriteException | SQLException e) {
@@ -72,7 +73,7 @@ konto :) <br>
         User[] admins = null;  //na razie zakłądam ze admini różnią się tylko id_konta (póżniej sie to zmieni)
         if(sessionData.getAccoutType() == TypKonta.PRACOWNIK){
             try {
-                clients = dataSource.getAllAccountsBasicDataWithTagDB(TypKonta.KLIENT);
+                clients = dataSourceClient.getAllAccountsBasicDataWithTagDB(TypKonta.KLIENT);
             } catch (SQLException e) {
                 System.out.println("[ERR] DB Error");
                 System.out.println(e);
@@ -97,9 +98,9 @@ konto :) <br>
 
         if(sessionData.getAccoutType() == TypKonta.ADMINISTRATOR){
             try {
-                clients = dataSource.getAllAccountsBasicDataWithTagDB(TypKonta.KLIENT);
-                workers = dataSource.getAllAccountsBasicDataWithTagDB(TypKonta.PRACOWNIK);
-                admins = dataSource.getAllAccountsBasicDataWithTagDB(TypKonta.ADMINISTRATOR);
+                clients = dataSourceClient.getAllAccountsBasicDataWithTagDB(TypKonta.KLIENT);
+                workers = dataSourceWorker.getAllAccountsBasicDataWithTagDB(TypKonta.PRACOWNIK);
+                admins = dataSourceAdmin.getAllAccountsBasicDataWithTagDB(TypKonta.ADMINISTRATOR);
             } catch (SQLException e) {
                 System.out.println("[ERR] DB Error");
                 System.out.println(e);

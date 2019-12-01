@@ -6,6 +6,7 @@ import myPage.data.User;
 import myPage.exceptions.DBReadWriteException;
 import myPage.exceptions.NoResultsException;
 import myPage.others.DataSource;
+import myPage.others.DataSourceClient;
 import myPage.others.Encrypter;
 
 import javax.servlet.ServletException;
@@ -38,6 +39,7 @@ public class ControllerRegister extends HttpServlet {
         }
 
         DataSource dataSource = new DataSource();
+        DataSourceClient dataSourceClient = new DataSourceClient();
         User user;
         try {
             user = dataSource.getUserDB(request.getParameter("e-mail"));
@@ -90,7 +92,7 @@ public class ControllerRegister extends HttpServlet {
         //inputData.setHasloPowtorz(encryptedPasswd);
 
         try {
-            dataSource.createClientDB(inputData);
+            dataSourceClient.createClientDB(inputData);
         } catch (DBReadWriteException | SQLException e) {
             ErrorMessage errorMessage = new ErrorMessage(e);
             session.setAttribute("errorMessage", errorMessage);
