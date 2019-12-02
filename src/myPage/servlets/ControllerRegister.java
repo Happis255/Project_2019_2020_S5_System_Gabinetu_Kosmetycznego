@@ -40,17 +40,20 @@ public class ControllerRegister extends HttpServlet {
 
         DataSource dataSource = new DataSource();
         DataSourceClient dataSourceClient = new DataSourceClient();
-        User user;
+        User user = null;
         try {
             user = dataSource.getUserDB(request.getParameter("e-mail"));
-        } catch (NoResultsException e) {
-            System.out.println("urzytkownik o podanym niku juz istnieje");
-            response.sendRedirect("rejestracja.jsp");
-            return;
+        } catch (NoResultsException ignored) {
         } catch (SQLException e) {
             ErrorMessage errorMessage = new ErrorMessage(e);
             session.setAttribute("errorMessage", errorMessage);
             response.sendRedirect("errorPage.jsp");
+            return;
+        }
+
+        if(user != null){
+            System.out.println("urzytkownik o podanym niku juz istnieje");
+            response.sendRedirect("rejestracja.jsp");
             return;
         }
 

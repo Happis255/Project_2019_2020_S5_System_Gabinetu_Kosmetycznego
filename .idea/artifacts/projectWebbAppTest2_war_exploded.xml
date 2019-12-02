@@ -10,6 +10,9 @@
         <element id="directory" name="lib">
           <element id="library" level="project" name="Java EE 6" />
           <element id="library" level="project" name="mysql-connector-java-5.1.48" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/activation.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/mysql.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/javax.mail.jar" />
         </element>
       </element>
     </root>
