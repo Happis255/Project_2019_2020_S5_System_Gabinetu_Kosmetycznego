@@ -1,4 +1,4 @@
-<%@ page import="myPage.data.ErrorMessage" %>
+<%@ page import="myPage.data.others.ErrorMessage" %>
 <%@ page import="myPage.others.HTMLFilter" %><%--
   Created by IntelliJ IDEA.
   User: ppisk

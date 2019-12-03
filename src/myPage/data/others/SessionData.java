@@ -1,13 +1,17 @@
-package myPage.data;
+package myPage.data.others;
 
 public class SessionData {
+
     private String nick;
     private TypKonta accoutType;
+    private int id;
     private ErrorMessage errorMessage;
 
-    public SessionData(String nick, TypKonta accountType){
+
+    public SessionData(String nick, TypKonta accountType, int id){
         this.nick = nick;
         this.accoutType = accountType;
+        this.id = id;
     }
 
     public String getNick() {
@@ -24,6 +28,14 @@ public class SessionData {
 
     public void setAccoutType(TypKonta accoutType) {
         this.accoutType = accoutType;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public ErrorMessage getErrorMessage() {

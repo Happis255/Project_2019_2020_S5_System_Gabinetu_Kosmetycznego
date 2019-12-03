@@ -1,10 +1,7 @@
 package myPage.servlets;
 
-import myPage.data.ErrorMessage;
-import myPage.data.SessionData;
-import myPage.data.User;
-import myPage.exceptions.NoResultsException;
-import myPage.others.DataSource;
+import myPage.basicObjects.User;
+import myPage.data.others.ErrorMessage;
 import myPage.others.Encrypter;
 
 import javax.servlet.ServletException;
@@ -34,6 +31,7 @@ public class ControllerLogin extends HttpServlet {
         if(loginAttempts >= maxLoginAttempts){
             System.out.println("zbyt duzo logowan");
             response.sendRedirect("logowanie.jsp");
+            return;
         }
 
         if(session.getAttribute("userData") != null){
@@ -42,23 +40,19 @@ public class ControllerLogin extends HttpServlet {
             return;
         }
 
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-
+        User user = new User();
         Encrypter pws = new Encrypter();
-        password = pws.encrypt(password);
 
-        DataSource dataSource;
-        User user = null;
         try {
-            dataSource = new DataSource();
-            user = dataSource.getUserDB(username);
-        } catch (NoResultsException e) {
-            ++loginAttempts;
-            System.out.println("error logowania");
-            url = "index.jsp";
-            response.sendRedirect(url);
-            return;
+            boolean ret;
+            ret = user.login(request, request.getParameter("username"), pws.encrypt(request.getParameter("password")));
+            if(!ret){
+                ++loginAttempts;
+                System.out.println("błędny login i/lub hasło");
+            }else{
+                loginAttempts = 0;
+                System.out.println("zalogowano");
+            }
         } catch (SQLException e) {
             ErrorMessage errorMessage = new ErrorMessage(e);
             session.setAttribute("errorMessage", errorMessage);
@@ -66,32 +60,13 @@ public class ControllerLogin extends HttpServlet {
             return;
         }
 
-        if(user.getHaslo().matches(password)){
-            session = request.getSession();
-            session.invalidate();
-            session = request.getSession(true);
-            SessionData sessionData = new SessionData(user.getE_mail(), user.getTyp_konta());
-            session.setAttribute("userData", sessionData);
-            loginAttempts = 0;
-            System.out.println("zalogowano");
-            url = "index.jsp";
-        } else {
-            ++loginAttempts;
-            System.out.println("bledne haslo");
-            url = "index.jsp";
-        }
-
-        response.sendRedirect(url);
-    }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getSession().invalidate();
         response.sendRedirect("index.jsp");
     }
 
-    /*
-    public void logout() {
-        session.invalidate();
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        User user = new User();
+        user.logout(request.getSession());
+
+        response.sendRedirect("index.jsp");
     }
-    */
 }

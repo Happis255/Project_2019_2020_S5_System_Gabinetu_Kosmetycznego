@@ -1,9 +1,9 @@
-<%@ page import="myPage.data.Client" %>
-<%@ page import="myPage.others.DataSource" %>
-<%@ page import="myPage.data.SessionData" %>
+<%@ page import="myPage.data.dataBase.Client" %>
+<%@ page import="myPage.dataSourceDB.DataSource" %>
+<%@ page import="myPage.data.others.SessionData" %>
 <%@ page import="myPage.exceptions.DBReadWriteException" %>
 <%@ page import="java.sql.SQLException" %>
-<%@ page import="myPage.data.Aktualnosci" %>
+<%@ page import="myPage.data.dataBase.Aktualnosci" %>
 
 <!DOCTYPE html>
 <html>

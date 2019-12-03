@@ -1,4 +1,4 @@
-package myPage.data;
+package myPage.data.others;
 
 public enum TypKonta{
     PRACOWNIK(1),
@@ -28,5 +28,24 @@ public enum TypKonta{
                 break;
         }
         return str;
+    }
+
+    public static TypKonta getTypKonta(String accountType){
+        TypKonta typKonta;
+        switch (accountType){
+            case "ADMINISTRATOR":
+                typKonta = ADMINISTRATOR;
+                break;
+            case "PRACOWNIK":
+                typKonta = PRACOWNIK;
+                break;
+            case "KLIENT":
+                typKonta = KLIENT;
+                break;
+            default:
+                typKonta = null;
+                break;
+        }
+        return typKonta;
     }
 }

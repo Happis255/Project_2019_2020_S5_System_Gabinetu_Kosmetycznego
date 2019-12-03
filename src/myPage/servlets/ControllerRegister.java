@@ -1,12 +1,8 @@
 package myPage.servlets;
 
-import myPage.data.Client;
-import myPage.data.ErrorMessage;
-import myPage.data.User;
+import myPage.basicObjects.User;
+import myPage.data.others.ErrorMessage;
 import myPage.exceptions.DBReadWriteException;
-import myPage.exceptions.NoResultsException;
-import myPage.others.DataSource;
-import myPage.others.DataSourceClient;
 import myPage.others.Encrypter;
 
 import javax.servlet.ServletException;
@@ -17,10 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.HashMap;
 
 @WebServlet(description = "kontroler do obsługi logowania klientow", urlPatterns = { "/UserRegister" })
 public class ControllerRegister extends HttpServlet {
@@ -33,75 +27,37 @@ public class ControllerRegister extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         session = request.getSession();
         if(session.getAttribute("userData") != null){
-            System.out.println("najpierw sie wyloguj");
+            System.out.println("juz jestes zalogowany");
             response.sendRedirect("logowanie.jsp");
             return;
         }
 
-        DataSource dataSource = new DataSource();
-        DataSourceClient dataSourceClient = new DataSourceClient();
-        User user = null;
-        try {
-            user = dataSource.getUserDB(request.getParameter("e-mail"));
-        } catch (NoResultsException ignored) {
-        } catch (SQLException e) {
-            ErrorMessage errorMessage = new ErrorMessage(e);
-            session.setAttribute("errorMessage", errorMessage);
-            response.sendRedirect("errorPage.jsp");
-            return;
-        }
-
-        if(user != null){
-            System.out.println("urzytkownik o podanym niku juz istnieje");
-            response.sendRedirect("rejestracja.jsp");
-            return;
-        }
-
-        Client inputData = new Client();
-        inputData.setE_mail(request.getParameter("e-mail"));
-        inputData.setHaslo(request.getParameter("haslo"));
-        //inputData.setHasloPowtorz(request.getParameter("powtorz-haslo"));
-        inputData.setImie(request.getParameter("imie"));
-        inputData.setNazwisko(request.getParameter("nazwisko"));
-        System.out.println(request.getParameter("data-urodzenia"));
-
-        try {
-            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            Date date = dateFormat.parse(request.getParameter("data-urodzenia"));
-            inputData.setData_urodzenia(date);
-        } catch (ParseException e) {
-            ErrorMessage errorMessage = new ErrorMessage(e);
-            session.setAttribute("errorMessage", errorMessage);
-            response.sendRedirect("errorPage.jsp");
-            return;
-        }
-
-        inputData.setTelefon(Integer.parseInt(request.getParameter("telefon")));
-        inputData.setUlica(request.getParameter("ulica"));
-        inputData.setKod_pocztowy(request.getParameter("kod"));
-        inputData.setMiejscowosc(request.getParameter("miejscowosc"));
-
-        /*
-        if(inputData.getHaslo().compareTo(inputData.getHasloPowtorz()) != 0){
-            System.out.println("hasla nie sa takie same");
-            response.sendRedirect("rejestracja.jsp");
-            return;
-        }
-        */
-
         Encrypter pws = new Encrypter();
-        String encryptedPasswd = pws.encrypt(inputData.getHaslo());
-        inputData.setHaslo(encryptedPasswd);
-        //inputData.setHasloPowtorz(encryptedPasswd);
+        User user = new User();
+        boolean ret;
+        HashMap<String, String> parameters = new HashMap<>();
+
+        parameters.put("e-mail", request.getParameter("e-mail"));
+        parameters.put("haslo", pws.encrypt(request.getParameter("haslo")));
+        parameters.put("imie", request.getParameter("imie"));
+        parameters.put("nazwisko", request.getParameter("nazwisko"));
+        parameters.put("data-urodzenia", request.getParameter("data-urodzenia"));
+        parameters.put("telefon", request.getParameter("telefon"));
+        parameters.put("ulica", request.getParameter("ulica"));
+        parameters.put("kod", request.getParameter("kod"));
+        parameters.put("miejscowosc", request.getParameter("miejscowosc"));
 
         try {
-            dataSourceClient.createClientDB(inputData);
-        } catch (DBReadWriteException | SQLException e) {
+            ret = user.register(parameters);
+        } catch (SQLException | ParseException | DBReadWriteException e) {
             ErrorMessage errorMessage = new ErrorMessage(e);
             session.setAttribute("errorMessage", errorMessage);
             response.sendRedirect("errorPage.jsp");
             return;
         }
+
+        if(!ret)
+            System.out.println("urzytkownik o podanym niku juz istnieje");
 
         response.sendRedirect("logowanie.jsp");
     }

@@ -1,8 +1,16 @@
-<%@ page import="myPage.data.*" %>
+<%@ page import="myPage.basicObjects.User" %>
+<%@ page import="myPage.data.dataBase.*" %>
+<%@ page import="myPage.data.others.ErrorMessage" %>
+<%@ page import="myPage.data.others.SessionData" %>
+<%@ page import="myPage.data.others.TypKonta" %>
+<%@ page import="myPage.exceptions.CannotInstanciateException" %>
 <%@ page import="myPage.exceptions.DBReadWriteException" %>
 <%@ page import="myPage.exceptions.NoResultsException" %>
+<%@ page import="myPage.others.HTMLFilter" %>
 <%@ page import="java.sql.SQLException" %>
-<%@ page import="myPage.others.*" %>
+<%@ page import="myPage.basicObjects.Pracownik" %>
+<%@ page import="myPage.basicObjects.Klient" %>
+<%@ page import="myPage.basicObjects.Admin" %>
 <%--
   Created by IntelliJ IDEA.
   User: ppisk
@@ -19,117 +27,61 @@
 <% SessionData sessionData = (SessionData)session.getAttribute("userData"); %>
 konto :) <br>
 <% out.println("TYP KONTA: " + TypKonta.getStringVal(sessionData.getAccoutType())); %>
-<br>DANE KTWOJEGO KONTA:
+<br>DANE TWOJEGO KONTA:
     <%
         User user = null;
-        DataSourceClient dataSourceClient = new DataSourceClient();
-        DataSourcePracownik dataSourceWorker = new DataSourcePracownik();
-        DataSourceAdmin dataSourceAdmin = new DataSourceAdmin();
+        UserData data;
+        try {
+            user = User.getInstance(sessionData.getId(), sessionData.getAccoutType());
+
+            data = user.getData();
+            if(!data.next())
+                throw new NoResultsException();
+        } catch (SQLException | NoResultsException | CannotInstanciateException e) {
+            ErrorMessage errorMessage = new ErrorMessage(e);
+            session.setAttribute("errorMessage", errorMessage);
+            response.sendRedirect("errorPage.jsp");
+            return;
+        }
+
+        %> <br><br> <%
 
         try {
-            if(sessionData.getAccoutType() == TypKonta.KLIENT){
-                user = dataSourceClient.getClientDB(sessionData.getNick());
-            }else{
-                user = dataSourceWorker.getPracownikDB(sessionData.getNick());
+            out.println("Imie:" + data.getImie() + HTMLFilter.addBR());
+            out.println("Nazwisko:" + data.getNazwisko() + HTMLFilter.addBR());
+            out.println("Ulica:" + data.getUlica() + HTMLFilter.addBR());
+            out.println("kod_pocztowy:" + data.getKod_pocztowy() + HTMLFilter.addBR());
+            out.println("miejscowosc:" + data.getMiejscowosc() + HTMLFilter.addBR());
+            out.println("data_urodzenia:" + data.getData_urodzenia() + HTMLFilter.addBR());
+            out.println("telefon:" + data.getTelefon() + HTMLFilter.addBR());
+            out.println("e_mail:" + data.getE_mail() + HTMLFilter.addBR());
+            out.println("id_klienta:" + data.getId() + HTMLFilter.addBR());
+            out.println("id_konta:" + data.getId_konta() + HTMLFilter.addBR() + HTMLFilter.addBR());
+
+            if(data instanceof PracownikData){
+                out.println("pesel:" + ((PracownikData)data).getPesel() + HTMLFilter.addBR());
+                out.println("data_zatrudnienia:" + ((PracownikData)data).getData_zatrudnienia() + HTMLFilter.addBR());
+                out.println("certyfikaty:" + ((PracownikData)data).getCertyfikaty() + HTMLFilter.addBR());
+                out.println("id_ksiarzeczki:" + ((PracownikData)data).getId_ksiazeczki() + HTMLFilter.addBR());
             }
-            if(user == null) throw  new NoResultsException();
-        } catch (DBReadWriteException | SQLException e) {
-            System.out.println("[ERR] DB Error");
-            System.out.println(e);
-            e.printStackTrace();
-            session.invalidate();
-            response.sendRedirect("index.jsp");
-            return;
-        } catch (NullPointerException e){
-            System.out.println("[ERR] NullPointerException");
-            System.out.println(e);
-            e.printStackTrace();
-            out.println("blad odczytu danych");
-            response.sendRedirect("index.jsp");
+
+            if(data instanceof KlientData){
+                out.println("ilosc_punktow:" + ((KlientData)data).getIloscPunktow() + HTMLFilter.addBR());
+                out.println("id_karty:" + ((KlientData)data).getId_karty() + HTMLFilter.addBR());
+                out.println("id_statusu:" + ((KlientData)data).getId_statusu() + HTMLFilter.addBR());
+            }
+        } catch (SQLException e) {
+            ErrorMessage errorMessage = new ErrorMessage(e);
+            session.setAttribute("errorMessage", errorMessage);
+            response.sendRedirect("errorPage.jsp");
             return;
         }
+
+
 
         %> <br><br> <%
-        out.println("Imie:" + user.getImie()); %> <br> <%
-        out.println("Nazwisko:" + user.getNazwisko()); %> <br> <%
-        out.println("Ulica:" + user.getUlica()); %> <br> <%
-        out.println("kod_pocztowy:" + user.getKod_pocztowy()); %> <br> <%
-        out.println("miejscowosc:" + user.getMiejscowosc()); %> <br> <%
-        out.println("data_urodzenia:" + user.getData_urodzenia()); %> <br> <%
-        out.println("telefon:" + user.getTelefon()); %> <br> <%
-        out.println("e_mail:" + user.getE_mail()); %> <br> <%
-        out.println("typ_konta:" + user.getTyp_konta_String()); %> <br> <%
-        if(user instanceof Client){
-            out.println("ilosc_punktow:" + ((Client)user).getIlosc_punktow());
-        }else{
-            out.println("pesel:" + ((Pracownik)user).getPesel()); %> <br> <%
-            out.println("data_zatrudnienia:" + ((Pracownik)user).getData_zatrudnienia()); %> <br> <%
-            out.println("certyfikaty:" + ((Pracownik)user).getCertyfikaty());
-        }
-        %> <br><br> <%
 
-        User[] clients = null;
-        User[] workers = null; //na razie zakłądam ze pracwonicy różnią się tylko id_konta (póżniej sie to zmieni)
-        User[] admins = null;  //na razie zakłądam ze admini różnią się tylko id_konta (póżniej sie to zmieni)
-        if(sessionData.getAccoutType() == TypKonta.PRACOWNIK){
-            try {
-                clients = dataSourceClient.getAllAccountsBasicDataWithTagDB(TypKonta.KLIENT);
-            } catch (SQLException e) {
-                System.out.println("[ERR] DB Error");
-                System.out.println(e);
-                e.printStackTrace();
-                session.invalidate();
-                response.sendRedirect("index.jsp");
-                return;
-            } catch (NullPointerException e){
-                System.out.println("[ERR] NullPointerException");
-                System.out.println(e);
-                e.printStackTrace();
-                out.println("blad odczytu danych");
-                response.sendRedirect("index.jsp");
-                return;
-            }
 
-            out.println("KLIENCI:" + HTMLFilter.addBR());
-            for (User u : clients) {
-                out.println(u.getE_mail() + "    " + u.getImie() + "    " + u.getNazwisko() + HTMLFilter.addBR());
-            }
-        }
-
-        if(sessionData.getAccoutType() == TypKonta.ADMINISTRATOR){
-            try {
-                clients = dataSourceClient.getAllAccountsBasicDataWithTagDB(TypKonta.KLIENT);
-                workers = dataSourceWorker.getAllAccountsBasicDataWithTagDB(TypKonta.PRACOWNIK);
-                admins = dataSourceAdmin.getAllAccountsBasicDataWithTagDB(TypKonta.ADMINISTRATOR);
-            } catch (SQLException e) {
-                System.out.println("[ERR] DB Error");
-                System.out.println(e);
-                e.printStackTrace();
-                session.invalidate();
-                response.sendRedirect("index.jsp");
-                return;
-            } catch (NullPointerException e){
-                System.out.println("[ERR] NullPointerException");
-                System.out.println(e);
-                e.printStackTrace();
-                out.println("blad odczytu danych");
-                response.sendRedirect("index.jsp");
-                return;
-            }
-
-            out.println(HTMLFilter.addBR() + "KLIENCI:" + HTMLFilter.addBR());
-            for (User u : clients) {
-                out.println(u.getE_mail() + "    " + u.getImie() + "    " + u.getNazwisko() + HTMLFilter.addBR());
-            }
-            out.println(HTMLFilter.addBR() + "PRACOWNICY:" + HTMLFilter.addBR());
-            for (User u : workers) {
-                out.println(u.getE_mail() + "    " + u.getImie() + "    " + u.getNazwisko() + HTMLFilter.addBR());
-            }
-            out.println(HTMLFilter.addBR() + "ADMINI:" + HTMLFilter.addBR());
-            for (User u : admins) {
-                out.println(u.getE_mail() + "    " + u.getImie() + "    " + u.getNazwisko() + HTMLFilter.addBR());
-            }
-        }
 
 %>
 

@@ -1,4 +1,4 @@
-package myPage.data;
+package myPage.data.others;
 
 public class ErrorMessage {
     Exception exception;
