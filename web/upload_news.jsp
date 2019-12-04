@@ -26,7 +26,7 @@
 <!--end of navbar bar-->
 
 <section id="upload_news" class="bg-light-gray" style="margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:800px;margin-right:auto;margin-left:auto;border-radius:20px;margin-bottom:30px;">
-    <form>
+    <form action="UploadNewsWithJPG" method="post" enctype="multipart/form-data">
         <h2 class="text-center" style="height:79px;">Dodaj aktualność</h2>
         <h5 class="text-center" style="height:21px;margin-right:50px;margin-left:50px;">Wprowadź tytuł aktualności, opis oraz dodaj grafikę.</h5>
         <h6 class="text-center" id="Informacja_Upload" style="font-weight:300;height:44px;margin-right:50px;margin-left:50px;">Uploadowana grafika nie powinna przekraczać rozmiaru 50 MB<br>

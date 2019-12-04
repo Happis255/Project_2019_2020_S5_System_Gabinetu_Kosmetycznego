@@ -30,11 +30,13 @@
         $("#navbar-placeholder").load("navbar.jsp");
     });
 </script>
+
 <section id="kontakt" class="bg-light-gray" style="margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:800px;margin-right:auto;margin-left:auto;border-radius:20px;margin-bottom:229px;margin-top:180px;">
     <h2 class="text-center" style="height:53px;">E-Mail z twoim CV został pomyślnie wysłany</h2>
     <h5 class="text-center" style="height:99px;margin-right:50px;margin-left:50px;"><br>Do 7 dni skontaktuje się z tobą pracownik gabinetu w celu potwierdzenia<br>przyjęcia twojego CV i umówienia się na rozmowę kwalifikacyjną.&nbsp;<br></h5>
     <div class="form-group"><a href="index.jsp"><button class="btn btn-primary" type="submit" style="margin:0;width:265px;margin-left:267px;">Powrót do strony głównej</button></a></div>
 </section>
+
 <!--Footer bar-->
 <div id="footer-placeholder">
 
