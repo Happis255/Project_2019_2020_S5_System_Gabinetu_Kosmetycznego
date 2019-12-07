@@ -1,53 +1,80 @@
 package myPage.data.dataBase;
 
-import myPage.others.DateTransformer;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Date;
 
-public class UserData extends Data{
-    public UserData(ResultSet resultQuery){
-        super(resultQuery);
+public class UserData{
+    private int id;
+    private String imie;
+    private String nazwisko;
+    private String ulica;
+    private String kod_pocztowy;
+    private String miejscowosc;
+    private Date data_urodzenia;
+    private int telefon;
+    private String e_mail;
+    private int id_konta;
+
+    public UserData(
+            int id,
+            String imie,
+            String nazwisko,
+            String ulica,
+            String kod_pocztowy,
+            String miejscowosc,
+            Date data_urodzenia,
+            int telefon,
+            String e_mail,
+            int id_konta
+    ){
+        this.id = id;
+        this.imie = imie;
+        this.nazwisko = nazwisko;
+        this.ulica = ulica;
+        this.kod_pocztowy = kod_pocztowy;
+        this.miejscowosc = miejscowosc;
+        this.data_urodzenia = data_urodzenia;
+        this.telefon = telefon;
+        this.e_mail = e_mail;
+        this.id_konta = id_konta;
     }
 
-    public int getId() throws SQLException {
-        return resultQuery.getInt("id");
+    public int getId() {
+        return id;
     }
 
-    public String getImie() throws SQLException {
-        return resultQuery.getString("imie");
+    public String getImie() {
+        return imie;
     }
 
-    public String getNazwisko() throws SQLException {
-        return resultQuery.getString("nazwisko");
+    public String getNazwisko() {
+        return nazwisko;
     }
 
-    public String getUlica() throws SQLException {
-        return resultQuery.getString("ulica");
+    public String getUlica() {
+        return ulica;
     }
 
-    public String getKod_pocztowy() throws SQLException {
-        return resultQuery.getString("kod_pocztowy");
+    public String getKod_pocztowy() {
+        return kod_pocztowy;
     }
 
-    public String getMiejscowosc() throws SQLException {
-        return resultQuery.getString("miejscowosc");
+    public String getMiejscowosc() {
+        return miejscowosc;
     }
 
-    public Date getData_urodzenia() throws SQLException {
-        return DateTransformer.getJavaDate(resultQuery.getDate("data_urodzenia"));
+    public Date getData_urodzenia() {
+        return data_urodzenia;
     }
 
-    public int getTelefon() throws SQLException {
-        return resultQuery.getInt("telefon");
+    public int getTelefon() {
+        return telefon;
     }
 
-    public String getE_mail() throws SQLException {
-        return resultQuery.getString("e_mail");
+    public String getE_mail() {
+        return e_mail;
     }
 
-    public int getId_konta() throws SQLException {
-        return resultQuery.getInt("id_konta");
+    public int getId_konta() {
+        return id_konta;
     }
 }

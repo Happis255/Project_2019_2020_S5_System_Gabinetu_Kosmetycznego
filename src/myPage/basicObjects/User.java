@@ -80,7 +80,7 @@ public class User {
         return null;
     }
 
-    public KontoData getAccount() throws SQLException {
+    public KontoData getAccount() throws SQLException, DBReadWriteException {
         return null;
     }
 }

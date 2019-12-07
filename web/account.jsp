@@ -35,7 +35,7 @@ konto :) <br>
             user = User.getInstance(sessionData.getId(), sessionData.getAccoutType());
 
             data = user.getData();
-            if(!data.next())
+            if(data == null)
                 throw new NoResultsException();
         } catch (SQLException | NoResultsException | CannotInstanciateException e) {
             ErrorMessage errorMessage = new ErrorMessage(e);
@@ -46,42 +46,31 @@ konto :) <br>
 
         %> <br><br> <%
 
-        try {
-            out.println("Imie:" + data.getImie() + HTMLFilter.addBR());
-            out.println("Nazwisko:" + data.getNazwisko() + HTMLFilter.addBR());
-            out.println("Ulica:" + data.getUlica() + HTMLFilter.addBR());
-            out.println("kod_pocztowy:" + data.getKod_pocztowy() + HTMLFilter.addBR());
-            out.println("miejscowosc:" + data.getMiejscowosc() + HTMLFilter.addBR());
-            out.println("data_urodzenia:" + data.getData_urodzenia() + HTMLFilter.addBR());
-            out.println("telefon:" + data.getTelefon() + HTMLFilter.addBR());
-            out.println("e_mail:" + data.getE_mail() + HTMLFilter.addBR());
-            out.println("id_klienta:" + data.getId() + HTMLFilter.addBR());
-            out.println("id_konta:" + data.getId_konta() + HTMLFilter.addBR() + HTMLFilter.addBR());
+    out.println("Imie:" + data.getImie() + HTMLFilter.addBR());
+    out.println("Nazwisko:" + data.getNazwisko() + HTMLFilter.addBR());
+    out.println("Ulica:" + data.getUlica() + HTMLFilter.addBR());
+    out.println("kod_pocztowy:" + data.getKod_pocztowy() + HTMLFilter.addBR());
+    out.println("miejscowosc:" + data.getMiejscowosc() + HTMLFilter.addBR());
+    out.println("data_urodzenia:" + data.getData_urodzenia() + HTMLFilter.addBR());
+    out.println("telefon:" + data.getTelefon() + HTMLFilter.addBR());
+    out.println("e_mail:" + data.getE_mail() + HTMLFilter.addBR());
+    out.println("id_klienta:" + data.getId() + HTMLFilter.addBR());
+    out.println("id_konta:" + data.getId_konta() + HTMLFilter.addBR() + HTMLFilter.addBR());
 
-            if(data instanceof PracownikData){
-                out.println("pesel:" + ((PracownikData)data).getPesel() + HTMLFilter.addBR());
-                out.println("data_zatrudnienia:" + ((PracownikData)data).getData_zatrudnienia() + HTMLFilter.addBR());
-                out.println("certyfikaty:" + ((PracownikData)data).getCertyfikaty() + HTMLFilter.addBR());
-                out.println("id_ksiarzeczki:" + ((PracownikData)data).getId_ksiazeczki() + HTMLFilter.addBR());
-            }
+    if(data instanceof PracownikData){
+        out.println("pesel:" + ((PracownikData)data).getPesel() + HTMLFilter.addBR());
+        out.println("data_zatrudnienia:" + ((PracownikData)data).getData_zatrudnienia() + HTMLFilter.addBR());
+        out.println("certyfikaty:" + ((PracownikData)data).getCertyfikaty() + HTMLFilter.addBR());
+        out.println("id_ksiarzeczki:" + ((PracownikData)data).getId_ksiazeczki() + HTMLFilter.addBR());
+    }
 
-            if(data instanceof KlientData){
-                out.println("ilosc_punktow:" + ((KlientData)data).getIloscPunktow() + HTMLFilter.addBR());
-                out.println("id_karty:" + ((KlientData)data).getId_karty() + HTMLFilter.addBR());
-                out.println("id_statusu:" + ((KlientData)data).getId_statusu() + HTMLFilter.addBR());
-            }
-        } catch (SQLException e) {
-            ErrorMessage errorMessage = new ErrorMessage(e);
-            session.setAttribute("errorMessage", errorMessage);
-            response.sendRedirect("errorPage.jsp");
-            return;
-        }
+    if(data instanceof KlientData){
+        out.println("ilosc_punktow:" + ((KlientData)data).getIlosc_punktow() + HTMLFilter.addBR());
+        out.println("id_karty:" + ((KlientData)data).getId_karty() + HTMLFilter.addBR());
+        out.println("id_statusu:" + ((KlientData)data).getId_statusu() + HTMLFilter.addBR());
+    }
 
-
-
-        %> <br><br> <%
-
-
+%> <br><br> <%
 
 %>
 

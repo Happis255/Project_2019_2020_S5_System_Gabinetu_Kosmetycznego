@@ -1,54 +1,85 @@
 package myPage.data.dataBase;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+public class KsiazeczkaZdrowiaData{
+    private int id_ksiazeczki;
+    private boolean rozrusznik_serca;
+    private boolean hermofilia;
+    private boolean luszczyca;
+    private String alergia;
+    private String przebarwienie;
+    private String choroba_zakazna;
+    private String zaburzenia_ukrwienia;
+    private String goraczka;
+    private String oslabienie;
+    private boolean ciaza;
 
-public class KsiazeczkaZdrowiaData extends Data{
-    public KsiazeczkaZdrowiaData(ResultSet resultQuery) {
-        super(resultQuery);
+    public KsiazeczkaZdrowiaData(
+            int id_ksiazeczki,
+            boolean rozrusznik_serca,
+            boolean hermofilia,
+            boolean luszczyca,
+            String alergia,
+            String przebarwienie,
+            String choroba_zakazna,
+            String zaburzenia_ukrwienia,
+            String goraczka,
+            String oslabienie,
+            boolean ciaza
+    ){
+        this.id_ksiazeczki = id_ksiazeczki;
+        this.rozrusznik_serca = rozrusznik_serca;
+        this.hermofilia = hermofilia;
+        this.luszczyca = luszczyca;
+        this.alergia = alergia;
+        this.przebarwienie = przebarwienie;
+        this.choroba_zakazna = choroba_zakazna;
+        this.zaburzenia_ukrwienia = zaburzenia_ukrwienia;
+        this.goraczka = goraczka;
+        this.oslabienie = oslabienie;
+        this.ciaza = ciaza;
     }
 
-    public int getId_ksiazeczki() throws SQLException {
-        return resultQuery.getInt("id_ksiazeczki");
+    public int getId_ksiazeczki() {
+        return id_ksiazeczki;
     }
 
-    public boolean getRozrusznik_serca() throws SQLException {
-        return resultQuery.getBoolean("rozrusznik_serca");
+    public boolean isRozrusznik_serca() {
+        return rozrusznik_serca;
     }
 
-    public boolean getHermofilia() throws SQLException {
-        return resultQuery.getBoolean("hermofilia");
+    public boolean isHermofilia() {
+        return hermofilia;
     }
 
-    public boolean getLuszczyca() throws SQLException {
-        return resultQuery.getBoolean("luszczyca");
+    public boolean isLuszczyca() {
+        return luszczyca;
     }
 
-    public String getAlergia() throws SQLException {
-        return resultQuery.getString("alergia");
+    public String getAlergia() {
+        return alergia;
     }
 
-    public String getPrzebarwienie() throws SQLException {
-        return resultQuery.getString("przebarwienie");
+    public String getPrzebarwienie() {
+        return przebarwienie;
     }
 
-    public String getChoroba_zakazna() throws SQLException {
-        return resultQuery.getString("choroba_zakazna");
+    public String getChoroba_zakazna() {
+        return choroba_zakazna;
     }
 
-    public String getZaburzenia_ukrwienia() throws SQLException {
-        return resultQuery.getString("zaburzenia_ukrwienia");
+    public String getZaburzenia_ukrwienia() {
+        return zaburzenia_ukrwienia;
     }
 
-    public String getOpryszczka() throws SQLException {
-        return resultQuery.getString("goraczka");
+    public String getGoraczka() {
+        return goraczka;
     }
 
-    public String getOslabienie() throws SQLException {
-        return resultQuery.getString("oslabienie");
+    public String getOslabienie() {
+        return oslabienie;
     }
 
-    public boolean getCiaza() throws SQLException {
-        return resultQuery.getBoolean("ciaza");
+    public boolean isCiaza() {
+        return ciaza;
     }
 }

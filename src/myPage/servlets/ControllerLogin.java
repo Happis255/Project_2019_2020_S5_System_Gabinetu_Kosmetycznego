@@ -34,12 +34,6 @@ public class ControllerLogin extends HttpServlet {
             return;
         }
 
-        if(session.getAttribute("userData") != null){
-            System.out.println("najpierw sie wyloguj");
-            response.sendRedirect("logowanie.jsp");
-            return;
-        }
-
         User user = new User();
         Encrypter pws = new Encrypter();
 

@@ -1,6 +1,6 @@
 package myPage.dataSourceDB;
 
-import myPage.data.dataBase.Aktualnosci;
+import myPage.data.dataBase.AktualnoscData;
 import myPage.data.others.TypKonta;
 import myPage.exceptions.DBReadWriteException;
 import myPage.exceptions.NoResultsException;
@@ -25,29 +25,47 @@ public class DataSource {
         statements = DataBaseManager.getStatements();
     }
 
+
+
     /* Metody wykorzystywane do komunikacji z bazą danych */
-    public Aktualnosci getAktualnosci() throws NoResultsException, SQLException{
+    public ResultSet getAktualnosciDB() throws SQLException{
         PreparedStatement exeStatement;
         ResultSet resultSet;
-        Aktualnosci aktualnosc = new Aktualnosci();
+
         exeStatement = statements.get("pobierz_dzisiaj_aktualnosci_P");
 
-        /* Pobieramy wynik zapytania */
         resultSet = exeStatement.executeQuery();
 
-        /* Uzupełniamy klasę wynikami
-        *  Każdy wiersz z treścią i każdy wiersz z tytulem trzeba umiescic w stosie w klasie Aktualnosc */
-        resultSet.last();
-        if(resultSet.getRow() == 0)
-            throw new NoResultsException();
-        resultSet.beforeFirst();
+        return resultSet;
+    }
 
-        while (resultSet.next()){
-            aktualnosc.setID(resultSet.getInt("id_aktualnosci"));
-            aktualnosc.setTytul(resultSet.getString("tytul"));
-            aktualnosc.setTresc(resultSet.getString("tresc"));
-        }
-        return aktualnosc;
+    public int getMaxIDAktualnosciDB() throws NoResultsException, SQLException{
+        PreparedStatement exeStatement;
+        ResultSet resultSet;
+        exeStatement = statements.get("pobierz_max_id_aktualnosci_p");
+
+        resultSet = exeStatement.executeQuery();
+
+        if (resultSet.next()){
+            int wynik = resultSet.getInt("id_aktualnosci");
+            return wynik;
+        }else
+            throw new NoResultsException();
+    }
+
+    public void createAktualnoscDB(AktualnoscData news) throws DBReadWriteException, SQLException {
+        PreparedStatement exeStatement;
+        int result;
+
+        exeStatement = statements.get("createNews_P");
+        exeStatement.setString(1, news.getTytul());
+        exeStatement.setString(2, news.getTresc());
+        exeStatement.setDate(3,  DateTransformer.getSqlDate(news.getData_od()));
+        exeStatement.setDate(4, DateTransformer.getSqlDate(news.getData_do()));
+        exeStatement.setInt(4, news.getId_pracownika());
+        result = exeStatement.executeUpdate();
+        if(result != 1)
+            throw new DBReadWriteException(result + " rows add with execute: createNews_P");
     }
 
     public ResultSet getUserDB(String e_mail) throws SQLException{

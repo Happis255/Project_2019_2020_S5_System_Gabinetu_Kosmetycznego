@@ -1,18 +1,19 @@
 package myPage.servlets;
 
-import myPage.data.Aktualnosci;
-import myPage.data.ErrorMessage;
+import myPage.basicObjects.Pracownik;
+import myPage.data.dataBase.AktualnoscData;
+import myPage.data.others.ErrorMessage;
+import myPage.data.others.SessionData;
+import myPage.data.others.TypKonta;
 import myPage.exceptions.DBReadWriteException;
-import myPage.exceptions.NoResultsException;
-import myPage.others.DataSource;
-import myPage.others.DataSourceClient;
-import myPage.others.DataSourcePracownik;
-import myPage.others.Encrypter;
+import myPage.exceptions.ErrorException;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -41,31 +42,25 @@ public class ControllerNewsUploader extends HttpServlet {
         /* Tu musi byc sprawdzanie, czy zalogowana osoba ma uprawnienia do wrzucania news'a?
         * (Sprawdź, czy pracownik to pracownik, jak nie, przekieruj na stronę wynikową*/
 
-        /* session = request.getSession();
-        if(session.getAttribute("userData") != null){
-            System.out.println("najpierw sie wyloguj");
+        session = request.getSession();
+        SessionData sessionData = (SessionData)session.getAttribute("userData");
+        Pracownik pracownik = null;
 
-            resultMessage = "<h2 class=\"text-center\" style=\"height:53px;\">Ooooops!</h2><h5 class=\"text-center\" style=\"height:99px;margin-right:50px;margin-left:50px;\"><br>Wygląda na to, że nie masz uprawnień, by dodawać aktualności.<br>Skontaktuj się z administratorem systemu by wyjaśnić sytuację.</h5> <div class=\"form-group\"><a href=\"index.jsp\"><button class=\"btn btn-primary\" type=\"submit\" style=\"margin:0;width:265px;margin-left:267px;\">Powrót do strony głównej</button></a></div>";
-            request.setAttribute("message", resultMessage);
-            getServletContext().getRequestDispatcher("/wynik-wiadomosc.jsp").forward(request, response);
+        if(sessionData.getAccoutType() != TypKonta.KLIENT){
+            pracownik = new Pracownik(sessionData.getId());
+        }else{
+            ErrorMessage errorMessage = new ErrorMessage(new ErrorException("brak dostepu do tej operacji"));
+            session.setAttribute("errorMessage", errorMessage);
+            response.sendRedirect("errorPage.jsp");
             return;
-        } */
+        }
 
-        Aktualnosci inputData = new Aktualnosci();
-        DataSourcePracownik dataSource = new DataSourcePracownik();
-
-        inputData.setTytul(request.getParameter("tytul"));
-        inputData.setTresc(request.getParameter("opis"));
-
-        /* W tym miejscu potrzebuję ID zalogowanego pracownika */
-        //inputData.setID_Pracownika();
-
+        Date date_od;
+        Date date_do;
         try {
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            Date date = dateFormat.parse(request.getParameter("data-od"));
-            inputData.setData_od(date);
-            date = dateFormat.parse(request.getParameter("data-do"));
-            inputData.setData_do(date);
+            date_od = dateFormat.parse(request.getParameter("data-od"));
+            date_do = dateFormat.parse(request.getParameter("data-do"));
         } catch (ParseException e) {
             ErrorMessage errorMessage = new ErrorMessage(e);
             session.setAttribute("errorMessage", errorMessage);
@@ -73,13 +68,24 @@ public class ControllerNewsUploader extends HttpServlet {
             return;
         }
 
+        AktualnoscData aktualnosc = new AktualnoscData(
+                0,
+                request.getParameter("tytul"),
+                request.getParameter("opis"),
+                date_od,
+                date_do,
+                sessionData.getId()
+        );
+
+
+
+
+
         try {
-            dataSource.createDBAktualnosc(inputData);
+            int ID_Newsa = pracownik.addAktualnosci(aktualnosc);
 
             /* Pobieramy informacje o tym, jakie ID ma ta aktualnosc - potrzebne do ustawienia nazwy pliku.
             *  W bazie danych będzie to poprostu max ID */
-            DataSource dataSource1 = new DataSource();
-            int ID_Newsa = dataSource1.getMaxIDAktualnosci();
 
             /* Uploadujemy grafike dla news'a */
             //DiskFileItemFactory factory = new DiskFileItemFactory();
