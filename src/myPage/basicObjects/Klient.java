@@ -22,7 +22,7 @@ public class Klient extends User{
 
         if(resultQuery.next()){
             klientData = new KlientData(
-                    resultQuery.getInt("id"),
+                    resultQuery.getInt("id_klienta"),
                     resultQuery.getString("imie"),
                     resultQuery.getString("nazwisko"),
                     resultQuery.getString("ulica"),
@@ -33,7 +33,6 @@ public class Klient extends User{
                     resultQuery.getString("e_mail"),
                     resultQuery.getInt("id_konta"),
 
-                    resultQuery.getInt("id_klienta"),
                     resultQuery.getInt("ilosc_punktow"),
                     resultQuery.getInt("id_karty"),
                     resultQuery.getInt("id_statusu")

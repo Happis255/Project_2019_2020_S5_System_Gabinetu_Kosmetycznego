@@ -3,14 +3,13 @@ package myPage.data.dataBase;
 import java.util.Date;
 
 public class PracownikData extends UserData{
-    private int id_pracownika;
     private int pesel;
     private Date data_zatrudnienia;
     private String certyfikaty;
     private int id_ksiazeczki;
 
     public PracownikData(
-            int id,
+            int id_pracownika,
             String imie,
             String nazwisko,
             String ulica,
@@ -21,14 +20,13 @@ public class PracownikData extends UserData{
             String e_mail,
             int id_konta,
 
-            int id_pracownika,
             int pesel,
             Date data_zatrudnienia,
             String certyfikaty,
             int id_ksiazeczki
     ){
         super(
-                id,
+                id_pracownika,
                 imie,
                 nazwisko,
                 ulica,
@@ -39,16 +37,11 @@ public class PracownikData extends UserData{
                 e_mail,
                 id_konta
         );
-        this.id_pracownika = id_pracownika;
+
         this.pesel = pesel;
         this.data_zatrudnienia = data_zatrudnienia;
         this.certyfikaty = certyfikaty;
         this.id_ksiazeczki = id_ksiazeczki;
-    }
-
-    @Override
-    public int getId() {
-        return id_pracownika;
     }
 
     public int getPesel() {

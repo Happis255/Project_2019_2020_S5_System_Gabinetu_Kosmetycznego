@@ -23,8 +23,8 @@ public class User {
         dataSource = new DataSource();
     }
 
-    public User(int idUsera){
-        this.id = idUsera;
+    public User(int idUser){
+        this.id = idUser;
         dataSource = new DataSource();
     }
 

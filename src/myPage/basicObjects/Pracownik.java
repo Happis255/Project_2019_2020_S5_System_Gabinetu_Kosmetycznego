@@ -24,7 +24,7 @@ public class Pracownik extends User{
 
         if(resultQuery.next()){
             pracownikData = new PracownikData(
-                    resultQuery.getInt("id"),
+                    resultQuery.getInt("id_pracownika"),
                     resultQuery.getString("imie"),
                     resultQuery.getString("nazwisko"),
                     resultQuery.getString("ulica"),
@@ -35,7 +35,6 @@ public class Pracownik extends User{
                     resultQuery.getString("e_mail"),
                     resultQuery.getInt("id_konta"),
 
-                    resultQuery.getInt("id_pracownika"),
                     resultQuery.getInt("pesel"),
                     DateTransformer.getJavaDate(resultQuery.getDate("data_zatrudnienia")),
                     resultQuery.getString("certyfikaty"),
