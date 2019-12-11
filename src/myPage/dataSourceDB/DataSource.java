@@ -15,6 +15,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedList;
 
 public class DataSource {
     protected Connection connection;
@@ -25,44 +26,55 @@ public class DataSource {
         statements = DataBaseManager.getStatements();
     }
 
-
-
     /* Metody wykorzystywane do komunikacji z bazą danych */
-    public ResultSet getAktualnosciDB() throws SQLException{
+    public LinkedList<AktualnoscData> getAktualnosciDB() throws SQLException{
+
+        LinkedList<AktualnoscData> news_list = new LinkedList<>();
+
         PreparedStatement exeStatement;
         ResultSet resultSet;
-
         exeStatement = statements.get("pobierz_dzisiaj_aktualnosci_P");
-
         resultSet = exeStatement.executeQuery();
 
-        return resultSet;
+        while(resultSet.next()){
+            news_list.push(new AktualnoscData(
+                    resultSet.getInt("id_aktualnosci"),
+                    resultSet.getString("tytul"),
+                    resultSet.getString("tresc"),
+                    DateTransformer.getJavaDate(resultSet.getDate("data_od")),
+                    DateTransformer.getJavaDate(resultSet.getDate("data_do")),
+                    resultSet.getInt("id_pracownika")));
+            System.out.println("Dodalem :)");
+        }
+        return news_list;
     }
 
     public int getMaxIDAktualnosciDB() throws NoResultsException, SQLException{
         PreparedStatement exeStatement;
         ResultSet resultSet;
         exeStatement = statements.get("pobierz_max_id_aktualnosci_p");
-
         resultSet = exeStatement.executeQuery();
-
         if (resultSet.next()){
             int wynik = resultSet.getInt("id_aktualnosci");
             return wynik;
-        }else
+        } else
             throw new NoResultsException();
     }
 
-    public void createAktualnoscDB(AktualnoscData news) throws DBReadWriteException, SQLException {
+    /* Metoda odpowiedzialna za dodawanie news'a do bazy danych */
+    public void createAktualnoscDB(HashMap<String, String> parameters) throws DBReadWriteException, SQLException, ParseException {
+
         PreparedStatement exeStatement;
         int result;
-
         exeStatement = statements.get("createNews_P");
-        exeStatement.setString(1, news.getTytul());
-        exeStatement.setString(2, news.getTresc());
-        exeStatement.setDate(3,  DateTransformer.getSqlDate(news.getData_od()));
-        exeStatement.setDate(4, DateTransformer.getSqlDate(news.getData_do()));
-        exeStatement.setInt(4, news.getId_pracownika());
+        exeStatement.setString(1, parameters.get("tytul"));
+        exeStatement.setString(2, parameters.get("opis"));
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date_od = dateFormat.parse(parameters.get("data-od"));
+        Date date_do = dateFormat.parse(parameters.get("data-do"));
+        exeStatement.setDate(3, DateTransformer.getSqlDate(date_od));
+        exeStatement.setDate(4, DateTransformer.getSqlDate(date_do));
+        exeStatement.setInt(5, Integer.parseInt(parameters.get("id-pracownika")));
         result = exeStatement.executeUpdate();
         if(result != 1)
             throw new DBReadWriteException(result + " rows add with execute: createNews_P");

@@ -3,6 +3,7 @@ package myPage.data.dataBase;
 import java.util.Date;
 
 public class AktualnoscData{
+
     private int id_aktualnosci;
     private String tytul;
     private String tresc;
@@ -48,5 +49,9 @@ public class AktualnoscData{
 
     public int getId_pracownika() {
         return id_pracownika;
+    }
+
+    public String getFileName() {
+        return "aktualnosc_" + this.id_aktualnosci + ".jpg";
     }
 }

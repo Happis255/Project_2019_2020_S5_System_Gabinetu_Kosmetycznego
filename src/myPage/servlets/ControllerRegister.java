@@ -57,7 +57,7 @@ public class ControllerRegister extends HttpServlet {
         }
 
         if(!ret)
-            System.out.println("urzytkownik o podanym niku juz istnieje");
+            System.out.println("urzytkownik o podanym nicku juz istnieje");
 
         response.sendRedirect("logowanie.jsp");
     }

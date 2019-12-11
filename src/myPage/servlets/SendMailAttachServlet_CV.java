@@ -34,6 +34,7 @@ public class SendMailAttachServlet_CV extends HttpServlet {
         user = context.getInitParameter("user");
         pass = context.getInitParameter("pass");
     }
+
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response) throws ServletException, IOException {
 
@@ -77,7 +78,6 @@ public class SendMailAttachServlet_CV extends HttpServlet {
                 if (fileName == null || fileName.equals("")) {
                     continue;
                 }
-
                 File saveFile = new File(fileName);
                 System.out.println("saveFile: " + saveFile.getAbsolutePath());
                 FileOutputStream outputStream = new FileOutputStream(saveFile);
@@ -92,6 +92,7 @@ public class SendMailAttachServlet_CV extends HttpServlet {
         }
         return listFiles;
     }
+
     private String extractFileName(Part part) {
         String contentDisp = part.getHeader("content-disposition");
         String[] items = contentDisp.split(";");
@@ -102,6 +103,7 @@ public class SendMailAttachServlet_CV extends HttpServlet {
         }
         return null;
     }
+
     private void deleteUploadFiles(List<File> listFiles) {
         if (listFiles != null && listFiles.size() > 0) {
             for (File aFile : listFiles) {

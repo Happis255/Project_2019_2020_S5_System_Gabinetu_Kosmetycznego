@@ -16,6 +16,7 @@ import java.text.ParseException;
 import java.util.HashMap;
 
 public class User {
+
     protected int id;
     protected DataSource dataSource;
 

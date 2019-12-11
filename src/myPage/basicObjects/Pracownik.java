@@ -1,7 +1,6 @@
 package myPage.basicObjects;
 
 import myPage.data.dataBase.AktualnoscData;
-import myPage.data.dataBase.Aktualnosci;
 import myPage.data.dataBase.KontoData;
 import myPage.data.dataBase.PracownikData;
 import myPage.data.others.TypKonta;
@@ -66,29 +65,5 @@ public class Pracownik extends User{
         }
 
         return kontoData;
-    }
-
-    public Aktualnosci getAktualnosci() throws SQLException{
-        ResultSet resultQuery = dataSource.getAktualnosciDB();
-        Aktualnosci aktualnosci = new Aktualnosci();
-        AktualnoscData akt;
-        while(resultQuery.next()){
-            akt = new AktualnoscData(
-                    resultQuery.getInt("id_aktualnosci"),
-                    resultQuery.getString("tytul"),
-                    resultQuery.getString("tresc"),
-                    DateTransformer.getJavaDate(resultQuery.getDate("data_od")),
-                    DateTransformer.getJavaDate(resultQuery.getDate("data_do")),
-                    resultQuery.getInt("id_pracownika")
-            );
-            aktualnosci.addAktualnosc(akt);
-        }
-        return aktualnosci;
-    }
-
-    public int addAktualnosci(AktualnoscData aktualnosc) throws DBReadWriteException, SQLException {
-        dataSource.createAktualnoscDB(aktualnosc);
-        int idNewsa = dataSource.getMaxIDAktualnosciDB();
-        return idNewsa;
     }
 }

@@ -33,12 +33,11 @@ public class DataBaseManager {
             statements.put("getPracownikAccountData", connection.prepareStatement("select kt.* " +
                     "from konto kt join pracownik pr on kt.id_konta=pr.id_konta where pr.id_pracownika = ?"));
             statements.put("getPracownik", connection.prepareStatement("select * from pracownik where id_pracownika=?"));
-            statements.put("getAllAccountsBasicDataWithTag", connection.prepareStatement("{call pobierz_dane_uzytkownikow_typu(?)}"));
 
             statements.put("pobierz_dzisiaj_aktualnosci_P", connection.prepareStatement("{call pobierz_dzisiaj_aktualnosci()}"));
             statements.put("getAllAccountsBasicDataWithTag", connection.prepareStatement("{call pobierz_dane_uzytkownikow_typu(?)}"));
             statements.put("createNews_P", connection.prepareStatement("{call dodaj_aktualnosc(?, ?, ?, ?, ?)}"));
-            statements.put("pobierz_max_id_aktualnosci_p", connection.prepareStatement("select MAX(a.id_aktualnosci) from aktualnosc a"));
+            statements.put("pobierz_max_id_aktualnosci_p", connection.prepareStatement("select MAX(id_aktualnosci) as 'id_aktualnosci' from aktualnosc"));
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }

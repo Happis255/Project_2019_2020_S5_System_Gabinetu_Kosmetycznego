@@ -2,7 +2,8 @@
 <%@ page import="myPage.data.others.SessionData" %>
 <%@ page import="myPage.exceptions.DBReadWriteException" %>
 <%@ page import="java.sql.SQLException" %>
-<%@ page import="myPage.data.dataBase.Aktualnosci" %>
+<%@ page import="myPage.basicObjects.Aktualnosci" %>
+<%@ page import="myPage.data.dataBase.AktualnoscData" %>
 
 <!DOCTYPE html>
 <html>
@@ -31,40 +32,49 @@
 </script>
 <!--end of navbar bar-->
 
-<section id="aktualnosci" class="bg-light-gray" style="margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:800px;margin-right:auto;margin-left:auto;border-radius:20px;margin-bottom:30px;">
-    <h2 class="text-center" style="height:44px;">Aktualności</h2>
-    <h5 class="text-center" style="height:auto;margin-right:50px;margin-left:50px;font-weight:200;margin-bottom:31px;">W poniższej sekcji znajdziesz wszystkie&nbsp;<br>aktualne informacje dotyczące naszego gabinetu!</h5>
-    <hr id="linia" style="color: white;border: solid 2px;border-radius: 100px;width:635px;margin-top:auto;margin-bottom:29px;">
-    <section class="news" style="text-align: center!important; ">
-
         <!--newsy generowane na bieżąco-->
-
         <%
             Aktualnosci aktualnosci = new Aktualnosci();
-            DataSource dataSource = new DataSource();
-
+            AktualnoscData temp;
             try {
-                aktualnosci = dataSource.getAktualnosci();
+                aktualnosci.getTodayUpdates();
             } catch (DBReadWriteException e) {
                 e.printStackTrace();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
 
-            while (!aktualnosci.getStos_tresci().empty()){
+            if (aktualnosci.aktualnoscEmpty() == true) {
+                out.println(
+                        "<section id=\"aktualnosci\" class=\"bg-light-gray\" style=\"margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:800px;margin-right:auto;margin-left:auto;border-radius:20px;margin-bottom:314px;\">" +
+                        "<h2 class=\"text-center\" style=\"height:44px;\">Aktualności</h2>" +
+                        "<h5 class=\"text-center\" style=\"height:auto;margin-right:50px;margin-left:50px;font-weight:200;margin-bottom:31px;\">W poniższej sekcji znajdziesz wszystkie&nbsp;<br>aktualne informacje dotyczące naszego gabinetu!</h5>" +
+                        "<hr id=\"linia\" style=\"color: white;border: solid 2px;border-radius: 100px;width:635px;margin-top:auto;margin-bottom:29px;\">" +
+                        "<section class=\"news\" style=\"text-align: center!important; \">" +
+                        "<div class=\"col-sm-6 col-md-4 col-lg-9 item\" style=\"margin-right:auto;margin-left:auto;\">" +
+                        "<h3 class=\"tytul\" style=\"margin-bottom:24px;\">" +
+                        "Brak aktualnosci w systemie" + "<p class=\"opis-newsa\"><br>" +
+                        "</div>\n");
 
+            } else
+
+                out.println(    "<section id=\"aktualnosci\" class=\"bg-light-gray\" style=\"margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:800px;margin-right:auto;margin-left:auto;border-radius:20px;margin-bottom:30px;\">" +
+                                "<h2 class=\"text-center\" style=\"height:44px;\">Aktualności</h2>" +
+                                "<h5 class=\"text-center\" style=\"height:auto;margin-right:50px;margin-left:50px;font-weight:200;margin-bottom:31px;\">W poniższej sekcji znajdziesz wszystkie&nbsp;<br>aktualne informacje dotyczące naszego gabinetu!</h5>" +
+                                "<hr id=\"linia\" style=\"color: white;border: solid 2px;border-radius: 100px;width:635px;margin-top:auto;margin-bottom:29px;\">" +
+                                "<section class=\"news\" style=\"text-align: center!important; \">");
+
+                while (!aktualnosci.aktualnoscEmpty()){
+                temp = aktualnosci.AktualnoscPop();
                 out.println("<div class=\"col-sm-6 col-md-4 col-lg-9 item\" style=\"margin-right:auto;margin-left:auto;\">" +
                         "<h3 class=\"tytul\" style=\"margin-bottom:24px;\">" +
-                        aktualnosci.getTytul() +
+                        temp.getTytul() +
                         "</h3><img class=\"img-fluid\" src=\"assets/aktualnosci_grafika/");
-
-                /* Sprawdzamy, czy aktualnosc ma swoją grafikę na serwerze - jeśli nie, wyświetli defualt */
-                out.println(aktualnosci.getFileName());
-
+                out.println(temp.getFileName());
                 out.println("\" style=\"border: solid 3px;border-radius: 6px;width:auto;height:auto;\">");
 
                 out.println("<p class=\"opis-newsa\"><br>" +
-                        aktualnosci.getTresc() +
+                        temp.getTresc() +
                         "</div>\n" +
                         " <hr id=\"linia\" style=\"color: white;border: solid 2px;border-radius: 100px;width:635px;margin-top:auto;margin-bottom:29px;\">" );
             }
