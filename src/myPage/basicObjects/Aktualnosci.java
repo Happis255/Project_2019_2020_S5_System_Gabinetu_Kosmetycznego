@@ -38,4 +38,8 @@ public class Aktualnosci {
     public void getTodayUpdates() throws SQLException, DBReadWriteException {
         this.aktualnosci = dataSource.getAktualnosciDB();
     }
+
+    public void getEverything() throws SQLException, DBReadWriteException {
+        this.aktualnosci = dataSource.getAllAtktualnosciDB();
+    }
 }

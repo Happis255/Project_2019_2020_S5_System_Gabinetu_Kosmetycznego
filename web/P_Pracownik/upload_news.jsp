@@ -37,7 +37,7 @@
             <input class="form-control" type="date" name="date-od" required="" style="margin:0;width:500px;margin-left:145px;margin-top:-7px;"><label style="font-size:17px;margin-left:101px;margin-top:17px;">Data do</label>
             <input class="form-control" type="date" name="date-do" required="" style="margin:0;margin-bottom:13px;width:500px;margin-left:145px;margin-top:-7px;">
             <div class="form-group"><input type="file" name="file" id="fileToUpload" required="" style="margin-top:12px;margin:0px;margin-left:146px;" accept="image/jpeg"></div>
-            <div class="form-group"><button class="btn btn-primary" type="submit" style="margin:0;width:265px;background-color:#2d2d2d;margin-left:267px;">Wyślij</button></div>
+            <div class="form-group"><button class="btn btn-primary" type="submit" style="margin:0;width:265px;margin-left:267px;">Wyślij</button></div>
         </div>
     </form>
 </section>

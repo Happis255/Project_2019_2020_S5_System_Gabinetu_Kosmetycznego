@@ -38,6 +38,7 @@ public class DataBaseManager {
             statements.put("getAllAccountsBasicDataWithTag", connection.prepareStatement("{call pobierz_dane_uzytkownikow_typu(?)}"));
             statements.put("createNews_P", connection.prepareStatement("{call dodaj_aktualnosc(?, ?, ?, ?, ?)}"));
             statements.put("pobierz_max_id_aktualnosci_p", connection.prepareStatement("select MAX(id_aktualnosci) as 'id_aktualnosci' from aktualnosc"));
+            statements.put("pobierz_wszystkieAktualnosci_P", connection.prepareStatement("{call pokaz_aktualnosci_pracownik()}"));
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }

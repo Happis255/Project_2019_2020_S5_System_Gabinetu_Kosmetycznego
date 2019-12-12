@@ -44,7 +44,27 @@ public class DataSource {
                     DateTransformer.getJavaDate(resultSet.getDate("data_od")),
                     DateTransformer.getJavaDate(resultSet.getDate("data_do")),
                     resultSet.getInt("id_pracownika")));
-            System.out.println("Dodalem :)");
+        }
+        return news_list;
+    }
+
+    public LinkedList<AktualnoscData> getAllAtktualnosciDB()  throws SQLException {
+
+        LinkedList<AktualnoscData> news_list = new LinkedList<>();
+
+        PreparedStatement exeStatement;
+        ResultSet resultSet;
+        exeStatement = statements.get("pobierz_wszystkieAktualnosci_P");
+        resultSet = exeStatement.executeQuery();
+
+        while(resultSet.next()){
+            news_list.push(new AktualnoscData(
+                    resultSet.getInt("id_aktualnosci"),
+                    resultSet.getString("tytul"),
+                    resultSet.getString("tresc"),
+                    DateTransformer.getJavaDate(resultSet.getDate("data_od")),
+                    DateTransformer.getJavaDate(resultSet.getDate("data_do")),
+                    resultSet.getString("nazwisko")));
         }
         return news_list;
     }

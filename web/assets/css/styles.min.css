@@ -160,7 +160,6 @@
     float:initial
 }
 .rounded.img-fluid,.uslugi img{
-    border:3px solid;
     border-radius:25px
 }
 .h4,h4{
@@ -316,7 +315,7 @@ section#team h3.section-subheading{
 }
 .team-member img{
     margin:0 auto;
-    border:7px solid #fff
+    border:5px solid #fff
 }
 #team ul.social-buttons,.team-member h4{
     margin-bottom:0

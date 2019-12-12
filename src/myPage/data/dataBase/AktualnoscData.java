@@ -11,6 +11,12 @@ public class AktualnoscData{
     private Date data_do;
     private int id_pracownika;
 
+    public String getNazwisko() {
+        return nazwisko;
+    }
+
+    private String nazwisko;
+
     public AktualnoscData(
             int id_aktualnosci,
             String tytul,
@@ -25,6 +31,22 @@ public class AktualnoscData{
         this.data_od = data_od;
         this.data_do = data_do;
         this.id_pracownika = id_pracownika;
+    }
+
+    public AktualnoscData(
+            int id_aktualnosci,
+            String tytul,
+            String tresc,
+            Date data_od,
+            Date data_do,
+            String nazwisko
+    ){
+        this.id_aktualnosci = id_aktualnosci;
+        this.tytul = tytul;
+        this.tresc = tresc;
+        this.data_od = data_od;
+        this.data_do = data_do;
+        this.nazwisko = nazwisko;
     }
 
     public int getId_aktualnosci() {
