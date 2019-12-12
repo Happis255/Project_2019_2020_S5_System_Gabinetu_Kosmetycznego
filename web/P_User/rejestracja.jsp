@@ -13,7 +13,7 @@
     <title>Gabinet Gracja</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-    <link rel="stylesheet" href="assets/css/styles.min.css?v=1.1">
+    <link rel="stylesheet" href="../assets/css/styles.min.css?v=1.1">
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 
@@ -31,7 +31,7 @@ request.setCharacterEncoding("UTF-8");
 
 <script>
     $(function(){
-        $("#navbar-placeholder").load("navbar.jsp");
+        $("#navbar-placeholder").load("navbar_user.jsp");
     });
 </script>
 <!--end of navbar bar-->
@@ -41,7 +41,7 @@ request.setCharacterEncoding("UTF-8");
         var a = $("#haslo").val();
         var b = $("#powtorz-haslo").val();
 
-        if (a == b)
+        if (a === b)
             $("#divCheckPasswordMatch").html("Wpisane hasła są poprawne.");
         else
             $("#divCheckPasswordMatch").html("Wpisane hasła się nie zgadzają!");
@@ -54,10 +54,10 @@ request.setCharacterEncoding("UTF-8");
 </script>
 
 <section id="rejestracja" class="bg-light-gray" style="margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:800px;margin-right:auto;margin-left:auto;border-radius:20px;margin-bottom:30px;">
-<form method="post" action="UserRegister" onsubmit="code(this)">
+<form method="post" action="${pageContext.request.contextPath}/UserRegister" onsubmit="code(this)">
     <h2 class="text-center" style="height:79px;">Rejestracja użytkownika</h2>
     <h5 class="text-center" style="height:21px;margin-right:50px;margin-left:50px;">Aby założyć konto, wypełnij poniższe pola.<br><br></h5>
-    <h6 class="text-center" id="RODO" style="height:44px;margin-right:50px;margin-left:50px;">Zapoznaj się również z &nbsp;podstawowymi informacjami o przetwarzaniu&nbsp;<br>Twoich danych osobowych -&nbsp;<a href="RODO.jsp">(przeczytaj)</a><br></h6>
+    <h6 class="text-center" id="RODO" style="height:44px;margin-right:50px;margin-left:50px;">Zapoznaj się również z &nbsp;podstawowymi informacjami o przetwarzaniu&nbsp;<br>Twoich danych osobowych -&nbsp;<a href="rodo_info.jsp">(przeczytaj)</a><br></h6>
     <div class="form-group"><label style="font-size:17px;margin-left:101px;">Twoje dane</label><input class="form-control" type="text" name="imie" required="" placeholder="Imię" maxlength="255" minlength="2" style="margin:0;width:500px;margin-left:145px;"><input class="form-control" type="text" name="nazwisko" required="" placeholder="Nazwisko" maxlength="255" minlength="2" style="margin:0;width:500px;margin-left:145px;margin-top:15px;"><input class="form-control" type="date" name="data-urodzenia" required="" style="margin:0;width:500px;margin-left:145px;margin-top:15px;" requiredplaceholder="Data urodzenia"></div>
     <div class="form-group"><label style="font-size:17px;margin-left:101px;">Dane kontaktowe</label><input class="form-control" type="text" name="e-mail" required="" placeholder="E-Main" maxlength="255" style="margin:0;width:500px;margin-left:145px;"></div>
     <div class="form-group"><input class="form-control" type="tel" name="telefon" placeholder="Numer telefonu" maxlength="10" minlength="6" style="width:500px;margin:0;margin-left:145px;"></div>
@@ -82,7 +82,7 @@ request.setCharacterEncoding("UTF-8");
 
 <script>
     $(function(){
-        $("#footer-placeholder").load("footer.jsp");
+        $("#footer-placeholder").load("footer_user.jsp");
     });
 </script>
 <!--end of Footer bar-->

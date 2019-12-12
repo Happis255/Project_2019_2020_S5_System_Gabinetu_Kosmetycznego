@@ -32,7 +32,7 @@
 
 <script>
     $(function(){
-        $("#navbar-placeholder").load("navbar.jsp");
+        $("#navbar-placeholder").load("navbar_index.jsp");
     });
 </script>
 
@@ -107,7 +107,7 @@
 
 <script>
     $(function(){
-        $("#footer-placeholder").load("footer.jsp");
+        $("#footer-placeholder").load("footer_index.jsp");
     });
 </script>
 <!--end of Footer bar-->

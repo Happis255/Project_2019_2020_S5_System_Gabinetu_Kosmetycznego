@@ -8,7 +8,7 @@
     <title>Gabinet Gracja</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-    <link rel="stylesheet" href="assets/css/styles.min.css?v=1.1">
+    <link rel="stylesheet" href="../assets/css/styles.min.css?v=1.1">
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 
@@ -20,13 +20,13 @@
 
 <script>
     $(function(){
-        $("#navbar-placeholder").load("navbar.jsp");
+        $("#navbar-placeholder").load("navbar_pracownik.jsp");
     });
 </script>
 <!--end of navbar bar-->
 
 <section id="upload_news" class="bg-light-gray" style="margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:800px;margin-right:auto;margin-left:auto;border-radius:20px;margin-bottom:30px;">
-    <form action="UploadNewsWithJPG" method="post" enctype="multipart/form-data">
+    <form action="${pageContext.request.contextPath}/UploadNewsWithJPG" method="post" enctype="multipart/form-data">
         <h2 class="text-center" style="height:79px;">Dodaj aktualność</h2>
         <h5 class="text-center" style="height:21px;margin-right:50px;margin-left:50px;">Wprowadź tytuł aktualności, opis oraz dodaj grafikę.</h5>
         <h6 class="text-center" id="Informacja_Upload" style="font-weight:300;height:44px;margin-right:50px;margin-left:50px;">Uploadowana grafika nie powinna przekraczać rozmiaru 50 MB<br>
@@ -49,7 +49,7 @@
 
 <script>
     $(function(){
-        $("#footer-placeholder").load("footer.jsp");
+        $("#footer-placeholder").load("footer_pracownik.jsp");
     });
 </script>
 <!--end of Footer bar-->

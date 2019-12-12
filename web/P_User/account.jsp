@@ -74,7 +74,7 @@ konto :) <br>
 
 %>
 
-<a href="index.jsp">RETURN</a>
+<a href="../index.jsp">RETURN</a>
 
 </body>
 </html>

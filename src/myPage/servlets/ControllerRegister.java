@@ -57,12 +57,14 @@ public class ControllerRegister extends HttpServlet {
         }
 
         if(!ret)
-            System.out.println("urzytkownik o podanym nicku juz istnieje");
+            System.out.println("Użytkownik o podanym mailu juz istnieje");
+            String resultMessage = "<h2 class=\"text-center\" style=\"height:53px;\">Utworzenie konta nie powiodło się!</h2><h5 class=\"text-center\" style=\"height:99px;margin-right:50px;margin-left:50px;\"><br>W bazie klientów podany adres e-mail jest zajęty.<br>Prosimy o skorzystanie z innego adresu.<br></h5> <div class=\"form-group\"><a href=\"P_User/rejestracja.jsp\"><button class=\"btn btn-primary\" type=\"submit\" style=\"margin:0;width:265px;margin-left:267px;\">Powrót do rejestracji</button></a></div>";
+            request.setAttribute("message", resultMessage);
+            getServletContext().getRequestDispatcher("/index_result.jsp").forward(
+                request, response);
 
-        response.sendRedirect("logowanie.jsp");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 }

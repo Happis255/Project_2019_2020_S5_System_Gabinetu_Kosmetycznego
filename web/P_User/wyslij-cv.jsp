@@ -15,7 +15,7 @@
     <title>Gabinet Gracja</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-    <link rel="stylesheet" href="assets/css/styles.min.css?v=1.1">
+    <link rel="stylesheet" href="../assets/css/styles.min.css?v=1.1">
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 
@@ -27,13 +27,13 @@
 
 <script>
     $(function(){
-        $("#navbar-placeholder").load("navbar.jsp");
+        $("#navbar-placeholder").load("navbar_user.jsp");
     });
 </script>
 <!--end of navbar bar-->
 
 <section id="kontakt" class="bg-light-gray" style="margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:800px;margin-right:auto;margin-left:auto;border-radius:20px;margin-bottom:30px;">
-    <form form action="SendMailAttachServlet_CV" method="post" enctype="multipart/form-data">
+    <form form action="${pageContext.request.contextPath}/SendMailAttachServlet_CV" method="post" enctype="multipart/form-data">
         <h2 class="text-center" style="height:53px;">Wyślij swoje CV</h2>
         <h5 class="text-center" style="height:99px;margin-right:50px;margin-left:50px;"><br>Wypełnij krótki formularz poniżej, załącz swoje CV.<br>Twoje dane osobowe nie będą przetrzymywane w naszej bazie. <br><br></h5>
         <div class="form-group"><label style="font-size:17px;margin-left:101px;">Imię i nazwisko</label><input class="form-control" type="text" name="imie-nazwisko" required="" placeholder="Imię i nazwisko" style="margin:0;width:500px;margin-left:145px;"></div>
@@ -57,7 +57,7 @@
 
 <script>
     $(function(){
-        $("#footer-placeholder").load("footer.jsp");
+        $("#footer-placeholder").load("footer_user.jsp");
     });
 </script>
 <!--end of Footer bar-->

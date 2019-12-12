@@ -57,11 +57,12 @@ public class SendMailAttachServlet_CV extends HttpServlet {
             resultMessage = "<h2 class=\"text-center\" style=\"height:53px;\">Wysyłanie mail'a z CV powiodło się</h2><h5 class=\"text-center\" style=\"height:99px;margin-right:50px;margin-left:50px;\"><br>W ciągu 7 dni skontaktuje się z tobą pracownik gabinetu <br>w celu umówienia się na rozmowę kwalifikacyjną.<br></h5> <div class=\"form-group\"><a href=\"index.jsp\"><button class=\"btn btn-primary\" type=\"submit\" style=\"margin:0;width:265px;margin-left:267px;\">Powrót do strony głównej</button></a></div>";;
         } catch (Exception ex) {
             ex.printStackTrace();
-            resultMessage = "<h2 class=\"text-center\" style=\"height:53px;\">Wysyłanie mail'a z CV nie powiodło się</h2><h5 class=\"text-center\" style=\"height:99px;margin-right:50px;margin-left:50px;\"><br>Upewnij się, czy twój plik CV posiada format .PDF, .DOC&nbsp;<br>bądź .DOCX oraz czy plik nie przekracza rozmiaru 50MB.<br></h5> <div class=\"form-group\"><a href=\"wyslij-cv.jsp\"><button class=\"btn btn-primary\" type=\"submit\" style=\"margin:0;width:265px;margin-left:267px;\">Powrót do strony CV</button></a></div>";
+            resultMessage = "<h2 class=\"text-center\" style=\"height:53px;\">Wysyłanie mail'a z CV nie powiodło się</h2><h5 class=\"text-center\" style=\"height:99px;margin-right:50px;margin-left:50px;\"><br>Upewnij się, czy twój plik CV posiada format .PDF, .DOC&nbsp;<br>bądź .DOCX oraz czy plik nie przekracza rozmiaru 50MB.<br></h5> <div class=\"form-group\"><a href=\"P_User/wyslij-cv.jsp\"><button class=\"btn btn-primary\" type=\"submit\" style=\"margin:0;width:265px;margin-left:267px;\">Powrót do strony CV</button></a></div>";
+
         } finally {
             deleteUploadFiles(uploadedFiles);
             request.setAttribute("message", resultMessage);
-            getServletContext().getRequestDispatcher("/wynik-wiadomosc.jsp").forward(
+            getServletContext().getRequestDispatcher("/index_result.jsp").forward(
                     request, response);
         }
     }

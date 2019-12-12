@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: Huber
   Date: 25.11.2019
-  Time: 15:40
+  Time: 15:43
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -27,14 +27,14 @@
 
 <script>
     $(function(){
-        $("#navbar-placeholder").load("navbar.jsp");
+        $("#navbar-placeholder").load("P_User/navbar_user.jsp");
     });
 </script>
 
-<section id="kontakt" class="bg-light-gray" style="margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:800px;margin-right:auto;margin-left:auto;border-radius:20px;margin-bottom:229px;margin-top:180px;">
-    <h2 class="text-center" style="height:53px;">E-Mail z twoim CV został pomyślnie wysłany</h2>
-    <h5 class="text-center" style="height:99px;margin-right:50px;margin-left:50px;"><br>Do 7 dni skontaktuje się z tobą pracownik gabinetu w celu potwierdzenia<br>przyjęcia twojego CV i umówienia się na rozmowę kwalifikacyjną.&nbsp;<br></h5>
-    <div class="form-group"><a href="index.jsp"><button class="btn btn-primary" type="submit" style="margin:0;width:265px;margin-left:267px;">Powrót do strony głównej</button></a></div>
+<section id="kontakt" class="bg-light-gray" style="margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:800px;margin-right:auto;margin-left:auto;border-radius:20px;margin-bottom:219px;margin-top:157px;">
+
+    <div>${requestScope.message}</div>
+
 </section>
 
 <!--Footer bar-->
@@ -44,7 +44,7 @@
 
 <script>
     $(function(){
-        $("#footer-placeholder").load("footer.jsp");
+        $("#footer-placeholder").load("P_User/footer_user.jsp");
     });
 </script>
 <!--end of Footer bar-->

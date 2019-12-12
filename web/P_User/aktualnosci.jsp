@@ -14,7 +14,7 @@
     <title>Gabinet Gracja</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-    <link rel="stylesheet" href="assets/css/styles.min.css?v=1.1">
+    <link rel="stylesheet" href="../assets/css/styles.min.css?v=1.1">
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 
@@ -27,7 +27,7 @@
 
 <script>
     $(function(){
-        $("#navbar-placeholder").load("navbar.jsp");
+        $("#navbar-placeholder").load("navbar_user.jsp");
     });
 </script>
 <!--end of navbar bar-->
@@ -38,9 +38,7 @@
             AktualnoscData temp;
             try {
                 aktualnosci.getTodayUpdates();
-            } catch (DBReadWriteException e) {
-                e.printStackTrace();
-            } catch (SQLException e) {
+            } catch (DBReadWriteException | SQLException e) {
                 e.printStackTrace();
             }
 
@@ -69,7 +67,7 @@
                 out.println("<div class=\"col-sm-6 col-md-4 col-lg-9 item\" style=\"margin-right:auto;margin-left:auto;\">" +
                         "<h3 class=\"tytul\" style=\"margin-bottom:24px;\">" +
                         temp.getTytul() +
-                        "</h3><img class=\"img-fluid\" src=\"assets/aktualnosci_grafika/");
+                        "</h3><img class=\"img-fluid\" src=\"../assets/aktualnosci_grafika/");
                 out.println(temp.getFileName());
                 out.println("\" style=\"border: solid 3px;border-radius: 6px;width:auto;height:auto;\">");
 
@@ -101,7 +99,7 @@
 
 <script>
     $(function(){
-        $("#footer-placeholder").load("footer.jsp");
+        $("#footer-placeholder").load("footer_user.jsp");
     });
 </script>
 <!--end of Footer bar-->
