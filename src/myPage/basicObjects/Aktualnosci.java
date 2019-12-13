@@ -42,4 +42,7 @@ public class Aktualnosci {
     public void getEverything() throws SQLException, DBReadWriteException {
         this.aktualnosci = dataSource.getAllAtktualnosciDB();
     }
+    public void removeId(int a) throws SQLException {
+        dataSource.removeNewsID(a);
+    }
 }

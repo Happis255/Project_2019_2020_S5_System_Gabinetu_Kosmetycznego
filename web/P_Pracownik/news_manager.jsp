@@ -31,7 +31,7 @@
 <!--end of navbar bar-->
 
 <section id="baza_aktualnosci" class="bg-light-gray" style="margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:1140px;margin-right:auto;margin-left:auto;border-radius:20px;margin-bottom:30px;">
-    <form action="${pageContext.request.contextPath}/RemoveNews" method="post">
+    <form action="${pageContext.request.contextPath}/RemoveNewsWithJPG" method="post">
         <h2 class="text-center" style="height:79px;">Aktualności</h2>
         <h5 class="text-center" style="height:21px;margin-right:50px;margin-left:50px;">Poniżesz zamieszczona jest lista aktualności znajdująca się w systemie</h5>
         <h6 class="text-center" id="informacja" style="height:44px;margin-right:50px;margin-left:50px;font-weight: 100;">Zaznacz daną aktualność, by ją usunąć.</h6>

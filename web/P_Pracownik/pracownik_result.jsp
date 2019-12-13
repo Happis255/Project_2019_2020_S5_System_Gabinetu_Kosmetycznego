@@ -33,7 +33,7 @@
                 <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">Powiadomienia</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">Konto</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">Wydarzenia</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">aktualności</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="P_Pracownik/news_menager.jsp" style="color:#ffffff;">aktualności</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">wizyty</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">produkty</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">raporty</a></li>
@@ -50,18 +50,45 @@
 
 </section>
 
-<!--Footer bar-->
-<div id="footer-placeholder">
-
+<div class="footer-clean" style="color:rgb(0,0,0);">
+    <footer>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-sm-4 col-md-3 item">
+                    <h3>Przejdź do</h3>
+                    <ul>
+                        <li><a href="#">Panel główny</a></li>
+                        <li><a href="#">Powiadomienia</a></li>
+                        <li><a href="#">Konto</a></li>
+                        <li><a href="#">Wizyty</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-4 col-md-3 item">
+                    <h3>Przejdź do</h3>
+                    <ul>
+                        <li><a href="#">Wydarzenia</a></li>
+                        <li><a href="P_Pracownik/news_manager.jsp">Aktualności</a></li>
+                        <li><a href="#">Produkty</a></li>
+                        <li><a href="#">Raporty</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-4 col-md-3 item">
+                    <h3>Gabinet Kosmetyczny "Gracja"</h3>
+                    <ul>
+                        <li>Al. Jana Pawla II 13a/2</li>
+                        <li>37-450 Stalowa Wola</li>
+                        <li>tel.: (15) 842 94 19</li>
+                        <li>10.00-18.00 pn-pt<br></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 item social"><a href="https://www.facebook.com/Gracja-Gabinet-Kosmetyczny-255745234516172/"><i class="icon ion-social-facebook"></i></a><a href="https://www.instagram.com/gabinet.gracja/"><i class="icon ion-social-instagram-outline"></i></a>
+                    <a href="mailto:info@gabinetgracja.com.pl"><i class="icon ion-email"></i></a><a href="https://www.messenger.com/t/255745234516172"><i class="icon ion-android-mail"></i></a>
+                    <p class="copyright" style="width:281px;">Gabinet Kosmetyczny "Gracja" Anna Wasik</p>
+                </div>
+            </div>
+        </div>
+    </footer>
 </div>
-
-<script>
-    $(function(){
-        $("#footer-placeholder").load("P_Pracownik/footer_pracownik.jsp");
-    });
-</script>
-<!--end of Footer bar-->
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
 </body>

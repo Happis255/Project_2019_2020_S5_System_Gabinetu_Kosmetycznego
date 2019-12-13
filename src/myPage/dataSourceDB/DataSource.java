@@ -26,6 +26,14 @@ public class DataSource {
         statements = DataBaseManager.getStatements();
     }
 
+    /* Metoda do usuwania aktualnosci o podanym id */
+    public void removeNewsID(int id) throws SQLException {
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("removeNewsID_P");
+        exeStatement.setInt(1, id);
+        exeStatement.executeUpdate();
+    }
+
     /* Metody wykorzystywane do komunikacji z bazą danych */
     public LinkedList<AktualnoscData> getAktualnosciDB() throws SQLException{
 
