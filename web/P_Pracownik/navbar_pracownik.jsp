@@ -14,7 +14,7 @@
 
 <body>
 <nav class="navbar navbar-dark navbar-expand-md" style="background-color:#2d2d2d;color:rgb(255,255,255);font-weight:100;text-transform:uppercase;margin:0;margin-bottom:30px;min-height: 66px">
-    <div class="container"><a class="navbar-brand" href="#"><img src="../assets/img/LOGO.png" style="margin:-63px;"></a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span></button>
+    <div class="container"><a class="navbar-brand" href="../index.jsp"><img src="../assets/img/LOGO.png" style="margin:-63px;"></a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span></button>
         <div class="collapse navbar-collapse"
              id="navcol-1">
             <ul class="nav navbar-nav ml-auto" style="max-width:895px;">
@@ -26,7 +26,7 @@
                 <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">Produkty</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">raporty</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">sklep online</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="UserLogin" style="color:#ffffff;">wyloguj</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="../UserLogin" style="color:#ffffff;">wyloguj</a></li>
             </ul>
         </div>
     </div>

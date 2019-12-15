@@ -107,7 +107,7 @@
 
 <script>
     $(function(){
-        $("#footer-placeholder").load("footer_index.jsp");
+        $("#footer-placeholder").load("P_Klient/footer_klient.jsp");
     });
 </script>
 <!--end of Footer bar-->
