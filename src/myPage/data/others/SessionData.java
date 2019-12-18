@@ -6,6 +6,7 @@ public class SessionData {
     private TypKonta accoutType;
     private int id;
     private ErrorMessage errorMessage;
+    private String page;
 
 
     public SessionData(String nick, TypKonta accountType, int id){
@@ -44,6 +45,14 @@ public class SessionData {
 
     public void setErrorMessage(ErrorMessage errorMessage) {
         this.errorMessage = errorMessage;
+    }
+
+    public String getPage() {
+        return page;
+    }
+
+    public void setPage(String page) {
+        this.page = page;
     }
 
     public String toString(){
