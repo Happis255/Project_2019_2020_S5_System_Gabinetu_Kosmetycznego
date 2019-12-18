@@ -19,18 +19,19 @@
              id="navcol-1">
             <ul class="nav navbar-nav ml-auto" style="max-width:641px;">
                 <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">Powiadomienia</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="../AccountController?page=konto" style="color:#ffffff;">Konto</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">Pracownicy</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">Wydarzenia</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">Wizyty</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">promocje</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">aktualności</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;margin-left:27px;">usługi</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">produkty</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">raporty</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">sprzęt</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">odpady</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">sklep online</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="../UserLogin" style="color:#ffffff;">wyloguj</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">Promocje</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="../P_Pracownik/news_manager.jsp" style="color:#ffffff;">Aktualności</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;margin-left:27px;">Usługi</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">Produkty</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">Raporty</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">Sprzęt</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">Odpady</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">Sklep online</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="../UserLogin" style="color:#ffffff;">Wyloguj</a></li>
             </ul>
         </div>
     </div>

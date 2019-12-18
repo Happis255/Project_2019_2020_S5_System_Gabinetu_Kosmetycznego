@@ -31,9 +31,7 @@
 </div>
 
 <script>
-    $(function(){
         $("#navbar-placeholder").load("navbar_index.jsp");
-    });
 </script>
 
 <section style="margin-bottom:30px;">

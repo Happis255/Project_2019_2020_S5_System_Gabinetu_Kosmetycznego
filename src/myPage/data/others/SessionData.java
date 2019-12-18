@@ -13,6 +13,7 @@ public class SessionData {
         this.nick = nick;
         this.accoutType = accountType;
         this.id = id;
+        this.page = "konto";
     }
 
     public String getNick() {

@@ -39,55 +39,16 @@
 <!--Nav bar-->
 <div id="navbar-placeholder"></div>
 
-<script>
-    function loadNavbar(navbarName){
-        $("#navbar-placeholder").load(navbarName);
-    };
-
-    <% if(sessionData.getAccoutType() == TypKonta.KLIENT){ %>
-        loadNavbar("../P_Klient/navbar_klient.jsp");
-    <% }else if(sessionData.getAccoutType() == TypKonta.PRACOWNIK){ %>
-        loadNavbar("../P_Pracownik/navbar_pracownik.jsp");
-    <% }else if(sessionData.getAccoutType() == TypKonta.ADMINISTRATOR){ %>
-        loadNavbar("../P_Administrator/navbar_administrator.jsp");
-    <% } %>
-</script>
 <!--end of Nav bar-->
 
 <!--content-->
 <div id="content-placeholder"></div>
 
-<script>
-    function loadContent(contentName){
-        $("#content-placeholder").load(contentName);
-    };
-
-    <% if(sessionData.getAccoutType() == TypKonta.KLIENT){ %>
-    loadContent("../P_Klient/content_klient.jsp");
-    <% }else if(sessionData.getAccoutType() == TypKonta.PRACOWNIK){ %>
-
-    <% }else if(sessionData.getAccoutType() == TypKonta.ADMINISTRATOR){ %>
-
-    <% } %>
-</script>
 <!--end of content-->
 
 <!--Footer bar-->
 <div id="footer-placeholder"></div>
 
-<script>
-    function loadFooter(footerName){
-        $("#footer-placeholder").load(footerName);
-    };
-
-    <% if(sessionData.getAccoutType() == TypKonta.KLIENT){ %>
-        loadFooter("../P_Klient/footer_klient.jsp");
-    <% }else if(sessionData.getAccoutType() == TypKonta.PRACOWNIK){ %>
-        loadFooter("../P_Pracownik/footer_pracownik.jsp");
-    <% }else if(sessionData.getAccoutType() == TypKonta.ADMINISTRATOR){ %>
-        loadFooter("../P_Administrator/footer_administrator.jsp");
-    <% } %>
-</script>
 <!--end of Footer bar-->
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
