@@ -17,41 +17,45 @@
     <title>Title</title>
 </head>
 <% SessionData sessionData = (SessionData)session.getAttribute("userData"); %>
+
 <section style="margin-bottom:30px;">
     <div class="jumbotron" style="background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:800px;margin-right:auto;margin-left:auto;">
-        <br>DANE TWOJEGO KONTA:
-        <%
-            Klient user = null;
-            KlientData data;
-            try {
-                user = new Klient(sessionData.getId());
+    <h2 class="text-center" style="height:79px;">Dane Konta</h2>
+        <table id="tablica_ogloszen" class="table" cellspacing="0" width="100%" style="text-align: center; gmargin-bottom: 0;border: 0px solid #FFFFFF;width: 60%;max-width: 98%;margin: auto;background-color: transparent;border-collapse: collapse;">
+            <tbody>
+                <%
+                    Klient user = null;
+                    KlientData data;
+                    try {
+                        user = new Klient(sessionData.getId());
 
-                data = user.getData();
-                if(data == null)
-                    throw new NoResultsException();
-            } catch (SQLException | NoResultsException e) {
-                ErrorMessage errorMessage = new ErrorMessage(e);
-                session.setAttribute("errorMessage", errorMessage);
-                response.sendRedirect("errorPage.jsp");
-                return;
-            }
-
-        %> <br><br> <%
-
-        out.println("Imie:" + data.getImie() + "<br>");
-        out.println("Nazwisko:" + data.getNazwisko() + "<br>");
-        out.println("Ulica:" + data.getUlica() + "<br>");
-        out.println("kod_pocztowy:" + data.getKod_pocztowy() + "<br>");
-        out.println("miejscowosc:" + data.getMiejscowosc() + "<br>");
-        out.println("data_urodzenia:" + data.getData_urodzenia() + "<br>");
-        out.println("telefon:" + data.getTelefon() + "<br>");
-        out.println("e_mail:" + data.getE_mail() + "<br>");
-        out.println("id_klienta:" + data.getId() + "<br>");
-        out.println("id_konta:" + data.getId_konta() + "<br><br>");
-        out.println("ilosc_punktow:" + data.getIlosc_punktow() + "<br>");
-        out.println("id_karty:" + data.getId_karty() + "<br>");
-        out.println("id_statusu:" + data.getId_statusu() + "<br>");
-    %>
+                        data = user.getData();
+                        if(data == null)
+                            throw new NoResultsException();
+                    } catch (SQLException | NoResultsException e) {
+                        ErrorMessage errorMessage = new ErrorMessage(e);
+                        session.setAttribute("errorMessage", errorMessage);
+                        response.sendRedirect("errorPage.jsp");
+                        return;
+                    }
+                %>
+                <tr><td><span style="color: black; ">Imie</span></td><td><%out.print(data.getImie());%></td></tr>
+                <tr><td><span style="color: black; ">Nazwisko</span></td><td><%out.print(data.getNazwisko());%></td></tr>
+                <tr><td><span style="color: black; ">Ulica</span></td><td><%out.print(data.getUlica());%></td></tr>
+                <tr><td><span style="color: black; ">Kod Pocztowy</span></td><td><%out.print(data.getKod_pocztowy());%></td></tr>
+                <tr><td><span style="color: black; ">Miejscowosc</span></td><td><%out.print(data.getMiejscowosc());%></td></tr>
+                <tr><td><span style="color: black; ">Data Urodzenia</span></td><td><%out.print(data.getData_urodzenia());%></td></tr>
+                <tr><td><span style="color: black; ">Telefon</span></td><td><%out.print(data.getTelefon());%></td></tr>
+                <tr><td><span style="color: black; ">E-mail</span></td><td><%out.print(data.getE_mail());%></td></tr>
+                <tr><td><span style="color: black; ">ID Klienta</span></td><td><%out.print(data.getId());%></td></tr>
+                <tr><td><span style="color: black; ">ID Konta</span></td><td><%out.print(data.getId_konta());%></td></tr>
+                <tr><td></td><td></td></tr>
+                <tr><td><span style="color: black; ">Ilosc Punktow</span></td><td><%out.print(data.getIlosc_punktow());%></td></tr>
+                <tr><td><span style="color: black; ">ID Karty</span></td><td><%out.print(data.getId_karty());%></td></tr>
+                <tr><td><span style="color: black; ">ID Statusu</span></td><td><%out.print(data.getId_statusu());%></td></tr>
+                <tr><td></td><td></td></tr>
+            </tbody>
+        </table>
     </div>
 </section>
 
