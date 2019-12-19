@@ -1,14 +1,16 @@
 package myPage.basicObjects;
 
-import myPage.data.dataBase.AktualnoscData;
 import myPage.data.dataBase.KontoData;
 import myPage.data.dataBase.PracownikData;
 import myPage.data.others.TypKonta;
+import myPage.dataSourceDB.DataSource;
 import myPage.exceptions.DBReadWriteException;
 import myPage.others.DateTransformer;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.util.HashMap;
 
 public class Pracownik extends User{
 
@@ -65,5 +67,10 @@ public class Pracownik extends User{
         }
 
         return kontoData;
+    }
+
+    public void addEvent(HashMap<String, String> parameters) throws DBReadWriteException, SQLException, ParseException {
+        DataSource dataSource = new DataSource();
+        dataSource.createEventDB(parameters);
     }
 }

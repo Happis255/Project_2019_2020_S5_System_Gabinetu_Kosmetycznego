@@ -1,7 +1,6 @@
 package myPage.dataSourceDB;
 
 import myPage.data.dataBase.AktualnoscData;
-import myPage.data.others.TypKonta;
 import myPage.exceptions.DBReadWriteException;
 import myPage.exceptions.NoResultsException;
 import myPage.others.DateTransformer;
@@ -26,6 +25,8 @@ public class DataSource {
         statements = DataBaseManager.getStatements();
     }
 
+    /* Metody wykorzystywane do komunikacji z bazą danych */
+
     /* Metoda do usuwania aktualnosci o podanym id */
     public void removeNewsID(int id) throws SQLException {
         PreparedStatement exeStatement;
@@ -34,7 +35,6 @@ public class DataSource {
         exeStatement.executeUpdate();
     }
 
-    /* Metody wykorzystywane do komunikacji z bazą danych */
     public LinkedList<AktualnoscData> getAktualnosciDB() throws SQLException{
 
         LinkedList<AktualnoscData> news_list = new LinkedList<>();
@@ -89,7 +89,6 @@ public class DataSource {
             throw new NoResultsException();
     }
 
-    /* Metoda odpowiedzialna za dodawanie news'a do bazy danych */
     public void createAktualnoscDB(HashMap<String, String> parameters) throws DBReadWriteException, SQLException, ParseException {
 
         PreparedStatement exeStatement;
@@ -210,15 +209,31 @@ public class DataSource {
         return resultSet;
     }
 
-    public ResultSet getAllAccountsBasicDataWithTagDB(TypKonta accountType)throws SQLException{
+    public void createEventDB(HashMap<String, String> parameters) throws DBReadWriteException, SQLException, ParseException {
         PreparedStatement exeStatement;
-        ResultSet resultSet;
-        String typKonta = TypKonta.getStringVal(accountType);
+        int result;
+        DateFormat dateFormat;
+        Date date;
 
-        exeStatement = statements.get("getAllAccountsBasicDataWithTag");
-        exeStatement.setString(1, typKonta);
-        resultSet = exeStatement.executeQuery();
+        exeStatement = statements.get("createEvent_P");
+        exeStatement.setString(1, parameters.get("typWydarzenia"));
+        exeStatement.setString(2, parameters.get("nazwa"));
+        exeStatement.setString(3, parameters.get("opis"));
+        exeStatement.setString(4, parameters.get("miejscowosc"));
+        exeStatement.setString(5, parameters.get("kod_pocztowy"));
+        exeStatement.setString(6, parameters.get("ulica"));
 
-        return resultSet;
+        dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        date = dateFormat.parse(parameters.get("data_od"));
+        exeStatement.setDate(7, DateTransformer.getSqlDate(date));
+        date = dateFormat.parse(parameters.get("data_do"));
+        exeStatement.setDate(8, DateTransformer.getSqlDate(date));
+
+        exeStatement.setInt(9, Integer.parseInt(parameters.get("kosz")));
+        exeStatement.setInt(10, Integer.parseInt(parameters.get("id_pracownika")));
+
+        result = exeStatement.executeUpdate();
+        if(result != 1)
+            throw new DBReadWriteException(result + " rows add with execute: createClientCard_P");
     }
 }

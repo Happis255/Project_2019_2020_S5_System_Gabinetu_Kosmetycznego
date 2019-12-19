@@ -33,7 +33,7 @@
                     <h3>Przejdź do</h3>
                     <ul>
                         <li><a href="#">Wydarzenia</a></li>
-                        <li><a href="../P_User/news_manager.jsp">Aktualności</a></li>
+                        <li><a href="news_manager.jsp">Aktualności</a></li>
                         <li><a href="#">Produkty</a></li>
                         <li><a href="#">Raporty</a></li>
                     </ul>

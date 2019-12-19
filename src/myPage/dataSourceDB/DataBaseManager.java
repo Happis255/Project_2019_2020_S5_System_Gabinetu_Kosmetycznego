@@ -40,6 +40,8 @@ public class DataBaseManager {
             statements.put("pobierz_max_id_aktualnosci_p", connection.prepareStatement("select MAX(id_aktualnosci) as 'id_aktualnosci' from aktualnosc"));
             statements.put("pobierz_wszystkieAktualnosci_P", connection.prepareStatement("{call pokaz_aktualnosci_pracownik()}"));
             statements.put("removeNewsID_P", connection.prepareStatement("{call usun_aktualnosc(?)}"));
+            //statements.put("getAllEvents_P", connection.prepareStatement("{call usun_aktualnosc(?)}"));
+            statements.put("createEvent_P", connection.prepareStatement("{call dodaj_wydarzenie(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}"));
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
