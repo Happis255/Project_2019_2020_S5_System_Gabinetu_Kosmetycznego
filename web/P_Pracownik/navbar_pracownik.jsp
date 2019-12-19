@@ -19,9 +19,9 @@
              id="navcol-1">
             <ul class="nav navbar-nav ml-auto" style="max-width:895px;">
                 <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">Powiadomienia</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="../AccountController?page=konto" style="color:#ffffff;">Konto</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="../ControllerAccount?page=konto" style="color:#ffffff;">Konto</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">Wydarzenia</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="news_manager.jsp" style="color:#ffffff;">Aktualności</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="../ControllerAccount?page=aktualnosci" style="color:#ffffff;">Aktualności</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">Wizyty</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">Produkty</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">Raporty</a></li>

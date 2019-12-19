@@ -22,7 +22,7 @@
                 <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">Wizyty</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">Sklep</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">Twoje bonusy</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="../AccountController?page=konto" style="color:#ffffff;">konto</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="../ControllerAccount?page=konto" style="color:#ffffff;">konto</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="../UserLogin" style="color:#ffffff;">wyloguj</a></li>
             </ul>
         </div>

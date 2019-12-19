@@ -25,7 +25,7 @@
                 <% if(session.getAttribute("userData") == null){ %>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="P_User/logowanie.jsp" style="color:#ffffff;">Logowanie</a></li>
                 <% }else{ %>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="AccountController?page=konto" style="color:#ffffff;">Moje Konto</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="ControllerAccount?page=konto" style="color:#ffffff;">Moje Konto</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="UserLogin" style="color:#ffffff;">Wyloguj</a></li>
                 <% } %>
 

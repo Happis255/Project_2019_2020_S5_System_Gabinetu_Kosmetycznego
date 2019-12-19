@@ -6,14 +6,14 @@ public class SessionData {
     private TypKonta accoutType;
     private int id;
     private ErrorMessage errorMessage;
-    private String page;
+    private AccountPage accountPage;
 
 
     public SessionData(String nick, TypKonta accountType, int id){
         this.nick = nick;
         this.accoutType = accountType;
         this.id = id;
-        this.page = "konto";
+        this.accountPage = new AccountPage();
     }
 
     public String getNick() {
@@ -48,12 +48,8 @@ public class SessionData {
         this.errorMessage = errorMessage;
     }
 
-    public String getPage() {
-        return page;
-    }
-
-    public void setPage(String page) {
-        this.page = page;
+    public AccountPage getAccountPage() {
+        return accountPage;
     }
 
     public String toString(){
