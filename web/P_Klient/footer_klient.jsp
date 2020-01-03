@@ -33,7 +33,7 @@
                     <h3>Przejdź do</h3>
                     <ul>
                         <li><a href="#">Wizyty</a></li>
-                        <li><a href="#">Aktualności</a></li>
+                        <li><a href="P_User/aktualnosci.jsp">Aktualności</a></li>
                         <li><a href="#">Oferta sprzedażowa</a></li>
                         <li><a href="#">Oferta usługowa</a></li>
                     </ul>

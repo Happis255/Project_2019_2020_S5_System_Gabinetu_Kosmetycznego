@@ -121,6 +121,8 @@ public class DataSource {
         resultSet = exeStatement.executeQuery();
 
         while(resultSet.next()){
+
+            if (!resultSet.getString("opis").equals("usługa nie jest wykonywana"))
             news_list.push(new UslugaData(
                     resultSet.getInt("id_uslugi"),
                     resultSet.getInt("id_uprawnienia_usl"),
@@ -169,7 +171,7 @@ public class DataSource {
         exeStatement.setString(4, parameters.get("opis"));
         exeStatement.setBoolean(5, Boolean.parseBoolean(parameters.get("czy_karta")));
         exeStatement.setInt(6, Integer.parseInt(parameters.get("cena")));
-        exeStatement.setInt(7, Integer.parseInt(parameters.get("czas")));
+        exeStatement.setInt(7, Integer.parseInt(parameters.get("czas_trwania")));
         exeStatement.setString(8, parameters.get("wskazowki"));
         result = exeStatement.executeUpdate();
         if(result != 1)

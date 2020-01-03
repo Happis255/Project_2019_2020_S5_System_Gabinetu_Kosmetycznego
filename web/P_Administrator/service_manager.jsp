@@ -63,8 +63,7 @@
             </table>
             <button class="btn btn-primary float-none align-self-center" type="submit" style="width:265px;position:static;text-align:center!important;margin-left:437px;margin-top:20px;">Usuń usługę</button>
             </form>
-            <form method="get" action="../AccountController?page=uslugi_upload">
-            <button class="btn btn-primary float-none align-self-center" type="submit" style="width:265px;position:static;text-align:center!important;margin-left:437px;margin-top:20px;">Dodaj usługę</button>
-            </form>
+            <button class="btn btn-primary float-none align-self-center" type="submit" style="width:265px;position:static;text-align:center!important;margin-left:437px;margin-top:20px;">
+                <a href="../ControllerAccount?page=uslugi_upload">Dodaj usługę</a></button>
     </section>
 </html>

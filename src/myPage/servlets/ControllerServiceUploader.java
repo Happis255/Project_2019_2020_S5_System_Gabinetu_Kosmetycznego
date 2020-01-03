@@ -1,12 +1,7 @@
 package myPage.servlets;
 
-import myPage.basicObjects.Admin;
 import myPage.basicObjects.Usluga;
-import myPage.data.others.ErrorMessage;
-import myPage.data.others.SessionData;
-import myPage.data.others.TypKonta;
 import myPage.exceptions.DBReadWriteException;
-import myPage.exceptions.ErrorException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
@@ -26,19 +21,6 @@ public class ControllerServiceUploader extends HttpServlet {
 
         request.setCharacterEncoding("UTF-8");
 
-        session = request.getSession();
-        SessionData sessionData = (SessionData) session.getAttribute("userData");
-        Admin admin = null;
-
-        if (sessionData.getAccoutType() != TypKonta.ADMINISTRATOR) {
-            admin = new Admin(sessionData.getId());
-        } else {
-            ErrorMessage errorMessage = new ErrorMessage(new ErrorException("brak dostepu do tej operacji"));
-            session.setAttribute("errorMessage", errorMessage);
-            response.sendRedirect("errorPage.jsp");
-            return;
-        }
-
         Usluga uslugi = new Usluga();
 
         HashMap<String, String> parameters = new HashMap<>();
@@ -56,15 +38,15 @@ public class ControllerServiceUploader extends HttpServlet {
 
         try {
             uslugi.register(parameters);
-            resultMessage = "<h2 class=\"text-center\" style=\"height:53px;\">Aktualność została dodana do bazy danych</h2><h5 class=\"text-center\" style=\"height:99px;margin-right:50px;margin-left:50px;\"><br>Zmiany powinny być już widoczne.<br></h5> <div class=\"form-group\"><a href=\"index.jsp\"><button class=\"btn btn-primary\" type=\"submit\" style=\"margin:0;width:265px;margin-left:267px;\">Powrót do strony głównej</button></a></div>";
+            resultMessage = "<h2 class=\"text-center\" style=\"height:53px;\">Aktualność została dodana do bazy danych</h2><h5 class=\"text-center\" style=\"height:99px;margin-right:50px;margin-left:50px;\"><br>Zmiany powinny być już widoczne.<br></h5> <div class=\"form-group\"><button class=\"btn btn-primary\" type=\"submit\" style=\"margin:0;width:265px;margin-left:267px;\"><a href=\"../ControllerAccount?page=uslugi\">Powrót do usług</a></button></div>";
             request.setAttribute("message", resultMessage);
-            getServletContext().getRequestDispatcher("../ControllerAccount?page=aktualnosci").forward(request, response);
+            getServletContext().getRequestDispatcher("/index_result.jsp").forward(request, response);
 
         } catch (SQLException | ParseException | DBReadWriteException e) {
             e.printStackTrace();
-            resultMessage = "<h2 class=\"text-center\" style=\"height:53px;\">Wystąpił błąd podczas dodawania aktualności.</h2><h5 class=\"text-center\" style=\"height:99px;margin-right:50px;margin-left:50px;\"><br>Prosimy o sprawdzenie, czy wybrane zostały prawidłowe daty<br>bądź czy zawarta grafika nie przekracza 50MB i jest w formacie .jpg.<br></h5> <div class=\"form-group\"><a href=\"index.jsp\"><button class=\"btn btn-primary\" type=\"submit\" style=\"margin:0;width:265px;margin-left:267px;\">Powrót do strony głównej</button></a></div>";
+            resultMessage = "<h2 class=\"text-center\" style=\"height:53px;\">Wystąpił błąd podczas dodawania aktualności.</h2><h5 class=\"text-center\" style=\"height:99px;margin-right:50px;margin-left:50px;\"><br>Prosimy o sprawdzenie, czy wybrane zostały prawidłowe daty<br>bądź czy zawarta grafika nie przekracza 50MB i jest w formacie .jpg.<br></h5> <div class=\"form-group\"><button class=\"btn btn-primary\" type=\"submit\" style=\"margin:0;width:265px;margin-left:267px;\"><a href=\"../ControllerAccount?page=uslugi\">Powrót do usług</a></button></div>";
             request.setAttribute("message", resultMessage);
-            getServletContext().getRequestDispatcher("../ControllerAccount?page=aktualnosci").forward(request, response);
+            getServletContext().getRequestDispatcher("/index_result.jsp").forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -28,7 +28,7 @@
                         <% }else{ %>
                             <li><a href="account.jsp">Moje konto</a></li>
                         <% } %>
-                        <li><a href="#">Oferta usługowa</a></li>
+                        <li><a href="uslugi.jsp">Oferta usługowa</a></li>
                         <li><a href="#">Oferta sprzedażowa</a></li>
                     </ul>
                 </div>
