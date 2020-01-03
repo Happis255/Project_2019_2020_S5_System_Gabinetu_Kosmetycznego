@@ -33,7 +33,7 @@
                     <h3>Przejdź do</h3>
                     <ul>
                         <li><a href="#">Wydarzenia</a></li>
-                        <li><a href="#">Aktualności</a></li>
+                        <li><a href="../ControllerAccount?page=aktualnosci">Aktualności</a></li>
                         <li><a href="#">Promocje</a></li>
                         <li><a href="#">Raporty</a></li>
                     </ul>
