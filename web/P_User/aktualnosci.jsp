@@ -32,6 +32,7 @@
 </script>
 <!--end of navbar bar-->
 
+<div>
         <!--newsy generowane na bieżąco-->
         <%
             Aktualnosci aktualnosci = new Aktualnosci();
@@ -77,7 +78,7 @@
                         " <hr id=\"linia\" style=\"color: white;border: solid 2px;border-radius: 100px;width:635px;margin-top:auto;margin-bottom:29px;\">" );
             }
         %>
-
+</div>
         <!--newsy generowane na bieżąco <div class="d-flex">
             <div class="col-sm-6 col-md-4 col-lg-9 item" style="margin-right:auto;margin-left:auto;">
                 <h3 class="tytul" style="margin-bottom:24px;">Konkurs w Gabinecie Gracja!</h3><a href="#"><img class="img-fluid" src="assets/img/1.jpg" style="width:auto;height:auto;"></a>
@@ -88,9 +89,6 @@
 
         -->
 
-
-    </section>
-</section>
 
 <!--Footer bar-->
 <div id="footer-placeholder">
@@ -106,5 +104,5 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
-</body>
+
 </html>

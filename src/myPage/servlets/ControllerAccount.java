@@ -38,7 +38,7 @@ public class ControllerAccount extends HttpServlet {
                 case "wizyty": break;
                 case "promocje": break;
                 case "aktualnosci": accPage.addContent("../P_Pracownik/news_manager.jsp"); break;
-                case "aktuanosci_upload": accPage.addContent("../P_Pracownik/upload_news.jsp"); break;
+                case "aktualnosci_upload": accPage.addContent("../P_Pracownik/upload_news.jsp"); break;
                 case "uslugi": accPage.addContent("../P_Administrator/service_manager.jsp"); break;
                 case "uslugi_upload": accPage.addContent("../P_Administrator/add_service.jsp"); break;
                 case "produkty": break;
@@ -55,7 +55,7 @@ public class ControllerAccount extends HttpServlet {
                 case "konto": accPage.addContent("../P_Pracownik/accountData_pracownik.jsp"); break;
                 case "wydarzenia": break;
                 case "aktualnosci": accPage.addContent("../P_Pracownik/news_manager.jsp"); break;
-                case "aktuanosci_upload": accPage.addContent("../P_Pracownik/upload_news.jsp"); break;
+                case "aktualnosci_upload": accPage.addContent("../P_Pracownik/upload_news.jsp"); break;
                 case "wizyty": break;
                 case "produkty": break;
                 case "raporty": break;
