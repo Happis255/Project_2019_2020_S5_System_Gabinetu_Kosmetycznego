@@ -27,6 +27,7 @@ public class ControllerAccount extends HttpServlet {
         accPage.clearContent();
 
 
+        System.out.println(sessionData.getAccoutType());
 
         if(sessionData.getAccoutType() == TypKonta.ADMINISTRATOR) {
             switch (page) {
@@ -37,8 +38,9 @@ public class ControllerAccount extends HttpServlet {
                 case "wizyty": break;
                 case "promocje": break;
                 case "aktualnosci": accPage.addContent("../P_Pracownik/news_manager.jsp"); break;
-                case "aktuanosci_upload": accPage.addContent("../P_Pracownik/upload_news.jsp");
-                case "uslugi": break;
+                case "aktuanosci_upload": accPage.addContent("../P_Pracownik/upload_news.jsp"); break;
+                case "uslugi": accPage.addContent("../P_Administrator/service_manager.jsp"); break;
+                case "uslugi_upload": accPage.addContent("../P_Administrator/add_service.jsp"); break;
                 case "produkty": break;
                 case "raporty": break;
                 case "sprzet": break;

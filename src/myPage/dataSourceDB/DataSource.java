@@ -1,6 +1,7 @@
 package myPage.dataSourceDB;
 
 import myPage.data.dataBase.AktualnoscData;
+import myPage.data.dataBase.UslugaData;
 import myPage.exceptions.DBReadWriteException;
 import myPage.exceptions.NoResultsException;
 import myPage.others.DateTransformer;
@@ -35,6 +36,7 @@ public class DataSource {
         exeStatement.executeUpdate();
     }
 
+    /* Metoda do pobierania aktualnosci */
     public LinkedList<AktualnoscData> getAktualnosciDB() throws SQLException{
 
         LinkedList<AktualnoscData> news_list = new LinkedList<>();
@@ -105,6 +107,73 @@ public class DataSource {
         result = exeStatement.executeUpdate();
         if(result != 1)
             throw new DBReadWriteException(result + " rows add with execute: createNews_P");
+    }
+
+    /* Uslugi */
+    // 1. Pobieranie wszystkich uslug gabinetu
+    public LinkedList<UslugaData> getAllServicesDB() throws SQLException{
+
+        LinkedList<UslugaData> news_list = new LinkedList<>();
+
+        PreparedStatement exeStatement;
+        ResultSet resultSet;
+        exeStatement = statements.get("pobierz_UslugiGabinetu_p");
+        resultSet = exeStatement.executeQuery();
+
+        while(resultSet.next()){
+            news_list.push(new UslugaData(
+                    resultSet.getInt("id_uslugi"),
+                    resultSet.getInt("id_uprawnienia_usl"),
+                    resultSet.getString("typ_uslugi"),
+                    resultSet.getString("nazwa"),
+                    resultSet.getString("opis"),
+                    resultSet.getBoolean("czy_karta"),
+                    resultSet.getInt("cena"),
+                    resultSet.getInt("czas_trwania"),
+                    resultSet.getString("wskazowki"),
+                    resultSet.getInt("id_promocji")));
+        }
+        return news_list;
+    }
+
+    // 2. Pobieranie max id uslugi
+    public int getMaxIDServiceDB() throws NoResultsException, SQLException{
+        PreparedStatement exeStatement;
+        ResultSet resultSet;
+        exeStatement = statements.get("pobierz_max_id_uslugi_p");
+        resultSet = exeStatement.executeQuery();
+        if (resultSet.next()){
+            int wynik = resultSet.getInt("id_uslugi");
+            return wynik;
+        } else
+            throw new NoResultsException();
+    }
+
+    // 3. Usuwanie uslugi
+    public void removeServiceID(int id) throws SQLException {
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("removeServiceID_P");
+        exeStatement.setInt(1, id);
+        exeStatement.executeUpdate();
+    }
+
+    // 4. Utworz usluge
+    public void createServiceDB(HashMap<String, String> parameters) throws DBReadWriteException, SQLException, ParseException {
+
+        PreparedStatement exeStatement;
+        int result;
+        exeStatement = statements.get("createService_p");
+        exeStatement.setInt(1, Integer.parseInt(parameters.get("id_uprawnienia")));
+        exeStatement.setString(2, parameters.get("typ_uslugi"));
+        exeStatement.setString(3, parameters.get("nazwa"));
+        exeStatement.setString(4, parameters.get("opis"));
+        exeStatement.setBoolean(5, Boolean.parseBoolean(parameters.get("czy_karta")));
+        exeStatement.setInt(6, Integer.parseInt(parameters.get("cena")));
+        exeStatement.setInt(7, Integer.parseInt(parameters.get("czas")));
+        exeStatement.setString(8, parameters.get("wskazowki"));
+        result = exeStatement.executeUpdate();
+        if(result != 1)
+            throw new DBReadWriteException(result + " rows add with execute: createService_p");
     }
 
     public ResultSet getUserDB(String e_mail) throws SQLException{

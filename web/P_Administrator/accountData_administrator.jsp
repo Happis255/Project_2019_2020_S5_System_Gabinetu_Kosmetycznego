@@ -20,7 +20,7 @@
 <section style="margin-bottom:30px;">
     <div class="jumbotron" style="background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:800px;margin-right:auto;margin-left:auto;">
         <h2 class="text-center" style="height:79px;">Dane Konta</h2>
-        <table id="tablica_ogloszen" class="table" cellspacing="0" width="100%" style="text-align: center; gmargin-bottom: 0;border: 3px solid #FFFFFF;width: 60%;max-width: 98%;margin: auto;background-color: transparent;border-collapse: collapse;">
+        <table id="tablica_ogloszen" class="table" cellspacing="0" width="100%" style="text-align: center; margin-bottom: 0;border: 3px solid #FFFFFF;width: 60%;max-width: 98%;margin: auto;background-color: transparent;border-collapse: collapse;">
             <tbody>
             <%
                 Admin user = null;

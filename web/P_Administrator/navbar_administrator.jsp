@@ -17,7 +17,7 @@
     <div class="container"><a class="navbar-brand" href="../index.jsp"><img src="../assets/img/LOGO Administrator.png" style="margin:-46px;"></a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span></button>
         <div class="collapse navbar-collapse"
              id="navcol-1">
-            <ul class="nav navbar-nav ml-auto" style="max-width:641px;">
+            <ul class="nav navbar-nav ml-auto" style="max-width:720px;">
                 <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">Powiadomienia</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="../ControllerAccount?page=konto" style="color:#ffffff;">Konto</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">Pracownicy</a></li>
@@ -25,7 +25,7 @@
                 <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">Wizyty</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">Promocje</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="../ControllerAccount?page=aktualnosci" style="color:#ffffff;">Aktualności</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;margin-left:27px;">Usługi</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="../ControllerAccount?page=uslugi" style="color:#ffffff;">Usługi</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">Produkty</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">Raporty</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">Sprzęt</a></li>

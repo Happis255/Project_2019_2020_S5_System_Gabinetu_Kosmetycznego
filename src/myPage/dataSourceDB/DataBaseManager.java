@@ -38,10 +38,14 @@ public class DataBaseManager {
             statements.put("getAllAccountsBasicDataWithTag", connection.prepareStatement("{call pobierz_dane_uzytkownikow_typu(?)}"));
             statements.put("createNews_P", connection.prepareStatement("{call dodaj_aktualnosc(?, ?, ?, ?, ?)}"));
             statements.put("pobierz_max_id_aktualnosci_p", connection.prepareStatement("select MAX(id_aktualnosci) as 'id_aktualnosci' from aktualnosc"));
-            statements.put("pobierz_wszystkieAktualnosci_P", connection.prepareStatement("{call pokaz_aktualnosci_pracownik()}"));
+            statements.put("pobierz_wszystkieAktualnosci_P", connection.prepareStatement("{call pokaz_aktualnosci()}"));
             statements.put("removeNewsID_P", connection.prepareStatement("{call usun_aktualnosc(?)}"));
             //statements.put("getAllEvents_P", connection.prepareStatement("{call usun_aktualnosc(?)}"));
             statements.put("createEvent_P", connection.prepareStatement("{call dodaj_wydarzenie(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}"));
+            statements.put("pobierz_UslugiGabinetu_p", connection.prepareStatement("SELECT * FROM usluga ORDER BY usluga.typ_uslugi DESC"));
+            statements.put("pobierz_max_id_uslugi_p", connection.prepareStatement("select MAX(id_uslugi) as 'id_uslugi' from usluga"));
+            statements.put("removeServiceID_P", connection.prepareStatement("{call usun_usluge(?)}"));
+            statements.put("createService_p", connection.prepareStatement("{call dodaj_usluge(?,?,?,?,?,?,?,?)}"));
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
