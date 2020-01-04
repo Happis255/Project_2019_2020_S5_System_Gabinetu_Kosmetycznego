@@ -32,7 +32,6 @@ public class Klient extends User{
                     resultQuery.getInt("telefon"),
                     resultQuery.getString("e_mail"),
                     resultQuery.getInt("id_konta"),
-
                     resultQuery.getInt("ilosc_punktow"),
                     resultQuery.getInt("id_karty"),
                     resultQuery.getInt("id_statusu")

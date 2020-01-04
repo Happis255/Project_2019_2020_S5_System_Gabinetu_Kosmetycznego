@@ -1,6 +1,7 @@
 package myPage.dataSourceDB;
 
 import myPage.data.dataBase.AktualnoscData;
+import myPage.data.dataBase.NieobecnoscData;
 import myPage.data.dataBase.UslugaData;
 import myPage.exceptions.DBReadWriteException;
 import myPage.exceptions.NoResultsException;
@@ -28,6 +29,118 @@ public class DataSource {
 
     /* Metody wykorzystywane do komunikacji z bazą danych */
 
+    //Nieobecnosc
+    /* Metoda do zgłaszania nieobecności w bazie danych */
+    public void createNieobecnoscDB(HashMap<String, String> parameters) throws DBReadWriteException, SQLException, ParseException {
+
+        PreparedStatement exeStatement;
+        int result;
+
+        exeStatement = statements.get("zglos_nieobecnosc_P");
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date_od = dateFormat.parse(parameters.get("data_od"));
+        Date date_do = dateFormat.parse(parameters.get("data_do"));
+        exeStatement.setDate(1, DateTransformer.getSqlDate(date_od));
+        exeStatement.setDate(2, DateTransformer.getSqlDate(date_do));
+        exeStatement.setString(3, parameters.get("powod"));
+        exeStatement.setInt(4, Integer.parseInt(parameters.get("id_pracownika")));
+        exeStatement.setString(5, "NIEPOTWIERDZONE");
+
+        result = exeStatement.executeUpdate();
+        if(result != 1)
+            throw new DBReadWriteException(result + " rows add with execute: zglos_nieobecnosc_P");
+    }
+
+    /* Metoda do pobierania nieobecności z bazy danych */
+    public LinkedList<NieobecnoscData> getAbsencesAll() throws SQLException {
+
+        LinkedList<NieobecnoscData> news_list = new LinkedList<>();
+
+        PreparedStatement exeStatement;
+        ResultSet resultSet;
+        exeStatement = statements.get("pobierz_nieobecnosci_all_p");
+        resultSet = exeStatement.executeQuery();
+
+        NieobecnoscData.Status status = null;
+
+        while(resultSet.next()){
+
+            if (resultSet.getString("status").equals("NIEPOTWIERDZONE"))
+                status = NieobecnoscData.Status.NIEPOTWIERDZONE;
+            else
+                status = NieobecnoscData.Status.POTWIERDZONE;
+
+            news_list.push(new NieobecnoscData(
+                    resultSet.getInt("id_nieobecnosci"),
+                    DateTransformer.getJavaDate(resultSet.getDate("data_od")),
+                    DateTransformer.getJavaDate(resultSet.getDate("data_do")),
+                    resultSet.getString("powod"),
+                    resultSet.getInt("id_pracownika"),
+                    status,
+                    resultSet.getString("imie"),
+                    resultSet.getString("nazwisko")));
+        }
+        return news_list;
+    }
+
+    /* Metoda do pobierania nieobecności z bazy danych wybranego pracownika */
+    public LinkedList<NieobecnoscData> getAbsenceWorker(int id) throws SQLException {
+
+        LinkedList<NieobecnoscData> news_list = new LinkedList<>();
+
+        PreparedStatement exeStatement;
+        ResultSet resultSet;
+        exeStatement = statements.get("pobierz_nieobecnosci_pracownika_p");
+        exeStatement.setInt(1, id);
+        resultSet = exeStatement.executeQuery();
+
+        NieobecnoscData.Status status = null;
+
+        while(resultSet.next()){
+
+            if (resultSet.getString("status").equals("NIEPOTWIERDZONE"))
+                status = NieobecnoscData.Status.NIEPOTWIERDZONE;
+            else
+                status = NieobecnoscData.Status.POTWIERDZONE;
+
+            news_list.push(new NieobecnoscData(
+                    resultSet.getInt("id_nieobecnosci"),
+                    DateTransformer.getJavaDate(resultSet.getDate("data_od")),
+                    DateTransformer.getJavaDate(resultSet.getDate("data_do")),
+                    resultSet.getString("powod"),
+                    resultSet.getInt("id_pracownika"),
+                    status,
+                    resultSet.getString("imie"),
+                    resultSet.getString("nazwisko")));
+        }
+        return news_list;
+    }
+    /* Metody do ustawiania statusu nieobecności danego pracownika */
+    public void declineAbsenceID(int id) throws SQLException {
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("declineAbsenceID_P");
+        exeStatement.setInt(1, id);
+        exeStatement.executeUpdate();
+    }
+
+    public void approveAbsenceID(int id) throws SQLException {
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("approveAbsenceID_P");
+        exeStatement.setInt(1, id);
+        exeStatement.executeUpdate();
+    }
+
+    /* Metoda do usuwania nieobecności z bazy danych przez wybranego pracownika */
+    public void removeAbsenceID(int id) throws SQLException {
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("removeAbsenceID_P");
+        exeStatement.setInt(1, id);
+        exeStatement.executeUpdate();
+    }
+
+
+    //Aktualnosci
     /* Metoda do usuwania aktualnosci o podanym id */
     public void removeNewsID(int id) throws SQLException {
         PreparedStatement exeStatement;

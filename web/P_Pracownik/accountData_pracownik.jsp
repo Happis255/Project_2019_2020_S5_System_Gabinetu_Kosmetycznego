@@ -4,14 +4,8 @@
 <%@ page import="myPage.data.others.SessionData" %>
 <%@ page import="myPage.exceptions.NoResultsException" %>
 <%@ page import="java.sql.SQLException" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: ppisk
-  Date: 18.12.2019
-  Time: 17:25
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 <head>
     <title>Title</title>

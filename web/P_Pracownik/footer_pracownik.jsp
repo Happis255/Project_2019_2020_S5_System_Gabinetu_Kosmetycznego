@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Huber
-  Date: 25.11.2019
-  Time: 15:35
-  To change this template use File | Settings | File Templates.
---%>'
 <%
     response.setCharacterEncoding("UTF-8");
     request.setCharacterEncoding("UTF-8");

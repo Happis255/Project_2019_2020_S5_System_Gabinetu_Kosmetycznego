@@ -33,19 +33,32 @@ public class DataBaseManager {
             statements.put("getPracownikAccountData", connection.prepareStatement("select kt.* " +
                     "from konto kt join pracownik pr on kt.id_konta=pr.id_konta where pr.id_pracownika = ?"));
             statements.put("getPracownik", connection.prepareStatement("select * from pracownik where id_pracownika=?"));
-
-            statements.put("pobierz_dzisiaj_aktualnosci_P", connection.prepareStatement("{call pobierz_dzisiaj_aktualnosci()}"));
             statements.put("getAllAccountsBasicDataWithTag", connection.prepareStatement("{call pobierz_dane_uzytkownikow_typu(?)}"));
+
+            /* Zarządzanie aktualnosciami */
+            statements.put("pobierz_dzisiaj_aktualnosci_P", connection.prepareStatement("{call pobierz_dzisiaj_aktualnosci()}"));
             statements.put("createNews_P", connection.prepareStatement("{call dodaj_aktualnosc(?, ?, ?, ?, ?)}"));
             statements.put("pobierz_max_id_aktualnosci_p", connection.prepareStatement("select MAX(id_aktualnosci) as 'id_aktualnosci' from aktualnosc"));
-            statements.put("pobierz_wszystkieAktualnosci_P", connection.prepareStatement("{call pokaz_aktualnosci()}"));
+            statements.put("pobierz_wszystkieAktualnosci_P", connection.prepareStatement("{call pokaz_aktualnosci_pracownik()}"));
             statements.put("removeNewsID_P", connection.prepareStatement("{call usun_aktualnosc(?)}"));
+
             //statements.put("getAllEvents_P", connection.prepareStatement("{call usun_aktualnosc(?)}"));
             statements.put("createEvent_P", connection.prepareStatement("{call dodaj_wydarzenie(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}"));
+
+            /* Zarządzanie usługą gabinetu */
             statements.put("pobierz_UslugiGabinetu_p", connection.prepareStatement("SELECT * FROM usluga ORDER BY usluga.typ_uslugi DESC"));
             statements.put("pobierz_max_id_uslugi_p", connection.prepareStatement("select MAX(id_uslugi) as 'id_uslugi' from usluga"));
             statements.put("removeServiceID_P", connection.prepareStatement("{call usun_usluge(?)}"));
             statements.put("createService_p", connection.prepareStatement("{call dodaj_usluge(?,?,?,?,?,?,?,?)}"));
+
+            /* Zarządzanie nieobecnosciami */
+            statements.put("zglos_nieobecnosc_P", connection.prepareStatement("{call zglos_nieobecnosc(?,?,?,?,?)}"));
+            statements.put("pobierz_nieobecnosci_pracownika_p", connection.prepareStatement("{call nieob_pracownika(?)}"));
+            statements.put("pobierz_nieobecnosci_all_p", connection.prepareStatement("SELECT nieobecnosc.*, pracownik.* FROM nieobecnosc JOIN pracownik ON nieobecnosc.id_pracownika = pracownik.id_pracownika"));
+            statements.put("removeAbsenceID_P", connection.prepareStatement("DELETE FROM nieobecnosc WHERE nieobecnosc.id_nieobecnosci = ?"));
+            statements.put("declineAbsenceID_P", connection.prepareStatement("{call odrzuc_nieob(?)}"));
+            statements.put("approveAbsenceID_P", connection.prepareStatement("{call potwr_nieob(?)}"));
+
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }

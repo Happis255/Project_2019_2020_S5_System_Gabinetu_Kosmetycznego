@@ -10,9 +10,7 @@
         <form action="${pageContext.request.contextPath}/RemoveNewsWithJPG" method="post">
             <h2 class="text-center" style="height:79px;">Aktualności</h2>
             <h5 class="text-center" style="height:21px;margin-right:50px;margin-left:50px;">Poniżesz zamieszczona jest lista aktualności znajdująca się w systemie</h5>
-            <h6 class="text-center" id="informacja" style="height:44px;margin-right:50px;margin-left:50px;font-weight: 100;">Zaznacz daną aktualność, by ją usunąć.</h6>
-
-            <table id="tablica_ogloszen" class="table" cellspacing="0" width="100%" style="text-align: center;margin-bottom: 0;border: 3px solid #FFFFFF;width: 98%;max-width: 98%;margin-left: 12px;background-color: transparent;border-collapse: collapse;">
+            <h6 class="text-center" id="informacja" style="height:44px;margin-right:50px;margin-left:50px;font-weight: 100;">Zaznacz daną aktualność, by ją usunąć.</h6><table id="tablica_ogloszen" class="table" cellspacing="0" width="100%" style="text-align: center;margin-bottom: 0;border: 3px solid #FFFFFF;width: 98%;max-width: 98%;margin-left: 12px;background-color: transparent;border-collapse: collapse;">
             <thead>
             <tr>
                 <th></th>
@@ -69,7 +67,8 @@
 
             </tbody>
             </table>
-            <button formmethod="get" formaction="#" class="btn btn-primary float-none align-self-center" type="submit" style="width:265px;position:static;text-align:center!important;margin-left:437px;margin-top:20px;"><a href="#">Usuń aktualność</a></button>
-            <button class="btn btn-primary float-none align-self-center" style="width:265px;position:static;text-align:center!important;margin-left:437px;margin-top:20px;"><a href="../ControllerAccount?page=aktualnosci_upload">Dodaj aktualność</a></button>
+            <button class="btn btn-primary float-none align-self-center" type="submit" style="width:265px;position:static;text-align:center!important;margin-left:437px;margin-top:20px;">Usuń aktualność</button>
+            </form>
+            <a href="../ControllerAccount?page=aktualnosci_upload"><button class="btn btn-primary float-none align-self-center" style="width:265px;position:static;text-align:center!important;margin-left:437px;margin-top:20px;">Dodaj aktualność</button></a>
         </section>
 </html>

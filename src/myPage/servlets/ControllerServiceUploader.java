@@ -38,13 +38,13 @@ public class ControllerServiceUploader extends HttpServlet {
 
         try {
             uslugi.register(parameters);
-            resultMessage = "<h2 class=\"text-center\" style=\"height:53px;\">Usługa została dodana do bazy gabinetu.</h2><h5 class=\"text-center\" style=\"height:99px;margin-right:50px;margin-left:50px;\"><br>Zmiany powinny być już widoczne.<br></h5> <div class=\"form-group\"><button class=\"btn btn-primary\" type=\"submit\" style=\"margin:0;width:265px;margin-left:267px;\"><a href=\"ControllerAccount?page=uslugi\">Powrót do usług</a></button></div>";
+            resultMessage = "<h2 class=\"text-center\" style=\"height:53px;\">Usługa została dodana do bazy gabinetu.</h2><h5 class=\"text-center\" style=\"height:99px;margin-right:50px;margin-left:50px;\"><br>Zmiany powinny być już widoczne.<br></h5> <div class=\"form-group\"><a href=\"ControllerAccount?page=uslugi\"><button class=\"btn btn-primary\" type=\"submit\" style=\"margin:0;width:265px;margin-left:267px;\">Powrót do usług</button></a></div>";
             request.setAttribute("message", resultMessage);
             getServletContext().getRequestDispatcher("/index_result.jsp").forward(request, response);
 
         } catch (SQLException | ParseException | DBReadWriteException e) {
             e.printStackTrace();
-            resultMessage = "<h2 class=\"text-center\" style=\"height:53px;\">Wystąpił błąd podczas dodawania usługi.</h2><h5 class=\"text-center\" style=\"height:99px;margin-right:50px;margin-left:50px;\"><br>Prosimy o sprawdzenie, czy wprowadzone zostały prawidłowe dane<br>bądź czy nie wybrano błędnego ID uprawnienia.<br></h5> <div class=\"form-group\"><button class=\"btn btn-primary\" type=\"submit\" style=\"margin:0;width:265px;margin-left:267px;\"><a href=\"ControllerAccount?page=uslugi\">Powrót do usług</a></button></div>";
+            resultMessage = "<h2 class=\"text-center\" style=\"height:53px;\">Wystąpił błąd podczas dodawania usługi.</h2><h5 class=\"text-center\" style=\"height:99px;margin-right:50px;margin-left:50px;\"><br>Prosimy o sprawdzenie, czy wprowadzone zostały prawidłowe dane<br>bądź czy nie wybrano błędnego ID uprawnienia.<br></h5> <div class=\"form-group\"><a href=\"ControllerAccount?page=uslugi\"><button class=\"btn btn-primary\" type=\"submit\" style=\"margin:0;width:265px;margin-left:267px;\">Powrót do usług</button></a></div>";
             request.setAttribute("message", resultMessage);
             getServletContext().getRequestDispatcher("/index_result.jsp").forward(request, response);
         } catch (Exception e) {
