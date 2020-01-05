@@ -25,7 +25,7 @@
                     <ul>
                         <li><a href="#">Panel główny</a></li>
                         <li><a href="#">Powiadomienia</a></li>
-                        <li><a href="#">Pracownicy</a></li>
+                        <li><a href="../ControllerAccount?page=pracownicy">Pracownicy</a></li>
                         <li><a href="#">Wizyty</a></li>
                     </ul>
                 </div>

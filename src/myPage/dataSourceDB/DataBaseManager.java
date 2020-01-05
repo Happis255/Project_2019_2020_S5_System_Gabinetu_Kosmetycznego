@@ -49,7 +49,7 @@ public class DataBaseManager {
             statements.put("pobierz_UslugiGabinetu_p", connection.prepareStatement("SELECT * FROM usluga ORDER BY usluga.typ_uslugi DESC"));
             statements.put("pobierz_max_id_uslugi_p", connection.prepareStatement("select MAX(id_uslugi) as 'id_uslugi' from usluga"));
             statements.put("removeServiceID_P", connection.prepareStatement("{call usun_usluge(?)}"));
-            statements.put("createService_p", connection.prepareStatement("{call dodaj_usluge(?,?,?,?,?,?,?,?)}"));
+            statements.put("createService_p", connection.prepareStatement("{call dodaj_usluge(?,?,?,?,?,?,?)}"));
 
             /* Zarządzanie nieobecnosciami */
             statements.put("zglos_nieobecnosc_P", connection.prepareStatement("{call zglos_nieobecnosc(?,?,?,?,?)}"));

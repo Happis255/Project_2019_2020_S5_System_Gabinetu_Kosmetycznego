@@ -238,7 +238,6 @@ public class DataSource {
             if (!resultSet.getString("opis").equals("usługa nie jest wykonywana"))
             news_list.push(new UslugaData(
                     resultSet.getInt("id_uslugi"),
-                    resultSet.getInt("id_uprawnienia_usl"),
                     resultSet.getString("typ_uslugi"),
                     resultSet.getString("nazwa"),
                     resultSet.getString("opis"),
@@ -278,14 +277,13 @@ public class DataSource {
         PreparedStatement exeStatement;
         int result;
         exeStatement = statements.get("createService_p");
-        exeStatement.setInt(1, Integer.parseInt(parameters.get("id_uprawnienia")));
-        exeStatement.setString(2, parameters.get("typ_uslugi"));
-        exeStatement.setString(3, parameters.get("nazwa"));
-        exeStatement.setString(4, parameters.get("opis"));
-        exeStatement.setBoolean(5, Boolean.parseBoolean(parameters.get("czy_karta")));
-        exeStatement.setInt(6, Integer.parseInt(parameters.get("cena")));
-        exeStatement.setInt(7, Integer.parseInt(parameters.get("czas_trwania")));
-        exeStatement.setString(8, parameters.get("wskazowki"));
+        exeStatement.setString(1, parameters.get("typ_uslugi"));
+        exeStatement.setString(2, parameters.get("nazwa"));
+        exeStatement.setString(3, parameters.get("opis"));
+        exeStatement.setBoolean(4, Boolean.parseBoolean(parameters.get("czy_karta")));
+        exeStatement.setInt(5, Integer.parseInt(parameters.get("cena")));
+        exeStatement.setInt(6, Integer.parseInt(parameters.get("czas_trwania")));
+        exeStatement.setString(7, parameters.get("wskazowki"));
         result = exeStatement.executeUpdate();
         if(result != 1)
             throw new DBReadWriteException(result + " rows add with execute: createService_p");

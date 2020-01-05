@@ -33,7 +33,7 @@ public class ControllerAccount extends HttpServlet {
             switch (page) {
                 case "powiadomienia": break;
                 case "konto": accPage.addContent("../P_Administrator/accountData_administrator.jsp"); break;
-                case "pracownicy": break;
+                case "pracownicy": accPage.addContent("../P_Administrator/workers_manager.jsp"); break;
                 case "wydarzenia": break;
                 case "wizyty": break;
                 case "promocje": break;

@@ -27,7 +27,6 @@ public class ControllerServiceUploader extends HttpServlet {
 
         String content = request.getParameter("typ_uslugi");
         System.out.println(content);
-        parameters.put("id_uprawnienia", request.getParameter("id_uprawnienia"));
         parameters.put("typ_uslugi", request.getParameter("typ_uslugi"));
         parameters.put("nazwa", request.getParameter("nazwa"));
         parameters.put("opis", request.getParameter("opis"));

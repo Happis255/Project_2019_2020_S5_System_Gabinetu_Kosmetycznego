@@ -3,7 +3,6 @@ package myPage.data.dataBase;
 public class UslugaData {
 
     int id_uslugi;
-    int id_uprawnienia_usl;
     String typ_uslugi;
     String nazwa;
     String opis;
@@ -13,9 +12,8 @@ public class UslugaData {
     String wskazowki;
     int id_promocji;
 
-    public UslugaData(int id_uslugi, int id_uprawnienia_usl, String typ_uslugi, String nazwa, String opis, boolean czy_karta, int cena, int czas_trwania, String wskazowki, int id_promocji) {
+    public UslugaData(int id_uslugi, String typ_uslugi, String nazwa, String opis, boolean czy_karta, int cena, int czas_trwania, String wskazowki, int id_promocji) {
         this.id_uslugi = id_uslugi;
-        this.id_uprawnienia_usl = id_uprawnienia_usl;
         this.typ_uslugi = typ_uslugi;
         this.nazwa = nazwa;
         this.opis = opis;
@@ -32,14 +30,6 @@ public class UslugaData {
 
     public void setId_uslugi(int id_uslugi) {
         this.id_uslugi = id_uslugi;
-    }
-
-    public int getId_uprawnienia_usl() {
-        return id_uprawnienia_usl;
-    }
-
-    public void setId_uprawnienia_usl(int id_uprawnienia_usl) {
-        this.id_uprawnienia_usl = id_uprawnienia_usl;
     }
 
     public String getTyp_uslugi() {
