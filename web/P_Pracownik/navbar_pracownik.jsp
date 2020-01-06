@@ -10,7 +10,7 @@
     <div class="container"><a class="navbar-brand" href="../index.jsp"><img src="../assets/img/LOGO.png" style="margin:-63px;"></a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span></button>
         <div class="collapse navbar-collapse"
              id="navcol-1">
-            <ul class="nav navbar-nav ml-auto" style="max-width:600px;">
+            <ul class="nav navbar-nav ml-auto" style="max-width:553px;">
                 <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">Powiadomienia</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="../ControllerAccount?page=konto" style="color:#ffffff;">Konto</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">Wydarzenia</a></li>

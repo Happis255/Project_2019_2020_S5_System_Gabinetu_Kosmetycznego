@@ -28,8 +28,7 @@ public class DataBaseManager {
                     "FROM (SELECT kt.id_konta, IF(kt.typ_konta LIKE 'KLIENT' , kl.e_mail , pr.e_mail) AS e_mail, kt.typ_konta, kt.haslo, IF(kt.typ_konta LIKE 'KLIENT' , kl.id_klienta , pr.id_pracownika) AS id " +
                     "FROM konto kt LEFT JOIN klient kl ON kt.id_konta = kl.id_konta LEFT JOIN pracownik pr ON kt.id_konta = pr.id_konta) as t " +
                     "WHERE e_mail =? "));
-            statements.put("getClientAccountData", connection.prepareStatement("select kt.* " +
-                    "from konto kt join klient kl on kt.id_konta=kl.id_konta where kl.id_klienta = ?"));
+
             statements.put("getPracownikAccountData", connection.prepareStatement("select kt.* " +
                     "from konto kt join pracownik pr on kt.id_konta=pr.id_konta where pr.id_pracownika = ?"));
             statements.put("createWorker_p", connection.prepareStatement("{call utworz_pracownika(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}"));
@@ -43,6 +42,15 @@ public class DataBaseManager {
             statements.put("setServiceWorker", connection.prepareStatement("{call nadaj_uprawnienie_uslugowe(?, ?)}"));
             statements.put("checkServiceWorker", connection.prepareStatement("select * from pracownik_usluga where pracownik_usluga.id_pracownika =? AND pracownik_usluga.id_uslugi =?"));
             statements.put("getAllAccountsBasicDataWithTag", connection.prepareStatement("{call pobierz_dane_uzytkownikow_typu(?)}"));
+
+            /* Klient */
+            statements.put("getClientAccountData", connection.prepareStatement("select kt.* " +
+                    "from konto kt join klient kl on kt.id_konta=kl.id_konta where kl.id_klienta = ?"));
+            statements.put("pobierz_karteKlientaID_P", connection.prepareStatement("{call pobierz_karte_klienta(?)}"));
+            statements.put("getClientStatusNameDB_p", connection.prepareStatement("SELECT nazwa FROM status_klienta WHERE status_klienta.id_statusu =? "));
+            statements.put("removeClientDN_P", connection.prepareStatement("{call usun_klient(?)}"));
+            statements.put("editClient_p", connection.prepareStatement("{call edytuj_klienta(?,?,?,?,?,?,?,?)}"));
+            statements.put("editClientBook_p", connection.prepareStatement("{call edytuj_karte_klienta(?,?,?,?,?,?,?,?,?,?,?,?,?,?)}"));
 
             /* Zarzadzanie ksiazeczka zdrowia pracownika */
             statements.put("pobierz_ksiazeczkeZdrowiaID_P", connection.prepareStatement("{call pobierz_ksiazeczke(?)}"));

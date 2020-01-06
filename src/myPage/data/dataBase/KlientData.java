@@ -3,6 +3,7 @@ package myPage.data.dataBase;
 import java.util.Date;
 
 public class KlientData extends UserData{
+
     private int id_klienta;
     private int ilosc_punktow;
     private int id_karty;

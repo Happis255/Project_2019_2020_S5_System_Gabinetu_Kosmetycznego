@@ -70,9 +70,11 @@
 
             </tbody>
             </table>
-            <button class="btn btn-primary float-none align-self-center" type="submit" name="opcja" value="potwierdz" style="width:265px;position:static;text-align:center!important;margin-left:437px;margin-top:20px;">Potwierdź nieobecność</button>
-            <button class="btn btn-primary float-none align-self-center" type="submit" name="opcja" value="niepotwierdzone" style="width:265px;position:static;text-align:center!important;margin-left:437px;margin-top:20px;">Odrzuć nieobecność</button>
-            <button class="btn btn-primary float-none align-self-center" type="submit" name="opcja" value="usun" style="width:265px;position:static;text-align:center!important;margin-left:437px;margin-top:20px;">Usuń nieobecność</button>
+            <div class="row">
+                <a><button class="btn btn-primary float-none align-self-center" type="submit" name="opcja" value="potwierdz" style="width:265px;margin-left: 170px;margin-top:20px;">Potwierdź nieobecność</button></a>
+                <a><button class="btn btn-primary float-none align-self-center" type="submit" name="opcja" value="niepotwierdzone" style="width:265px;margin-left: 17px;margin-top:20px;">Odrzuć nieobecność</button></a>
+                <a><button class="btn btn-primary float-none align-self-center" type="submit" name="opcja" value="usun" style="width:265px;margin-left: 17px;margin-top:20px;">Usuń nieobecność</button></a>
+            </div>
         </form>
         <a href="../ControllerAccount?page=nieobecnosc_upload"><button class="btn btn-primary float-none align-self-center" style="width:265px;position:static;text-align:center!important;margin-left:437px;margin-top:20px;">Zgłoś nieobecność</button></a>
         </section>

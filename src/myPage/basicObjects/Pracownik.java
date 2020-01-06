@@ -30,6 +30,8 @@ public class Pracownik extends User {
 
     @Override
     public PracownikData getData() throws SQLException {
+
+
         ResultSet resultQuery = dataSource.getPracownikDB(id);
         PracownikData pracownikData = null;
 
@@ -45,7 +47,6 @@ public class Pracownik extends User {
                     resultQuery.getInt("telefon"),
                     resultQuery.getString("e_mail"),
                     resultQuery.getInt("id_konta"),
-
                     resultQuery.getLong("pesel"),
                     DateTransformer.getJavaDate(resultQuery.getDate("data_zatrudnienia")),
                     resultQuery.getString("certyfikaty"),
@@ -133,6 +134,7 @@ public class Pracownik extends User {
     }
 
     public void editPracownik (HashMap<String, String> parameters) throws SQLException, ParseException, DBReadWriteException {
+        dataSource.CheckUserDB(parameters.get("e_mail"));
         dataSource.editWorkerDB(parameters);
     }
     public void  editKsiazeczkaPracownika (HashMap<String, String> parameters) throws SQLException, ParseException, DBReadWriteException {

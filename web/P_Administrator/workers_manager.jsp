@@ -110,12 +110,12 @@
 
     <section id="przyciski" class="bg-light-gray" style="margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;max-width:1140px;margin-right:auto;margin-left:auto;border-radius:20px;margin-bottom:30px;">
         <div class="row">
-            <a href="../ControllerAccount?page=add_pracownik"><button type="button" class="btn btn-primary float-none align-self-center" style="width:265px;margin-left: 160px;margin-top:20px;">Dodaj pracownika</button></a>
+            <a href="../ControllerAccount?page=add_pracownik"><button type="button" class="btn btn-primary float-none align-self-center" style="width:265px;margin-left: 170px;margin-top:20px;">Dodaj pracownika</button></a>
             <a href="../ControllerAccount?page=remove_pracownik"><button type="button" class="btn btn-primary float-none align-self-center" style="width:265px;margin-left: 17px;margin-top:20px;">Usuń pracownika</button></a>
             <a href="../ControllerAccount?page=add_service_pracownik"><button type="button" class="btn btn-primary float-none align-self-center" style="width:265px;margin-left: 17px;margin-top:20px;">Nadaj uprawnienie</button></a>
         </div>
         <div class="row">
-            <a><button class="btn btn-primary float-none align-self-center" type="submit" name="button1" value="Button 1" style="width:265px;margin-left: 160px;margin-top:20px;">Odbierz uprawnienie</button></a>
+            <a><button class="btn btn-primary float-none align-self-center" type="submit" name="button1" value="Button 1" style="width:265px;margin-left: 170px;margin-top:20px;">Odbierz uprawnienie</button></a>
             <a href="../ControllerAccount?page=edit_worker"><button type="button" class="btn btn-primary float-none align-self-center" style="width:265px;margin-left: 17px;margin-top:20px;">Edytuj pracownika</button></a>
             <a href="../ControllerAccount?page=edit_book"><button type="button" class="btn btn-primary float-none align-self-center" style="width:265px;margin-left: 17px;margin-top:20px;">Edytuj książeczkę zdrowia</button></a>
         </div>

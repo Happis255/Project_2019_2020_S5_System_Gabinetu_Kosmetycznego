@@ -103,4 +103,40 @@ public class KartaKlientaData{
     public String getInne_uwagi() {
         return inne_uwagi;
     }
+
+    public String toStringp1(){
+            if (p1) return "tak"; else return "nie";
+    }
+
+    public String toStringp2(){
+        if (p2) return "tak"; else return "nie";
+    }
+
+    public String toStringp3(){
+        if (p3) return "tak"; else return "nie";
+    }
+
+    public String toStringp4(){
+        if (p4) return "tak"; else return "nie";
+    }
+
+    public String toStringp5(){
+        if (p5) return "tak"; else return "nie";
+    }
+
+    public String toStringp6(){
+        if (p6) return "tak"; else return "nie";
+    }
+
+    public String toStringp7(){
+        if (p7) return "tak"; else return "nie";
+    }
+
+    public String toStringp8(){
+        if (p8) return "tak"; else return "nie";
+    }
+
+    public String toStringp9(){
+        if (p9) return "tak"; else return "nie";
+    }
 }

@@ -22,10 +22,8 @@ public class ControllerAccount extends HttpServlet {
         String redirect = "P_User/account.jsp";
         String page = request.getParameter("page");
         AccountPage accPage = sessionData.getAccountPage();
-
         accPage.setNavbarFooter(sessionData.getAccoutType());
         accPage.clearContent();
-
 
         System.out.println(sessionData.getAccoutType());
 
@@ -79,10 +77,11 @@ public class ControllerAccount extends HttpServlet {
                 case "sklep": break;
                 case "twojebonusy": break;
                 case "konto": accPage.addContent("../P_Klient/accountData_klient.jsp"); break;
+                case "konto_edit": accPage.addContent("../P_Klient/client_editor.jsp"); break;
+                case "card_edit": accPage.addContent("../P_Klient/clientBook_editor.jsp"); break;
                 default: break;
             }
         }
-
         response.sendRedirect(redirect);
     }
 }

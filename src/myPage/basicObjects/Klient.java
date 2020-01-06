@@ -4,10 +4,13 @@ import myPage.data.dataBase.KlientData;
 import myPage.data.dataBase.KontoData;
 import myPage.data.others.TypKonta;
 import myPage.exceptions.DBReadWriteException;
+import myPage.exceptions.NoResultsException;
 import myPage.others.DateTransformer;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.util.HashMap;
 
 public class Klient extends User{
 
@@ -62,5 +65,23 @@ public class Klient extends User{
         }
 
         return kontoData;
+    }
+
+    public String getAccountStatusName(int id_statusu) throws SQLException, NoResultsException {
+        String nazwa = dataSource.getClientStatusNameDB(id_statusu);
+        return nazwa;
+    }
+
+    public void removeClient(int id_klienta) throws SQLException {
+        dataSource.removeClientDN(id_klienta);
+    }
+
+    public void editClient(HashMap<String, String> parameters) throws SQLException, DBReadWriteException, ParseException {
+        dataSource.CheckUserDB(parameters.get("e_mail"));
+        dataSource.UpdateClientDB(parameters);
+    }
+
+    public void editClientBook(HashMap<String, String> parameters) throws SQLException {
+        dataSource.editClientBookDB(parameters);
     }
 }

@@ -1,9 +1,6 @@
 package myPage.dataSourceDB;
 
-import myPage.data.dataBase.AktualnoscData;
-import myPage.data.dataBase.KsiazeczkaZdrowiaData;
-import myPage.data.dataBase.NieobecnoscData;
-import myPage.data.dataBase.UslugaData;
+import myPage.data.dataBase.*;
 import myPage.exceptions.DBReadWriteException;
 import myPage.exceptions.NoResultsException;
 import myPage.others.DateTransformer;
@@ -29,6 +26,39 @@ public class DataSource {
     }
 
     /* Metody wykorzystywane do komunikacji z bazą danych */
+
+    //Karta klienta
+    /* Metoda zwraca informacje o karcie klienta o podanym ID */
+    public KartaKlientaData getKartaKlientaID(int id_klienta) throws SQLException {
+
+        PreparedStatement exeStatement;
+
+        exeStatement = statements.get("pobierz_karteKlientaID_P");
+        exeStatement.setInt(1, id_klienta);
+        ResultSet resultSet = exeStatement.executeQuery();
+
+        KartaKlientaData wynik = null;
+
+        if (resultSet.next())
+        wynik = new KartaKlientaData(
+                resultSet.getInt("id_karty"),
+                resultSet.getBoolean("p1"),
+                resultSet.getBoolean("p2"),
+                resultSet.getBoolean("p3"),
+                resultSet.getBoolean("p4"),
+                resultSet.getBoolean("p5"),
+                resultSet.getBoolean("p6"),
+                resultSet.getBoolean("p7"),
+                resultSet.getBoolean("p8"),
+                resultSet.getBoolean("p9"),
+                resultSet.getString("ocena_skory"),
+                resultSet.getString("rodzaj_jakosc"),
+                resultSet.getString("wrazliwosc"),
+                resultSet.getString("inne_uwagi")
+        );
+        return wynik;
+    }
+
 
     //Ksiazeczka zdrowia
     /* Metoda zwraca informacje o ksiazece zdrowia odczytanej z bazy danych */
@@ -451,6 +481,47 @@ public class DataSource {
         exeStatement.executeQuery();
     }
 
+    //Edytuj dane klienta
+    public void UpdateClientDB(HashMap<String, String> parameters) throws DBReadWriteException, SQLException, ParseException {
+
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("editClient_p");
+
+        exeStatement.setInt(1, Integer.parseInt(parameters.get("p_id_klienta")));
+        exeStatement.setString(2, parameters.get("p_e_mail"));
+        exeStatement.setString(3, parameters.get("p_nazwisko"));
+        exeStatement.setString(4, parameters.get("p_ulica"));
+        exeStatement.setString(5, parameters.get("p_kod_pocztowy"));
+        exeStatement.setString(6, parameters.get("p_miejscowowsc"));
+        exeStatement.setInt(7, Integer.parseInt(parameters.get("p_telefon")));
+        exeStatement.setString(8, parameters.get("p_haslo"));
+        exeStatement.executeQuery();
+    }
+
+    //Edytuj karte klienta
+    public void editClientBookDB(HashMap<String, String> parameters) throws SQLException {
+
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("editClientBook_p");
+
+        exeStatement.setInt(1, Integer.parseInt(parameters.get("p_id_klienta")));
+        exeStatement.setBoolean(2, Boolean.parseBoolean(parameters.get("p1")));
+        exeStatement.setBoolean(3, Boolean.parseBoolean(parameters.get("p2")));
+        exeStatement.setBoolean(4, Boolean.parseBoolean(parameters.get("p3")));
+        exeStatement.setBoolean(5, Boolean.parseBoolean(parameters.get("p4")));
+        exeStatement.setBoolean(6, Boolean.parseBoolean(parameters.get("p5")));
+        exeStatement.setBoolean(7, Boolean.parseBoolean(parameters.get("p6")));
+        exeStatement.setBoolean(8, Boolean.parseBoolean(parameters.get("p7")));
+        exeStatement.setBoolean(9, Boolean.parseBoolean(parameters.get("p8")));
+        exeStatement.setBoolean(10, Boolean.parseBoolean(parameters.get("p9")));
+        exeStatement.setString(11, parameters.get("p10"));
+        exeStatement.setString(12, parameters.get("p11"));
+        exeStatement.setString(13, parameters.get("p12"));
+        exeStatement.setString(14, parameters.get("p13"));
+
+        exeStatement.executeQuery();
+    }
+
     public void CheckUserDB(String e_mail) throws SQLException{
         PreparedStatement exeStatement;
         ResultSet resultSet;
@@ -532,6 +603,31 @@ public class DataSource {
         return resultSet;
     }
 
+    public void removeClientDN (int id_kontaKlienta) throws SQLException {
+
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("removeClientDN_P");
+
+        exeStatement.setInt(1, id_kontaKlienta);
+        exeStatement.executeQuery();
+    }
+
+    public String getClientStatusNameDB(int id_statusu) throws SQLException, NoResultsException {
+
+        String wynik = "";
+        PreparedStatement exeStatement;
+        ResultSet resultSet;
+
+        exeStatement = statements.get("getClientStatusNameDB_p");
+        exeStatement.setInt(1, id_statusu);
+        resultSet = exeStatement.executeQuery();
+
+        if (resultSet.next()){
+            wynik = resultSet.getString("nazwa");
+            return wynik;
+        } else
+            throw new NoResultsException();
+    }
     public ResultSet getClientAccountDB(int idKlienta) throws SQLException{
         PreparedStatement exeStatement;
         ResultSet resultSet;
