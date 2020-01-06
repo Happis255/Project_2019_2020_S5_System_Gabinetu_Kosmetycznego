@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.SQLException;
 
 @WebServlet(name =  "kontroler służący do nadawania możliwości wykonywania usługi wybranemu pracownika", urlPatterns = { "/ControllerWorkerServiceAdder" })
 public class ControllerWorkerServiceAdder extends HttpServlet {

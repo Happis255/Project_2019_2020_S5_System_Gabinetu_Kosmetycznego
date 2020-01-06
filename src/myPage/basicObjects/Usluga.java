@@ -44,4 +44,8 @@ public class Usluga {
     public void getUslugiPracownikaID(int id) throws SQLException {
         this.uslugi = dataSource.getAllServicesForWorker(id);
     }
+
+    public void removeAllowence(int id_uslugi, int id_prac) throws SQLException {
+        dataSource.removeAllowenceDB(id_uslugi, id_prac);
+    }
 }

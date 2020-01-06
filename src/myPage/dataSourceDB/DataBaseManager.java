@@ -61,6 +61,7 @@ public class DataBaseManager {
             statements.put("removeServiceID_P", connection.prepareStatement("{call usun_usluge(?)}"));
             statements.put("createService_p", connection.prepareStatement("{call dodaj_usluge(?,?,?,?,?,?,?)}"));
             statements.put("pobierz_UslugiGabinetuDlaPracownika_p", connection.prepareStatement("SELECT usluga.* FROM usluga JOIN pracownik_usluga ON usluga.id_uslugi = pracownik_usluga.id_uslugi WHERE pracownik_usluga.id_pracownika = ? AND usluga.opis != 'usługa nie jest wykonywana'"));
+            statements.put("removeAllowenceWorker_p", connection.prepareStatement("DELETE FROM pracownik_usluga WHERE id_pracownika =? and id_uslugi =?;"));
 
             /* Zarządzanie nieobecnosciami */
             statements.put("zglos_nieobecnosc_P", connection.prepareStatement("{call zglos_nieobecnosc(?,?,?,?,?)}"));

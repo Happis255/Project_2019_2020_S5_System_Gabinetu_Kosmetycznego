@@ -346,6 +346,15 @@ public class DataSource {
         exeStatement.executeUpdate();
     }
 
+    // 3.1 Usuwanie możliwości wykonywania uslugi
+    public void removeAllowenceDB(int id_uslugi, int id_prac) throws SQLException {
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("removeAllowenceWorker_p");
+        exeStatement.setInt(1, id_prac);
+        exeStatement.setInt(2, id_uslugi);
+        exeStatement.executeUpdate();
+    }
+
     // 4. Utworz usluge
     public void createServiceDB(HashMap<String, String> parameters) throws DBReadWriteException, SQLException {
 
