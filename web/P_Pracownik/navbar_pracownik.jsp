@@ -18,7 +18,7 @@
                 <li class="nav-item" role="presentation"><a class="nav-link" href="../ControllerAccount?page=nieobecnosci" style="color:#ffffff;">Nieobecności</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;margin-left: 109px;">Wizyty</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">Produkty</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">Raporty</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="../ControllerAccount?page=raporty" style="color:#ffffff;">Raporty</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">Sklep online</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="../UserLogin" style="color:#ffffff;">Wyloguj</a></li>
             </ul>

@@ -719,4 +719,30 @@ public class DataSource {
         if(result != 1)
             throw new DBReadWriteException(result + " rows add with execute: createClientCard_P");
     }
+
+    //Pobierz raporty pracownika
+    public LinkedList<RaportData> getRaportsWorker(int id) throws SQLException {
+
+        LinkedList<RaportData> raport_list = new LinkedList<>();
+
+        PreparedStatement exeStatement;
+        ResultSet resultSet;
+        exeStatement = statements.get("pobierz_raporty_pracownika_p");
+        exeStatement.setInt(1, id);
+        resultSet = exeStatement.executeQuery();
+
+        while(resultSet.next()){
+
+            raport_list.push(new RaportData(
+                    resultSet.getInt("id_raportu"),
+                    DateTransformer.getJavaDate(resultSet.getDate("data")),
+                    resultSet.getString("tytul_raportu"),
+                    resultSet.getString("typ_odpadow"),
+                    resultSet.getInt("ilosc"),
+                    resultSet.getInt("koszt"),
+                    resultSet.getInt("id_pracownika")));
+        }
+        
+        return raport_list;
+    }
 }

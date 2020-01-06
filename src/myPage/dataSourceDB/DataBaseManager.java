@@ -81,6 +81,9 @@ public class DataBaseManager {
             statements.put("declineAbsenceID_P", connection.prepareStatement("{call odrzuc_nieob(?)}"));
             statements.put("approveAbsenceID_P", connection.prepareStatement("{call potwr_nieob(?)}"));
 
+            /*Raporty odpadów*/
+            statements.put("pobierz_raporty_pracownika_p", connection.prepareStatement("{call pobierz_raporty_pracownika(?)}"));
+
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
