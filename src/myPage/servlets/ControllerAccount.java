@@ -46,6 +46,8 @@ public class ControllerAccount extends HttpServlet {
                 case "add_pracownik": accPage.addContent("../P_Administrator/worker_adder.jsp");break;
                 case "remove_pracownik": accPage.addContent("../P_Administrator/worker_remover.jsp"); break;
                 case "add_service_pracownik": accPage.addContent("../P_Administrator/worker_service_adder.jsp"); break;
+                case "edit_worker": accPage.addContent("../P_Administrator/worker_editor.jsp"); break;
+                case "edit_book": accPage.addContent("../P_Administrator/workerBook_editor.jsp"); break;
                 case "produkty": break;
                 case "raporty": break;
                 case "sprzet": break;

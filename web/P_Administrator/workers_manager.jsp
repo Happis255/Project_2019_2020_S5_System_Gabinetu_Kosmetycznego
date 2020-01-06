@@ -92,7 +92,7 @@
                              temp_usluga = uslugi.uslugaPop();
                              out.print(
                                      "            <tr>\n" +
-                                     "                <td> <input type=\"Checkbox\" name=\"do_usuniecia\" value=\"" + temp_usluga.getId_uslugi() + " " + temp_pracownik.getId() + "d\"></td>\n" +
+                                     "                <td> <input type=\"Checkbox\" name=\"do_usuniecia\" value=\"" + temp_usluga.getId_uslugi() + " " + temp_pracownik.getId() + "\"></td>\n" +
                                      "                <td>" + temp_usluga.getTyp_uslugi() +"</td>\n" +
                                      "                <td>"  + temp_usluga.getNazwa() +"</td>\n" +
                                      "            </tr>\n");
@@ -115,9 +115,9 @@
             <a href="../ControllerAccount?page=add_service_pracownik"><button type="button" class="btn btn-primary float-none align-self-center" style="width:265px;margin-left: 17px;margin-top:20px;">Nadaj uprawnienie</button></a>
         </div>
         <div class="row">
-            <a><button class="btn btn-primary float-none align-self-center" type="submit" style="width:265px;margin-left: 160px;margin-top:20px;">Odbierz uprawnienie</button></a>
-            <a href="#"><button type="button" class="btn btn-primary float-none align-self-center" style="width:265px;margin-left: 17px;margin-top:20px;">Edytuj pracownika</button></a>
-            <a href="#"><button type="button" class="btn btn-primary float-none align-self-center" style="width:265px;margin-left: 17px;margin-top:20px;">Edytuj książeczkę zdrowia</button></a>
+            <a><button class="btn btn-primary float-none align-self-center" type="submit" name="button1" value="Button 1" style="width:265px;margin-left: 160px;margin-top:20px;">Odbierz uprawnienie</button></a>
+            <a href="../ControllerAccount?page=edit_worker"><button type="button" class="btn btn-primary float-none align-self-center" style="width:265px;margin-left: 17px;margin-top:20px;">Edytuj pracownika</button></a>
+            <a href="../ControllerAccount?page=edit_book"><button type="button" class="btn btn-primary float-none align-self-center" style="width:265px;margin-left: 17px;margin-top:20px;">Edytuj książeczkę zdrowia</button></a>
         </div>
     </section>
 </form>

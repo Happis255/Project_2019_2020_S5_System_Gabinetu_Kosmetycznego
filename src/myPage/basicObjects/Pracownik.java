@@ -131,4 +131,11 @@ public class Pracownik extends User {
         dataSource.checkServiceWorkerDB(id_prac, id_usl);
         dataSource.addServiceWorkerDB(id_prac, id_usl);
     }
+
+    public void editPracownik (HashMap<String, String> parameters) throws SQLException, ParseException, DBReadWriteException {
+        dataSource.editWorkerDB(parameters);
+    }
+    public void  editKsiazeczkaPracownika (HashMap<String, String> parameters) throws SQLException, ParseException, DBReadWriteException {
+        dataSource.editWorkersBookDB(parameters);
+    }
 }

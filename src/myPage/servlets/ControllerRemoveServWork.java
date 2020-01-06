@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet(name =  "kontroler służący do usuwania zaznaczonych z listy nieobecności", urlPatterns = { "/ControllerRemoveServWork" })
+@WebServlet("/ControllerRemoveServWork")
 public class ControllerRemoveServWork extends HttpServlet {
 
     private HttpSession session;
@@ -24,7 +24,7 @@ public class ControllerRemoveServWork extends HttpServlet {
 
         Usluga uslugi = new Usluga();
         String[] spis_id = request.getParameterValues("do_usuniecia");
-        int a = 0;
+
         String[] dane;
         try {
             for (int i = 0; i < spis_id.length; i++){

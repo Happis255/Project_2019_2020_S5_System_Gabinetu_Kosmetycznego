@@ -38,6 +38,8 @@ public class DataBaseManager {
             statements.put("usunPracownika_p", connection.prepareStatement("{call usun_pracownik(?)}"));
             statements.put("usunaKartePracownika_p", connection.prepareStatement("{call usun_ksiazeczka_zdrowia(?)}"));
             statements.put("usunKonto_p", connection.prepareStatement("{call usun_konto(?)}"));
+            statements.put("editWorker_P", connection.prepareStatement("{call edytuj_pracownik(?,?,?,?,?,?,?,?,?)}"));
+            statements.put("editWorkerBook_P", connection.prepareStatement("{call edytuj_ksiazeczke(?,?,?,?,?,?,?,?,?,?,?,?)}"));
             statements.put("setServiceWorker", connection.prepareStatement("{call nadaj_uprawnienie_uslugowe(?, ?)}"));
             statements.put("checkServiceWorker", connection.prepareStatement("select * from pracownik_usluga where pracownik_usluga.id_pracownika =? AND pracownik_usluga.id_uslugi =?"));
             statements.put("getAllAccountsBasicDataWithTag", connection.prepareStatement("{call pobierz_dane_uzytkownikow_typu(?)}"));

@@ -410,6 +410,47 @@ public class DataSource {
         exeStatement.executeQuery();
     }
 
+    //2. Edytuj pracownika
+    public void editWorkerDB(HashMap<String, String> parameters) throws DBReadWriteException, SQLException, ParseException {
+
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("editWorker_P");
+
+        System.out.println(parameters.get("p_id_pracownika"));
+
+        exeStatement.setInt(1, Integer.parseInt(parameters.get("p_id_pracownika")));
+        exeStatement.setString(2, parameters.get("p_nazwisko"));
+        exeStatement.setString(3, parameters.get("p_ulica"));
+        exeStatement.setString(4, parameters.get("p_kod_pocztowy"));
+        exeStatement.setString(5, parameters.get("p_miejscowowsc"));
+        exeStatement.setInt(6, Integer.parseInt(parameters.get("p_telefon")));
+        exeStatement.setString(7, parameters.get("p_e_mail"));
+        exeStatement.setString(8, parameters.get("p_certyfikaty"));
+        exeStatement.setString(9, parameters.get("p_haslo"));
+        exeStatement.executeQuery();
+    }
+
+    //2.1 Edytuj ksiazeczke zdrowia pracownika
+    public void editWorkersBookDB(HashMap<String, String> parameters) throws DBReadWriteException, SQLException, ParseException {
+
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("editWorkerBook_P");
+
+        exeStatement.setInt(1, Integer.parseInt(parameters.get("p_id_ksiazeczki")));
+        exeStatement.setBoolean(2, Boolean.parseBoolean(parameters.get("p_rozrusznik_serca")));
+        exeStatement.setBoolean(3, Boolean.parseBoolean(parameters.get("p_hermofilia")));
+        exeStatement.setBoolean(4, Boolean.parseBoolean(parameters.get("p_luszczyca")));
+        exeStatement.setString(5, parameters.get("p_alergia"));
+        exeStatement.setString(6, parameters.get("p_przebarwienie"));
+        exeStatement.setString(7, parameters.get("p_choroba_zakazna"));
+        exeStatement.setString(8, parameters.get("p_zaburzenia_ukrwienia"));
+        exeStatement.setString(9, parameters.get("p_opryszczka"));
+        exeStatement.setString(10, parameters.get("p_goraczka"));
+        exeStatement.setString(11, parameters.get("p_oslabienie"));
+        exeStatement.setBoolean(12, Boolean.parseBoolean(parameters.get("p_ciaza")));
+        exeStatement.executeQuery();
+    }
+
     public void CheckUserDB(String e_mail) throws SQLException{
         PreparedStatement exeStatement;
         ResultSet resultSet;
