@@ -65,7 +65,7 @@ public class ControllerAccount extends HttpServlet {
                 case "nieobecnosc_upload": accPage.addContent("../P_Pracownik/add_absence.jsp"); break;
                 case "wizyty": break;
                 case "produkty": break;
-                case "raporty": break;
+                case "raporty": accPage.addContent("../P_Pracownik/raports_manager.jsp"); break;
                 case "sklep_online": break;
                 default: break;
             }

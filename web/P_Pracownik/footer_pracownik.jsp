@@ -28,7 +28,7 @@
                         <li><a href="#">Wydarzenia</a></li>
                         <li><a href="../ControllerAccount?page=aktualnosci">Aktualności</a></li>
                         <li><a href="#">Produkty</a></li>
-                        <li><a href="#">Raporty</a></li>
+                        <li><a href="../ControllerAccount?page=raporty">Raporty</a></li>
                     </ul>
                 </div>
                 <div class="col-sm-4 col-md-3 item">
