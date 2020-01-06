@@ -68,11 +68,7 @@ public class User {
     }
 
     public boolean register(HashMap<String, String> parameters) throws SQLException, ParseException, DBReadWriteException {
-        ResultSet resultQuery = dataSource.getUserDB(parameters.get("e-mail"));
-
-        if(resultQuery.next())
-            return false;
-
+        dataSource.CheckUserDB(parameters.get("e-mail"));
         dataSource.createClientDB(parameters);
         return true;
     }

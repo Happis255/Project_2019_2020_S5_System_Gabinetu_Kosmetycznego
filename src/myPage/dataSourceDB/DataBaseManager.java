@@ -32,8 +32,18 @@ public class DataBaseManager {
                     "from konto kt join klient kl on kt.id_konta=kl.id_konta where kl.id_klienta = ?"));
             statements.put("getPracownikAccountData", connection.prepareStatement("select kt.* " +
                     "from konto kt join pracownik pr on kt.id_konta=pr.id_konta where pr.id_pracownika = ?"));
+            statements.put("createWorker_p", connection.prepareStatement("{call utworz_pracownika(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}"));
             statements.put("getPracownik", connection.prepareStatement("select * from pracownik where id_pracownika=?"));
+            statements.put("getAllWorkers", connection.prepareStatement("select * from pracownik where pracownik.e_mail != '-'"));
+            statements.put("usunPracownika_p", connection.prepareStatement("{call usun_pracownik(?)}"));
+            statements.put("usunaKartePracownika_p", connection.prepareStatement("{call usun_ksiazeczka_zdrowia(?)}"));
+            statements.put("usunKonto_p", connection.prepareStatement("{call usun_konto(?)}"));
+            statements.put("setServiceWorker", connection.prepareStatement("{call nadaj_uprawnienie_uslugowe(?, ?)}"));
+            statements.put("checkServiceWorker", connection.prepareStatement("select * from pracownik_usluga where pracownik_usluga.id_pracownika =? AND pracownik_usluga.id_uslugi =?"));
             statements.put("getAllAccountsBasicDataWithTag", connection.prepareStatement("{call pobierz_dane_uzytkownikow_typu(?)}"));
+
+            /* Zarzadzanie ksiazeczka zdrowia pracownika */
+            statements.put("pobierz_ksiazeczkeZdrowiaID_P", connection.prepareStatement("{call pobierz_ksiazeczke(?)}"));
 
             /* Zarządzanie aktualnosciami */
             statements.put("pobierz_dzisiaj_aktualnosci_P", connection.prepareStatement("{call pobierz_dzisiaj_aktualnosci()}"));
@@ -46,10 +56,11 @@ public class DataBaseManager {
             statements.put("createEvent_P", connection.prepareStatement("{call dodaj_wydarzenie(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}"));
 
             /* Zarządzanie usługą gabinetu */
-            statements.put("pobierz_UslugiGabinetu_p", connection.prepareStatement("SELECT * FROM usluga ORDER BY usluga.typ_uslugi DESC"));
+            statements.put("pobierz_UslugiGabinetu_p", connection.prepareStatement("SELECT * FROM usluga WHERE usluga.opis != 'usługa nie jest wykonywana' ORDER BY usluga.typ_uslugi DESC"));
             statements.put("pobierz_max_id_uslugi_p", connection.prepareStatement("select MAX(id_uslugi) as 'id_uslugi' from usluga"));
             statements.put("removeServiceID_P", connection.prepareStatement("{call usun_usluge(?)}"));
             statements.put("createService_p", connection.prepareStatement("{call dodaj_usluge(?,?,?,?,?,?,?)}"));
+            statements.put("pobierz_UslugiGabinetuDlaPracownika_p", connection.prepareStatement("SELECT usluga.* FROM usluga JOIN pracownik_usluga ON usluga.id_uslugi = pracownik_usluga.id_uslugi WHERE pracownik_usluga.id_pracownika = ? AND usluga.opis != 'usługa nie jest wykonywana'"));
 
             /* Zarządzanie nieobecnosciami */
             statements.put("zglos_nieobecnosc_P", connection.prepareStatement("{call zglos_nieobecnosc(?,?,?,?,?)}"));

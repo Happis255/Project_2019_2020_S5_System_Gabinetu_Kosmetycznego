@@ -3,7 +3,7 @@ package myPage.data.dataBase;
 import java.util.Date;
 
 public class PracownikData extends UserData{
-    private int pesel;
+    private long pesel;
     private Date data_zatrudnienia;
     private String certyfikaty;
     private int id_ksiazeczki;
@@ -19,8 +19,7 @@ public class PracownikData extends UserData{
             int telefon,
             String e_mail,
             int id_konta,
-
-            int pesel,
+            long pesel,
             Date data_zatrudnienia,
             String certyfikaty,
             int id_ksiazeczki
@@ -44,7 +43,7 @@ public class PracownikData extends UserData{
         this.id_ksiazeczki = id_ksiazeczki;
     }
 
-    public int getPesel() {
+    public long getPesel() {
         return pesel;
     }
 

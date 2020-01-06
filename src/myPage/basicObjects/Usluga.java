@@ -40,4 +40,8 @@ public class Usluga {
     public void removeId(int a) throws SQLException {
         dataSource.removeServiceID(a);
     }
+
+    public void getUslugiPracownikaID(int id) throws SQLException {
+        this.uslugi = dataSource.getAllServicesForWorker(id);
+    }
 }
