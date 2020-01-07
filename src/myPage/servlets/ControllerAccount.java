@@ -70,6 +70,7 @@ public class ControllerAccount extends HttpServlet {
                 case "produkty": break;
                 case "raporty": accPage.addContent("../P_Pracownik/raports_manager.jsp"); break;
                 case "sklep_online": break;
+                case "raport_upload": accPage.addContent("../P_Pracownik/add_raport.jsp"); break;
                 default: break;
             }
 

@@ -831,7 +831,7 @@ public class DataSource {
             throw new DBReadWriteException(result + " rows add with execute: createClientCard_P");
     }
 
-    //Pobierz raporty pracownika
+    //Raporty
     public LinkedList<RaportData> getRaportsWorker(int id) throws SQLException {
 
         LinkedList<RaportData> raport_list = new LinkedList<>();
@@ -845,15 +845,42 @@ public class DataSource {
         while(resultSet.next()){
 
             raport_list.push(new RaportData(
-                    resultSet.getInt("id_raportu"),
+                    resultSet.getInt("id_sprawozdania"),
                     DateTransformer.getJavaDate(resultSet.getDate("data")),
-                    resultSet.getString("tytul_raportu"),
-                    resultSet.getString("typ_odpadow"),
-                    resultSet.getInt("ilos"),
-                    resultSet.getInt("koszt"),
+                    resultSet.getString("tytul"),
+                    resultSet.getString("typ"),
+                    resultSet.getString("tresc"),
                     resultSet.getInt("id_pracownika")));
         }
-        
+
         return raport_list;
+    }
+
+    public void removeRaportID(int id_sprawozdania) throws SQLException {
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("removeRaport");
+
+        exeStatement.setInt(1, id_sprawozdania);
+        exeStatement.executeQuery();
+    }
+
+    public void createRaportDB(HashMap<String, String> parameters) throws DBReadWriteException, SQLException, ParseException {
+        PreparedStatement exeStatement;
+        int result;
+
+        exeStatement = statements.get("dodaj_raport");
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date data = dateFormat.parse(parameters.get("data"));
+        exeStatement.setString(1, parameters.get("typ"));
+        exeStatement.setString(2, "tytul");
+        exeStatement.setString(3, "tresc");
+        exeStatement.setDate(4, DateTransformer.getSqlDate(data));
+        exeStatement.setInt(5, Integer.parseInt(parameters.get("id_pracownika")));
+
+
+        result = exeStatement.executeUpdate();
+        if(result != 1)
+            throw new DBReadWriteException(result + " rows add with execute: dodaj_raport");
     }
 }

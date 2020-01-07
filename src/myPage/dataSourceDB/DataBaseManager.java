@@ -94,6 +94,8 @@ public class DataBaseManager {
 
             /*Raporty odpadów*/
             statements.put("pobierz_raporty_pracownika_p", connection.prepareStatement("{call pobierz_raporty_pracownika(?)}"));
+            statements.put("removeRaport", connection.prepareStatement("{call usun_sprawozdanie(?)}"));
+            statements.put("dodaj_raport", connection.prepareStatement("{call sprawozdanie(?, ?, ?, ?, ?)}"));
 
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();

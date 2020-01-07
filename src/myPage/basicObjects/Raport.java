@@ -4,6 +4,8 @@ import myPage.dataSourceDB.DataSource;
 import myPage.exceptions.DBReadWriteException;
 
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.util.HashMap;
 import java.util.LinkedList;
 
 public class Raport {
@@ -27,5 +29,13 @@ public class Raport {
 
     public RaportData raportyPop() {
         return raporty.pop();
+    }
+
+    public void removeId(int id) throws SQLException {
+        dataSource.removeRaportID(id);
+    }
+
+    public void register(HashMap<String, String> parameters) throws SQLException, ParseException, DBReadWriteException {
+        dataSource.createRaportDB(parameters);
     }
 }

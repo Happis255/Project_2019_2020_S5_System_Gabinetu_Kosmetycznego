@@ -4,21 +4,19 @@ import java.util.Date;
 
 public class RaportData {
 
-    private int id_raportu;
+    private int id_sprawozdania;
     private Date data;
-    private String tytul_raportu;
-    private String typ_odpadow;
-    private int ilosc;
-    private int koszt;
+    private String tytul;
+    private String typ;
+    private String tresc;
     private int id_pracownika;
 
-    public RaportData(int id_raportu, Date data, String tytul_raportu, String typ_odpadow, int ilosc, int koszt, int id_pracownika){
-        this.id_raportu = id_raportu;
+    public RaportData(int id_sprawozdania, Date data, String tytul, String typ, String tresc ,int id_pracownika){
+        this.id_sprawozdania = id_sprawozdania;
         this.data = data;
-        this.tytul_raportu = tytul_raportu;
-        this.typ_odpadow = typ_odpadow;
-        this.ilosc = ilosc;
-        this.koszt = koszt;
+        this.tytul = tytul;
+        this.tresc = tresc;
+        this.typ = typ;
         this.id_pracownika = id_pracownika;
     }
 
@@ -27,27 +25,23 @@ public class RaportData {
         return data;
     }
 
-    public int getId_raportu() {
-        return  id_raportu;
+    public int getId_sprawozdania() {
+        return  id_sprawozdania;
     }
 
     public int getId_pracownika(){
         return id_pracownika;
     }
 
-    public String getTytul_raportu() {
-        return tytul_raportu;
+    public String getTytul() {
+        return tytul;
     }
 
-    public String getTyp_odpadow() {
-        return typ_odpadow;
+    public String getTyp() {
+        return typ;
     }
 
-    public int getIlosc() {
-        return ilosc;
-    }
-
-    public int getKoszt() {
-        return koszt;
+    public String getTresc() {
+        return tresc;
     }
 }
