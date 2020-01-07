@@ -23,7 +23,7 @@
                 <li class="nav-item" role="presentation"><a class="nav-link" href="../ControllerAccount?page=pracownicy" style="color:#ffffff;">Pracownicy</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">Wydarzenia</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">Wizyty</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">Promocje</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="../ControllerAccount?page=promocje" style="color:#ffffff;">Promocje</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="../ControllerAccount?page=aktualnosci" style="color:#ffffff;">Aktualności</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="../ControllerAccount?page=nieobecnosci" style="color:#ffffff;">Nieobecności</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="../ControllerAccount?page=uslugi" style="color:#ffffff;">Usługi</a></li>

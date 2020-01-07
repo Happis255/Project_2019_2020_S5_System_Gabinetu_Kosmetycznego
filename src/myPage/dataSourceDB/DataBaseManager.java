@@ -43,6 +43,12 @@ public class DataBaseManager {
             statements.put("checkServiceWorker", connection.prepareStatement("select * from pracownik_usluga where pracownik_usluga.id_pracownika =? AND pracownik_usluga.id_uslugi =?"));
             statements.put("getAllAccountsBasicDataWithTag", connection.prepareStatement("{call pobierz_dane_uzytkownikow_typu(?)}"));
 
+            /* Statusy */
+            statements.put("pobierz_statusy_DB", connection.prepareStatement("SELECT * FROM status_klienta"));
+            statements.put("dodaj_status_DB", connection.prepareStatement("{call utworz_status_klienta(?,?,?,?,?)}"));
+            statements.put("zlicz_status_ID_DB", connection.prepareStatement("SELECT COUNT(*) as liczba FROM KLIENT WHERE id_statusu =?"));
+            statements.put("edytuj_status_DB", connection.prepareStatement("{call edytuj_status(?,?,?,?,?,?)}"));
+
             /* Sprzet */
             statements.put("pobierz_sprzet_gabinet_p", connection.prepareStatement("SELECT * FROM sprzet"));
             statements.put("usun_sprzet_id_p", connection.prepareStatement("{call usun_sprzet(?)}"));

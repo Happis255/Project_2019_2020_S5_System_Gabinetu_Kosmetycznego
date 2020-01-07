@@ -213,6 +213,75 @@ public class DataSource {
         exeStatement.executeUpdate();
     }
 
+    /* Pobieranie statusów */
+    public LinkedList<StatusData> getStatusy() throws SQLException {
+
+        LinkedList<StatusData> status_list = new LinkedList<>();
+        PreparedStatement exeStatement;
+        ResultSet resultSet;
+
+        exeStatement = statements.get("pobierz_statusy_DB");
+
+        resultSet = exeStatement.executeQuery();
+
+        while(resultSet.next()){
+            status_list.push(new StatusData(
+                resultSet.getInt("id_statusu"),
+                resultSet.getInt("punkty_od"),
+                resultSet.getInt("punkty_do"),
+                resultSet.getInt("znizka_proc"),
+                resultSet.getInt("znizka_kwot"),
+                resultSet.getString("nazwa")
+            ));
+        }
+        return status_list;
+    }
+
+    /* Dodanie statusu */
+    public void addStatusDB(HashMap<String, String> parameters) throws SQLException {
+
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("dodaj_status_DB");
+
+        exeStatement.setInt(1, Integer.parseInt(parameters.get("p_punkty_od")));
+        exeStatement.setInt(2, Integer.parseInt(parameters.get("p_punkty_do")));
+        exeStatement.setInt(3, Integer.parseInt(parameters.get("p_znizka_proc")));
+        exeStatement.setInt(4, Integer.parseInt(parameters.get("p_znizka_kwot")));
+        exeStatement.setString(5, parameters.get("p_nazwa"));
+
+        exeStatement.executeUpdate();
+    }
+
+    /* Pobieranie liczby użytkowników danego statusu*/
+    public int countStatus(int id_statusu) throws SQLException {
+        int count = 0;
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("zlicz_status_ID_DB");
+        exeStatement.setInt(1, id_statusu);
+        ResultSet resultSet = exeStatement.executeQuery();
+
+        if (resultSet.next())
+            count = resultSet.getInt("liczba");
+
+        return count;
+    }
+
+    /* Edycja statusu */
+    public void editStatusDB(HashMap<String, String> parameters) throws SQLException {
+        PreparedStatement exeStatement;
+
+        exeStatement = statements.get("edytuj_status_DB");
+
+        exeStatement.setInt(1, Integer.parseInt(parameters.get("p_id")));
+        exeStatement.setInt(2, Integer.parseInt(parameters.get("p_punkty_od")));
+        exeStatement.setInt(3, Integer.parseInt(parameters.get("p_punkty_do")));
+        exeStatement.setInt(4, Integer.parseInt(parameters.get("p_znizka_proc")));
+        exeStatement.setInt(5, Integer.parseInt(parameters.get("p_znizka_kwot")));
+        exeStatement.setString(6, parameters.get("p_nazwa"));
+
+        exeStatement.executeUpdate();
+    }
+
     /* Metoda do pobierania nieobecności z bazy danych wybranego pracownika */
     public LinkedList<NieobecnoscData> getAbsenceWorker(int id) throws SQLException {
 
@@ -669,6 +738,7 @@ public class DataSource {
         } else
             throw new NoResultsException();
     }
+
     public ResultSet getClientAccountDB(int idKlienta) throws SQLException{
         PreparedStatement exeStatement;
         ResultSet resultSet;
