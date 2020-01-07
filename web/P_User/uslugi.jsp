@@ -42,7 +42,7 @@
 
             if (usluga.uslugiEmpty() == true) {
                 out.println(
-                        "<section id=\"uslugi\" class=\"bg-light-gray\" style=\"margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:800px;margin-right:auto;margin-left:auto;border-radius:20px;margin-bottom:314px;\">" +
+                        "<section id=\"uslugi\" class=\"bg-light-gray\" style=\"margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:800px;margin-right:auto;margin-left:auto;border-radius:20px;margin-bottom:281px;\">" +
                         "<h2 class=\"text-center\" style=\"height:44px;\">Cennik usług</h2>" +
                         "<h5 class=\"text-center\" style=\"height:auto;margin-right:50px;margin-left:50px;font-weight:200;margin-bottom:31px;\">W poniższej sekcji znajdziesz wszystkie&nbsp;<br>usługi wykonywane w naszym gabinecie!</h5>" +
                         "<hr id=\"linia\" style=\"color: white;border: solid 2px;border-radius: 100px;width:635px;margin-top:auto;margin-bottom:29px;\">" +

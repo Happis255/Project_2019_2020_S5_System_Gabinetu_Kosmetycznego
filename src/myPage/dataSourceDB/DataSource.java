@@ -1,5 +1,6 @@
 package myPage.dataSourceDB;
 
+import myPage.basicObjects.Sprzet;
 import myPage.data.dataBase.*;
 import myPage.exceptions.DBReadWriteException;
 import myPage.exceptions.NoResultsException;
@@ -162,6 +163,54 @@ public class DataSource {
         exeStatement3 = statements.get("usunKonto_p");
         exeStatement3.setInt(1, a);
         exeStatement.executeQuery();
+    }
+
+    /* Zwracanie listy sprzętów używanych w gabinecie kosmetycznym */
+    public LinkedList<SprzetData> getAllMachinesDB() throws SQLException {
+
+        LinkedList<SprzetData> sprzety = new LinkedList<>();
+        PreparedStatement exeStatement;
+        ResultSet resultSet;
+        exeStatement = statements.get("pobierz_sprzet_gabinet_p");
+        resultSet = exeStatement.executeQuery();
+
+        while(resultSet.next()){
+            if (!resultSet.getString("uwagi").equals("Sprzęt nie jest już w użytku"))
+                sprzety.push(new SprzetData(
+                        resultSet.getInt("id_sprzetu"),
+                        resultSet.getString("nazwa_sprzetu"),
+                        resultSet.getString("opis_sprzetu"),
+                        DateTransformer.getJavaDate(resultSet.getDate("data_zakupu")),
+                        DateTransformer.getJavaDate(resultSet.getDate("data_gwarancji")),
+                        resultSet.getString("uwagi")));
+        }
+        return sprzety;
+    }
+
+    /* Dodawanie sprzetu */
+    public void addMachine (HashMap<String, String> parameters) throws SQLException, ParseException {
+
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("dodaj_sprzet_p");
+
+        exeStatement.setString(1, parameters.get("gwarancja"));
+        exeStatement.setString(2, parameters.get("opis"));
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date data_zakupu = dateFormat.parse(parameters.get("data_zakupu"));
+        Date data_gwarancji = dateFormat.parse(parameters.get("gwarancja"));
+        exeStatement.setDate(3, DateTransformer.getSqlDate(data_zakupu));
+        exeStatement.setDate(4, DateTransformer.getSqlDate(data_gwarancji));
+        exeStatement.setString(5, parameters.get("uwagi"));
+
+        exeStatement.executeUpdate();
+    }
+
+    /* Usuwanie sprzetu */
+    public void removeMachine (int id) throws SQLException {
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("usun_sprzet_id_p");
+        exeStatement.setInt(1, id);
+        exeStatement.executeUpdate();
     }
 
     /* Metoda do pobierania nieobecności z bazy danych wybranego pracownika */
@@ -546,50 +595,42 @@ public class DataSource {
     }
 
     public void createClientDB(HashMap<String, String> parameters) throws DBReadWriteException, SQLException, ParseException {
-        PreparedStatement exeStatement;
-        int result;
 
-        exeStatement = statements.get("createClientCard_P");
-        exeStatement.setBoolean(1, false);
-        exeStatement.setBoolean(2, false);
-        exeStatement.setBoolean(3, false);
-        exeStatement.setBoolean(4, false);
-        exeStatement.setBoolean(5, false);
-        exeStatement.setBoolean(6, false);
-        exeStatement.setBoolean(7, false);
-        exeStatement.setBoolean(8, false);
-        exeStatement.setBoolean(9, false);
-        exeStatement.setString(10, "-");
-        exeStatement.setString(11, "-");
-        exeStatement.setString(12, "-");
-        exeStatement.setString(13, "-");
-        result = exeStatement.executeUpdate();
-        if(result != 1)
-            throw new DBReadWriteException(result + " rows add with execute: createClientCard_P");
+        PreparedStatement exeStatement1 = statements.get("createClientCard_P");
+        exeStatement1.setBoolean(1, false);
+        exeStatement1.setBoolean(2, false);
+        exeStatement1.setBoolean(3, false);
+        exeStatement1.setBoolean(4, false);
+        exeStatement1.setBoolean(5, false);
+        exeStatement1.setBoolean(6, false);
+        exeStatement1.setBoolean(7, false);
+        exeStatement1.setBoolean(8, false);
+        exeStatement1.setBoolean(9, false);
+        exeStatement1.setString(10, "-");
+        exeStatement1.setString(11, "-");
+        exeStatement1.setString(12, "-");
+        exeStatement1.setString(13, "-");
+        exeStatement1.executeUpdate();
 
-        exeStatement = statements.get("createClient_P");
-        exeStatement.setString(1, parameters.get("e-mail"));
-        exeStatement.setString(2, parameters.get("haslo"));
-        exeStatement.setString(3, parameters.get("imie"));
-        exeStatement.setString(4, parameters.get("nazwisko"));
-        exeStatement.setString(5, parameters.get("ulica"));
-        exeStatement.setString(6, parameters.get("kod"));
-        exeStatement.setString(7, parameters.get("miejscowosc"));
+        PreparedStatement exeStatement2 = statements.get("createClient_P");
+        exeStatement2.setString(1, parameters.get("e-mail"));
+        exeStatement2.setString(2, parameters.get("haslo"));
+        exeStatement2.setString(3, parameters.get("imie"));
+        exeStatement2.setString(4, parameters.get("nazwisko"));
+        exeStatement2.setString(5, parameters.get("ulica"));
+        exeStatement2.setString(6, parameters.get("kod"));
+        exeStatement2.setString(7, parameters.get("miejscowosc"));
 
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = dateFormat.parse(parameters.get("data-urodzenia"));
 
-        exeStatement.setDate(8, DateTransformer.getSqlDate(date));
-        exeStatement.setInt(9, Integer.parseInt(parameters.get("telefon")));
-        result = exeStatement.executeUpdate();
-        if(result != 1)
-            throw new DBReadWriteException(result + " rows add with execute: createClient_P");
+        exeStatement2.setDate(8, DateTransformer.getSqlDate(date));
+        exeStatement2.setInt(9, Integer.parseInt(parameters.get("telefon")));
+        exeStatement2.executeUpdate();
 
-        exeStatement = statements.get("assignClientCard_P");
-        exeStatement.setString(1, parameters.get("e-mail"));
-        result = exeStatement.executeUpdate();
-        if(result != 1)
-            throw new DBReadWriteException(result + " rows add with execute: assignClientCard_P");
+        PreparedStatement exeStatement3 = statements.get("assignClientCard_P");
+        exeStatement3.setString(1, parameters.get("e-mail"));
+        exeStatement3.executeUpdate();
     }
 
     public ResultSet getClientDB(int idKlienta) throws SQLException{
@@ -738,7 +779,7 @@ public class DataSource {
                     DateTransformer.getJavaDate(resultSet.getDate("data")),
                     resultSet.getString("tytul_raportu"),
                     resultSet.getString("typ_odpadow"),
-                    resultSet.getInt("ilosc"),
+                    resultSet.getInt("ilos"),
                     resultSet.getInt("koszt"),
                     resultSet.getInt("id_pracownika")));
         }

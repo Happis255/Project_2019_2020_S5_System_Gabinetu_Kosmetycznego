@@ -25,6 +25,9 @@
 
             <%
                 SessionData sessionData = (SessionData)session.getAttribute("userData");
+
+                System.out.println(sessionData.getId());
+
                 Raport raport = new Raport();
                 RaportData temp;
                 try {

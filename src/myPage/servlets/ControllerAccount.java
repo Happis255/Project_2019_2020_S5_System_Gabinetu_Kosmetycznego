@@ -48,7 +48,8 @@ public class ControllerAccount extends HttpServlet {
                 case "edit_book": accPage.addContent("../P_Administrator/workerBook_editor.jsp"); break;
                 case "produkty": break;
                 case "raporty": break;
-                case "sprzet": break;
+                case "sprzet": accPage.addContent("../P_Administrator/machine_manager.jsp"); break;
+                case "dodaj_sprzet": accPage.addContent("../P_Administrator/add_machine.jsp"); break;
                 case "odpady": break;
                 case "sklep_online": break;
                 default: break;

@@ -67,10 +67,9 @@ public class User {
         session.invalidate();
     }
 
-    public boolean register(HashMap<String, String> parameters) throws SQLException, ParseException, DBReadWriteException {
+    public void register(HashMap<String, String> parameters) throws SQLException, ParseException, DBReadWriteException {
         dataSource.CheckUserDB(parameters.get("e-mail"));
         dataSource.createClientDB(parameters);
-        return true;
     }
 
     public UserData getData() throws SQLException {

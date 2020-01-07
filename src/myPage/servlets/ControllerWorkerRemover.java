@@ -29,7 +29,7 @@ public class ControllerWorkerRemover extends HttpServlet {
             request.setAttribute("message", resultMessage);
             getServletContext().getRequestDispatcher("/index_result.jsp").forward(request, response);
 
-        } catch (SQLException e) {
+        } catch (SQLException  | NullPointerException e) {
             e.printStackTrace();
             resultMessage = "<h2 class=\"text-center\" style=\"height:53px;\">Wystąpił błąd podczas usuwania pracownika.</h2><h5 class=\"text-center\" style=\"height:99px;margin-right:50px;margin-left:50px;\"><brProsimy o skontaktowanie się z administratorem systemu<br>bądź zgłoszenie błędu.<br></h5> <div class=\"form-group\"><a href=\"ControllerAccount?page=pracownicy\"><button class=\"btn btn-primary\" type=\"submit\" style=\"margin:0;width:265px;margin-left:267px;\">Powrót do pracowników</button></a></div>";
             request.setAttribute("message", resultMessage);

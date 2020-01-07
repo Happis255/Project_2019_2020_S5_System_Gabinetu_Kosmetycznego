@@ -34,7 +34,6 @@ public class ControllerRegister extends HttpServlet {
 
         Encrypter pws = new Encrypter();
         User user = new User();
-        boolean ret;
         HashMap<String, String> parameters = new HashMap<>();
 
         parameters.put("e-mail", request.getParameter("e-mail"));
@@ -48,23 +47,17 @@ public class ControllerRegister extends HttpServlet {
         parameters.put("miejscowosc", request.getParameter("miejscowosc"));
 
         try {
-            ret = user.register(parameters);
-        } catch (SQLException | ParseException | DBReadWriteException e) {
-            ErrorMessage errorMessage = new ErrorMessage(e);
-            session.setAttribute("errorMessage", errorMessage);
-            response.sendRedirect("errorPage.jsp");
-            return;
-        }
+            user.register(parameters);
+            System.out.println("Konto zostało założone");
+            String resultMessage = "<h2 class=\"text-center\" style=\"height:53px;\">Utworzenie konta powiodło się!</h2><h5 class=\"text-center\" style=\"height:99px;margin-right:50px;margin-left:50px;\"><br>Zaloguj się do systemu, a następnie.<br>prosimy o wypełnienie karty informacyjnej.<br></h5> <div class=\"form-group\"><a href=\"P_User/logowanie.jsp\"><button class=\"btn btn-primary\" type=\"submit\" style=\"margin:0;width:265px;margin-left:267px;\">Strona logowania</button></a></div>";
+            request.setAttribute("message", resultMessage);
+            getServletContext().getRequestDispatcher("/index_result.jsp").forward(request, response);
 
-        if(!ret)
+        } catch (SQLException | ParseException | DBReadWriteException  | NullPointerException e) {
             System.out.println("Użytkownik o podanym mailu juz istnieje");
             String resultMessage = "<h2 class=\"text-center\" style=\"height:53px;\">Utworzenie konta nie powiodło się!</h2><h5 class=\"text-center\" style=\"height:99px;margin-right:50px;margin-left:50px;\"><br>W bazie klientów podany adres e-mail jest zajęty.<br>Prosimy o skorzystanie z innego adresu.<br></h5> <div class=\"form-group\"><a href=\"P_User/rejestracja.jsp\"><button class=\"btn btn-primary\" type=\"submit\" style=\"margin:0;width:265px;margin-left:267px;\">Powrót do rejestracji</button></a></div>";
             request.setAttribute("message", resultMessage);
-            getServletContext().getRequestDispatcher("/index_result.jsp").forward(
-                request, response);
-
-    }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+            getServletContext().getRequestDispatcher("/index_result.jsp").forward(request, response);
+        }
     }
 }

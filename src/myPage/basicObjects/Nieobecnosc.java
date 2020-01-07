@@ -31,6 +31,7 @@ public class Nieobecnosc {
     }
 
     public void getPracownikNieobecnosc(int id) throws SQLException, DBReadWriteException {
+        System.out.println(id);
         this.uslugi = dataSource.getAbsenceWorker(id);
     }
 

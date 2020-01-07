@@ -23,7 +23,7 @@
                 <div class="col-sm-4 col-md-3 item">
                     <h3>Przejdź do</h3>
                     <ul>
-                        <li><a href="#">Panel główny</a></li>
+                        <li><a href="../ControllerAccount?page=konto">Panel główny</a></li>
                         <li><a href="#">Powiadomienia</a></li>
                         <li><a href="../ControllerAccount?page=pracownicy">Pracownicy</a></li>
                         <li><a href="#">Wizyty</a></li>

@@ -57,7 +57,7 @@ public class ControllerAbsenceAdder extends HttpServlet {
             request.setAttribute("message", resultMessage);
             getServletContext().getRequestDispatcher("/index_result.jsp").forward(request, response);
 
-        } catch (SQLException | ParseException | DBReadWriteException e) {
+        } catch (SQLException | ParseException | DBReadWriteException | NullPointerException e) {
             e.printStackTrace();
             resultMessage = "<h2 class=\"text-center\" style=\"height:53px;\">Wystąpił błąd podczas zgłaszania nieobecności.</h2><h5 class=\"text-center\" style=\"height:99px;margin-right:50px;margin-left:50px;\"><br>Prosimy o sprawdzenie, czy wprowadzone zostały prawidłowe dane<br>bądź czy nie wybrano błędnej daty.<br></h5> <div class=\"form-group\"><a href=\"ControllerAccount?page=nieobecnosci\"><button class=\"btn btn-primary\" type=\"submit\" style=\"margin:0;width:265px;margin-left:267px;\">Powrót do nieobecności</button></a></div>";
             request.setAttribute("message", resultMessage);

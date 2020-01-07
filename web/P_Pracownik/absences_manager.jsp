@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
     <section id="nieobecnosci_pracownik" class="bg-light-gray" style="margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:1140px;margin-right:auto;margin-left:auto;border-radius:20px;margin-bottom:30px;">
-        <form action="${pageContext.request.contextPath}/RemoveAbsence" method="post">
+        <form action="${pageContext.request.contextPath}/ControllerAbsenceRemover" method="post">
             <h2 class="text-center" style="height:79px;">Nieobecności</h2>
             <h5 class="text-center" style="height:21px;margin-right:50px;margin-left:50px;">W poniższej sekcji znajdują się wszystkie zgłoszone przez Ciebie nieobecności.</h5>
             <h6 class="text-center" id="informacja" style="height:44px;margin-right:50px;margin-left:50px;font-weight: 100;">Zaznacz wybraną nieobecność, by ją następnie usunąć, bądź dodaj nową.</h6>
