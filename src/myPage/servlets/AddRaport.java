@@ -20,8 +20,8 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.HashMap;
 
-@WebServlet(name =  "kontroler sluzacy do dodawania raportów w gabinecie", urlPatterns = { "/AddRaport" })
-public class ControllerRaportAdder extends HttpServlet {
+@WebServlet("/AddRaport")
+public class AddRaport extends HttpServlet {
     private HttpSession session;
     private String resultMessage = "";
 
@@ -31,16 +31,6 @@ public class ControllerRaportAdder extends HttpServlet {
 
         session = request.getSession();
         SessionData sessionData = (SessionData) session.getAttribute("userData");
-        Pracownik pracownik = null;
-
-        if (sessionData.getAccoutType() != TypKonta.KLIENT) {
-            pracownik = new Pracownik(sessionData.getId());
-        } else {
-            ErrorMessage errorMessage = new ErrorMessage(new ErrorException("brak dostepu do tej operacji"));
-            session.setAttribute("errorMessage", errorMessage);
-            response.sendRedirect("errorPage.jsp");
-            return;
-        }
 
         Raport raport = new Raport();
         HashMap<String, String> parameters = new HashMap<>();

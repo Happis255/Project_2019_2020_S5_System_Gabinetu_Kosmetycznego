@@ -97,6 +97,7 @@ public class DataBaseManager {
             statements.put("pobierz_raporty_pracownika_p", connection.prepareStatement("{call pobierz_raporty_pracownika(?)}"));
             statements.put("removeRaport", connection.prepareStatement("{call usun_sprawozdanie(?)}"));
             statements.put("dodaj_raport", connection.prepareStatement("{call sprawozdanie(?, ?, ?, ?, ?)}"));
+            statements.put("pobierz_raporty", connection.prepareStatement("SELECT * FROM sprawozdanie"));
 
             /* Produkty */
             statements.put("get_MaxId_produkt_sprzedazowyDB_P", connection.prepareStatement("SELECT MAX(produkt_sprzedaz.id_produktu_s) as max_id FROM produkt_sprzedaz"));
