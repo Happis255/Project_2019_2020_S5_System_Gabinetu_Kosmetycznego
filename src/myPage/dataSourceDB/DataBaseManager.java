@@ -97,6 +97,28 @@ public class DataBaseManager {
             statements.put("removeRaport", connection.prepareStatement("{call usun_sprawozdanie(?)}"));
             statements.put("dodaj_raport", connection.prepareStatement("{call sprawozdanie(?, ?, ?, ?, ?)}"));
 
+            /* Produkty */
+            statements.put("get_MaxId_produkt_sprzedazowyDB_P", connection.prepareStatement("SELECT MAX(produkt_sprzedaz.id_produktu_s) as max_id FROM produkt_sprzedaz"));
+            statements.put("createProductSell_P", connection.prepareStatement("{call dodaj_produkt_sprzedaz(?,?,?,?)}"));
+            statements.put("setNoPromoProduct_P", connection.prepareStatement("UPDATE `produkt_sprzedaz` SET `id_promocji` = NULL WHERE `produkt_sprzedaz`.`id_produktu_s` = ?"));
+            statements.put("setPromoProductSell_P", connection.prepareStatement("{call promocja_produkt(?,?)}"));
+            statements.put("createProductUse_P", connection.prepareStatement("{call dodaj_produkt_uzytkowy(?,?,?,?,?)}"));
+            statements.put("getAllSelling_P", connection.prepareStatement("SELECT * FROM produkt_sprzedaz ORDER BY produkt_sprzedaz.nazwa"));
+            statements.put("getAllUsing_P", connection.prepareStatement("SELECT * FROM produkt_uzytkowy ORDER BY produkt_uzytkowy.nazwa"));
+            statements.put("edit_sellingProductsDB_P", connection.prepareStatement("{call ile_produkt_sprzedaz(?, ?)}"));
+            statements.put("edit_usingProductsDB_P", connection.prepareStatement("{call ile_produkt_uzytkowy(?, ?)}"));
+            statements.put("removeUsingProductIDDB_P", connection.prepareStatement("UPDATE produkt_uzytkowy SET produkt_uzytkowy.opis = \"produkt usuniety\" WHERE produkt_uzytkowy.id_produktu = ?"));
+            statements.put("removeSellingProductIDDB_P", connection.prepareStatement("UPDATE produkt_sprzedaz SET produkt_sprzedaz.opis = \"produkt usuniety\" WHERE produkt_sprzedaz.id_produktu_s = ?"));
+
+            /* Promocje */
+            statements.put("add_promoDB_P", connection.prepareStatement("{call dodaj_promocje(?,?,?,?,?,?,?)}"));
+            statements.put("get_all_promoDB_P", connection.prepareStatement("SELECT * FROM promocja ORDER BY promocja.nazwa"));
+            statements.put("remove_promo_IDDB_P", connection.prepareStatement("{call usun_promocje(?)}"));
+            statements.put("get_promo_IDDB_P", connection.prepareStatement("SELECT * FROM promocja WHERE promocja.id_promocji = ?"));
+            statements.put("get_all_promo_workerIDDB_P", connection.prepareStatement("SELECT * FROM promocja WHERE promocja.id_pracownika = ? ORDER BY promocja.nazwa"));
+            statements.put("edit_promo_P", connection.prepareStatement("{call edytuj_promocje(?,?,?,?,?,?,?,?)}"));
+            statements.put("check_promo_today_P", connection.prepareStatement("SELECT * FROM promocja WHERE CURRENT_DATE > promocja.data_od AND CURRENT_DATE < promocja.data_do AND promocja.id_promocji = ?"));
+
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }

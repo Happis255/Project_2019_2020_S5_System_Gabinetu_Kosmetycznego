@@ -782,7 +782,6 @@ public class DataSource {
     }
 
     /* Nadaje możliwość wykonywania usługi pracownikowi */
-
     public void addServiceWorkerDB(int id_prac, int id_usl) throws SQLException {
 
         PreparedStatement exeStatement;
@@ -882,5 +881,303 @@ public class DataSource {
         result = exeStatement.executeUpdate();
         if(result != 1)
             throw new DBReadWriteException(result + " rows add with execute: dodaj_raport");
+    }
+
+    /* Produkty znajdujące się w gabinecie kosmetycznym */
+
+    //Pobieranie max id produktu - potrzebne dla ustawiania nazwy grafiki produktu
+    public int get_MaxId_produkt_sprzedazowyDB() throws SQLException {
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("get_MaxId_produkt_sprzedazowyDB_P");
+
+        int wynik = 0;
+        ResultSet resultSet = exeStatement.executeQuery();
+
+        if(resultSet.next()){
+            wynik = resultSet.getInt("max_id");
+        }
+        return wynik;
+    }
+
+    //1.0 Tworzenie produktu na sprzedaż
+    public void createProductSell(HashMap<String, String> parameters) throws SQLException {
+
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("createProductSell_P");
+
+        exeStatement.setString(1, parameters.get("P_NAZWA"));
+        exeStatement.setString(2, parameters.get("P_OPIS"));
+        exeStatement.setInt(3, Integer.parseInt(parameters.get("P_CENA")));
+        exeStatement.setInt( 4, Integer.parseInt(parameters.get("P_ILOSC")));
+        exeStatement.executeQuery();
+    }
+
+    //2.0 Tworzenie produktu uslugowego
+    public void createProductUse(HashMap<String, String> parameters) throws SQLException {
+
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("createProductUse_P");
+
+        exeStatement.setString(1, parameters.get("P_NAZWA"));
+        exeStatement.setString(2, parameters.get("P_OPIS"));
+        exeStatement.setInt(3, Integer.parseInt(parameters.get("P_CENA")));
+        exeStatement.setInt( 4, Integer.parseInt(parameters.get("P_ILOSC")));
+        exeStatement.setString(5, parameters.get("P_KOLOR"));
+        exeStatement.executeUpdate();
+    }
+
+    //3.0 Zaladowanie produktow sprzedazowych
+    public LinkedList<ProduktSprzedazowyData> getAllSelling() throws SQLException {
+
+        LinkedList<ProduktSprzedazowyData> lista = new LinkedList<>();
+
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("getAllSelling_P");
+
+        ResultSet resultSet = exeStatement.executeQuery();
+        int id = 0;
+
+        while(resultSet.next()){
+            id = resultSet.getInt("id_promocji");
+            if (id == 0){
+                /* Produkt posiada promocje */
+                if ( !resultSet.getString("opis").equals("produkt usuniety") )
+                lista.push(new ProduktSprzedazowyData(
+                        resultSet.getInt("id_produktu_s"),
+                        resultSet.getString("nazwa"),
+                        resultSet.getString("opis"),
+                        resultSet.getInt("cena"),
+                        resultSet.getInt("ilosc")
+            ));
+            } else {
+                /* Produkt nie posiada promocje */
+                if ( !resultSet.getString("opis").equals("produkt usuniety") )
+                lista.push(new ProduktSprzedazowyData(
+                        resultSet.getInt("id_produktu_s"),
+                        resultSet.getString("nazwa"),
+                        resultSet.getString("opis"),
+                        resultSet.getInt("cena"),
+                        resultSet.getInt("ilosc"),
+                        id
+                ));
+            }
+        }
+        return lista;
+    }
+
+    //4.0 Zaladowanie produktow uzytkowych
+    public LinkedList<ProduktUzytkowyData> getAllUsing() throws SQLException {
+
+        LinkedList<ProduktUzytkowyData> lista = new LinkedList<>();
+
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("getAllUsing_P");
+
+        ResultSet resultSet = exeStatement.executeQuery();
+        while (resultSet.next()) {
+            /* Produkt posiada promocje */
+            if ( !resultSet.getString("opis").equals("produkt usuniety") )
+            lista.push(new ProduktUzytkowyData(
+                    resultSet.getInt("id_produktu"),
+                    resultSet.getString("nazwa"),
+                    resultSet.getString("opis"),
+                    resultSet.getInt("cena"),
+                    resultSet.getInt("ilosc"),
+                    resultSet.getString("kolor")
+            ));
+        }
+        return lista;
+    }
+
+    //5.0 Edytowanie ilosci produktow na sprzedaz badz przypisywanie nowej promocji
+    public void edit_sellingProductsDB(HashMap<String, String> parameters) throws SQLException {
+
+        /* Sprawdzamy, czy trzba zmienić ilosc produktow */
+        if (Integer.parseInt(parameters.get("p_ilosc")) > -1){
+            /* Zmieniana bedzie ilość */
+            PreparedStatement exeStatement;
+            exeStatement = statements.get("edit_sellingProductsDB_P");
+            exeStatement.setInt(1, Integer.parseInt(parameters.get("P_ID_PRODUKTU_S")));
+            exeStatement.setInt(2, Integer.parseInt(parameters.get("p_ilosc")));
+            exeStatement.executeUpdate();
+        }
+
+        /* Została wybrana promocja - nalezy ją uwzględnić */
+        PreparedStatement exeStatement2;
+
+        if (parameters.get("P_ID_PROMOCJI").equals("null")){
+            exeStatement2 = statements.get("setNoPromoProduct_P");
+            exeStatement2.setInt(1, Integer.parseInt(parameters.get("P_ID_PRODUKTU_S")));
+        }
+        else{
+            exeStatement2 = statements.get("setPromoProductSell_P");
+            exeStatement2.setInt(1, Integer.parseInt(parameters.get("P_ID_PROMOCJI")));
+            exeStatement2.setInt(2, Integer.parseInt(parameters.get("P_ID_PRODUKTU_S")));
+        }
+        exeStatement2.executeUpdate();
+    }
+
+    //6.0 Zmiana ilosci produktow uzytkowych
+    public void edit_usingProductsDB(HashMap<String, String> parameters) throws SQLException {
+
+        if (Integer.parseInt(parameters.get("p_ilosc")) > -1){
+            PreparedStatement exeStatement;
+            exeStatement = statements.get("edit_usingProductsDB_P");
+            exeStatement.setInt(1, Integer.parseInt(parameters.get("P_ID_PRODUKTU_S")));
+            exeStatement.setInt(2, Integer.parseInt(parameters.get("p_ilosc")));
+            exeStatement.executeUpdate();
+        }
+    }
+
+    //7.0 Usuwanie produktu uzytkowego
+    public void removeUsingProductIDDB(int a) throws SQLException {
+
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("removeUsingProductIDDB_P");
+        exeStatement.setInt(1, a);
+        exeStatement.executeUpdate();
+    }
+
+    //8.0 Usuwanie produktu sprzedazowego
+    public void removeSellingProductIDDB(int a) throws SQLException {
+
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("removeSellingProductIDDB_P");
+        exeStatement.setInt(1, a);
+        exeStatement.executeUpdate();
+    }
+
+    /* Promocje uslugowe i zabiegowe */
+
+    //1 Dodawanie promocji
+    public void add_promoDB(HashMap<String, String> parameters) throws SQLException, ParseException {
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("add_promoDB_P");
+
+        exeStatement.setString(1, parameters.get("P_NAZWA"));
+        exeStatement.setString(2, parameters.get("P_OPIS"));
+        exeStatement.setInt(3, Integer.parseInt(parameters.get("P_ZNIZKA_PROC")));
+        exeStatement.setInt( 4, Integer.parseInt(parameters.get("P_ZNIZKA_KWOT")));
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date_od = dateFormat.parse(parameters.get("P_DATA_OD"));
+        Date date_do = dateFormat.parse(parameters.get("P_DATA_DO"));
+
+        exeStatement.setDate(5, DateTransformer.getSqlDate(date_od));
+        exeStatement.setDate(6, DateTransformer.getSqlDate(date_do));
+        exeStatement.setInt(7, Integer.parseInt(parameters.get("P_ID_PRACOWNIKA")));
+        exeStatement.executeUpdate();
+    }
+
+    //2 Wczytywanie promocji
+    public LinkedList<PromocjaData> get_all_promoDB() throws SQLException {
+        LinkedList<PromocjaData> lista = new LinkedList<>();
+
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("get_all_promoDB_P");
+
+        ResultSet resultSet = exeStatement.executeQuery();
+
+        while (resultSet.next()) {
+            if (!resultSet.getString("opis").equals("promocja nieaktualna"))
+            lista.push(new PromocjaData(
+                    resultSet.getInt("id_promocji"),
+                    resultSet.getString("nazwa"),
+                    resultSet.getString("opis"),
+                    resultSet.getInt("znizka_proc"),
+                    resultSet.getInt("znizka_kwot"),
+                    DateTransformer.getJavaDate(resultSet.getDate("data_od")),
+                    DateTransformer.getJavaDate(resultSet.getDate("data_do")),
+                    resultSet.getInt("id_pracownika")
+            ));
+        }
+        return lista;
+    }
+
+    //3 Usuwanie promocji
+    public void remove_promo_IDDB(int a) throws SQLException {
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("remove_promo_IDDB_P");
+        exeStatement.setInt(1, a);
+        exeStatement.executeUpdate();
+    }
+
+    //4 Pobieranie wybranej promocji
+    public PromocjaData get_promo_IDDB(int a) throws SQLException {
+
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("get_promo_IDDB_P");
+        exeStatement.setInt(1, a);
+
+        ResultSet resultSet = exeStatement.executeQuery();
+        PromocjaData wczytana = null;
+
+        if (resultSet.next()) {
+            wczytana = new PromocjaData(
+                    resultSet.getInt("id_promocji"),
+                    resultSet.getString("nazwa"),
+                    resultSet.getString("opis"),
+                    resultSet.getInt("znizka_proc"),
+                    resultSet.getInt("znizka_kwot"),
+                    DateTransformer.getJavaDate(resultSet.getDate("data_od")),
+                    DateTransformer.getJavaDate(resultSet.getDate("data_do")),
+                    resultSet.getInt("id_pracownika")
+            );
+        }
+        return wczytana;
+    }
+
+    //5 Pobieranie promocji dodanych przez pracownika
+    public LinkedList<PromocjaData> get_all_promo_workerIDDB(int id_pracownika) throws SQLException {
+        LinkedList<PromocjaData> lista = new LinkedList<>();
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("get_all_promo_workerIDDB_P");
+        exeStatement.setInt(1, id_pracownika);
+
+        ResultSet resultSet = exeStatement.executeQuery();
+
+        while (resultSet.next()) {
+
+            lista.push(new PromocjaData(
+                    resultSet.getInt("id_promocji"),
+                    resultSet.getString("nazwa"),
+                    resultSet.getString("opis"),
+                    resultSet.getInt("znizka_proc"),
+                    resultSet.getInt("znizka_kwot"),
+                    DateTransformer.getJavaDate(resultSet.getDate("data_od")),
+                    DateTransformer.getJavaDate(resultSet.getDate("data_do")),
+                    resultSet.getInt("id_pracownika")
+            ));
+        }
+        return lista;
+    }
+
+    //Edycja promocji
+    public void edit_promo(HashMap<String, String> parameters) throws SQLException, ParseException {
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("edit_promo_P");
+
+        exeStatement.setString(1, parameters.get("P_NAZWA"));
+        exeStatement.setString(2, parameters.get("P_OPIS"));
+        exeStatement.setInt(3, Integer.parseInt(parameters.get("P_ZNIZKA_PROC")));
+        exeStatement.setInt( 4, Integer.parseInt(parameters.get("P_ZNIZKA_KWOT")));
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date_od = dateFormat.parse(parameters.get("P_DATA_OD"));
+        Date date_do = dateFormat.parse(parameters.get("P_DATA_DO"));
+
+        exeStatement.setDate(5, DateTransformer.getSqlDate(date_od));
+        exeStatement.setDate(6, DateTransformer.getSqlDate(date_do));
+        exeStatement.setInt(7, Integer.parseInt(parameters.get("P_ID_PRACOWNIKA")));
+        exeStatement.setInt(8, Integer.parseInt(parameters.get("P_ID_PROMOCJI")));
+        exeStatement.executeUpdate();
+    }
+
+    public boolean checkPromoToday_DB(int id_promocji) throws SQLException {
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("check_promo_today_P");
+        exeStatement.setInt(1, id_promocji);
+        ResultSet resultSet = exeStatement.executeQuery();
+        return resultSet.next();
     }
 }

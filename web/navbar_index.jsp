@@ -19,7 +19,7 @@
              id="navcol-1">
             <ul class="nav navbar-nav ml-auto">
                 <li class="nav-item" role="presentation"><a class="nav-link" href="P_User/uslugi.jsp" style="color:#ffffff;">Oferta zabiegowa</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">Oferta sprzedażowa</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="P_User/oferta_zakupowa.jsp" style="color:#ffffff;">Oferta sprzedażowa</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="P_User/aktualnosci.jsp" style="color:#ffffff;">Aktualności</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="index.jsp#kontakt" style="color:#ffffff;">Kontakt</a></li>
                 <% if(session.getAttribute("userData") == null){ %>
