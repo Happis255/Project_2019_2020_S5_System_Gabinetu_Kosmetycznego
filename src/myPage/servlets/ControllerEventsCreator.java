@@ -30,7 +30,7 @@ public class ControllerEventsCreator extends HttpServlet {
         Wydarzenie event = new Wydarzenie();
         HashMap<String, String> parameters = new HashMap<>();
 
-        parameters.put("typWydarzenia", request.getParameter("typWydarzenia"));
+        parameters.put("typWydarzenia", request.getParameter("typ"));
         parameters.put("nazwa", request.getParameter("nazwa"));
         parameters.put("opis", request.getParameter("opis"));
         parameters.put("miejscowosc", request.getParameter("miejscowosc"));

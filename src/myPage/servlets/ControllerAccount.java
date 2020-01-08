@@ -29,7 +29,9 @@ public class ControllerAccount extends HttpServlet {
 
         if(sessionData.getAccoutType() == TypKonta.ADMINISTRATOR) {
             switch (page) {
-                case "powiadomienia": break;
+                case "zadania_gosp": accPage.addContent("../P_Administrator/zadania_manager.jsp"); break;
+                case "przypisz_zadanie": accPage.addContent("../P_Administrator/give_zadanie.jsp"); break;
+                case "dodaj_zadanie": accPage.addContent("../P_Administrator/add_zadanie.jsp"); break;
                 case "konto": accPage.addContent("../P_Administrator/accountData_administrator.jsp"); break;
                 case "pracownicy": accPage.addContent("../P_Administrator/workers_manager.jsp"); break;
                 case "wydarzenia": accPage.addContent("../P_Administrator/event_manager.jsp"); break;
@@ -67,7 +69,7 @@ public class ControllerAccount extends HttpServlet {
 
         }else if(sessionData.getAccoutType() == TypKonta.PRACOWNIK) {
             switch(page){
-                case "powiadomienia": break;
+                case "zadania_peek": accPage.addContent("../P_Pracownik/zadania_peek.jsp"); break;
                 case "konto": accPage.addContent("../P_Pracownik/accountData_pracownik.jsp"); break;
                 case "wydarzenia": accPage.addContent("../P_Administrator/event_manager.jsp"); break;
                 case "aktualnosci": accPage.addContent("../P_Pracownik/news_manager.jsp"); break;

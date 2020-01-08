@@ -17,10 +17,10 @@
     <div class="container"><a class="navbar-brand" href="../index.jsp"><img src="../assets/img/LOGO Administrator.png" style="margin:-46px;"></a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span></button>
         <div class="collapse navbar-collapse"
              id="navcol-1">
-            <ul class="nav navbar-nav ml-auto" style="max-width:720px;">
-                <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">Powiadomienia</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="../ControllerAccount?page=konto" style="color:#ffffff;">Konto</a></li>
+            <ul class="nav navbar-nav ml-auto" style="max-width:721px;">
+                <li class="nav-item" role="presentation"><a class="nav-link" href="../ControllerAccount?page=konto" style="color:#ffffff;margin-left: 28px;">Konto</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="../ControllerAccount?page=pracownicy" style="color:#ffffff;">Pracownicy</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="../ControllerAccount?page=zadania_gosp" style="color:#ffffff;">Zadania Gosp.</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="../ControllerAccount?page=wydarzenia" style="color:#ffffff;">Wydarzenia</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">Wizyty</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="../ControllerAccount?page=promocje" style="color:#ffffff;">Promocje</a></li>
@@ -31,7 +31,7 @@
                 <li class="nav-item" role="presentation"><a class="nav-link" href="../ControllerAccount?page=raporty" style="color:#ffffff;">Raporty</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="../ControllerAccount?page=sprzet" style="color:#ffffff;">Sprzęt</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">Odpady</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">Sklep online</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">Baza klientów</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="../UserLogin" style="color:#ffffff;">Wyloguj</a></li>
             </ul>
         </div>

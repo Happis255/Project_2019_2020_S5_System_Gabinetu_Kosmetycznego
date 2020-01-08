@@ -46,7 +46,7 @@ public class ControllerEventsSingIn extends HttpServlet {
                 idEventu = Integer.parseInt(spis_id[i]);
                 event.singInForEvent(idPracownika, idEventu);
             }
-            resultMessage = "<h2 class=\"text-center\" style=\"height:53px;\">Zostałeś zapisany na wybrane wydarzenia!</h2> <div class=\"form-group\"><a href=\"ControllerAccount?page=wydarzenia\"><button class=\"btn btn-primary\" type=\"submit\" style=\"margin:0;width:265px;margin-left:267px;\">Powrót do wydarzeń</button></a></div>";
+            resultMessage = "<h2 class=\"text-center\" style=\"height:53px;\">Pomyślnie zapisałeś się na szkolenie!</h2><h5 class=\"text-center\" style=\"height:99px;margin-right:50px;margin-left:50px;\"><br>Zmiany powinny być już widoczne.<br></h5> <div class=\"form-group\"><a href=\"ControllerAccount?page=wydarzenia\"><button class=\"btn btn-primary\" type=\"submit\" style=\"margin:0;width:265px;margin-left:267px;\">Powrót do wydarzeń</button></a></div>";
             request.setAttribute("message", resultMessage);
             getServletContext().getRequestDispatcher("/index_result.jsp").forward(request, response);
 

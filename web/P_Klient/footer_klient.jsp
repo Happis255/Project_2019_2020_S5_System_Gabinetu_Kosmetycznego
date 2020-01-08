@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Huber
-  Date: 25.11.2019
-  Time: 15:35
-  To change this template use File | Settings | File Templates.
---%>'
 <%
     response.setCharacterEncoding("UTF-8");
     request.setCharacterEncoding("UTF-8");
@@ -23,8 +16,8 @@
                 <div class="col-sm-4 col-md-3 item">
                     <h3>Przejdź do</h3>
                     <ul>
-                        <li><a href="../ControllerAccount?page=konto#">Panel główny</a></li>
-                        <li><a href="../ControllerAccount?page=konto#">Konto</a></li>
+                        <li><a href="../ControllerAccount?page=konto">Panel główny</a></li>
+                        <li><a href="../ControllerAccount?page=konto_edit">Edytuj dane</a></li>
                         <li><a href="../ControllerAccount?page=twojebonusy">Twoje bonusy</a></li>
                         <li><a href="../P_User/oferta_zakupowa.jsp">Sklep</a></li>
                     </ul>

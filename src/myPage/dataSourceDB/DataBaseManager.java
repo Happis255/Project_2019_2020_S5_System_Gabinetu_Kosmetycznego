@@ -99,6 +99,13 @@ public class DataBaseManager {
             statements.put("dodaj_raport", connection.prepareStatement("{call sprawozdanie(?, ?, ?, ?, ?)}"));
             statements.put("pobierz_raporty", connection.prepareStatement("SELECT * FROM sprawozdanie"));
 
+            /* Zadania gospodarcze */
+            statements.put("get_all_zadania_P", connection.prepareStatement("select * from zadanie_gospodarcze"));
+            statements.put("get_all_zadania_pracownik_P", connection.prepareStatement("select * from zadanie_gospodarcze where zadanie_gospodarcze.id_pracownika = ?"));
+            statements.put("add_zadanieGospodarcze_P", connection.prepareStatement("{call zadanie_gosp(?, ?, ?, ?, ?)}"));
+            statements.put("assigneZadanie_DB_P", connection.prepareStatement("UPDATE zadanie_gospodarcze SET zadanie_gospodarcze.id_pracownika = ? WHERE zadanie_gospodarcze.id_zadania = ?"));
+            statements.put("removeZadanie_P", connection.prepareStatement("DELETE FROM zadanie_gospodarcze WHERE zadanie_gospodarcze.id_zadania = ?"));
+
             /* Produkty */
             statements.put("get_MaxId_produkt_sprzedazowyDB_P", connection.prepareStatement("SELECT MAX(produkt_sprzedaz.id_produktu_s) as max_id FROM produkt_sprzedaz"));
             statements.put("createProductSell_P", connection.prepareStatement("{call dodaj_produkt_sprzedaz(?,?,?,?)}"));
