@@ -16,9 +16,9 @@
                 <div class="col-sm-4 col-md-3 item">
                     <h3>Przejdź do</h3>
                     <ul>
-                        <li><a href="#">Panel główny</a></li>
-                        <li><a href="#">Powiadomienia</a></li>
-                        <li><a href="#">Konto</a></li>
+                        <li><a href="#../ControllerAccount?page=konto">Konto</a></li>
+                        <li><a href="../ControllerAccount?page=zadania_peek">Zadania gospodarcze</a></li>
+                        <li><a href="../ControllerAccount?page=nieobecnosci">Nieobecności</a></li>
                         <li><a href="#">Wizyty</a></li>
                     </ul>
                 </div>
@@ -27,7 +27,7 @@
                     <ul>
                         <li><a href="#">Wydarzenia</a></li>
                         <li><a href="../ControllerAccount?page=aktualnosci">Aktualności</a></li>
-                        <li><a href="#">Produkty</a></li>
+                        <li><a href="../ControllerAccount?page=produkty">Produkty</a></li>
                         <li><a href="../ControllerAccount?page=raporty">Raporty</a></li>
                     </ul>
                 </div>

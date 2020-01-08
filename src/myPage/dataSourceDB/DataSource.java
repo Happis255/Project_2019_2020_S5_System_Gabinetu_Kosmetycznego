@@ -1240,4 +1240,77 @@ public class DataSource {
         if(result != 1)
             throw new DBReadWriteException(result + " rows add with execute: createClientCard_P");
     }
+
+    //Zadania gospodarcze
+    public LinkedList<ZadanieGospodarczeData> getAllZadania_DB() throws SQLException {
+
+        LinkedList<ZadanieGospodarczeData> lista = new LinkedList<>();
+
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("get_all_zadania_P");
+        ResultSet resultSet = exeStatement.executeQuery();
+
+        while (resultSet.next()) {
+                lista.push(new ZadanieGospodarczeData(
+                        resultSet.getInt("id_zadania"),
+                        resultSet.getString("tytul_zadania"),
+                        resultSet.getString("opis_zadania"),
+                        DateTransformer.getJavaDate(resultSet.getDate("data_od")),
+                        DateTransformer.getJavaDate(resultSet.getDate("data_do")),
+                        resultSet.getInt("id_pracownika")
+                ));
+        }
+        return lista;
+    }
+
+    public LinkedList<ZadanieGospodarczeData> getAllZadaniaID_DB(int id_pracownika) throws SQLException {
+        LinkedList<ZadanieGospodarczeData> lista = new LinkedList<>();
+
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("get_all_zadania_pracownik_P");
+        exeStatement.setInt(1, id_pracownika);
+
+        ResultSet resultSet = exeStatement.executeQuery();
+
+        while (resultSet.next()) {
+            lista.push(new ZadanieGospodarczeData(
+                    resultSet.getInt("id_zadania"),
+                    resultSet.getString("tytul_zadania"),
+                    resultSet.getString("opis_zadania"),
+                    DateTransformer.getJavaDate(resultSet.getDate("data_od")),
+                    DateTransformer.getJavaDate(resultSet.getDate("data_do")),
+                    resultSet.getInt("id_pracownika")
+            ));
+        }
+        return lista;
+    }
+
+    public void addNewZadanie_DB(HashMap<String, String> parameters) throws ParseException, SQLException {
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("add_zadanieGospodarcze_P");
+        exeStatement.setString(1, parameters.get("P_TYTUL_ZADANIA"));
+        exeStatement.setString(2, parameters.get("P_OPIS_ZADANIA"));
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date_od = dateFormat.parse(parameters.get("P_DATA_OD"));
+        Date date_do = dateFormat.parse(parameters.get("P_DATA_DO"));
+        exeStatement.setDate(3, DateTransformer.getSqlDate(date_od));
+        exeStatement.setDate(4, DateTransformer.getSqlDate(date_do));
+        exeStatement.setInt(5, Integer.parseInt(parameters.get("P_ID_PRACOWNIKA")));
+        exeStatement.executeUpdate();
+    }
+
+    public void assigneZadanie_DB(int id_zadania, int id_pracownika) throws SQLException {
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("assigneZadanie_DB_P");
+        exeStatement.setInt(1, id_pracownika);
+        exeStatement.setInt(2, id_zadania);
+        exeStatement.executeUpdate();
+    }
+
+    public void dropZadanie_DB(int id_zadania) throws SQLException {
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("removeZadanie_P");
+        exeStatement.setInt(1, id_zadania);
+        exeStatement.executeUpdate();
+    }
 }

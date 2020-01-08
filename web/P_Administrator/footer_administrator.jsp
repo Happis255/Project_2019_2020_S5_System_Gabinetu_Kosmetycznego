@@ -24,7 +24,7 @@
                     <h3>Przejdź do</h3>
                     <ul>
                         <li><a href="../ControllerAccount?page=konto">Panel główny</a></li>
-                        <li><a href="#">Powiadomienia</a></li>
+                        <li><a href="../ControllerAccount?page=sprzet">Sprzet</a></li>
                         <li><a href="../ControllerAccount?page=pracownicy">Pracownicy</a></li>
                         <li><a href="#">Wizyty</a></li>
                     </ul>
@@ -34,7 +34,7 @@
                     <ul>
                         <li><a href="../ControllerAccount?page=wydarzenia">Wydarzenia</a></li>
                         <li><a href="../ControllerAccount?page=aktualnosci">Aktualności</a></li>
-                        <li><a href="#">Promocje</a></li>
+                        <li><a href="../ControllerAccount?page=promocje">Promocje</a></li>
                         <li><a href="#">Raporty</a></li>
                     </ul>
                 </div>

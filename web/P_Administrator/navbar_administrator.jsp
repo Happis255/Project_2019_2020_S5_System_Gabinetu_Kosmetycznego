@@ -18,9 +18,9 @@
         <div class="collapse navbar-collapse"
              id="navcol-1">
             <ul class="nav navbar-nav ml-auto" style="max-width:720px;">
-                <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">Powiadomienia</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="../ControllerAccount?page=konto" style="color:#ffffff;">Konto</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="../ControllerAccount?page=pracownicy" style="color:#ffffff;">Pracownicy</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="../ControllerAccount?page=zadania_gosp" style="color:#ffffff;">Zadania Gosp.</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="../ControllerAccount?page=wydarzenia" style="color:#ffffff;">Wydarzenia</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">Wizyty</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="../ControllerAccount?page=promocje" style="color:#ffffff;">Promocje</a></li>
