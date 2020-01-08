@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 @WebServlet("/RemoveRaport")
-public class ControllerRemoveRaport extends HttpServlet {
+public class RemoveRaport extends HttpServlet {
 
     private HttpSession session;
     private String resultMessage = "";

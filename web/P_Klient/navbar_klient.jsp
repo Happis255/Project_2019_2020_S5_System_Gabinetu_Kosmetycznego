@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Huber
-  Date: 25.11.2019
-  Time: 15:37
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html>
@@ -20,8 +13,8 @@
             <ul class="nav navbar-nav ml-auto">
                 <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">Powiadomienia</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">Wizyty</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">Sklep</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">Twoje bonusy</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="../P_User/oferta_zakupowa.jsp" style="color:#ffffff;">Sklep</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="../ControllerAccount?page=twojebonusy" style="color:#ffffff;">Twoje bonusy</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="../ControllerAccount?page=konto" style="color:#ffffff;">konto</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="../UserLogin" style="color:#ffffff;">wyloguj</a></li>
             </ul>

@@ -38,4 +38,8 @@ public class Raport {
     public void register(HashMap<String, String> parameters) throws SQLException, ParseException, DBReadWriteException {
         dataSource.createRaportDB(parameters);
     }
+
+    public void getRaporty() throws SQLException, DBReadWriteException {
+        this.raporty = dataSource.getRaports();
+    }
 }
