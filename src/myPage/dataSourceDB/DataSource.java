@@ -236,6 +236,30 @@ public class DataSource {
         return status_list;
     }
 
+    public StatusData getStatusyID(int ID) throws SQLException {
+
+        StatusData wynik = null;
+        PreparedStatement exeStatement;
+        ResultSet resultSet;
+
+        exeStatement = statements.get("pobierz_statusy_ID_DB");
+        exeStatement.setInt(1, ID);
+
+        resultSet = exeStatement.executeQuery();
+
+        if(resultSet.next()){
+            wynik = new StatusData(
+                    resultSet.getInt("id_statusu"),
+                    resultSet.getInt("punkty_od"),
+                    resultSet.getInt("punkty_do"),
+                    resultSet.getInt("znizka_proc"),
+                    resultSet.getInt("znizka_kwot"),
+                    resultSet.getString("nazwa")
+            );
+        }
+        return wynik;
+    }
+
     /* Dodanie statusu */
     public void addStatusDB(HashMap<String, String> parameters) throws SQLException {
 

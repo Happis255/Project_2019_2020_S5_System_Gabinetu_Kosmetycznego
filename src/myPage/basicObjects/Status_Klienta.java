@@ -29,6 +29,10 @@ public class Status_Klienta {
         statusy = dataSource.getStatusy();
     }
 
+    public StatusData getStatusyID(int ID) throws SQLException {
+        return dataSource.getStatusyID(ID);
+    }
+
     public void addStatus(HashMap<String, String> parameters) throws SQLException {
         dataSource.addStatusDB(parameters);
     }
