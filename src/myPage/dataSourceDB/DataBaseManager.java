@@ -97,6 +97,7 @@ public class DataBaseManager {
             statements.put("pobierz_raporty_pracownika_p", connection.prepareStatement("{call pobierz_raporty_pracownika(?)}"));
             statements.put("removeRaport", connection.prepareStatement("{call usun_sprawozdanie(?)}"));
             statements.put("dodaj_raport", connection.prepareStatement("{call sprawozdanie(?, ?, ?, ?, ?)}"));
+            statements.put("pobierz_raporty", connection.prepareStatement("SELECT * FROM sprawozdanie"));
 
             /* Zadania gospodarcze */
             statements.put("get_all_zadania_P", connection.prepareStatement("select * from zadanie_gospodarcze"));
@@ -129,6 +130,7 @@ public class DataBaseManager {
 
             /*zarzadzanie wydarzeniami*/
             statements.put("getAllEvents", connection.prepareStatement("select * from wydarzenie"));
+            statements.put("zapiszPracownikaNaWydarzenie", connection.prepareStatement("INSERT INTO wydarzenie_pracownik(id_wydarzenia, id_pracownika) VALUES (?, ?); "));
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }

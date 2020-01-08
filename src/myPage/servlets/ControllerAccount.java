@@ -58,7 +58,8 @@ public class ControllerAccount extends HttpServlet {
                 case "edit_selling_product": accPage.addContent("../P_Administrator/edit_product_sell.jsp"); break;
                 case "add_usage_product": accPage.addContent("../P_Administrator/add_usage_product.jsp"); break;
                 case "edit_usage_product": accPage.addContent("../P_Administrator/edit_product_use.jsp"); break;
-                case "raporty": break;
+                case "raporty": accPage.addContent("../P_Administrator/raports_manager.jsp"); break;
+                case "raport_upload": accPage.addContent("../P_Administrator/add_raports.jsp"); break;
                 case "sprzet": accPage.addContent("../P_Administrator/machine_manager.jsp"); break;
                 case "dodaj_sprzet": accPage.addContent("../P_Administrator/add_machine.jsp"); break;
                 case "odpady": break;
@@ -70,7 +71,7 @@ public class ControllerAccount extends HttpServlet {
             switch(page){
                 case "zadania_peek": accPage.addContent("../P_Pracownik/zadania_peek.jsp"); break;
                 case "konto": accPage.addContent("../P_Pracownik/accountData_pracownik.jsp"); break;
-                case "wydarzenia": break;
+                case "wydarzenia": accPage.addContent("../P_Administrator/event_manager.jsp"); break;
                 case "aktualnosci": accPage.addContent("../P_Pracownik/news_manager.jsp"); break;
                 case "aktualnosci_upload": accPage.addContent("../P_Pracownik/upload_news.jsp"); break;
                 case "nieobecnosci": accPage.addContent("../P_Pracownik/absences_manager.jsp"); break;
@@ -81,7 +82,7 @@ public class ControllerAccount extends HttpServlet {
                 case "edit_usage_product": accPage.addContent("../P_Pracownik/edit_product_use.jsp"); break;
                 case "raporty": accPage.addContent("../P_Pracownik/raports_manager.jsp"); break;
                 case "sklep_online": break;
-                case "raport_upload": accPage.addContent("../P_Pracownik/add_raport.jsp"); break;
+                case "raport_upload": accPage.addContent("../P_Pracownik/add_raports.jsp"); break;
                 default: break;
             }
 

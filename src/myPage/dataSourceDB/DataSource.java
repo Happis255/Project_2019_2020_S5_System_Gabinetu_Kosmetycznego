@@ -850,6 +850,30 @@ public class DataSource {
         return raport_list;
     }
 
+    public LinkedList<RaportData> getRaports() throws SQLException {
+
+        LinkedList<RaportData> raport_list = new LinkedList<>();
+
+        PreparedStatement exeStatement;
+        ResultSet resultSet;
+        exeStatement = statements.get("pobierz_raporty");
+        resultSet = exeStatement.executeQuery();
+
+        while(resultSet.next()){
+
+            raport_list.push(new RaportData(
+                    resultSet.getInt("id_sprawozdania"),
+                    DateTransformer.getJavaDate(resultSet.getDate("data")),
+                    resultSet.getString("tytul"),
+                    resultSet.getString("typ"),
+                    resultSet.getString("tresc"),
+                    resultSet.getInt("id_pracownika")));
+        }
+
+        return raport_list;
+
+    }
+
     public void removeRaportID(int id_sprawozdania) throws SQLException {
         PreparedStatement exeStatement;
         exeStatement = statements.get("removeRaport");
@@ -867,8 +891,8 @@ public class DataSource {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date data = dateFormat.parse(parameters.get("data"));
         exeStatement.setString(1, parameters.get("typ"));
-        exeStatement.setString(2, "tytul");
-        exeStatement.setString(3, "tresc");
+        exeStatement.setString(2, parameters.get("tytul"));
+        exeStatement.setString(3, parameters.get("tresc"));
         exeStatement.setDate(4, DateTransformer.getSqlDate(data));
         exeStatement.setInt(5, Integer.parseInt(parameters.get("id_pracownika")));
 
@@ -1213,32 +1237,10 @@ public class DataSource {
         return resultSet;
     }
 
-    public void removeEventDB(HashMap<String, String> parameters) throws DBReadWriteException, SQLException, ParseException {
+    public void singInWorkerForEvent(int workerId, int eventId){
         PreparedStatement exeStatement;
-        int result;
-        DateFormat dateFormat;
-        Date date;
+        exeStatement = statements.get("zapiszPracownikaNaWydarzenie");
 
-        exeStatement = statements.get("createEvent_P");
-        exeStatement.setString(1, parameters.get("typWydarzenia"));
-        exeStatement.setString(2, parameters.get("nazwa"));
-        exeStatement.setString(3, parameters.get("opis"));
-        exeStatement.setString(4, parameters.get("miejscowosc"));
-        exeStatement.setString(5, parameters.get("kod_pocztowy"));
-        exeStatement.setString(6, parameters.get("ulica"));
-
-        dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        date = dateFormat.parse(parameters.get("data_od"));
-        exeStatement.setDate(7, DateTransformer.getSqlDate(date));
-        date = dateFormat.parse(parameters.get("data_do"));
-        exeStatement.setDate(8, DateTransformer.getSqlDate(date));
-
-        exeStatement.setInt(9, Integer.parseInt(parameters.get("kosz")));
-        exeStatement.setInt(10, Integer.parseInt(parameters.get("id_pracownika")));
-
-        result = exeStatement.executeUpdate();
-        if(result != 1)
-            throw new DBReadWriteException(result + " rows add with execute: createClientCard_P");
     }
 
     //Zadania gospodarcze

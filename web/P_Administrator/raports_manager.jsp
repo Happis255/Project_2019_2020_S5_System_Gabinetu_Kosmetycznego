@@ -16,7 +16,7 @@
                 Raport raport = new Raport();
                 RaportData temp;
                 try {
-                    raport.getPracownikRaporty(sessionData.getId());
+                    raport.getRaporty();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

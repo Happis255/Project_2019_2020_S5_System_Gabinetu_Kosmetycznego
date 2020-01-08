@@ -25,7 +25,7 @@
                 <div class="col-sm-4 col-md-3 item">
                     <h3>Przejdź do</h3>
                     <ul>
-                        <li><a href="#">Wydarzenia</a></li>
+                        <li><a href="../ControllerAccount?page=wydarzenia">Wydarzenia</a></li>
                         <li><a href="../ControllerAccount?page=aktualnosci">Aktualności</a></li>
                         <li><a href="../ControllerAccount?page=produkty">Produkty</a></li>
                         <li><a href="../ControllerAccount?page=raporty">Raporty</a></li>

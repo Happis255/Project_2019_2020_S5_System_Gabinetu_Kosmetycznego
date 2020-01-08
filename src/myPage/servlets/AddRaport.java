@@ -20,8 +20,8 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.HashMap;
 
-@WebServlet("/ControllerRaportAdder")
-public class ControllerRaportAdder extends HttpServlet {
+@WebServlet("/AddRaport")
+public class AddRaport extends HttpServlet {
     private HttpSession session;
     private String resultMessage = "";
 
@@ -31,12 +31,10 @@ public class ControllerRaportAdder extends HttpServlet {
 
         session = request.getSession();
         SessionData sessionData = (SessionData) session.getAttribute("userData");
-        Pracownik pracownik = null;
 
         Raport raport = new Raport();
         HashMap<String, String> parameters = new HashMap<>();
         System.out.println("Pracownik o id: " + sessionData.getId() + " dodaje raport.");
-
         parameters.put("tytul", request.getParameter("tytul"));
         parameters.put("typ", request.getParameter("typ"));
         parameters.put("data", request.getParameter("data"));

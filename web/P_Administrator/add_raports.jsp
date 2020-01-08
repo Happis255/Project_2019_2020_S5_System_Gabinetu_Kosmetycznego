@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <section id="add_raport" class="bg-light-gray" style="margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:800px;margin-right:auto;margin-left:auto;border-radius:20px;margin-bottom:30px;">
-    <form action="${pageContext.request.contextPath}/ControllerRaportAdder" method="post">
+    <form action="${pageContext.request.contextPath}/AddRaport" method="post">
         <h2 class="text-center" style="height:79px;">Dodaj Raport</h2>
         <h5 class="text-center" style="height:21px;margin-right:50px;margin-left:50px;">Wprowadź dane raportu.</h5>
         <h6 class="text-center" id="Informacja_Upload" style="font-weight:300;height:44px;margin-right:50px;margin-left:50px;">Pamiętaj, by sprawdzić poprawność wprowadzonych danych!</h6>
