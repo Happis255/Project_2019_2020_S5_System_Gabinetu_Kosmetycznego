@@ -1,11 +1,10 @@
-<%@ page import="myPage.exceptions.DBReadWriteException" %>
 <%@ page import="java.sql.SQLException" %>
-<%@ page import="myPage.basicObjects.Usluga" %>
-<%@ page import="myPage.data.dataBase.UslugaData" %>
 <%@ page import="myPage.basicObjects.Wydarzenie" %>
 <%@ page import="myPage.data.dataBase.WydarzenieData" %>
 <%@ page import="myPage.data.others.SessionData" %>
 <%@ page import="myPage.data.others.TypKonta" %>
+<%@ page import="java.text.DateFormat" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -26,7 +25,7 @@
             <thead>
             <tr>
                 <th></th>
-                <th>TYP WYDARZENIA</th>
+                <th>TYP</th>
                 <th>NAZWA</th>
                 <th>OPIS</th>
                 <th>ULICA</th>
@@ -40,6 +39,7 @@
             <tbody>
 
             <%
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 Wydarzenie event = new Wydarzenie();
                 WydarzenieData temp;
 
@@ -54,15 +54,15 @@
 
                     out.println("<tr>" +
                             "<td> <input type=\"Checkbox\" Name=\"do_zapisania\" Value =\"" + temp.getId() + "\"></td>" +
-                            "<td>" + temp.getTypWydarzenia() + "</td>" +
+                            "<td>" + temp.getOpisTypuWydarzenia() + "</td>" +
                             "<td>" + temp.getNazwa() + "</td>" +
                             "<td>" + temp.getOpis() + "</td>" +
                             "<td>" + temp.getUlica() + "</td>" +
                             "<td>" + temp.getKod_pocztowy() + "</td>" +
                             "<td>" + temp.getMiejscowosc() + "</td>" +
-                            "<td>" + temp.getData_od() + "</td>" +
-                            "<td>" + temp.getData_do() + "</td>" +
-                            "<td>" + temp.getKosz() + "</td></tr>");
+                            "<td>" + dateFormat.format(temp.getData_od()) + "</td>" +
+                            "<td>" + dateFormat.format(temp.getData_do()) + "</td>" +
+                            "<td>" + temp.getKosz() + " PLN</td></tr>");
                 }
             %>
 
@@ -71,7 +71,7 @@
                 <a href="#"><button class="btn btn-primary float-none align-self-center" type="submit" style="width:265px;position:static;text-align:center!important;margin-left:437px;margin-top:20px;">Zapisz się na wydarzenie</button></a>
             </form>
         <% if(sessionData.getAccoutType() == TypKonta.ADMINISTRATOR){%>
-            <a href="../ControllerAccount?page=dodaj_wydarzenie"><button class="btn btn-primary float-none align-self-center" type="submit" style="width:265px;position:static;text-align:center!important;margin-left:437px;margin-top:20px;">Dodaj Wydarzenie</button></a>
+            <a href="../ControllerAccount?page=dodaj_wydarzenie"><button class="btn btn-primary float-none align-self-center" type="submit" style="width:265px;position:static;text-align:center!important;margin-left:437px;margin-top:20px;">Dodaj wydarzenie</button></a>
         <% } %>
     </section>
 </html>

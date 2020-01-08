@@ -1205,19 +1205,15 @@ public class DataSource {
         exeStatement.setString(4, parameters.get("miejscowosc"));
         exeStatement.setString(5, parameters.get("kod_pocztowy"));
         exeStatement.setString(6, parameters.get("ulica"));
-
         dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         date = dateFormat.parse(parameters.get("data_od"));
         exeStatement.setDate(7, DateTransformer.getSqlDate(date));
         date = dateFormat.parse(parameters.get("data_do"));
         exeStatement.setDate(8, DateTransformer.getSqlDate(date));
-
         exeStatement.setInt(9, Integer.parseInt(parameters.get("kosz")));
         exeStatement.setInt(10, Integer.parseInt(parameters.get("id_pracownika")));
 
         result = exeStatement.executeUpdate();
-        if(result != 1)
-            throw new DBReadWriteException(result + " rows add with execute: createClientCard_P");
     }
 
     public ResultSet getAllEventsDB() throws SQLException {

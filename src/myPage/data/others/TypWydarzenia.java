@@ -15,13 +15,13 @@ public enum TypWydarzenia {
         String str;
         switch (eventType){
             case KONGRES:
-                str = "KONGRES";
+                str = "Kongres";
                 break;
             case SZKOLENIE:
-                str = "SZKOLENIE";
+                str = "Szkolenie";
                 break;
             case TARGI_KOSMETYCZNE:
-                str = "TARGI_KOSMETYCZNE";
+                str = "Targi kosmetyczne";
                 break;
             default:
                 str = null;

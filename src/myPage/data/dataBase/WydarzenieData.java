@@ -48,6 +48,11 @@ public class WydarzenieData {
         return typWydarzenia;
     }
 
+    public String getOpisTypuWydarzenia() {
+        return TypWydarzenia.getStringVal(this.typWydarzenia);
+    }
+
+
     public String getNazwa() {
         return nazwa;
     }
