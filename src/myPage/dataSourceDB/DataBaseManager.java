@@ -119,6 +119,8 @@ public class DataBaseManager {
             statements.put("edit_promo_P", connection.prepareStatement("{call edytuj_promocje(?,?,?,?,?,?,?,?)}"));
             statements.put("check_promo_today_P", connection.prepareStatement("SELECT * FROM promocja WHERE CURRENT_DATE > promocja.data_od AND CURRENT_DATE < promocja.data_do AND promocja.id_promocji = ?"));
 
+            /*zarzadzanie wydarzeniami*/
+            statements.put("getAllEvents", connection.prepareStatement("select * from wydarzenie"));
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
