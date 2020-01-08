@@ -97,6 +97,8 @@ public class DataBaseManager {
             statements.put("removeRaport", connection.prepareStatement("{call usun_sprawozdanie(?)}"));
             statements.put("dodaj_raport", connection.prepareStatement("{call sprawozdanie(?, ?, ?, ?, ?)}"));
 
+            /*zarzadzanie wydarzeniami*/
+            statements.put("getAllEvents", connection.prepareStatement("select * from wydarzenie"));
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
