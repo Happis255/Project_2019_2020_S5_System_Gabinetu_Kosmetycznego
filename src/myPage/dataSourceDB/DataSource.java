@@ -884,22 +884,13 @@ public class DataSource {
 
     public void createRaportDB(HashMap<String, String> parameters) throws DBReadWriteException, SQLException, ParseException {
         PreparedStatement exeStatement;
-        int result;
-
         exeStatement = statements.get("dodaj_raport");
-
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date data = dateFormat.parse(parameters.get("data"));
         exeStatement.setString(1, parameters.get("typ"));
         exeStatement.setString(2, parameters.get("tytul"));
         exeStatement.setString(3, parameters.get("tresc"));
-        exeStatement.setDate(4, DateTransformer.getSqlDate(data));
+        exeStatement.setDate(4, DateTransformer.getSqlDate(new Date()));
         exeStatement.setInt(5, Integer.parseInt(parameters.get("id_pracownika")));
-
-
-        result = exeStatement.executeUpdate();
-        if(result != 1)
-            throw new DBReadWriteException(result + " rows add with execute: dodaj_raport");
+        exeStatement.executeUpdate();
     }
 
     /* Produkty znajdujące się w gabinecie kosmetycznym */

@@ -37,7 +37,6 @@ public class AddRaport extends HttpServlet {
         System.out.println("Pracownik o id: " + sessionData.getId() + " dodaje raport.");
         parameters.put("tytul", request.getParameter("tytul"));
         parameters.put("typ", request.getParameter("typ"));
-        parameters.put("data", request.getParameter("data"));
         parameters.put("tresc", request.getParameter("tresc"));
         parameters.put("id_pracownika", Integer.toString(sessionData.getId()));
 
@@ -49,7 +48,7 @@ public class AddRaport extends HttpServlet {
 
         } catch (SQLException | ParseException | DBReadWriteException | NullPointerException e) {
             e.printStackTrace();
-            resultMessage = "<h2 class=\"text-center\" style=\"height:53px;\">Wystąpił błąd podczas dodawania raportu.</h2><h5 class=\"text-center\" style=\"height:99px;margin-right:50px;margin-left:50px;\"><br>Prosimy o sprawdzenie, czy wprowadzone zostały prawidłowe dane<br>bądź czy nie wybrano błędnej daty.<br></h5> <div class=\"form-group\"><a href=\"ControllerAccount?page=raporty\"><button class=\"btn btn-primary\" type=\"submit\" style=\"margin:0;width:265px;margin-left:267px;\">Powrót do raportów</button></a></div>";
+            resultMessage = "<h2 class=\"text-center\" style=\"height:53px;\">Wystąpił błąd podczas dodawania raportu.</h2><h5 class=\"text-center\" style=\"height:99px;margin-right:50px;margin-left:50px;\"><br>Prosimy o sprawdzenie, czy wprowadzone zostały prawidłowe dane<br>bądź czy serwer bazy danych jest uruchomiony.<br></h5> <div class=\"form-group\"><a href=\"ControllerAccount?page=raporty\"><button class=\"btn btn-primary\" type=\"submit\" style=\"margin:0;width:265px;margin-left:267px;\">Powrót do raportów</button></a></div>";
             request.setAttribute("message", resultMessage);
             getServletContext().getRequestDispatcher("/index_result.jsp").forward(request, response);
         } catch (Exception e) {
