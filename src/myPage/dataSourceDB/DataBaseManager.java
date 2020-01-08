@@ -99,6 +99,7 @@ public class DataBaseManager {
 
             /*zarzadzanie wydarzeniami*/
             statements.put("getAllEvents", connection.prepareStatement("select * from wydarzenie"));
+            statements.put("zapiszPracownikaNaWydarzenie", connection.prepareStatement("INSERT INTO wydarzenie_pracownik(id_wydarzenia, id_pracownika) VALUES (?, ?); "));
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }

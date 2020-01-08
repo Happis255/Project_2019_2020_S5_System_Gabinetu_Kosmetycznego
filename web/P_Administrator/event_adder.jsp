@@ -1,6 +1,6 @@
 
 <section id="dodawanie_wydarzenia" class="bg-light-gray" style="margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:800px;margin-right:auto;margin-left:auto;border-radius:20px;margin-bottom:30px;">
-<form method="post" action="${pageContext.request.contextPath}/ControllerWorkerCreator">
+<form method="post" action="${pageContext.request.contextPath}/ControllerEventCreator">
     <h2 class="text-center" style="height:79px;">Dodawanie Wydarzenia</h2>
     <h5 class="text-center" style="height:21px;margin-right:50px;margin-left:50px;">Aby dodać wydarzenie, wypełnij poniższe pola.<br><br></h5>
     <div class="form-group"><label style="font-size:17px;margin-left:101px;">Dane Wydarzenia</label>
