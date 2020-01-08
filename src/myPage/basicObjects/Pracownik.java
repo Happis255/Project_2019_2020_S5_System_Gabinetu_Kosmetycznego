@@ -7,12 +7,9 @@ import myPage.dataSourceDB.DataSource;
 import myPage.exceptions.DBReadWriteException;
 import myPage.others.DateTransformer;
 
-import java.math.BigInteger;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.LinkedList;
 

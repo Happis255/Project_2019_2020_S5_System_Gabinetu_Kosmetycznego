@@ -1242,4 +1242,13 @@ public class DataSource {
         exeStatement = statements.get("zapiszPracownikaNaWydarzenie");
 
     }
+
+    /*wizyty*/
+    public ResultSet getVisitsWorkerInDay(int idPracownika, Date dzien) throws SQLException {
+        PreparedStatement exeStatement;
+        ResultSet resultSet;
+        exeStatement = statements.get("getVisitsWorkerInDay");
+        resultSet = exeStatement.executeQuery();
+        return resultSet;
+    }
 }

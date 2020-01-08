@@ -87,7 +87,8 @@ public class ControllerAccount extends HttpServlet {
         } else if(sessionData.getAccoutType() == TypKonta.KLIENT){
             switch(page){
                 case "powiadomienia": break;
-                case "wizty": break;
+                case "wizyty": accPage.addContent("../P_Klient/visits_manager.jsp"); break;
+                case "wizyty_timePick": accPage.addContent("../P_Klient/visits_timePick.jsp"); break;
                 case "twojebonusy": accPage.addContent("../P_Klient/bonusy.jsp"); break;
                 case "konto": accPage.addContent("../P_Klient/accountData_klient.jsp"); break;
                 case "konto_edit": accPage.addContent("../P_Klient/client_editor.jsp"); break;

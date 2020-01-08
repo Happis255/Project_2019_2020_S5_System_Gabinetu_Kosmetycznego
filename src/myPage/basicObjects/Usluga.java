@@ -34,7 +34,7 @@ public class Usluga {
         dataSource.createServiceDB(parameters);
     }
 
-    public void getEverything() throws SQLException, DBReadWriteException {
+    public void getEverything() throws SQLException{
         this.uslugi = dataSource.getAllServicesDB();
     }
     public void removeId(int a) throws SQLException {
