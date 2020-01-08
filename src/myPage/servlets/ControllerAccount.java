@@ -87,8 +87,7 @@ public class ControllerAccount extends HttpServlet {
             switch(page){
                 case "powiadomienia": break;
                 case "wizty": break;
-                case "sklep": break;
-                case "twojebonusy": break;
+                case "twojebonusy": accPage.addContent("../P_Klient/bonusy.jsp"); break;
                 case "konto": accPage.addContent("../P_Klient/accountData_klient.jsp"); break;
                 case "konto_edit": accPage.addContent("../P_Klient/client_editor.jsp"); break;
                 case "card_edit": accPage.addContent("../P_Klient/clientBook_editor.jsp"); break;

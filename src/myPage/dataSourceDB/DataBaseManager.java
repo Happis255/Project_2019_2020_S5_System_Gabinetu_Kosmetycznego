@@ -48,6 +48,7 @@ public class DataBaseManager {
             statements.put("dodaj_status_DB", connection.prepareStatement("{call utworz_status_klienta(?,?,?,?,?)}"));
             statements.put("zlicz_status_ID_DB", connection.prepareStatement("SELECT COUNT(*) as liczba FROM KLIENT WHERE id_statusu =?"));
             statements.put("edytuj_status_DB", connection.prepareStatement("{call edytuj_status(?,?,?,?,?,?)}"));
+            statements.put("pobierz_statusy_ID_DB", connection.prepareStatement("SELECT * FROM status_klienta WHERE status_klienta.id_statusu = ?"));
 
             /* Sprzet */
             statements.put("pobierz_sprzet_gabinet_p", connection.prepareStatement("SELECT * FROM sprzet"));
