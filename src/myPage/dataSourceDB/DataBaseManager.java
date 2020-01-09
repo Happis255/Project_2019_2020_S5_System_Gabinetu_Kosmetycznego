@@ -93,11 +93,15 @@ public class DataBaseManager {
             statements.put("declineAbsenceID_P", connection.prepareStatement("{call odrzuc_nieob(?)}"));
             statements.put("approveAbsenceID_P", connection.prepareStatement("{call potwr_nieob(?)}"));
 
-            /*Raporty odpadów*/
+            /*Raporty, wszystkie*/
             statements.put("pobierz_raporty_pracownika_p", connection.prepareStatement("{call pobierz_raporty_pracownika(?)}"));
             statements.put("removeRaport", connection.prepareStatement("{call usun_sprawozdanie(?)}"));
             statements.put("dodaj_raport", connection.prepareStatement("{call sprawozdanie(?, ?, ?, ?, ?)}"));
             statements.put("pobierz_raporty", connection.prepareStatement("SELECT * FROM sprawozdanie"));
+            statements.put("pobierz_przeglady_pracownika_p", connection.prepareStatement("{call pobierz_przeglady_pracownika(?)}"));
+            statements.put("pobierz_przeglady", connection.prepareStatement("SELECT * FROM przeglad"));
+            statements.put("removeService", connection.prepareStatement("{call usun_przeglad(?)}"));
+            statements.put("dodaj_przeglad", connection.prepareStatement("{call przeglad(?, ?, ?, ?, ?)}"));
 
             /* Zadania gospodarcze */
             statements.put("get_all_zadania_P", connection.prepareStatement("select * from zadanie_gospodarcze"));

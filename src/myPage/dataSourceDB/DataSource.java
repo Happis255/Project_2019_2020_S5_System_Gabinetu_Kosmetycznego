@@ -850,6 +850,30 @@ public class DataSource {
         return raport_list;
     }
 
+    public LinkedList<ServiceData> getServiceWorker(int id) throws SQLException {
+
+        LinkedList<ServiceData> raport_list = new LinkedList<>();
+
+        PreparedStatement exeStatement;
+        ResultSet resultSet;
+        exeStatement = statements.get("pobierz_przeglady_pracownika_p");
+        exeStatement.setInt(1, id);
+        resultSet = exeStatement.executeQuery();
+
+        while(resultSet.next()){
+
+            raport_list.push(new ServiceData(
+                    resultSet.getInt("id_przegladu"),
+                    resultSet.getString("tytul_przegladu"),
+                    resultSet.getString("opis_przegladu"),
+                    DateTransformer.getJavaDate(resultSet.getDate("data")),
+                    resultSet.getInt("id_pracownika")));
+        }
+
+        return raport_list;
+
+    }
+
     public LinkedList<RaportData> getRaports() throws SQLException {
 
         LinkedList<RaportData> raport_list = new LinkedList<>();
@@ -874,11 +898,40 @@ public class DataSource {
 
     }
 
+    public LinkedList<ServiceData> getRaportSprzet() throws SQLException {
+        LinkedList<ServiceData> raport_list = new LinkedList<>();
+
+        PreparedStatement exeStatement;
+        ResultSet resultSet;
+        exeStatement = statements.get("pobierz_przeglady");
+        resultSet = exeStatement.executeQuery();
+
+        while(resultSet.next()){
+
+            raport_list.push(new ServiceData(
+                    resultSet.getInt("id_przegladu"),
+                    resultSet.getString("tytul_przegladu"),
+                    resultSet.getString("opis_przegladu"),
+                    DateTransformer.getJavaDate(resultSet.getDate("data")),
+                    resultSet.getInt("id_pracownika")));
+        }
+
+        return raport_list;
+    }
+
     public void removeRaportID(int id_sprawozdania) throws SQLException {
         PreparedStatement exeStatement;
         exeStatement = statements.get("removeRaport");
 
         exeStatement.setInt(1, id_sprawozdania);
+        exeStatement.executeQuery();
+    }
+
+    public void removeServicesID(int id) throws SQLException {
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("removeService");
+
+        exeStatement.setInt(1, id);
         exeStatement.executeQuery();
     }
 
@@ -890,6 +943,17 @@ public class DataSource {
         exeStatement.setString(3, parameters.get("tresc"));
         exeStatement.setDate(4, DateTransformer.getSqlDate(new Date()));
         exeStatement.setInt(5, Integer.parseInt(parameters.get("id_pracownika")));
+        exeStatement.executeUpdate();
+    }
+
+    public void createPrzegladDB(HashMap<String, String> parameters) throws DBReadWriteException, SQLException, ParseException {
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("dodaj_przeglad");
+        exeStatement.setString(1, parameters.get("tytul_przegladu"));
+        exeStatement.setString(2, parameters.get("opis_przegladu"));
+        exeStatement.setDate(3, DateTransformer.getSqlDate(new Date()));
+        exeStatement.setInt(4, Integer.parseInt(parameters.get("id_pracownika")));
+        exeStatement.setInt(5, Integer.parseInt(parameters.get("id_sprzetu")));
         exeStatement.executeUpdate();
     }
 

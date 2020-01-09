@@ -4,12 +4,12 @@
 <%@ page import="myPage.data.others.SessionData" %>
 <!DOCTYPE html>
 <html>
+<form action="${pageContext.request.contextPath}/RemoveRaport" method="post">
 <section id="raporty_data" class="bg-light-gray" style="margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:1140px;margin-right:auto;margin-left:auto;border-radius:20px;margin-bottom:30px;">
-    <form action="${pageContext.request.contextPath}/RemoveRaport" method="post">
         <h2 class="text-center" style="height:79px;">Raporty</h2>
         <h5 class="text-center" style="height:21px;margin-right:50px;margin-left:50px;">W poniższej sekcji znajdują się dodane przez Ciebie raporty.</h5>
         <h6 class="text-center" id="informacja" style="height:44px;margin-right:50px;margin-left:50px;font-weight: 100;">Jeśli w raporcie został popełniony błąd, zaznacz go aby go usunąć lub dodaj nowy raport.</h6>
-
+</section>
             <%
                 SessionData sessionData = (SessionData)session.getAttribute("userData");
 
@@ -65,8 +65,10 @@
                             "    </section>");
                 }
             %>
+    <section id="przyciski" class="bg-light-gray" style="margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;max-width:1140px;margin-right:auto;margin-left:auto;border-radius:20px;margin-bottom:30px;">
         <button class="btn btn-primary float-none align-self-center" type="submit" style="width:265px;position:static;text-align:center!important;margin-left:437px;margin-top:20px;">Usuń Raport</button>
-    </form>
+
     <a href="../ControllerAccount?page=raport_upload"><button type="button" class="btn btn-primary float-none align-self-center" style="width:265px;position:static;text-align:center!important;margin-left:437px;margin-top:20px;">Dodaj Raport</button></a>
 </section>
+</form>
 </html>

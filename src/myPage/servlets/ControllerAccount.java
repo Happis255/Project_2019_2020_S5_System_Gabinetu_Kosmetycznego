@@ -62,6 +62,7 @@ public class ControllerAccount extends HttpServlet {
                 case "raport_upload": accPage.addContent("../P_Administrator/add_raports.jsp"); break;
                 case "sprzet": accPage.addContent("../P_Administrator/machine_manager.jsp"); break;
                 case "dodaj_sprzet": accPage.addContent("../P_Administrator/add_machine.jsp"); break;
+                case "przeglad_upload": accPage.addContent("../P_Pracownik/add_service.jsp"); break;
                 case "odpady": break;
                 case "sklep_online": break;
                 default: break;
@@ -81,8 +82,9 @@ public class ControllerAccount extends HttpServlet {
                 case "edit_selling_product": accPage.addContent("../P_Pracownik/edit_product_sell.jsp"); break;
                 case "edit_usage_product": accPage.addContent("../P_Pracownik/edit_product_use.jsp"); break;
                 case "raporty": accPage.addContent("../P_Pracownik/raports_manager.jsp"); break;
-                case "sklep_online": break;
-                case "raport_upload": accPage.addContent("../P_Pracownik/add_raports.jsp"); break;
+                case "sprzet": accPage.addContent("../P_Pracownik/machine_manager.jsp"); break;
+                case "raport_upload": accPage.addContent("../P_Pracownik/add_raport.jsp"); break;
+                case "przeglad_upload": accPage.addContent("../P_Pracownik/add_service.jsp"); break;
                 default: break;
             }
 

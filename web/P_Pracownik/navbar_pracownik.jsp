@@ -19,7 +19,7 @@
                 <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;margin-left: 95px;">Wizyty</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="../ControllerAccount?page=produkty" style="color:#ffffff;">Produkty</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="../ControllerAccount?page=raporty" style="color:#ffffff;">Raporty</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">Sklep online</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="../ControllerAccount?page=sprzet" style="color:#ffffff;">Sprzęt</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="../UserLogin" style="color:#ffffff;">Wyloguj</a></li>
             </ul>
         </div>
