@@ -3,6 +3,7 @@ package myPage.servlets;
 import myPage.data.others.AccountPage;
 import myPage.data.others.SessionData;
 import myPage.data.others.TypKonta;
+import myPage.data.others.VisitPage;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -93,8 +94,14 @@ public class ControllerAccount extends HttpServlet {
         } else if(sessionData.getAccoutType() == TypKonta.KLIENT){
             switch(page){
                 case "powiadomienia": break;
-                case "wizyty": accPage.addContent("../P_Klient/visits_manager.jsp"); break;
-                case "wizyty_timePick": accPage.addContent("../P_Klient/visits_timePick.jsp"); break;
+                case "wizyty":
+                    VisitPage visitPage = new VisitPage();
+                    visitPage.clearContent();
+                    visitPage.addContent("../P_Klient/visits_servicePick.jsp");
+                    request.getSession().setAttribute("VisitPage", visitPage);
+                    redirect = "P_Klient/visits_manager.jsp";
+                    //redirect = "./ControllerVisitsAdder?visitSubpage=visits_servicePick";
+                    break;
                 case "twojebonusy": accPage.addContent("../P_Klient/bonusy.jsp"); break;
                 case "konto": accPage.addContent("../P_Klient/accountData_klient.jsp"); break;
                 case "konto_edit": accPage.addContent("../P_Klient/client_editor.jsp"); break;

@@ -134,7 +134,32 @@ public class Pracownik extends User {
         dataSource.CheckUserDB(parameters.get("e_mail"));
         dataSource.editWorkerDB(parameters);
     }
-    public void  editKsiazeczkaPracownika (HashMap<String, String> parameters) throws SQLException, ParseException, DBReadWriteException {
+
+    public void editKsiazeczkaPracownika (HashMap<String, String> parameters) throws SQLException, ParseException, DBReadWriteException {
         dataSource.editWorkersBookDB(parameters);
+    }
+
+    public void getPracownicyOdUslugi(int idUslugi) throws SQLException {
+        ResultSet resultSet = dataSource.getPracownikOdUslugi(idUslugi);
+
+        while (resultSet.next()) {
+            if(!resultSet.getString("e_mail").equals("-"))
+                lista_pracownikow.push(new PracownikData(
+                        resultSet.getInt("id_pracownika"),
+                        resultSet.getString("imie"),
+                        resultSet.getString("nazwisko"),
+                        resultSet.getString("ulica"),
+                        resultSet.getString("kod_pocztowy"),
+                        resultSet.getString("miejscowosc"),
+                        DateTransformer.getJavaDate(resultSet.getDate("data_urodzenia")),
+                        resultSet.getInt("telefon"),
+                        resultSet.getString("e_mail"),
+                        resultSet.getInt("id_konta"),
+                        resultSet.getLong("pesel"),
+                        DateTransformer.getJavaDate(resultSet.getDate("data_zatrudnienia")),
+                        resultSet.getString("certyfikaty"),
+                        resultSet.getInt("id_ksiazeczki")
+                ));
+        }
     }
 }

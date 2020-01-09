@@ -46,6 +46,23 @@ public class Wizyta {
         }
     }
 
+    public void getVisitsInDayWithWorker(Date data, int idPracownika) throws SQLException{
+        ResultSet resultQuery = dataSource.getWizytyWDniuZPracownikiem(DateTransformer.getSqlDate(data), idPracownika);
+
+        while (resultQuery.next()) {
+
+            wizyty.add(new WizytaData(
+                    resultQuery.getInt("id_wizyty"),
+                    DateTransformer.getJavaDate(resultQuery.getDate("data")),
+                    TimeTransformer.getJavaTime(resultQuery.getTime("godzina")),
+                    StatusWizyty.getStatusWizyty(resultQuery.getString("status")),
+                    resultQuery.getInt("id_pracownika"),
+                    resultQuery.getInt("id_klienta"),
+                    resultQuery.getInt("id_uslugi")
+            ));
+        }
+    }
+
     public void getTimeWorkerFree(int idPracownika, Date dzien) throws SQLException, DBReadWriteException {
         ResultSet resultQuery = dataSource.getVisitsWorkerInDay(idPracownika, dzien);
 

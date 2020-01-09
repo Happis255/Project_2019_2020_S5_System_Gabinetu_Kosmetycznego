@@ -1404,4 +1404,19 @@ public class DataSource {
         }
         return lista;
     }
+
+    public ResultSet getPracownikOdUslugi(int idUslugi) throws SQLException {
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("pobierz_PracownikowDlaUslugi_p");
+        exeStatement.setInt(1, idUslugi);
+        return exeStatement.executeQuery();
+    }
+
+    public ResultSet getWizytyWDniuZPracownikiem(java.sql.Date data, int idPracownika) throws SQLException {
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("pobierz_WizytyWDniuZPracownikiem_p");
+        exeStatement.setInt(1, idPracownika);
+        exeStatement.setDate(2, data);
+        return exeStatement.executeQuery();
+    }
 }
