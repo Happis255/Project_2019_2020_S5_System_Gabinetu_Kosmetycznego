@@ -1,6 +1,7 @@
 <%@ page import="myPage.basicObjects.Usluga" %>
 <%@ page import="myPage.data.dataBase.UslugaData" %>
 <%@ page import="myPage.data.others.SessionData" %>
+<%@ page import="myPage.data.others.VisitPage" %>
 <!DOCTYPE html>
 <html>
 <section id="wizyty_klient" class="bg-light-gray" style="margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:1140px;margin-right:auto;margin-left:auto;border-radius:20px;margin-bottom:30px;">
@@ -21,6 +22,7 @@
 
         <%
             SessionData sessionData = (SessionData)session.getAttribute("userData");
+            VisitPage visitPage = (VisitPage)request.getSession().getAttribute("VisitPage");
             Usluga usluga = new Usluga();
             UslugaData temp = null;
             String row;
@@ -34,8 +36,8 @@
                 temp = usluga.uslugaPop();
 
                 row = "<tr><td> <input onchange=\"\" type=\"radio\" name=\"usluga\" Value =\"" + temp.getId_uslugi() + "\" ";
-                if(session.getAttribute("ID_USLUGI") != null && (int)session.getAttribute("ID_USLUGI") == temp.getId_uslugi())
-                    row += "checked";
+                //if(visitPage != null && visitPage.getIdUslugi() == temp.getId_uslugi())
+                //    row += "checked";
                 row += "></td>" + "<td>" + temp.getTyp_uslugi() + "</td>" +
                         "<td>" + temp.getNazwa() + "</td>" +
                         "<td>" + temp.getOpis() + "</td>" +
