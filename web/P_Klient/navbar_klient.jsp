@@ -11,7 +11,7 @@
         <div class="collapse navbar-collapse"
              id="navcol-1">
             <ul class="nav navbar-nav ml-auto">
-                <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;">Wizyty</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="../ControllerAccount?page=wizyty" style="color:#ffffff;">Wizyty</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="../P_User/oferta_zakupowa.jsp" style="color:#ffffff;">Sklep</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="../ControllerAccount?page=twojebonusy" style="color:#ffffff;">Twoje bonusy</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="../ControllerAccount?page=konto" style="color:#ffffff;">konto</a></li>

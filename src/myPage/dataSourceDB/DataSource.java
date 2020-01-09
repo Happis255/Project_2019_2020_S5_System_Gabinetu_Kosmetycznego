@@ -1366,4 +1366,13 @@ public class DataSource {
         exeStatement.setInt(1, id_zadania);
         exeStatement.executeUpdate();
     }
+
+    /*wizyty*/
+    public ResultSet getVisitsWorkerInDay(int idPracownika, Date dzien) throws SQLException {
+        PreparedStatement exeStatement;
+        ResultSet resultSet;
+        exeStatement = statements.get("getVisitsWorkerInDay");
+        resultSet = exeStatement.executeQuery();
+        return resultSet;
+    }
 }
