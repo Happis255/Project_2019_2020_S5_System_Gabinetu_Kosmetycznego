@@ -63,7 +63,7 @@ public class DataBaseManager {
             statements.put("removeClientDN_P", connection.prepareStatement("{call usun_klient(?)}"));
             statements.put("editClient_p", connection.prepareStatement("{call edytuj_klienta(?,?,?,?,?,?,?,?)}"));
             statements.put("editClientBook_p", connection.prepareStatement("{call edytuj_karte_klienta(?,?,?,?,?,?,?,?,?,?,?,?,?,?)}"));
-
+            statements.put("get_allClients_P", connection.prepareStatement("SELECT * FROM klient"));
             /* Zarzadzanie ksiazeczka zdrowia pracownika */
             statements.put("pobierz_ksiazeczkeZdrowiaID_P", connection.prepareStatement("{call pobierz_ksiazeczke(?)}"));
 

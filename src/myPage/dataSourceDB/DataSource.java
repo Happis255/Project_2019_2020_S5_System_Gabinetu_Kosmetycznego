@@ -1375,4 +1375,33 @@ public class DataSource {
         resultSet = exeStatement.executeQuery();
         return resultSet;
     }
+
+    public LinkedList<KlientData> getAllClientsDB() throws SQLException {
+        LinkedList<KlientData> lista = new LinkedList<>();
+
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("get_allClients_P");
+
+        ResultSet resultSet = exeStatement.executeQuery();
+
+        while (resultSet.next()) {
+            if(!resultSet.getString("e_mail").equals("-"))
+            lista.push(new KlientData(
+                    resultSet.getInt("id_klienta"),
+                    resultSet.getString("imie"),
+                    resultSet.getString("nazwisko"),
+                    resultSet.getString("ulica"),
+                    resultSet.getString("kod_pocztowy"),
+                    resultSet.getString("miejscowosc"),
+                    DateTransformer.getJavaDate(resultSet.getDate("data_urodzenia")),
+                    resultSet.getInt("telefon"),
+                    resultSet.getString("e_mail"),
+                    resultSet.getInt("ilosc_punktow"),
+                    resultSet.getInt("id_karty"),
+                    resultSet.getInt("id_statusu"),
+                    resultSet.getInt("id_konta")
+            ));
+        }
+        return lista;
+    }
 }

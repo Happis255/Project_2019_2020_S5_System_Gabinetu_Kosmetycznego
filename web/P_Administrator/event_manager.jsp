@@ -16,9 +16,12 @@
     <section id="baza_uslug" class="bg-light-gray" style="margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:1140px;margin-right:auto;margin-left:auto;border-radius:20px;margin-bottom:30px;">
         <form action="${pageContext.request.contextPath}/SingInEvents" method="post">
             <h2 class="text-center" style="height:79px;">Wydarzenia</h2>
-            <h5 class="text-center" style="height:21px;margin-right:50px;margin-left:50px;">Poniżej zamieszczona jest lista wydarzeń.</h5>
+            <h5 class="text-center" style="height:21px;margin-right:50px;margin-left:50px;">Poniżesz zamieszczona jest lista wydarzeń znajdująca się w systemie</h5>
+
             <% if(sessionData.getAccoutType() == TypKonta.ADMINISTRATOR){%>
-            <h6 class="text-center" id="informacja" style="height:44px;margin-right:50px;margin-left:50px;font-weight: 100;">Zaznacz dane wydarzenia, by je usunąć.</h6>
+            <h6 class="text-center" id="informacja" style="height:44px;margin-right:50px;margin-left:50px;font-weight: 100;">Zaznacz dane wydarzenia, by je edytować bądź wziąć w nim udział.</h6>
+            <% } else {%>
+            <h6 class="text-center" id="informacja" style="height:44px;margin-right:50px;margin-left:50px;font-weight: 100;">Zaznacz dane wydarzenia i potwierdź operację, by wziąć w nim udział.</h6>
             <% } %>
 
             <table id="wydarzenia" class="table" cellspacing="0" width="100%" style="text-align: center;margin-bottom: 0;border: 3px solid #FFFFFF;width: 98%;max-width: 98%;margin-left: 12px;background-color: transparent;border-collapse: collapse;">

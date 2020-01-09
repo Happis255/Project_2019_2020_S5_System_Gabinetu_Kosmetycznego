@@ -36,11 +36,11 @@
             UslugaData temp;
             try {
                 usluga.getEverything();
-            } catch (DBReadWriteException | SQLException e) {
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
 
-            if (usluga.uslugiEmpty() == true) {
+            if (usluga.uslugiEmpty()) {
                 out.println(
                         "<section id=\"uslugi\" class=\"bg-light-gray\" style=\"margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:800px;margin-right:auto;margin-left:auto;border-radius:20px;margin-bottom:281px;\">" +
                         "<h2 class=\"text-center\" style=\"height:44px;\">Cennik usług</h2>" +

@@ -42,7 +42,7 @@
                 UslugaData temp;
                 try {
                     usluga.getEverything();
-                } catch (DBReadWriteException | SQLException e) {
+                } catch (SQLException e) {
                     e.printStackTrace();
                 }
 

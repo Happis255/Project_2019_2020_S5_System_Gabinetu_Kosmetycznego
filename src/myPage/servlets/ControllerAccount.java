@@ -63,6 +63,7 @@ public class ControllerAccount extends HttpServlet {
                 case "sprzet": accPage.addContent("../P_Administrator/machine_manager.jsp"); break;
                 case "dodaj_sprzet": accPage.addContent("../P_Administrator/add_machine.jsp"); break;
                 case "przeglad_upload": accPage.addContent("../P_Pracownik/add_service.jsp"); break;
+                case "klienci": accPage.addContent("../P_Administrator/klient_manager.jsp"); break;
                 case "odpady": break;
                 case "sklep_online": break;
                 default: break;
@@ -85,6 +86,7 @@ public class ControllerAccount extends HttpServlet {
                 case "sprzet": accPage.addContent("../P_Pracownik/machine_manager.jsp"); break;
                 case "raport_upload": accPage.addContent("../P_Pracownik/add_raport.jsp"); break;
                 case "przeglad_upload": accPage.addContent("../P_Pracownik/add_service.jsp"); break;
+                case "klienci": accPage.addContent("../P_Administrator/klient_manager.jsp"); break;
                 default: break;
             }
 

@@ -29,7 +29,7 @@
                             <li><a href="P_User/account.jsp">Moje konto</a></li>
                         <% } %>
                         <li><a href="P_User/uslugi.jsp">Oferta usługowa</a></li>
-                        <li><a href="#">Oferta sprzedażowa</a></li>
+                        <li><a class="nav-link" href="P_User/oferta_zakupowa.jsp" style="color:#ffffff;">Oferta sprzedażowa</a>
                     </ul>
                 </div>
                 <div class="col-sm-4 col-md-3 item">

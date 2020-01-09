@@ -1,5 +1,6 @@
 package myPage.basicObjects;
 
+import myPage.data.dataBase.AktualnoscData;
 import myPage.data.dataBase.KlientData;
 import myPage.data.dataBase.KontoData;
 import myPage.data.others.TypKonta;
@@ -11,11 +12,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.HashMap;
+import java.util.LinkedList;
 
 public class Klient extends User{
 
     public Klient(int idKlienta){
         super(idKlienta);
+    }
+    private LinkedList<KlientData> klienci = new LinkedList<>();
+
+    public Klient() {
+
     }
 
     @Override
@@ -83,5 +90,17 @@ public class Klient extends User{
 
     public void editClientBook(HashMap<String, String> parameters) throws SQLException {
         dataSource.editClientBookDB(parameters);
+    }
+
+    public KlientData KlientPop(){
+        return klienci.pop();
+    }
+
+    public boolean KlientEmpty(){
+        return klienci.isEmpty();
+    }
+
+    public void getAllData() throws SQLException {
+        this.klienci = dataSource.getAllClientsDB();
     }
 }
