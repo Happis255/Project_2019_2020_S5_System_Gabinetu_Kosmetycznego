@@ -15,7 +15,7 @@
         Skontaktuj się z nami drogą mailową a my na pewno coś dla Ciebie przygotujemy</h6>
 </section>
 
-    <section id="promo_status_setter" class="bg-light-gray" style="margin:0;    margin-bottom: 91px;
+    <section id="promo_status_setter" class="bg-light-gray" style="margin:0;    margin-bottom: 115px;
 background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:1140px;margin-right:auto;margin-left:auto;border-radius:20px;">
         <h2 class="text-center" style="height:79px;">Twój obecny status klienta w naszym gabinecie</h2>
         <%

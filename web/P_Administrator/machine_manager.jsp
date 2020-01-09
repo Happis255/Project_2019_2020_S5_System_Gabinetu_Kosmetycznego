@@ -28,20 +28,6 @@
             </thead>
             <tbody>
 
-            <!--wyniki generowane na bieżąco
-
-             <tr>
-                <td> <input type="Checkbox" Name="do_usuniecia" Value ="ID_SPRZETU"></td>
-                <th>ID</th>
-                <th>NAZWA</th>
-                <th>OPIS</th>
-                <th>DATA ZAKUPU</th>
-                <th>DATA GWARANCJI</th>
-                <th>UWAGI</th>
-            </tr>
-
-            -->
-
             <%
                 Sprzet sprzet_w_gabinecie = new Sprzet();
                 SprzetData odczytany_sprzet;
@@ -54,7 +40,7 @@
                 SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 
                 while (!sprzet_w_gabinecie.sprzetyListaEmpty()){
-                    odczytany_sprzet = sprzet_w_gabinecie.uslugaPop();
+                    odczytany_sprzet = sprzet_w_gabinecie.sprzetPop();
 
                     out.println("<tr>" +
                             "<td> <input type=\"Checkbox\" Name=\"do_usuniecia\" Value =\"" + odczytany_sprzet.getId_sprzetu() + "\"></td>" +
@@ -81,8 +67,6 @@
             <h6 class="text-center" id="info" style="height:44px;margin-right:50px;margin-left:50px;font-weight: 100;">Jeśli w raporcie został popełniony błąd, zaznacz go aby go usunąć lub dodaj nowy raport.</h6>
         </section>
         <%
-            SessionData sessionData = (SessionData)session.getAttribute("userData");
-
             Services przeglad = new Services();
             ServiceData temp;
             try {
@@ -133,12 +117,9 @@
                         "    </section>");
             }
         %>
-        <section id="przyciski" class="bg-light-gray" style="margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;max-width:1140px;margin-right:auto;margin-left:auto;border-radius:20px;margin-bottom:30px;">
-            <button class="btn btn-primary float-none align-self-center" type="submit" style="width:265px;position:static;text-align:center!important;margin-left:437px;margin-top:20px;">Usuń Raport</button>
-
+        <section id="przeglady_data" class="bg-light-gray" style="margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:1140px;margin-right:auto;margin-left:auto;border-radius:20px;margin-bottom:30px;">
+            <button class="btn btn-primary float-none align-self-center" type="submit" style="width:265px;position:static;text-align:center!important;margin-left:437px;">Usuń Raport</button>
             <a href="../ControllerAccount?page=przeglad_upload"><button type="button" class="btn btn-primary float-none align-self-center" style="width:265px;position:static;text-align:center!important;margin-left:437px;margin-top:20px;">Dodaj Raport</button></a>
         </section>
     </form>
-
-
 </html>

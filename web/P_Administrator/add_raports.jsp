@@ -16,7 +16,7 @@
                     <option value="KONTROLA STACJI SANITARNO EPIDEMIOLOGICZNEJ">Kontrola stacji sanitarno epidemiologicznej</option>
                 </select>
             </div>
-            <div class="form-group"><button class="btn btn-primary" type="submit" style="margin:0;width:265px;margin-left:267px;margin-top: 59px;">Dodaj raport</button></div>
+            <div class="form-group"><button class="btn btn-primary" type="submit" style="margin:0;width:265px;margin-left:267px;margin-top: 39px;">Dodaj raport</button></div>
         </div>
     </form>
 </section>

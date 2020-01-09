@@ -47,7 +47,7 @@
         klient_kartaKlienta = kartaKlienta.KartaKlientaData_get(klient.getId());
 
         /* Generujemy stronę klientowi */
-        out.print("    <section id=\"pracownik\" class=\"bg-light-gray\" style=\"margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:1140px;margin-right:auto;margin-left:auto;border-radius:20px;margin-bottom:10px;\">\n" +
+        out.print("    <section id=\"pracownik\" class=\"bg-light-gray\" style=\"margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:1140px;margin-right:auto;margin-left:auto;border-radius:20px;margin-bottom:29px;\">\n" +
                 "        <h2 class=\"text-center\">Witaj " + klient.getImie() + " " + klient.getNazwisko() + "!</h2>\n" +
                 "        <br>\n" +
                 "        <table class=\"table\" cellspacing=\"0\" width=\"100%\" style=\"margin-top: -18px;text-align: center;margin-bottom: 0;width: 55%;/* max-width: 100%; */margin-left: 16%;background-color: transparent;border-collapse: collapse;min-width: 760px;\"\">\n" +

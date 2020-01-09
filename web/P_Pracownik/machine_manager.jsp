@@ -52,7 +52,7 @@
                 SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 
                 while (!sprzet_w_gabinecie.sprzetyListaEmpty()){
-                    odczytany_sprzet = sprzet_w_gabinecie.uslugaPop();
+                    odczytany_sprzet = sprzet_w_gabinecie.sprzetPop();
 
                     out.println(
                             "<tr><td>" + odczytany_sprzet.getId_sprzetu() + "</td>" +
@@ -129,7 +129,6 @@
         %>
         <section id="przyciski" class="bg-light-gray" style="margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;max-width:1140px;margin-right:auto;margin-left:auto;border-radius:20px;margin-bottom:30px;">
             <button class="btn btn-primary float-none align-self-center" type="submit" style="width:265px;position:static;text-align:center!important;margin-left:437px;margin-top:20px;">Usuń Raport</button>
-
             <a href="../ControllerAccount?page=przeglad_upload"><button type="button" class="btn btn-primary float-none align-self-center" style="width:265px;position:static;text-align:center!important;margin-left:437px;margin-top:20px;">Dodaj Raport</button></a>
         </section>
     </form>

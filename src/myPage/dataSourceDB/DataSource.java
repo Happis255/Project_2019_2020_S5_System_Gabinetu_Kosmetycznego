@@ -192,7 +192,7 @@ public class DataSource {
         PreparedStatement exeStatement;
         exeStatement = statements.get("dodaj_sprzet_p");
 
-        exeStatement.setString(1, parameters.get("gwarancja"));
+        exeStatement.setString(1, parameters.get("nazwa"));
         exeStatement.setString(2, parameters.get("opis"));
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date data_zakupu = dateFormat.parse(parameters.get("data_zakupu"));
@@ -946,7 +946,7 @@ public class DataSource {
         exeStatement.executeUpdate();
     }
 
-    public void createPrzegladDB(HashMap<String, String> parameters) throws DBReadWriteException, SQLException, ParseException {
+    public void createPrzegladDB(HashMap<String, String> parameters) throws SQLException {
         PreparedStatement exeStatement;
         exeStatement = statements.get("dodaj_przeglad");
         exeStatement.setString(1, parameters.get("tytul_przegladu"));

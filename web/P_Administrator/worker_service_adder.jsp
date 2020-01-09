@@ -37,7 +37,7 @@
 
                     try {
                         uslugi.getEverything();
-                    } catch (SQLException | DBReadWriteException e) {
+                    } catch (SQLException e) {
                         e.printStackTrace();
                     }
 

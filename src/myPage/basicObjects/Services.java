@@ -35,7 +35,7 @@ public class Services {
         dataSource.removeServicesID(id);
     }
 
-    public void register(HashMap<String, String> parameters) throws SQLException, ParseException, DBReadWriteException  {
+    public void register(HashMap<String, String> parameters) throws SQLException {
             dataSource.createPrzegladDB(parameters);
     }
 

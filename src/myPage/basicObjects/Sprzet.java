@@ -17,7 +17,7 @@ public class Sprzet {
         sprzety = new LinkedList<>();
     }
 
-    public SprzetData uslugaPop(){
+    public SprzetData sprzetPop(){
         return sprzety.pop();
     }
 
