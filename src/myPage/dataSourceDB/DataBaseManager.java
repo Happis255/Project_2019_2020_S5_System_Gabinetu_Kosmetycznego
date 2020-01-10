@@ -163,6 +163,8 @@ public class DataBaseManager {
             statements.put("zaktualizujPunktyDB_P", connection.prepareStatement("{call zaktualizuj_punkty(?,?)}"));
             statements.put("countWyplataID_DB_P", connection.prepareStatement("{call zarobki(?)}"));
             statements.put("pobierz_today_wzity_P", connection.prepareStatement("SELECT * FROM WIZYTA WHERE DAY(wizyta.data) = DAY(CURRENT_DATE()) AND MONTH(wizyta.data) = MONTH(CURRENT_DATE()) AND YEAR(wizyta.data) = YEAR(CURRENT_DATE()) ORDER BY wizyta.data ASC, wizyta.godzina ASC"));
+            statements.put("pobierz_wizytyPracownikaWDniu", connection.prepareStatement("SELECT * FROM wizyta WHERE data = ? AND  id_pracownika = ? ORDER BY godzina ASC"));
+            statements.put("pobierz_czasUslugi", connection.prepareStatement("SELECT * FROM usluga WHERE id_uslugi = ?"));
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }

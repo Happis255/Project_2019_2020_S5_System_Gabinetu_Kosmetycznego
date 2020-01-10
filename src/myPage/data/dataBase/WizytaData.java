@@ -32,6 +32,18 @@ public class WizytaData {
         this.id_uslugi = id_uslugi;
     }
 
+    public WizytaData(
+            WizytaData wizytaData
+    ) {
+        this.id_wizyty = wizytaData.id_wizyty;
+        this.data_wizyty = wizytaData.data_wizyty;
+        this.godzina = wizytaData.godzina;
+        this.status = wizytaData.status;
+        this.id_pracownika = wizytaData.id_pracownika;
+        this.id_klienta = wizytaData.id_klienta;
+        this.id_uslugi = wizytaData.id_uslugi;
+    }
+
     public int getId_wizyty() {
         return id_wizyty;
     }

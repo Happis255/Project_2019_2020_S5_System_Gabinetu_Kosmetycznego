@@ -29,6 +29,10 @@ public class Wizyta {
         return wizyty.pop();
     }
 
+    public int size(){
+        return wizyty.size();
+    }
+
     public boolean isEmpty(){
         return wizyty.isEmpty();
     }
@@ -241,5 +245,20 @@ public class Wizyta {
         Usluga usluga = new Usluga();
         UslugaData uslugaData = usluga.getUsluga_ID(wizyta_info.getId_uslugi());
         dataSource.zaktualizujPunktyDB(klientData.getE_mail(), uslugaData.getCena());
+    }
+
+    public void loadWizytyPracownikaWDniu(Date data, int idPracownika) throws SQLException {
+        ResultSet resultQuery = dataSource.pobierzWizytyPracnikaWDniu(data, idPracownika);
+        while (resultQuery.next()) {
+            wizyty.add(new WizytaData(
+                    resultQuery.getInt("id_wizyty"),
+                    DateTransformer.getJavaDate(resultQuery.getDate("data")),
+                    TimeTransformer.getJavaTime(resultQuery.getTime("godzina")),
+                    StatusWizyty.getStatusWizyty(resultQuery.getString("status")),
+                    resultQuery.getInt("id_pracownika"),
+                    resultQuery.getInt("id_klienta"),
+                    resultQuery.getInt("id_uslugi")
+            ));
+        }
     }
 }

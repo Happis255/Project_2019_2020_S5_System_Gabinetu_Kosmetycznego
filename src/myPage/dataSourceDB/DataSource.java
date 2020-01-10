@@ -1646,4 +1646,19 @@ public class DataSource {
         exeStatement.setInt(1, id);
         return exeStatement.executeQuery();
     }
+
+    public ResultSet pobierzWizytyPracnikaWDniu(Date data, int idPracownika) throws SQLException {
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("pobierz_wizytyPracownikaWDniu");
+        exeStatement.setDate(1, DateTransformer.getSqlDate(data));
+        exeStatement.setInt(2, idPracownika);
+        return exeStatement.executeQuery();
+    }
+
+    public ResultSet pobierzCzasUslugi(int idUslugi) throws SQLException {
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("pobierz_czasUslugi");
+        exeStatement.setInt(1, idUslugi);
+        return exeStatement.executeQuery();
+    }
 }

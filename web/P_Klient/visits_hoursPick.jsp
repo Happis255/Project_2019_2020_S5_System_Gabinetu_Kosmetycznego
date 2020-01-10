@@ -3,6 +3,10 @@
 <%@ page import="myPage.data.others.VisitPage" %>
 <%@ page import="java.util.Date" %>
 <%@ page import="java.util.HashMap" %>
+<%@ page import="myPage.basicObjects.Usluga" %>
+<%@ page import="myPage.data.dataBase.UslugaData" %>
+<%@ page import="java.sql.SQLException" %>
+<%@ page import="javax.rmi.ssl.SslRMIClientSocketFactory" %>
 <!DOCTYPE html>
 <html>
 <section id="wizyty_czas" class="bg-light-gray" style="margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:1140px;margin-right:auto;margin-left:auto;border-radius:20px;margin-bottom:30px;">
@@ -21,7 +25,9 @@
             <%
                 VisitPage visitPage = (VisitPage)request.getSession().getAttribute("VisitPage");
                 Wizyta wizyty = new Wizyta();
-                WizytaData temp;
+                Usluga uslugi = new Usluga();
+                WizytaData tempW;
+                UslugaData tempU;
                 Date data = visitPage.getData();
                 Integer idPracownika = visitPage.getIdPracownika();
                 try {
@@ -32,7 +38,7 @@
 
                 HashMap<String, WizytaData> wizytyGodzinami = new HashMap<>();
                 String czas;
-                for(int h = 10; h<16 ;h++){
+                for(int h = 10; h<=16 ;h++){
                     for(int m = 0; m <=30; m+=30){
                         if(m == 0)
                             czas = h + ":00";
@@ -43,24 +49,48 @@
                 }
                 wizytyGodzinami.put("17:00", null);
 
+                System.out.println("WIZYTY SIZE:" + wizyty.size());
                 while (!wizyty.isEmpty()){
-                    temp = wizyty.pop();
-                    czas = temp.getGodzina().getHour() + ":" + temp.getGodzina().getMinute();
+                    try {
+                        tempW = wizyty.pop();
+                        uslugi.getCzasUslugi(tempW.getId_uslugi());
+                        tempU = uslugi.uslugaPop();
+                        int timePeroids = tempU.getCzas_trwania() / 30;
+                        if(tempU.getCzas_trwania() % 30 != 0)
+                            timePeroids += 1;
+                        System.out.println("CZAS TRWANIA:" + tempU.getCzas_trwania());
+                        System.out.println("TIME PEROIDS:" + timePeroids);
+                        for(int h = tempW.getGodzina().getHour() ; h <= 16 && timePeroids > 0;h++){
+                            for(int m = tempW.getGodzina().getMinute(); m <=30 && timePeroids > 0; m+=30, timePeroids--){
+                                System.out.println("###" + h + " " + m);
+                                if(m == 0)
+                                    czas = h + ":00";
+                                else
+                                    czas = h + ":30";
+                                System.out.println("@@@" + czas);
+                                wizytyGodzinami.replace(czas, new WizytaData(tempW));
+                            }
+                        }
 
-                    wizytyGodzinami.replace(czas, temp);
+                        czas = tempW.getGodzina().getHour() + ":" + tempW.getGodzina().getMinute();
+
+                        wizytyGodzinami.replace(czas, tempW);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
                 }
+                System.out.println(wizytyGodzinami);
 
-            %>
-
-            <%
-                for(int h = 10; h<16 ;h++){
+                System.out.println("TEMPSW");
+                for(int h = 10; h<=16 ;h++){
                     for(int m = 0; m <=30; m+=30){
                         if(m == 0)
                             czas = h + ":00";
                         else
                             czas = h + ":30";
-                        temp = wizytyGodzinami.get("czas");
-                        if(temp != null){
+                        tempW = wizytyGodzinami.get("czas");
+                        System.out.println(czas + " " + tempW);
+                        if(tempW != null){
                             out.println("<tr><td></td>" +
                                     "<td>" + czas + "</td>" +
                                     "<td>" + "NIEDOSTEPNY" + "</td>" +
@@ -74,8 +104,8 @@
                     }
                 }
                 czas = "17:00";
-                temp = wizytyGodzinami.get(czas);
-                if(temp != null){
+                tempW = wizytyGodzinami.get(czas);
+                if(tempW != null){
                     out.println("<tr><td></td>" +
                             "<td>" + czas + "</td>" +
                             "<td>" + "NIEDOSTEPNY" + "</td>" +

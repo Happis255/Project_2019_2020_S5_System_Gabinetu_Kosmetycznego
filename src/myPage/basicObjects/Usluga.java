@@ -3,6 +3,8 @@ package myPage.basicObjects;
 import myPage.data.dataBase.UslugaData;
 import myPage.dataSourceDB.DataSource;
 import myPage.exceptions.DBReadWriteException;
+
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.HashMap;
@@ -51,5 +53,22 @@ public class Usluga {
 
     public UslugaData getUsluga_ID(int id_uslugi) throws SQLException {
         return dataSource.getUsluga_ID_DB(id_uslugi);
+    }
+
+    public void getCzasUslugi(int id_uslugi) throws SQLException {
+        ResultSet resultSet = dataSource.pobierzCzasUslugi(id_uslugi);
+        while (resultSet.next()) {
+            uslugi.push(new UslugaData(
+                    resultSet.getInt("id_uslugi"),
+                    resultSet.getString("typ_uslugi"),
+                    resultSet.getString("nazwa"),
+                    resultSet.getString("opis"),
+                    resultSet.getBoolean("czy_karta"),
+                    resultSet.getInt("cena"),
+                    resultSet.getInt("czas_trwania"),
+                    resultSet.getString("wskazowki"),
+                    resultSet.getInt("id_promocji")
+            ));
+        }
     }
 }
