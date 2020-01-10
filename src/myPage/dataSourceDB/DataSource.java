@@ -1366,9 +1366,12 @@ public class DataSource {
         return resultSet;
     }
 
-    public void singInWorkerForEvent(int workerId, int eventId){
+    public void singInWorkerForEvent(int workerId, int eventId) throws SQLException {
         PreparedStatement exeStatement;
         exeStatement = statements.get("zapiszPracownikaNaWydarzenie");
+        exeStatement.setInt(1, eventId);
+        exeStatement.setInt(2, workerId);
+        exeStatement.executeUpdate();
 
     }
 
@@ -1379,10 +1382,11 @@ public class DataSource {
         return exeStatement.executeQuery();
     }
 
-    public void signOutEvent(int id) throws SQLException {
+    public void signOutEvent(int id_eventu, int id_pracownika) throws SQLException {
         PreparedStatement exeStatement;
         exeStatement = statements.get("wypiszPracownikaNaWydarzenie");
-        exeStatement.setInt(1, id);
+        exeStatement.setInt(2, id_eventu);
+        exeStatement.setInt(1, id_pracownika);
         exeStatement.executeUpdate();
     }
 
@@ -1629,5 +1633,12 @@ public class DataSource {
         exeStatement = statements.get("countWyplataID_DB_P");
         exeStatement.setInt(1, id);
         return exeStatement.executeQuery();
+    }
+
+    public void usunWydarzenieID_DB(int idEventu_usuwanie) throws SQLException {
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("usunWydarzenieID_DB_P");
+        exeStatement.setInt(1, idEventu_usuwanie);
+        exeStatement.executeUpdate();
     }
 }

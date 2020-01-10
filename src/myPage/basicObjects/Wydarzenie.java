@@ -53,13 +53,15 @@ public class Wydarzenie {
         }
     }
 
-    public void singInForEvent(int idPracownika, int idWydarzenia){
+    public void singInForEvent(int idPracownika, int idWydarzenia) throws SQLException {
         dataSource.singInWorkerForEvent(idPracownika, idWydarzenia);
     }
 
-    public void singOutFromEvent(int id) throws SQLException {
-        dataSource.signOutEvent(id);
+    public void singOutFromEvent(int id_eventu, int id_pracownika) throws SQLException {
+        dataSource.signOutEvent(id_eventu, id_pracownika);
     }
 
-    //podobnie jak przy Usluga
+    public void usunWydarzenieID(int idEventu_usuwanie) throws SQLException {
+        dataSource.usunWydarzenieID_DB(idEventu_usuwanie);
+    }
 }
