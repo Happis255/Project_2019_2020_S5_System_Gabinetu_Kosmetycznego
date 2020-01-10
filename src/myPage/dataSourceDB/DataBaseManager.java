@@ -140,6 +140,7 @@ public class DataBaseManager {
 
             /*zarzadzanie wydarzeniami*/
             statements.put("getAllEvents", connection.prepareStatement("select * from wydarzenie"));
+            statements.put("czyJest", connection.prepareStatement("select * from wydarzenie_pracownik WHERE id_pracownika = ? AND id_wydarzenia = ?"));
             statements.put("zapiszPracownikaNaWydarzenie", connection.prepareStatement("INSERT INTO wydarzenie_pracownik(id_wydarzenia, id_pracownika) VALUES (?, ?); "));
             statements.put("pobierz_nazwiska_wydarzenie", connection.prepareStatement("{call pracownik_na_wydarzeniu(?)}"));
             statements.put("wypiszPracownikaNaWydarzenie", connection.prepareStatement("DELETE FROM wydarzenie_pracownik WHERE id_pracownika = ? AND id_wydarzenia = ?;"));

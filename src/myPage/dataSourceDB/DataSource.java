@@ -1368,13 +1368,22 @@ public class DataSource {
         return resultSet;
     }
 
-    public void singInWorkerForEvent(int workerId, int eventId) throws SQLException {
-        PreparedStatement exeStatement;
-        exeStatement = statements.get("zapiszPracownikaNaWydarzenie");
-        exeStatement.setInt(1, eventId);
-        exeStatement.setInt(2, workerId);
-        exeStatement.executeUpdate();
+    public void singInWorkerForEvent(int workerId, int eventId) throws Exception {
 
+        ResultSet resultSet;
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("czyJest");
+        exeStatement.setInt(1, workerId);
+        exeStatement.setInt(2, eventId);
+        resultSet = exeStatement.executeQuery();
+
+        if(!resultSet.next()) {
+            exeStatement = statements.get("zapiszPracownikaNaWydarzenie");
+            exeStatement.setInt(1, eventId);
+            exeStatement.setInt(2, workerId);
+            exeStatement.executeUpdate();
+        }
+        else {throw new Exception();}
     }
 
     public ResultSet getWorkerName(int id) throws SQLException {
