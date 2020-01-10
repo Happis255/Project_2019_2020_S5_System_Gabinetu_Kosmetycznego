@@ -144,7 +144,7 @@ public class DataBaseManager {
 
             /*zarzazanie wizytami*/
             statements.put("getVisitsWorkerInDay", connection.prepareStatement("SELECT * FROM wizyta WHERE id_pracownika = ? AND data = ?"));
-            statements.put("pobierz_PracownikowDlaUslugi_p", connection.prepareStatement("SELECT pracownik.* FROM pracownik JOIN pracownik_usluga ON pracownik.id_pracownika = pracownik_usluga.id_uslugi WHERE pracownik_usluga.id_uslugi = ?"));
+            statements.put("pobierz_PracownikowDlaUslugi_p", connection.prepareStatement("SELECT pracownik.* FROM pracownik JOIN pracownik_usluga ON pracownik.id_pracownika = pracownik_usluga.id_pracownika WHERE pracownik_usluga.id_uslugi = ?"));
             statements.put("pobierz_WizytyWDniuZPracownikiem_p", connection.prepareStatement("SELECT wizyta.* FROM wizyta WHERE id_pracownika = ? AND data = ?"));
             statements.put("pobierz_wizyty_ten_miesiac_P", connection.prepareStatement("SELECT * FROM WIZYTA WHERE MONTH(wizyta.data) = MONTH(CURRENT_DATE()) AND YEAR(wizyta.data) = YEAR(CURRENT_DATE()) ORDER BY wizyta.data ASC, wizyta.godzina ASC"));
             statements.put("potwierdz_wizyteID_DB_P", connection.prepareStatement("UPDATE `wizyta` SET `status` = 'POTWIERDZONE' WHERE `wizyta`.`id_wizyty` = ?"));
@@ -153,6 +153,7 @@ public class DataBaseManager {
             statements.put("usun_wizyteID_DB_P", connection.prepareStatement("DELETE FROM `wizyta` WHERE `wizyta`.`id_wizyty` = ?"));
             statements.put("getWizytaID_DB_P", connection.prepareStatement("SELECT * FROM `wizyta` WHERE `wizyta`.`id_wizyty` = ?"));
             statements.put("createWizytaWorkerDB_P", connection.prepareStatement("{call wizyta(?,?,?,?,?,?)}"));
+            statements.put("createWizytaClientDB_P", connection.prepareStatement("{call wizyta(?,?,?,?,?,?)}"));
             statements.put("pobierz_today_wzity_P", connection.prepareStatement("SELECT * FROM WIZYTA WHERE DAY(wizyta.data) = DAY(CURRENT_DATE()) AND MONTH(wizyta.data) = MONTH(CURRENT_DATE()) AND YEAR(wizyta.data) = YEAR(CURRENT_DATE()) ORDER BY wizyta.data ASC, wizyta.godzina ASC"));
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();

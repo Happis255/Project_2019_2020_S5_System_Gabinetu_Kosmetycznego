@@ -3,7 +3,6 @@ package myPage.servlets;
 import myPage.data.others.AccountPage;
 import myPage.data.others.SessionData;
 import myPage.data.others.TypKonta;
-import myPage.data.others.VisitPage;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,7 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(description = "kontroler do obsługi kont", urlPatterns = { "/ControllerAccount" })
+//@WebServlet(description = "kontroler do obsługi kont", urlPatterns = { "/ControllerAccount" })
+@WebServlet("/ControllerAccount")
 public class ControllerAccount extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -100,13 +100,9 @@ public class ControllerAccount extends HttpServlet {
         } else if(sessionData.getAccoutType() == TypKonta.KLIENT){
             switch(page){
                 case "powiadomienia": break;
-                case "wizyty":
-                    VisitPage visitPage = new VisitPage();
-                    visitPage.clearContent();
-                    visitPage.addContent("../P_Klient/visits_servicePick.jsp");
-                    request.getSession().setAttribute("VisitPage", visitPage);
-                    redirect = "P_Klient/visits_manager.jsp";
-                    break;
+                case "wizytyService": accPage.addContent("../P_Klient/visits_servicePick.jsp"); break;
+                case "wizytyWorker": accPage.addContent("../P_Klient/visits_workerPick.jsp"); break;
+                case "wizytyHour": accPage.addContent("../P_Klient/visits_hoursPick.jsp"); break;
                 case "twojebonusy": accPage.addContent("../P_Klient/bonusy.jsp"); break;
                 case "konto": accPage.addContent("../P_Klient/accountData_klient.jsp"); break;
                 case "konto_edit": accPage.addContent("../P_Klient/client_editor.jsp"); break;
