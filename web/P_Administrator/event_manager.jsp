@@ -73,6 +73,7 @@
                             "            <thead>\n" +
                             "            <tr>\n" +
                             "                <th></th>\n" +
+                            "                <th>ID</th>\n" +
                             "                <th>IMIĘ</th>\n" +
                             "                <th>NAZWISKO</th>\n" +
                             "            </tr>\n" +
