@@ -53,7 +53,7 @@ public class Wydarzenie {
         }
     }
 
-    public void singInForEvent(int idPracownika, int idWydarzenia){
+    public void singInForEvent(int idPracownika, int idWydarzenia) throws SQLException {
         dataSource.singInWorkerForEvent(idPracownika, idWydarzenia);
     }
 

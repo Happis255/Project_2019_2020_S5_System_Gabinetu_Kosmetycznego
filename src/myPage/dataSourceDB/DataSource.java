@@ -1366,9 +1366,12 @@ public class DataSource {
         return resultSet;
     }
 
-    public void singInWorkerForEvent(int workerId, int eventId){
+    public void singInWorkerForEvent(int workerId, int eventId) throws SQLException {
         PreparedStatement exeStatement;
         exeStatement = statements.get("zapiszPracownikaNaWydarzenie");
+        exeStatement.setInt(1, eventId);
+        exeStatement.setInt(2, workerId);
+        exeStatement.executeUpdate();
 
     }
 
