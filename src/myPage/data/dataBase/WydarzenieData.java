@@ -96,7 +96,7 @@ public class WydarzenieData {
         ResultSet result;
 
         result = dataSource.getWorkerName(id);
-        if(result.next()){
+        while(result.next()){
             name.add(String.valueOf(result.getInt("id_pracownika")));
             name.add(result.getString("imie"));
             name.add(result.getString("nazwisko"));
