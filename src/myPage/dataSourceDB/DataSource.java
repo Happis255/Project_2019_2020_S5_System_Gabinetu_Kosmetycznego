@@ -850,6 +850,28 @@ public class DataSource {
         return raport_list;
     }
 
+    public LinkedList<WasteData> getWaste() throws SQLException {
+        LinkedList<WasteData> raport_list = new LinkedList<>();
+
+        PreparedStatement exeStatement;
+        ResultSet resultSet;
+        exeStatement = statements.get("pobierz_raporty_odpadow");
+        resultSet = exeStatement.executeQuery();
+
+        while(resultSet.next()){
+            raport_list.push(new WasteData(
+                    resultSet.getInt("id_raportu"),
+                    DateTransformer.getJavaDate(resultSet.getDate("data")),
+                    resultSet.getString("tytul_raportu"),
+                    resultSet.getString("typ_odpadow"),
+                    resultSet.getInt("ilos"),
+                    resultSet.getInt("koszt"),
+                    resultSet.getInt("id_pracownika")));
+        }
+
+        return raport_list;
+    }
+
     public LinkedList<ServiceData> getServiceWorker(int id) throws SQLException {
 
         LinkedList<ServiceData> raport_list = new LinkedList<>();
@@ -927,6 +949,14 @@ public class DataSource {
         exeStatement.executeQuery();
     }
 
+    public void removeWasteID(int a) throws SQLException {
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("removeOdpady");
+
+        exeStatement.setInt(1, a);
+        exeStatement.executeQuery();
+    }
+
     public void removeServicesID(int id) throws SQLException {
         PreparedStatement exeStatement;
         exeStatement = statements.get("removeService");
@@ -946,6 +976,18 @@ public class DataSource {
         exeStatement.executeUpdate();
     }
 
+    public void createWasteDB(HashMap<String, String> parameters) throws DBReadWriteException, SQLException, ParseException {
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("dodaj_odpady");
+        exeStatement.setString(1, parameters.get("tytul_raportu"));
+        exeStatement.setString(2, parameters.get("typ_odpadow"));
+        exeStatement.setDate(3, DateTransformer.getSqlDate(new Date()));
+        exeStatement.setInt(4, Integer.parseInt(parameters.get("ilos")));
+        exeStatement.setInt(5, Integer.parseInt(parameters.get("koszt")));
+        exeStatement.setInt(6, Integer.parseInt(parameters.get("id_pracownika")));
+        exeStatement.executeUpdate();
+    }
+
     public void createPrzegladDB(HashMap<String, String> parameters) throws SQLException {
         PreparedStatement exeStatement;
         exeStatement = statements.get("dodaj_przeglad");
@@ -955,6 +997,21 @@ public class DataSource {
         exeStatement.setInt(4, Integer.parseInt(parameters.get("id_pracownika")));
         exeStatement.setInt(5, Integer.parseInt(parameters.get("id_sprzetu")));
         exeStatement.executeUpdate();
+    }
+
+    public int countWaste(HashMap<String, String> parameters) throws DBReadWriteException, SQLException, ParseException {
+
+        ResultSet resultSet;
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("bilans");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date_od = dateFormat.parse(parameters.get("data_od"));
+        Date date_do = dateFormat.parse(parameters.get("data_do"));
+        exeStatement.setDate(1, DateTransformer.getSqlDate(date_od));
+        exeStatement.setDate(2, DateTransformer.getSqlDate(date_do));
+        resultSet = exeStatement.executeQuery();
+
+        return resultSet.getInt("bilnas");
     }
 
     /* Produkty znajdujące się w gabinecie kosmetycznym */
@@ -1419,4 +1476,5 @@ public class DataSource {
         exeStatement.setDate(2, data);
         return exeStatement.executeQuery();
     }
+
 }

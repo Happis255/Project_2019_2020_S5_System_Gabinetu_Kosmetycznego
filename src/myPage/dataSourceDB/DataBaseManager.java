@@ -102,6 +102,10 @@ public class DataBaseManager {
             statements.put("pobierz_przeglady", connection.prepareStatement("SELECT * FROM przeglad"));
             statements.put("removeService", connection.prepareStatement("{call usun_przeglad(?)}"));
             statements.put("dodaj_przeglad", connection.prepareStatement("{call przeglad(?, ?, ?, ?, ?)}"));
+            statements.put("pobierz_raporty_odpadow", connection.prepareStatement("SELECT * FROM raport_odpadow"));
+            statements.put("removeOdpady", connection.prepareStatement("{call usun_odpady(?)}"));
+            statements.put("dodaj_odpady", connection.prepareStatement("{call odpady(?, ?, ?, ?, ?, ?)}"));
+            statements.put("bilans", connection.prepareStatement("{call bilans_utylizacji(?, ?)}"));
 
             /* Zadania gospodarcze */
             statements.put("get_all_zadania_P", connection.prepareStatement("select * from zadanie_gospodarcze"));
