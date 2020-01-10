@@ -4,11 +4,13 @@ import myPage.data.dataBase.*;
 import myPage.exceptions.DBReadWriteException;
 import myPage.exceptions.NoResultsException;
 import myPage.others.DateTransformer;
+import myPage.others.TimeTransformer;
 
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -1523,6 +1525,17 @@ public class DataSource {
         return exeStatement.executeQuery();
     }
 
+    public void createVisitToConfirm(int idUslugi, int idKlienta, int idPracownika, Date data, LocalTime godzina) throws SQLException {
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("createWizytaClientDB_P");
+        exeStatement.setDate(1, DateTransformer.getSqlDate(data));
+        exeStatement.setTime(2, TimeTransformer.getSqlTime(godzina));
+        exeStatement.setString(3,"DO_ZATWIERDZENIA");
+        exeStatement.setInt(4, idPracownika);
+        exeStatement.setInt(5, idKlienta);
+        exeStatement.setInt(6, idUslugi);
+        exeStatement.executeUpdate();
+    }
 
     public void potwierdz_wizyteID_DB(int id) throws SQLException {
         PreparedStatement exeStatement;

@@ -1,5 +1,7 @@
 package myPage.servlets;
 
+import myPage.basicObjects.Wizyta;
+import myPage.data.others.SessionData;
 import myPage.data.others.VisitPage;
 
 import javax.servlet.ServletException;
@@ -9,68 +11,45 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.Date;
+import java.sql.SQLException;
+import java.time.LocalTime;
 
 @WebServlet("/ControllerVisitsAdder")
 public class ControllerVisitsAdder extends HttpServlet {
-
     private HttpSession session;
-    private String resultMessage = "";
+    private String url = "";
+    String resultMessage;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         session = request.getSession();
-        String page = request.getParameter("page");
-        VisitPage visitPage = (VisitPage)request.getSession().getAttribute("VisitPage");
+        String czas = request.getParameter("wybrana_usluga");
 
-        String val;
+        if(czas != null){
+            System.out.println("WYBRANA GODZINA:" + czas);
+            url = "/ControllerAccount?page=wizytyWorker";
+            VisitPage visitPage = (VisitPage)session.getAttribute("VisitPage");
+            SessionData sessionData = (SessionData)session.getAttribute("userData");
+            Wizyta wizyty = new Wizyta();
+            LocalTime time = LocalTime.parse(czas);
 
-        val = request.getParameter("data-wizyty");
-        if(val != null)
-            visitPage.setData(new Date(val));
-
-        doGet(request, response);
-    }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        session = request.getSession();
-        String redirect = "P_Klient/visits_manager.jsp";
-        String page = request.getParameter("visitSubpage");
-        String userID = request.getParameter("userID");
-        String workerID = request.getParameter("workerID");
-        VisitPage visitPage = (VisitPage)request.getSession().getAttribute("VisitPage");
-
-        if(userID != null)
-            visitPage.setIdUslugi(Integer.parseInt(userID));
-        if(workerID != null)
-            visitPage.setIdPracownika(Integer.parseInt(workerID));
-
-        visitPage.clearContent();
-
-        Date data = (Date)session.getAttribute("DATA");
-        if(page == null){
-            visitPage.addContent("../P_Klient/visits_servicePick.jsp");
-            visitPage.addContent("../P_Klient/visits_workerPick.jsp");
-            visitPage.addContent("../P_Klient/visits_timePick.jsp");
-            visitPage.addContent("../P_Klient/visits_hoursPick.jsp");
-        }else {
-            switch (page) {
-                case "visits_servicePick":
-                    visitPage.addContent("../P_Klient/visits_servicePick.jsp");
-                    break;
-                case "visits_workerPick":
-                    visitPage.addContent("../P_Klient/visits_servicePick.jsp");
-                    visitPage.addContent("../P_Klient/visits_workerPick.jsp");
-                    break;
-                case "visits_timePick":
-                    visitPage.addContent("../P_Klient/visits_servicePick.jsp");
-                    visitPage.addContent("../P_Klient/visits_workerPick.jsp");
-                    visitPage.addContent("../P_Klient/visits_timePick.jsp");
-                    break;
-                default:
-                    visitPage.addContent("../P_Klient/visits_servicePick.jsp");
-                    break;
+            try {
+                wizyty.dodajWizyteDoZatwierdzenia(visitPage.getIdUslugi(), sessionData.getId(),
+                        visitPage.getIdPracownika(), visitPage.getData(), time);
+                resultMessage = "<h2 class=\"text-center\" style=\"height:53px;\">Zgłoszenie wizyty zostało wysłane!</h2><h5 class=\"text-center\" style=\"height:99px;margin-right:50px;margin-left:50px;\"><br>Zmiany powinny być już widoczne.<br></h5> <div class=\"form-group\"><a href=\"ControllerAccount?page=konto\"><button class=\"btn btn-primary\" type=\"submit\" style=\"margin:0;width:265px;margin-left:267px;\">Powrót do konta</button></a></div>";
+            } catch (SQLException | NullPointerException e) {
+                e.printStackTrace();
+                resultMessage = "<h2 class=\"text-center\" style=\"height:53px;\">Wystąpił błąd podczas wysyłania zgłoszenia wizyty.</h2><h5 class=\"text-center\" style=\"height:99px;margin-right:50px;margin-left:50px;\"><br>Prosimy o sprawdzenie, czy wprowadzone zostały prawidłowe dane.</h5> <div class=\"form-group\"><a href=\"ControllerAccount?page=konto\"><button class=\"btn btn-primary\" type=\"submit\" style=\"margin:0;width:265px;margin-left:267px;\">Powrót do konta</button></a></div>";
+            } catch (Exception e) {
+                e.printStackTrace();
             }
+
+            session.removeAttribute("VisitPage");
+        }else{
+            System.out.println("NIE WYBRANO USLUGI");
+            url = "/ControllerAccount?page=wizytyWorker";
         }
-        response.sendRedirect(redirect);
+
+        request.setAttribute("message", resultMessage);
+        getServletContext().getRequestDispatcher("/index_result.jsp").forward(request, response);
     }
 }

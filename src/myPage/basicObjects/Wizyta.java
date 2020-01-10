@@ -11,6 +11,7 @@ import myPage.others.TimeTransformer;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -80,6 +81,10 @@ public class Wizyta {
                     resultQuery.getInt("id_uslugi")
             ));
         }
+    }
+
+    public void dodajWizyteDoZatwierdzenia(int idUslugi, int idKlienta, int idPracownika, Date data, LocalTime godzina) throws SQLException {
+        dataSource.createVisitToConfirm(idUslugi, idKlienta, idPracownika, data, godzina);
     }
 
     /* Ładuje wizyy na aktualny miesiąc */
