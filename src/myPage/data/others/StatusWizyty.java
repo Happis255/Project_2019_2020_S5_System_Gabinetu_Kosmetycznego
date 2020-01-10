@@ -12,6 +12,29 @@ public enum StatusWizyty {
         this.val=val;
     }
 
+    /* Dla wyświetlania w tabeli !*/
+    public static String getName(StatusWizyty status){
+        String str;
+        switch (status){
+            case DO_ZATWIERDZENIA:
+                str = "Do zatwierdzenia";
+                break;
+            case ODRZUCONE:
+                str = "Odrzucona";
+                break;
+            case POTWIERDZONE:
+                str = "Potwierdzona";
+                break;
+            case OPLACONE:
+                str = "Opłacona";
+                break;
+            default:
+                str = null;
+                break;
+        }
+        return str;
+    }
+
     public static String getStringVal(StatusWizyty status){
         String str;
         switch (status){

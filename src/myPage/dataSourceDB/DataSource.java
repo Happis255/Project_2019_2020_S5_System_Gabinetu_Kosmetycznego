@@ -5,10 +5,7 @@ import myPage.exceptions.DBReadWriteException;
 import myPage.exceptions.NoResultsException;
 import myPage.others.DateTransformer;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -539,9 +536,33 @@ public class DataSource {
         exeStatement.setInt(5, Integer.parseInt(parameters.get("cena")));
         exeStatement.setInt(6, Integer.parseInt(parameters.get("czas_trwania")));
         exeStatement.setString(7, parameters.get("wskazowki"));
-        result = exeStatement.executeUpdate();
-        if(result != 1)
-            throw new DBReadWriteException(result + " rows add with execute: createService_p");
+        exeStatement.executeUpdate();
+    }
+
+    // 5. Pobierz usluge o ID
+    public UslugaData getUsluga_ID_DB(int id_uslugi) throws SQLException {
+
+        UslugaData odczytana = null;
+
+        PreparedStatement exeStatement;
+        ResultSet resultSet;
+        exeStatement = statements.get("getUsluga_ID_DB_P");
+        exeStatement.setInt(1, id_uslugi);
+        resultSet = exeStatement.executeQuery();
+
+        if (resultSet.next())
+        odczytana = new UslugaData(
+                resultSet.getInt("id_uslugi"),
+                resultSet.getString("typ_uslugi"),
+                resultSet.getString("nazwa"),
+                resultSet.getString("opis"),
+                resultSet.getBoolean("czy_karta"),
+                resultSet.getInt("cena"),
+                resultSet.getInt("czas_trwania"),
+                resultSet.getString("wskazowki"),
+                resultSet.getInt("id_promocji"));
+
+        return odczytana;
     }
 
     /* Pracownik */
@@ -1477,4 +1498,74 @@ public class DataSource {
         return exeStatement.executeQuery();
     }
 
+    /* Pobiera wizyty na aktualny miesiąc */
+    public ResultSet getMonthWizytyDB() throws SQLException {
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("pobierz_wizyty_ten_miesiac_P");
+        return exeStatement.executeQuery();
+    }
+
+
+    public void potwierdz_wizyteID_DB(int id) throws SQLException {
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("potwierdz_wizyteID_DB_P");
+        exeStatement.setInt(1, id);
+        exeStatement.executeUpdate();
+    }
+
+    public void odrzuc_wizyteID_DB(int id) throws SQLException {
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("odrzuc_wizyteID_DB_P");
+        exeStatement.setInt(1, id);
+        exeStatement.executeUpdate();
+    }
+
+    public void zatwierdz_platnosc_wizytyID_DB(int id) throws SQLException {
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("zatwierdz_platnosc_wizytyID_DB_P");
+        exeStatement.setInt(1, id);
+        exeStatement.executeUpdate();
+    }
+
+    public void usun_wizyteID_DB(int id) throws SQLException {
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("usun_wizyteID_DB_P");
+        exeStatement.setInt(1, id);
+        exeStatement.executeUpdate();
+    }
+
+    public ResultSet getWizytaID_DB(int id) throws SQLException {
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("getWizytaID_DB_P");
+        exeStatement.setInt(1, id);
+        return exeStatement.executeQuery();
+    }
+
+    public void createWizytaWorkerDB(HashMap<String, String> parameters) throws SQLException {
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("createWizytaWorkerDB_P");
+        exeStatement.setDate(1, java.sql.Date.valueOf(parameters.get("P_DATA")));
+        exeStatement.setTime(2, Time.valueOf(parameters.get("P_GODZINA") + ":00"));
+        exeStatement.setString(3, parameters.get("P_STATUS"));
+        exeStatement.setInt(4, Integer.parseInt(parameters.get("P_ID_PRACOWNIKA")));
+        exeStatement.setInt(5, Integer.parseInt(parameters.get("P_ID_KLIENTA")));
+        exeStatement.setInt(6, Integer.parseInt(parameters.get("P_ID_USLUGI")));
+        exeStatement.executeUpdate();
+    }
+
+    public void checkIfCanDoService(int id_pracownika, int id_uslugi) throws SQLException {
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("checkServiceWorker");
+        exeStatement.setInt(1, id_pracownika);
+        exeStatement.setInt(2, id_uslugi);
+        ResultSet result = exeStatement.executeQuery();
+        if (!result.next()) throw new SQLException("NIE MOZE WYKONAC USLUGI!");
+    }
+
+    /* Pobiera wizyty na dzisiejszy dzien */
+    public ResultSet getTodayWizytyDB() throws SQLException {
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("pobierz_today_wzity_P");
+        return exeStatement.executeQuery();
+    }
 }

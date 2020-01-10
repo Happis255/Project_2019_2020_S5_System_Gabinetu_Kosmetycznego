@@ -10,6 +10,7 @@ import myPage.others.TimeTransformer;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedList;
 
 public class Wizyta {
@@ -65,6 +66,79 @@ public class Wizyta {
 
     public void getTimeWorkerFree(int idPracownika, Date dzien) throws SQLException, DBReadWriteException {
         ResultSet resultQuery = dataSource.getVisitsWorkerInDay(idPracownika, dzien);
+
+        while (resultQuery.next()) {
+            wizyty.add(new WizytaData(
+                    resultQuery.getInt("id_wizyty"),
+                    DateTransformer.getJavaDate(resultQuery.getDate("data")),
+                    TimeTransformer.getJavaTime(resultQuery.getTime("godzina")),
+                    StatusWizyty.getStatusWizyty(resultQuery.getString("status")),
+                    resultQuery.getInt("id_pracownika"),
+                    resultQuery.getInt("id_klienta"),
+                    resultQuery.getInt("id_uslugi")
+            ));
+        }
+    }
+
+    /* Ładuje wizyy na aktualny miesiąc */
+    public void getMonthWizyty() throws SQLException {
+        ResultSet resultQuery = dataSource.getMonthWizytyDB();
+
+        while (resultQuery.next()) {
+            wizyty.add(new WizytaData(
+                    resultQuery.getInt("id_wizyty"),
+                    DateTransformer.getJavaDate(resultQuery.getDate("data")),
+                    TimeTransformer.getJavaTime(resultQuery.getTime("godzina")),
+                    StatusWizyty.getStatusWizyty(resultQuery.getString("status")),
+                    resultQuery.getInt("id_pracownika"),
+                    resultQuery.getInt("id_klienta"),
+                    resultQuery.getInt("id_uslugi")
+            ));
+        }
+    }
+
+    public WizytaData getWizytaID_DB(int id) throws SQLException {
+        ResultSet resultQuery = dataSource.getWizytaID_DB(id);
+        WizytaData result = null;
+
+        if (resultQuery.next())
+        result = new WizytaData(
+                    resultQuery.getInt("id_wizyty"),
+                    DateTransformer.getJavaDate(resultQuery.getDate("data")),
+                    TimeTransformer.getJavaTime(resultQuery.getTime("godzina")),
+                    StatusWizyty.getStatusWizyty(resultQuery.getString("status")),
+                    resultQuery.getInt("id_pracownika"),
+                    resultQuery.getInt("id_klienta"),
+                    resultQuery.getInt("id_uslugi")
+            );
+        return result;
+
+    }
+
+
+    public void potwierdz_wizyteID(int id) throws SQLException {
+        dataSource.potwierdz_wizyteID_DB(id);
+    }
+
+    public void odrzuc_wizyteID(int id) throws SQLException {
+        dataSource.odrzuc_wizyteID_DB(id);
+    }
+
+    public void zatwierdz_platnosc_wizytyID(int id) throws SQLException {
+        dataSource.zatwierdz_platnosc_wizytyID_DB(id);
+    }
+
+    public void usun_wizyteID(int id) throws SQLException {
+        dataSource.usun_wizyteID_DB(id);
+    }
+
+    public void createByWorker(HashMap<String, String> parameters) throws SQLException {
+        dataSource.checkIfCanDoService(Integer.parseInt(parameters.get("P_ID_PRACOWNIKA")), Integer.parseInt(parameters.get("P_ID_USLUGI")));
+        dataSource.createWizytaWorkerDB(parameters);
+    }
+
+    public void getTodayWizyty() throws SQLException {
+        ResultSet resultQuery = dataSource.getTodayWizytyDB();
 
         while (resultQuery.next()) {
             wizyty.add(new WizytaData(

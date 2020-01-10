@@ -12,7 +12,7 @@
     session = request.getSession();
     SessionData sessionData = (SessionData) session.getAttribute("userData");
     if(sessionData.getAccoutType() == TypKonta.ADMINISTRATOR)
-        out.print("    <section class=\"bg-light-gray\" style=\"margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:1140px;margin-right:auto;margin-left:auto;border-radius:20px;margin-bottom: 217px;\">\n");
+        out.print("    <section class=\"bg-light-gray\" style=\"margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:1140px;margin-right:auto;margin-left:auto;border-radius:20px;margin-bottom: 241px;\">\n");
     else
         out.print("    <section class=\"bg-light-gray\" style=\"margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:1140px;margin-right:auto;margin-left:auto;border-radius:20px;margin-bottom: 241px;\">\n");
 %>
@@ -37,7 +37,7 @@
 
                         while (!klient.KlientEmpty()) {
                             temp_klient = klient.KlientPop();
-                            out.print("<option value=\"" + temp_klient.getId() + "\">" + temp_klient.getImie() + " " + temp_klient.getNazwisko() + "</option>");
+                            out.print("<option value=\"" + temp_klient.getId() + "\">" + temp_klient.getNazwisko() + " " + temp_klient.getImie() + "</option>");
                         }
                     %>
                 </select>

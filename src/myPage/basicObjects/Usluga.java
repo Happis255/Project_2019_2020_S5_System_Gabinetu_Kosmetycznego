@@ -48,4 +48,8 @@ public class Usluga {
     public void removeAllowence(int id_uslugi, int id_prac) throws SQLException {
         dataSource.removeAllowenceDB(id_uslugi, id_prac);
     }
+
+    public UslugaData getUsluga_ID(int id_uslugi) throws SQLException {
+        return dataSource.getUsluga_ID_DB(id_uslugi);
+    }
 }

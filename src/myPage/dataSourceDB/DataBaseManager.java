@@ -42,6 +42,7 @@ public class DataBaseManager {
             statements.put("setServiceWorker", connection.prepareStatement("{call nadaj_uprawnienie_uslugowe(?, ?)}"));
             statements.put("checkServiceWorker", connection.prepareStatement("select * from pracownik_usluga where pracownik_usluga.id_pracownika =? AND pracownik_usluga.id_uslugi =?"));
             statements.put("getAllAccountsBasicDataWithTag", connection.prepareStatement("{call pobierz_dane_uzytkownikow_typu(?)}"));
+            statements.put("getUsluga_ID_DB_P", connection.prepareStatement("select * from usluga where id_uslugi=?"));
 
             /* Statusy */
             statements.put("pobierz_statusy_DB", connection.prepareStatement("SELECT * FROM status_klienta"));
@@ -63,7 +64,8 @@ public class DataBaseManager {
             statements.put("removeClientDN_P", connection.prepareStatement("{call usun_klient(?)}"));
             statements.put("editClient_p", connection.prepareStatement("{call edytuj_klienta(?,?,?,?,?,?,?,?)}"));
             statements.put("editClientBook_p", connection.prepareStatement("{call edytuj_karte_klienta(?,?,?,?,?,?,?,?,?,?,?,?,?,?)}"));
-            statements.put("get_allClients_P", connection.prepareStatement("SELECT * FROM klient"));
+            statements.put("get_allClients_P", connection.prepareStatement("SELECT * FROM klient ORDER BY klient.nazwisko DESC"));
+
             /* Zarzadzanie ksiazeczka zdrowia pracownika */
             statements.put("pobierz_ksiazeczkeZdrowiaID_P", connection.prepareStatement("{call pobierz_ksiazeczke(?)}"));
 
@@ -144,6 +146,14 @@ public class DataBaseManager {
             statements.put("getVisitsWorkerInDay", connection.prepareStatement("SELECT * FROM wizyta WHERE id_pracownika = ? AND data = ?"));
             statements.put("pobierz_PracownikowDlaUslugi_p", connection.prepareStatement("SELECT pracownik.* FROM pracownik JOIN pracownik_usluga ON pracownik.id_pracownika = pracownik_usluga.id_uslugi WHERE pracownik_usluga.id_uslugi = ?"));
             statements.put("pobierz_WizytyWDniuZPracownikiem_p", connection.prepareStatement("SELECT wizyta.* FROM wizyta WHERE id_pracownika = ? AND data = ?"));
+            statements.put("pobierz_wizyty_ten_miesiac_P", connection.prepareStatement("SELECT * FROM WIZYTA WHERE MONTH(wizyta.data) = MONTH(CURRENT_DATE()) AND YEAR(wizyta.data) = YEAR(CURRENT_DATE()) ORDER BY wizyta.data ASC, wizyta.godzina ASC"));
+            statements.put("potwierdz_wizyteID_DB_P", connection.prepareStatement("UPDATE `wizyta` SET `status` = 'POTWIERDZONE' WHERE `wizyta`.`id_wizyty` = ?"));
+            statements.put("odrzuc_wizyteID_DB_P", connection.prepareStatement("UPDATE `wizyta` SET `status` = 'ODRZUCONE' WHERE `wizyta`.`id_wizyty` = ?"));
+            statements.put("zatwierdz_platnosc_wizytyID_DB_P", connection.prepareStatement("UPDATE `wizyta` SET `status` = 'OPLACONE' WHERE `wizyta`.`id_wizyty` = ?"));
+            statements.put("usun_wizyteID_DB_P", connection.prepareStatement("DELETE FROM `wizyta` WHERE `wizyta`.`id_wizyty` = ?"));
+            statements.put("getWizytaID_DB_P", connection.prepareStatement("SELECT * FROM `wizyta` WHERE `wizyta`.`id_wizyty` = ?"));
+            statements.put("createWizytaWorkerDB_P", connection.prepareStatement("{call wizyta(?,?,?,?,?,?)}"));
+            statements.put("pobierz_today_wzity_P", connection.prepareStatement("SELECT * FROM WIZYTA WHERE DAY(wizyta.data) = DAY(CURRENT_DATE()) AND MONTH(wizyta.data) = MONTH(CURRENT_DATE()) AND YEAR(wizyta.data) = YEAR(CURRENT_DATE()) ORDER BY wizyta.data ASC, wizyta.godzina ASC"));
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }

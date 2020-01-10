@@ -37,7 +37,12 @@ public class ControllerAccount extends HttpServlet {
                 case "pracownicy": accPage.addContent("../P_Administrator/workers_manager.jsp"); break;
                 case "wydarzenia": accPage.addContent("../P_Administrator/event_manager.jsp"); break;
                 case "dodaj_wydarzenie": accPage.addContent("../P_Administrator/event_adder.jsp"); break;
-                case "wizyty": break;
+                case "wizyty": accPage.addContent("../P_Administrator/admin_wizyty_manager.jsp");break;
+                case "dodaj_wizyte": accPage.addContent("../P_Administrator/worker_wizyta_add.jsp");break;
+                case "wyswietl_today_wizyte": accPage.addContent("../P_Administrator/admin_wizyty_manager_today.jsp");break;
+                case "wyswietl_okres_wizyte": accPage.addContent("../P_Administrator/wyswietl_okres_wizyte.jsp");break;
+                case "wyswietl_pracownik_wizyte": accPage.addContent("../P_Administrator/wyswietl_pracownik_wizyte.jsp");break;
+                case "wyswietl_klient_wizyte": accPage.addContent("../P_Administrator/wyswietl_klient_wizyte.jsp");break;
                 case "promocje": accPage.addContent("../P_Administrator/promo_manager.jsp"); break;
                 case "edytuj_status": accPage.addContent("../P_Administrator/status_editor.jsp"); break;
                 case "dodaj_status": accPage.addContent("../P_Administrator/status_adder.jsp"); break;
@@ -68,7 +73,6 @@ public class ControllerAccount extends HttpServlet {
                 case "odpady": accPage.addContent("../P_Administrator/waste_manager.jsp"); break;
                 case "odpady_upload": accPage.addContent("../P_Administrator/add_waste.jsp"); break;
                 case "odpady_calc": accPage.addContent("../P_Administrator/odpady_bilans.jsp"); break;
-                case "sklep_online": break;
                 default: break;
             }
 
@@ -81,7 +85,7 @@ public class ControllerAccount extends HttpServlet {
                 case "aktualnosci_upload": accPage.addContent("../P_Pracownik/upload_news.jsp"); break;
                 case "nieobecnosci": accPage.addContent("../P_Pracownik/absences_manager.jsp"); break;
                 case "nieobecnosc_upload": accPage.addContent("../P_Pracownik/add_absence.jsp"); break;
-                case "wizyty": break;
+
                 case "produkty": accPage.addContent("../P_Pracownik/products_manager.jsp"); break;
                 case "edit_selling_product": accPage.addContent("../P_Pracownik/edit_product_sell.jsp"); break;
                 case "edit_usage_product": accPage.addContent("../P_Pracownik/edit_product_use.jsp"); break;

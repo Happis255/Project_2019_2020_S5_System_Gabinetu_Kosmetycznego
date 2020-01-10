@@ -7,7 +7,7 @@ import java.util.Date;
 
 public class WizytaData {
     private int id_wizyty;
-    private Date data_urodzenia;
+    private Date data_wizyty;
     private LocalTime godzina;
     private StatusWizyty status;
     private int id_pracownika;
@@ -16,7 +16,7 @@ public class WizytaData {
 
     public WizytaData(
             int id_wizyty,
-            Date data_urodzenia,
+            Date data_wizyty,
             LocalTime godzina,
             StatusWizyty status,
             int id_pracownika,
@@ -24,7 +24,7 @@ public class WizytaData {
             int id_uslugi
     ) {
         this.id_wizyty = id_wizyty;
-        this.data_urodzenia = data_urodzenia;
+        this.data_wizyty = data_wizyty;
         this.godzina = godzina;
         this.status = status;
         this.id_pracownika = id_pracownika;
@@ -36,8 +36,8 @@ public class WizytaData {
         return id_wizyty;
     }
 
-    public Date getData_urodzenia() {
-        return data_urodzenia;
+    public Date getData_wizyty() {
+        return data_wizyty;
     }
 
     public LocalTime getGodzina() {
