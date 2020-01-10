@@ -162,4 +162,17 @@ public class Pracownik extends User {
                 ));
         }
     }
+    public double countWyplataID(int id) throws SQLException {
+        ResultSet resultSet = dataSource.countWyplataID_DB(id);
+        if (resultSet.next()) {
+            double suma = resultSet.getInt("zarobki");
+            System.out.print(suma);
+                if (suma < 3000) return 2000;
+                else {
+                    double roznica = suma - 3000;
+                    double dodatkowa_kwota = roznica/2;
+                    return dodatkowa_kwota+2000;
+                }
+        } else return 2000;
+    }
 }

@@ -155,6 +155,12 @@ public class DataBaseManager {
             statements.put("usun_wizyteID_DB_P", connection.prepareStatement("DELETE FROM `wizyta` WHERE `wizyta`.`id_wizyty` = ?"));
             statements.put("getWizytaID_DB_P", connection.prepareStatement("SELECT * FROM `wizyta` WHERE `wizyta`.`id_wizyty` = ?"));
             statements.put("createWizytaWorkerDB_P", connection.prepareStatement("{call wizyta(?,?,?,?,?,?)}"));
+            statements.put("pobierz_wizyty_DataOd_DataDo_P", connection.prepareStatement("SELECT * FROM `wizyta` WHERE wizyta.data >= ? AND  wizyta.data <= ? ORDER BY wizyta.data ASC, wizyta.godzina ASC"));
+            statements.put("loadWizytyFromToWithClient_DB_P", connection.prepareStatement("SELECT * FROM `wizyta` WHERE wizyta.data >= ? AND  wizyta.data <= ? AND wizyta.id_klienta = ? ORDER BY wizyta.data ASC, wizyta.godzina ASC"));
+            statements.put("loadWizytyFromToWithWorker_DB_P", connection.prepareStatement("SELECT * FROM `wizyta` WHERE wizyta.data >= ? AND  wizyta.data <= ? AND wizyta.id_pracownika = ? ORDER BY wizyta.data ASC, wizyta.godzina ASC"));
+            statements.put("getMonthWizytyForClient_DB_P", connection.prepareStatement("SELECT * FROM WIZYTA WHERE MONTH(wizyta.data) = MONTH(CURRENT_DATE()) AND YEAR(wizyta.data) = YEAR(CURRENT_DATE()) AND wizyta.id_klienta = ? ORDER BY wizyta.data ASC, wizyta.godzina ASC"));
+            statements.put("zaktualizujPunktyDB_P", connection.prepareStatement("{call zaktualizuj_punkty(?,?)}"));
+            statements.put("countWyplataID_DB_P", connection.prepareStatement("{call zarobki(?)}"));
             statements.put("pobierz_today_wzity_P", connection.prepareStatement("SELECT * FROM WIZYTA WHERE DAY(wizyta.data) = DAY(CURRENT_DATE()) AND MONTH(wizyta.data) = MONTH(CURRENT_DATE()) AND YEAR(wizyta.data) = YEAR(CURRENT_DATE()) ORDER BY wizyta.data ASC, wizyta.godzina ASC"));
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();

@@ -8,7 +8,6 @@ public class SessionData {
     private ErrorMessage errorMessage;
     private AccountPage accountPage;
 
-
     public SessionData(String nick, TypKonta accountType, int id){
         this.nick = nick;
         this.accoutType = accountType;

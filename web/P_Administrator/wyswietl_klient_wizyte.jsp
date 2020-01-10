@@ -20,11 +20,11 @@
         <h2 class="text-center" style="height:79px;">Podgląd wizyt klienta</h2>
         <h5 class="text-center" style="height:21px;margin-right:50px;margin-left:50px;">Poniżej zamieszczona jest lista klientów gabinetu <br> znajdujących się w bazie systemu.</h5>
 
-        <form action="${pageContext.request.contextPath}/ControllerLoadClientMeetings" method="post">
+        <form action="${pageContext.request.contextPath}/ControllerGetWizytyKlient" method="post">
             <h6 class="text-center" id="informacja" style="height:44px;margin-right:50px;margin-left:50px;font-weight: 100;margin-top: 88px;">Wybierz imię i nazwisko klienta, a następnie zatwierdź operację by sprawdzić jego wizyty.</h6>
 
             <div class="form-group" style="margin-bottom:-2px;">
-                <select class="form-control" name="pracownik_id" required="" id="klient_id" style="margin:0;margin-left:437px;width:265px;margin-bottom:16px;margin-top: -17px;">
+                <select class="form-control" name="klient_id" required="" id="klient_id" style="margin:0;margin-left:437px;width:265px;margin-bottom:16px;margin-top: -17px;">
                     <%
                         Klient klienci = new Klient();
                         KlientData temp_klient;

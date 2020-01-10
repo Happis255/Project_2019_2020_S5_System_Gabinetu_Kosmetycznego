@@ -40,10 +40,11 @@
                 temp_ksiazeczka = ksiazeczka.getKsiazeczkaID(temp_pracownik.getId_ksiazeczki());
                 /* Pracownik może wykonywać wiele usług, dlatego należy pobrać zbiór usług możliwych do wykonywania przez pracownika */
                 uslugi.getUslugiPracownikaID(temp_pracownik.getId());
+                double wyplata = pracownicy_gabinetu.countWyplataID(temp_pracownik.getId());
 
                 /* Generujemy stronę pracownikowi */
                 out.print("    <section id=\"pracownik\" class=\"bg-light-gray\" style=\"margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:1140px;margin-right:auto;margin-left:auto;border-radius:20px;margin-bottom:30px;\">\n" +
-                        "        <h2 class=\"text-center\">" + temp_pracownik.getImie() + " " + temp_pracownik.getNazwisko() + "</h2>\n" +
+                        "        <h2 class=\"text-center\">" + temp_pracownik.getImie() + " " + temp_pracownik.getNazwisko() + ", wypłata: " + wyplata + " PLN</h2>\n" +
                         "        <br>\n" +
                         "        <table class=\"table\" cellspacing=\"0\" width=\"100%\" style=\"margin-top: -18px;text-align: center;margin-bottom: 0;width: 55%;/* max-width: 100%; */margin-left: 16%;background-color: transparent;border-collapse: collapse;min-width: 760px;\"\">\n" +
                         "            <tr>\n" +

@@ -29,9 +29,9 @@ public class ControllerLogin extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         session = request.getSession();
         if(loginAttempts >= maxLoginAttempts){
-            System.out.println("zbyt duzo logowan");
-            response.sendRedirect("logowanie.jsp");
-            return;
+            String resultMessage = "<h2 class=\"text-center\" style=\"height:53px;\">Logowanie nie powiodło się.</h2><h5 class=\"text-center\" style=\"height:99px;margin-right:50px;margin-left:50px;\"><br>Dokonano zbyt wielu prób niepoprawnego logowania.<br>Skontaktuj się z administratorem systemu.</h5> <div class=\"form-group\"><a href=\"index.jsp\"><button class=\"btn btn-primary\" type=\"submit\" style=\"margin:0;width:265px;margin-left:267px;\">Powrót do strony głównej</button></a></div>";
+            request.setAttribute("message", resultMessage);
+            getServletContext().getRequestDispatcher("/index_result.jsp").forward(request, response);
         }
 
         User user = new User();
@@ -42,15 +42,19 @@ public class ControllerLogin extends HttpServlet {
             ret = user.login(request, request.getParameter("username"), pws.encrypt(request.getParameter("password")));
             if(!ret){
                 ++loginAttempts;
-                System.out.println("błędny login i/lub hasło");
+                String resultMessage = "<h2 class=\"text-center\" style=\"height:53px;\">Logowanie nie powiodło się.</h2><h5 class=\"text-center\" style=\"height:99px;margin-right:50px;margin-left:50px;\"><br>Upewnij się, czy wprowadzony został poprawny e-mail/hasło,<br>bądź czy niezmieniany był ostatnio e-mail bądź hasło.</h5> <div class=\"form-group\"><a href=\"index.jsp\"><button class=\"btn btn-primary\" type=\"submit\" style=\"margin:0;width:265px;margin-left:267px;\">Powrót do strony głównej</button></a></div>";
+                request.setAttribute("message", resultMessage);
+                getServletContext().getRequestDispatcher("/index_result.jsp").forward(request, response);
             }else{
                 loginAttempts = 0;
-                System.out.println("zalogowano");
+                String resultMessage = "<h2 class=\"text-center\" style=\"height:53px;\">Witamy w systemie.</h2><h5 class=\"text-center\" style=\"height:99px;margin-right:50px;margin-left:50px;\"><br>Przejdź do swojego panelu za pomocą opcji z górnego menu.</h5> <div class=\"form-group\"><a href=\"index.jsp\"><button class=\"btn btn-primary\" type=\"submit\" style=\"margin:0;width:265px;margin-left:267px;\">Przejście do strony głównej</button></a></div>";
+                request.setAttribute("message", resultMessage);
+                getServletContext().getRequestDispatcher("/index_result.jsp").forward(request, response);
             }
         } catch (SQLException e) {
-            ErrorMessage errorMessage = new ErrorMessage(e);
-            session.setAttribute("errorMessage", errorMessage);
-            response.sendRedirect("errorPage.jsp");
+            String resultMessage = "<h2 class=\"text-center\" style=\"height:53px;\">Logowanie nie powiodło się.</h2><h5 class=\"text-center\" style=\"height:99px;margin-right:50px;margin-left:50px;\"><br>Upewnij się, czy wprowadzony został poprawny e-mail/hasło,<br>bądź czy niezmieniany był ostatnio e-mail bądź hasło.</h5> <div class=\"form-group\"><a href=\"index.jsp\"><button class=\"btn btn-primary\" type=\"submit\" style=\"margin:0;width:265px;margin-left:267px;\">Powrót do strony głównej</button></a></div>";
+            request.setAttribute("message", resultMessage);
+            getServletContext().getRequestDispatcher("/index_result.jsp").forward(request, response);
             return;
         }
 

@@ -80,22 +80,22 @@
                         e.printStackTrace();
                     }
 
-                    assert odczytana_usluga != null;
-                    assert odczytany_pracownik != null;
-                    assert odczytany_klient != null;
-                    out.println("<tr><td> <input type=\"Checkbox\" Name=\"do_zmiany\" Value =\"" + odczytana_wizyta.getId_wizyty() + "\"></td>" +
-                                "<td>" + odczytana_wizyta.getId_wizyty() + "</td>" +
-                                "<td>" + odczytany_klient.getImie() + "</td>" +
-                                "<td>" + odczytany_klient.getNazwisko() + "</td>" +
-                                "<td>" + odczytany_pracownik.getImie() + "</td>" +
-                                "<td>" + odczytany_pracownik.getNazwisko() + "</td>" +
-                                "<td>" + data_wizyty + "</td>" +
-                                "<td>" + godzina_wizyty + "</td>" +
-                                "<td>" + odczytana_usluga.getNazwa() + "</td>" +
-                                "<td>" + odczytana_usluga.getCena() + "</td>" +
-                                "<td>" + odczytana_usluga.getCzas_trwania() + "</td>" +
-                                "<td>" + StatusWizyty.getName(odczytana_wizyta.getStatus()) + "</td>" +
-                                "</tr>");
+                    out.println("<tr><td>");
+                    if (!StatusWizyty.getName(odczytana_wizyta.getStatus()).equals("Opłacona"))
+                        out.print("<input type=\"Checkbox\" Name=\"do_zmiany\" Value =\"" + odczytana_wizyta.getId_wizyty() + "\">");
+                    out.print( "</td>" +
+                            "<td>" + odczytana_wizyta.getId_wizyty() + "</td>" +
+                            "<td>" + odczytany_klient.getImie() + "</td>" +
+                            "<td>" + odczytany_klient.getNazwisko() + "</td>" +
+                            "<td>" + odczytany_pracownik.getImie() + "</td>" +
+                            "<td>" + odczytany_pracownik.getNazwisko() + "</td>" +
+                            "<td>" + data_wizyty + "</td>" +
+                            "<td>" + godzina_wizyty + "</td>" +
+                            "<td>" + odczytana_usluga.getNazwa() + "</td>" +
+                            "<td>" + odczytana_usluga.getCena() + "</td>" +
+                            "<td>" + odczytana_usluga.getCzas_trwania() + "</td>" +
+                            "<td>" + StatusWizyty.getName(odczytana_wizyta.getStatus()) + "</td>" +
+                            "</tr>");
                 }
             %>
 

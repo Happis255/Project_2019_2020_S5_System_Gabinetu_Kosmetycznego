@@ -90,7 +90,5 @@
     </table>
 
 </section>
-
 <a href="../ControllerVisitsSend"><button class="btn btn-primary float-none align-self-center" type="button" style="width:265px;position:static;text-align:center!important;margin-left:437px;margin-top:20px;">zatweirdz i wyślij</button></a>
-
 </html>

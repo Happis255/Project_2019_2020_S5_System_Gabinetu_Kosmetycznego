@@ -25,7 +25,7 @@
                 <div class="col-sm-4 col-md-3 item">
                     <h3>Przejdź do</h3>
                     <ul>
-                        <li><a href="../ControllerAccount?page=wizyty">Wizyty</a></li>
+                        <li><a href="../ControllerAccount?page=wizyty">Twoje wizyty</a></li>
                         <li><a href="../P_User/aktualnosci.jsp">Aktualności</a></li>
                         <li><a href="../P_User/oferta_zakupowa.jsp">Oferta sprzedażowa</a></li>
                         <li><a href="../P_User/uslugi.jsp">Oferta usługowa</a></li>

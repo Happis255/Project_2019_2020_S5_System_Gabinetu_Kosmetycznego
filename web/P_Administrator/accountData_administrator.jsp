@@ -33,6 +33,7 @@
 
         try {
                 temp_pracownik = pracownicy_gabinetu.getData();
+                double wyplata = pracownicy_gabinetu.countWyplataID(temp_pracownik.getId());
 
                 /* Odczytujemy ksiazeczke zdrowia pracownika oraz jego możliwe do wykonywania usługi */
                 DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -78,11 +79,11 @@
                         "            </tr>\n" +
                         "        </table>\n" +
                         "        <br>\n" +
+                        "        <h5 class=\"text-center\" style=\"    height: 49px;margin-right: 50px;margin-left: 50px;font-weight: 100;font-size: 17px;\">Przewidywana wypłata na ten miesiąc: " + wyplata +" PLN</h5>\n" +
                         "        <h5 class=\"text-center\" style=\"height:30px;margin-right:50px;margin-left:50px;\">Uprawnienia do wykonywania usług</h5>\n" +
                         "        <table class=\"table\" cellspacing=\"0\" width=\"100%\" style=\"text-align: center;margin-bottom: 0;border: 3px solid #FFFFFF;width: 55%;max-width: 55%;margin-left: 259px;background-color: transparent;border-collapse: collapse;\">\n" +
                         "            <thead>\n" +
                         "            <tr>\n" +
-                        "                <th></th>\n" +
                         "                <th style=\"width: 50%\">TYP USLUGI</th>\n" +
                         "                <th style=\"width: 50%\">NAZWA USLUGI</th>\n" +
                         "            </tr>\n" +
@@ -92,7 +93,6 @@
                              temp_usluga = uslugi.uslugaPop();
                              out.print(
                                      "            <tr>\n" +
-                                     "                <td> <input type=\"Checkbox\" name=\"do_usuniecia\" value=\"" + temp_usluga.getId_uslugi() + " " + temp_pracownik.getId() + "\"></td>\n" +
                                      "                <td>" + temp_usluga.getTyp_uslugi() +"</td>\n" +
                                      "                <td>"  + temp_usluga.getNazwa() +"</td>\n" +
                                      "            </tr>\n");

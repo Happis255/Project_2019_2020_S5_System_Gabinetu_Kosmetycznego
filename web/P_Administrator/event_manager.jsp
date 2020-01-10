@@ -2,11 +2,9 @@
 <%@ page import="myPage.basicObjects.Wydarzenie" %>
 <%@ page import="myPage.data.dataBase.WydarzenieData" %>
 <%@ page import="myPage.data.others.SessionData" %>
-<%@ page import="myPage.data.others.TypKonta" %>
 <%@ page import="java.text.DateFormat" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.LinkedList" %>
-<%@ page import="javax.persistence.criteria.CriteriaBuilder" %>
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>

@@ -74,6 +74,8 @@ public class ControllerWizytaModificator extends HttpServlet {
                         break;
 
                     case "zatwierdz": wizyty.zatwierdz_platnosc_wizytyID(a);
+                        wizyta_info = wizyty.getWizytaID_DB(a);
+                        wizyty.zaktualizuj_punkty(wizyta_info);
                         break;
 
                     case "usun":
