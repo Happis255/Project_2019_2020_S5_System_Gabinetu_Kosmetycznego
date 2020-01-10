@@ -57,5 +57,9 @@ public class Wydarzenie {
         dataSource.singInWorkerForEvent(idPracownika, idWydarzenia);
     }
 
+    public void singOutFromEvent(int id) throws SQLException {
+        dataSource.signOutEvent(id);
+    }
+
     //podobnie jak przy Usluga
 }

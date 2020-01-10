@@ -1372,6 +1372,20 @@ public class DataSource {
 
     }
 
+    public ResultSet getWorkerName(int id) throws SQLException {
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("pobierz_nazwiska_wydarzenie");
+        exeStatement.setInt(1, id);
+        return exeStatement.executeQuery();
+    }
+
+    public void signOutEvent(int id) throws SQLException {
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("wypiszPracownikaNaWydarzenie");
+        exeStatement.setInt(1, id);
+        exeStatement.executeUpdate();
+    }
+
     //Zadania gospodarcze
     public LinkedList<ZadanieGospodarczeData> getAllZadania_DB() throws SQLException {
 
@@ -1568,4 +1582,5 @@ public class DataSource {
         exeStatement = statements.get("pobierz_today_wzity_P");
         return exeStatement.executeQuery();
     }
+
 }
