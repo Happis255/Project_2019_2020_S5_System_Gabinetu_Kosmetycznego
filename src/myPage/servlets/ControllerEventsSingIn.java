@@ -20,43 +20,70 @@ public class ControllerEventsSingIn extends HttpServlet {
     private HttpSession session;
     private String resultMessage = "";
 
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         request.setCharacterEncoding("UTF-8");
+        switch (request.getParameter("opcja")) {
 
-        session = request.getSession();
-        SessionData sessionData = (SessionData) session.getAttribute("userData");
-        Pracownik pracownik = null;
+            case "zapisz":
+                session = request.getSession();
+                SessionData sessionData = (SessionData) session.getAttribute("userData");
+                Pracownik pracownik = null;
 
-        if (sessionData.getAccoutType() != TypKonta.KLIENT) {
-            pracownik = new Pracownik(sessionData.getId());
-        } else {
-            ErrorMessage errorMessage = new ErrorMessage(new ErrorException("brak dostepu do tej operacji"));
-            session.setAttribute("errorMessage", errorMessage);
-            response.sendRedirect("errorPage.jsp");
-            return;
-        }
+                if (sessionData.getAccoutType() != TypKonta.KLIENT) {
+                    pracownik = new Pracownik(sessionData.getId());
+                } else {
+                    ErrorMessage errorMessage = new ErrorMessage(new ErrorException("brak dostepu do tej operacji"));
+                    session.setAttribute("errorMessage", errorMessage);
+                    response.sendRedirect("errorPage.jsp");
+                    return;
+                }
 
-        Wydarzenie event = new Wydarzenie();
-        String[] spis_id = request.getParameterValues("do_zapisania");
-        int idEventu = 0;
-        int idPracownika = sessionData.getId();
-        try {
-            for (int i = 0; i < spis_id.length; i++){
-                idEventu = Integer.parseInt(spis_id[i]);
-                event.singInForEvent(idPracownika, idEventu);
-            }
-            resultMessage = "<h2 class=\"text-center\" style=\"height:53px;\">Pomyślnie zapisałeś się na szkolenie!</h2><h5 class=\"text-center\" style=\"height:99px;margin-right:50px;margin-left:50px;\"><br>Zmiany powinny być już widoczne.<br></h5> <div class=\"form-group\"><a href=\"ControllerAccount?page=wydarzenia\"><button class=\"btn btn-primary\" type=\"submit\" style=\"margin:0;width:265px;margin-left:267px;\">Powrót do wydarzeń</button></a></div>";
-            request.setAttribute("message", resultMessage);
-            getServletContext().getRequestDispatcher("/index_result.jsp").forward(request, response);
+                Wydarzenie event = new Wydarzenie();
+                String[] spis_id = request.getParameterValues("do_zapisania");
+                int idEventu = 0;
+                int idPracownika = sessionData.getId();
+                try {
+                    for (int i = 0; i < spis_id.length; i++) {
+                        idEventu = Integer.parseInt(spis_id[i]);
+                        event.singInForEvent(idPracownika, idEventu);
+                 }
+                    resultMessage = "<h2 class=\"text-center\" style=\"height:53px;\">Pomyślnie zapisałeś się na szkolenie!</h2><h5 class=\"text-center\" style=\"height:99px;margin-right:50px;margin-left:50px;\"><br>Zmiany powinny być już widoczne.<br></h5> <div class=\"form-group\"><a href=\"ControllerAccount?page=wydarzenia\"><button class=\"btn btn-primary\" type=\"submit\" style=\"margin:0;width:265px;margin-left:267px;\">Powrót do wydarzeń</button></a></div>";
+                    request.setAttribute("message", resultMessage);
+                    getServletContext().getRequestDispatcher("/index_result.jsp").forward(request, response);
 
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-            resultMessage = "<h2 class=\"text-center\" style=\"height:53px;\">Wystąpił błąd.</h2><h5 class=\"text-center\" style=\"height:99px;margin-right:50px;margin-left:50px;\"><br>Prosimy o skontaktowanie się z administratorem systemu<br>bądź prosimy o zgłoszenie błędu.<br></h5> <div class=\"form-group\"><a href=\"ControllerAccount?page=wydarzenia\"><button class=\"btn btn-primary\" type=\"submit\" style=\"margin:0;width:265px;margin-left:267px;\">Powrót</button></a></div>";
-            request.setAttribute("message", resultMessage);
-            getServletContext().getRequestDispatcher("/index_result.jsp").forward(request, response);
-        } catch (Exception e) {
-            e.printStackTrace();
+                } catch (NullPointerException e) {
+                    e.printStackTrace();
+                    resultMessage = "<h2 class=\"text-center\" style=\"height:53px;\">Wystąpił błąd.</h2><h5 class=\"text-center\" style=\"height:99px;margin-right:50px;margin-left:50px;\"><br>Prosimy o skontaktowanie się z administratorem systemu<br>bądź prosimy o zgłoszenie błędu.<br></h5> <div class=\"form-group\"><a href=\"ControllerAccount?page=wydarzenia\"><button class=\"btn btn-primary\" type=\"submit\" style=\"margin:0;width:265px;margin-left:267px;\">Powrót</button></a></div>";
+                    request.setAttribute("message", resultMessage);
+                    getServletContext().getRequestDispatcher("/index_result.jsp").forward(request, response);
+                } catch (Exception e) {
+                   e.printStackTrace();
+                }
+                break;
+
+            case "wypisz":
+                Wydarzenie eve = new Wydarzenie();
+                String[] spis = request.getParameterValues("do_wypisania");
+                int id = 0;
+                try {
+                    for (int i = 0; i < spis.length; i++){
+                        id = Integer.parseInt(spis[i]);
+                        eve.singOutFromEvent(id);
+                    }
+                    resultMessage = "<h2 class=\"text-center\" style=\"height:53px;\">Wypisanie ze szkolenia zostało zakończone sukcesem!</h2><h5 class=\"text-center\" style=\"height:99px;margin-right:50px;margin-left:50px;\"><br>Zmiany powinny być już widoczne.<br></h5> <div class=\"form-group\"><a href=\"ControllerAccount?page=wydarzenia\"><button class=\"btn btn-primary\" type=\"submit\" style=\"margin:0;width:265px;margin-left:267px;\">Powrót do wydarzeń</button></a></div>";
+                    request.setAttribute("message", resultMessage);
+                    getServletContext().getRequestDispatcher("/index_result.jsp").forward(request, response);
+
+                } catch (NullPointerException e) {
+                    e.printStackTrace();
+                    resultMessage = "<h2 class=\"text-center\" style=\"height:53px;\">Wystąpił błąd.</h2><h5 class=\"text-center\" style=\"height:99px;margin-right:50px;margin-left:50px;\"><br>Prosimy o skontaktowanie się z administratorem systemu<br>bądź prosimy o zgłoszenie błędu.<br></h5> <div class=\"form-group\"><a href=\"ControllerAccount?page=wydarzenia\"><button class=\"btn btn-primary\" type=\"submit\" style=\"margin:0;width:265px;margin-left:267px;\">Powrót</button></a></div>";
+                    request.setAttribute("message", resultMessage);
+                    getServletContext().getRequestDispatcher("/index_result.jsp").forward(request, response);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
         }
     }
 }

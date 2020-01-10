@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
-    <section id="upload_selling_product" class="bg-light-gray" style="margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:800px;margin-right:auto;margin-left:auto;border-radius:20px;margin-bottom:30px;">
+    <section id="upload_selling_product" class="bg-light-gray" style="margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:800px;margin-right:auto;margin-left:auto;border-radius:20px;margin-bottom:35px;">
         <form action="${pageContext.request.contextPath}/ControllerUploadSellingProductWithJPG" method="post" enctype="multipart/form-data">
             <h2 class="text-center" style="height:79px;">Dodaj produkt na sprzedaż</h2>
             <h5 class="text-center" style="height:21px;margin-right:50px;margin-left:50px;">Wprowadź dane dotyczące produktu oraz dodaj grafikę.</h5>

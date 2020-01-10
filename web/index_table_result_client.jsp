@@ -20,11 +20,11 @@
 
 <script>
     $(function(){
-        $("#navbar-placeholder").load("navbar_index.jsp");
+        $("#navbar-placeholder").load("navbar_klient.jsp");
     });
 </script>
 
-<section id="kontakt" class="bg-light-gray" style="margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:800px;margin-right:auto;margin-left:auto;border-radius:20px;margin-bottom:219px;margin-top:157px;">
+<section id="kontakt" class="bg-light-gray">
 
     <div>${requestScope.message}</div>
 
@@ -37,7 +37,7 @@
 
 <script>
     $(function(){
-        $("#footer-placeholder").load("footer_index.jsp");
+        $("#footer-placeholder").load("footer_klient.jsp");
     });
 </script>
 <!--end of Footer bar-->

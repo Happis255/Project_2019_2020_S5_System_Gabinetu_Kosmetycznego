@@ -16,10 +16,10 @@
                 <div class="col-sm-4 col-md-3 item">
                     <h3>Przejdź do</h3>
                     <ul>
-                        <li><a href="#../ControllerAccount?page=konto">Konto</a></li>
+                        <li><a href="../ControllerAccount?page=konto">Konto</a></li>
                         <li><a href="../ControllerAccount?page=zadania_peek">Zadania gospodarcze</a></li>
                         <li><a href="../ControllerAccount?page=nieobecnosci">Nieobecności</a></li>
-                        <li><a href="#">Wizyty</a></li>
+                        <li><a href="../ControllerAccount?page=wizyty">Wizyty</a></li>
                     </ul>
                 </div>
                 <div class="col-sm-4 col-md-3 item">

@@ -4,14 +4,16 @@
 <%@ page import="myPage.data.dataBase.*" %>
 <%@ page import="myPage.basicObjects.*" %>
 <%@ page import="myPage.data.others.StatusWizyty" %>
+<%@ page import="myPage.data.others.SessionData" %>
 <!DOCTYPE html>
 <html>
+<% SessionData sessionData = (SessionData)session.getAttribute("userData"); %>
     <section id="wizyty_spis_admin" class="bg-light-gray" style="margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:1350px;margin-right:auto;margin-left:auto;border-radius:20px;margin-bottom:30px;">
         <form action="${pageContext.request.contextPath}/ControllerWizytaModificator" method="post">
             <h2 class="text-center" style="height:79px;">Wizyty</h2>
-            <h5 class="text-center" style="height:21px;margin-right:50px;margin-left:50px;">W poniższej sekcji znajdując się wszystkie wizyty znajdujące się w bazie systemu na aktualny miesiąc.</h5>
-            <h6 class="text-center" id="informacja" style="margin-right:50px;margin-left:50px;font-weight: 100;    margin-bottom: 0;">Zaznacz wybraną wizytę, by ją odrzucić, potwierdzić, zatwierdzić płatność bądź usunąć.</h6>
-            <h6 class="text-center" style="height:44px;margin-right:50px;margin-left:50px;font-weight: 100;">W celu dodania nowej wizyty wybierz odpowiednią opcję oraz wprowadź dane klienta.</h6>
+            <h5 class="text-center" style="height:21px;margin-right:50px;margin-left:50px;">W poniższej sekcji znajdując się wszystkie twoje wizyty na aktualny miesiąc.</h5>
+            <h6 class="text-center" id="informacja" style="margin-right:50px;margin-left:50px;font-weight: 100;margin-bottom: 58px;">Zaznacz wybraną wizytę, by ją odwołać.</h6>
+
             <table id="tablica_wizyt_caly_dzien" class="table" cellspacing="0" width="100%" style="text-align: center;margin-bottom: 0;border: 3px solid #FFFFFF;width: 98%;max-width: 98%;margin-left: 12px;background-color: transparent;border-collapse: collapse;">
             <thead>
             <tr>
@@ -41,7 +43,7 @@
 
                 try {
                     /* Załadowanie wizyt znajdujących się w bazie gabinetu na aktualny miesiąc */
-                    wizyty_w_gabinecie.getMonthWizyty();
+                    wizyty_w_gabinecie.getMonthWizytyForClient(sessionData.getId());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -101,21 +103,8 @@
 
             </tbody>
             </table>
-            <div class="row">
-                <a><button class="btn btn-primary float-none align-self-center" type="submit" name="opcja" value="potwierdz" style="width:265px;margin-left: 272px;margin-top:20px;">Potwierdź wizytę</button></a>
-                <a><button class="btn btn-primary float-none align-self-center" type="submit" name="opcja" value="odrzuc" style="width:265px;margin-left: 17px;margin-top:20px;">Odrzuć wizytę</button></a>
-                <a><button class="btn btn-primary float-none align-self-center" type="submit" name="opcja" value="zatwierdz" style="width:265px;margin-left: 17px;margin-top:20px;">Zatwierdź płatność</button></a>
-            </div>
-            <div class="row">
-                <a><button class="btn btn-primary float-none align-self-center" type="submit" name="opcja" value="usun" style="width:265px;margin-left: 272px;margin-top:20px;">Usuń wizytę</button></a>
-                <a href="../ControllerAccount?page=dodaj_wizyte"><button class="btn btn-primary float-none align-self-center" type="button" style="width:265px;margin-left: 17px;margin-top:20px;">Dodaj wizytę</button></a>
-                <a href="../ControllerAccount?page=wyswietl_today_wizyte"><button class="btn btn-primary float-none align-self-center" type="button" style="width:265px;margin-left: 17px;margin-top:20px;">Wyświetl dzisiejsze wizyty</button></a>
-            </div>
-            <div class="row">
-                <a href="../ControllerAccount?page=wyswietl_okres_wizyte"><button class="btn btn-primary float-none align-self-center" type="button" style="width:265px;margin-left: 272px;margin-top:20px;">Wyświetl wybrany okres</button></a>
-                <a href="../ControllerAccount?page=wyswietl_pracownik_wizyte"><button class="btn btn-primary float-none align-self-center" type="button" style="width:265px;margin-left: 17px;margin-top:20px;">Wyświetl wybranego pracownika</button></a>
-                <a href="../ControllerAccount?page=wyswietl_klient_wizyte"><button class="btn btn-primary float-none align-self-center" type="button" style="width:265px;margin-left: 17px;margin-top:20px;">Wyświetl wybranego klienta</button></a>
-            </div>
+                <a href="../ControllerAccount?page=wyswietl_okres"><button class="btn btn-primary float-none align-self-center" type="button" style="width:265px;margin-left: 542px;margin-top:20px;">Wyświetl wybrany okres</button></a>
+                <a><button class="btn btn-primary float-none align-self-center" type="submit" name="opcja" value="odrzuc" style="width:265px;margin-left: 542px;margin-top:20px;">Odwołaj wizytę</button></a>
         </form>
         </section>
 </html>

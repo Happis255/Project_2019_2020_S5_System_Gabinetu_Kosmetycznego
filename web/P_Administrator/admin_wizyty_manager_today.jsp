@@ -8,7 +8,7 @@
 <html>
     <section id="wizyty_spis_admin" class="bg-light-gray" style="margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:1350px;margin-right:auto;margin-left:auto;border-radius:20px;margin-bottom:30px;">
         <form action="${pageContext.request.contextPath}/ControllerWizytaModificator" method="post">
-            <h2 class="text-center" style="height:79px;">Wizyty</h2>
+            <h2 class="text-center" style="height:79px;">Dzisiejsze wizyty</h2>
             <h5 class="text-center" style="height:21px;margin-right:50px;margin-left:50px;">W poniższej sekcji znajdując się wszystkie wizyty znajdujące się w bazie systemu na aktualny miesiąc.</h5>
             <h6 class="text-center" id="informacja" style="margin-right:50px;margin-left:50px;font-weight: 100;    margin-bottom: 0;">Zaznacz wybraną wizytę, by ją odrzucić, potwierdzić, zatwierdzić płatność bądź usunąć.</h6>
             <h6 class="text-center" style="height:44px;margin-right:50px;margin-left:50px;font-weight: 100;">W celu dodania nowej wizyty wybierz odpowiednią opcję oraz wprowadź dane klienta.</h6>
@@ -80,10 +80,10 @@
                         e.printStackTrace();
                     }
 
-                    assert odczytana_usluga != null;
-                    assert odczytany_pracownik != null;
-                    assert odczytany_klient != null;
-                    out.println("<tr><td> <input type=\"Checkbox\" Name=\"do_zmiany\" Value =\"" + odczytana_wizyta.getId_wizyty() + "\"></td>" +
+                    out.println("<tr><td>");
+                    if (!StatusWizyty.getName(odczytana_wizyta.getStatus()).equals("Opłacona"))
+                        out.print("<input type=\"Checkbox\" Name=\"do_zmiany\" Value =\"" + odczytana_wizyta.getId_wizyty() + "\">");
+                    out.print( "</td>" +
                                 "<td>" + odczytana_wizyta.getId_wizyty() + "</td>" +
                                 "<td>" + odczytany_klient.getImie() + "</td>" +
                                 "<td>" + odczytany_klient.getNazwisko() + "</td>" +

@@ -1,5 +1,7 @@
 package myPage.basicObjects;
 
+import myPage.data.dataBase.KlientData;
+import myPage.data.dataBase.UslugaData;
 import myPage.data.dataBase.WizytaData;
 import myPage.data.others.StatusWizyty;
 import myPage.dataSourceDB.DataSource;
@@ -156,5 +158,88 @@ public class Wizyta {
                     resultQuery.getInt("id_uslugi")
             ));
         }
+    }
+
+    public void loadWizytyFroMDatatoData(String data_od, String data_do) throws SQLException {
+        ResultSet resultQuery = dataSource.loadWizytyFroMDatatoData_DB(data_od, data_do);
+        while (resultQuery.next()) {
+            wizyty.add(new WizytaData(
+                    resultQuery.getInt("id_wizyty"),
+                    DateTransformer.getJavaDate(resultQuery.getDate("data")),
+                    TimeTransformer.getJavaTime(resultQuery.getTime("godzina")),
+                    StatusWizyty.getStatusWizyty(resultQuery.getString("status")),
+                    resultQuery.getInt("id_pracownika"),
+                    resultQuery.getInt("id_klienta"),
+                    resultQuery.getInt("id_uslugi")
+            ));
+        }
+    }
+
+    public void loadWizytyFromToWithClient(String data_od, String data_do, String id_klienta) throws SQLException {
+        ResultSet resultQuery = dataSource.loadWizytyFromToWithClient_DB(data_od, data_do, id_klienta);
+        while (resultQuery.next()) {
+            wizyty.add(new WizytaData(
+                    resultQuery.getInt("id_wizyty"),
+                    DateTransformer.getJavaDate(resultQuery.getDate("data")),
+                    TimeTransformer.getJavaTime(resultQuery.getTime("godzina")),
+                    StatusWizyty.getStatusWizyty(resultQuery.getString("status")),
+                    resultQuery.getInt("id_pracownika"),
+                    resultQuery.getInt("id_klienta"),
+                    resultQuery.getInt("id_uslugi")
+            ));
+        }
+    }
+
+    public void loadWizytyFromToWithWorker(String data_od, String data_do, String id_pracownika) throws SQLException {
+        ResultSet resultQuery = dataSource.loadWizytyFromToWithWorker_DB(data_od, data_do, id_pracownika);
+        while (resultQuery.next()) {
+            wizyty.add(new WizytaData(
+                    resultQuery.getInt("id_wizyty"),
+                    DateTransformer.getJavaDate(resultQuery.getDate("data")),
+                    TimeTransformer.getJavaTime(resultQuery.getTime("godzina")),
+                    StatusWizyty.getStatusWizyty(resultQuery.getString("status")),
+                    resultQuery.getInt("id_pracownika"),
+                    resultQuery.getInt("id_klienta"),
+                    resultQuery.getInt("id_uslugi")
+            ));
+        }
+    }
+
+    public void getMonthWizytyForClient(int id) throws SQLException {
+        ResultSet resultQuery = dataSource.getMonthWizytyForClient_DB(id);
+        while (resultQuery.next()) {
+            wizyty.add(new WizytaData(
+                    resultQuery.getInt("id_wizyty"),
+                    DateTransformer.getJavaDate(resultQuery.getDate("data")),
+                    TimeTransformer.getJavaTime(resultQuery.getTime("godzina")),
+                    StatusWizyty.getStatusWizyty(resultQuery.getString("status")),
+                    resultQuery.getInt("id_pracownika"),
+                    resultQuery.getInt("id_klienta"),
+                    resultQuery.getInt("id_uslugi")
+            ));
+        }
+    }
+
+    public void loadWizytyFromDataToDataClient(String data_od, String data_do, int id) throws SQLException {
+        ResultSet resultQuery = dataSource.loadWizytyFromToWithClient_DB(data_od, data_do, Integer.toString(id));
+        while (resultQuery.next()) {
+            wizyty.add(new WizytaData(
+                    resultQuery.getInt("id_wizyty"),
+                    DateTransformer.getJavaDate(resultQuery.getDate("data")),
+                    TimeTransformer.getJavaTime(resultQuery.getTime("godzina")),
+                    StatusWizyty.getStatusWizyty(resultQuery.getString("status")),
+                    resultQuery.getInt("id_pracownika"),
+                    resultQuery.getInt("id_klienta"),
+                    resultQuery.getInt("id_uslugi")
+            ));
+        }
+    }
+
+    public void zaktualizuj_punkty(WizytaData wizyta_info) throws SQLException {
+        Klient klient = new Klient(wizyta_info.getId_klienta());
+        KlientData klientData = klient.getData();
+        Usluga usluga = new Usluga();
+        UslugaData uslugaData = usluga.getUsluga_ID(wizyta_info.getId_uslugi());
+        dataSource.zaktualizujPunktyDB(klientData.getE_mail(), uslugaData.getCena());
     }
 }

@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-//@WebServlet(description = "kontroler do obsługi kont", urlPatterns = { "/ControllerAccount" })
 @WebServlet("/ControllerAccount")
 public class ControllerAccount extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -25,7 +24,6 @@ public class ControllerAccount extends HttpServlet {
         AccountPage accPage = sessionData.getAccountPage();
         accPage.setNavbarFooter(sessionData.getAccoutType());
         accPage.clearContent();
-
         System.out.println(sessionData.getAccoutType());
 
         if(sessionData.getAccoutType() == TypKonta.ADMINISTRATOR) {
@@ -41,6 +39,7 @@ public class ControllerAccount extends HttpServlet {
                 case "dodaj_wizyte": accPage.addContent("../P_Administrator/worker_wizyta_add.jsp");break;
                 case "wyswietl_today_wizyte": accPage.addContent("../P_Administrator/admin_wizyty_manager_today.jsp");break;
                 case "wyswietl_okres_wizyte": accPage.addContent("../P_Administrator/wyswietl_okres_wizyte.jsp");break;
+                case "wyswietl_okres_wizyte_wynik": accPage.addContent("../P_Administrator/wyswietl_okres_wizyte_wynik.jsp");break;
                 case "wyswietl_pracownik_wizyte": accPage.addContent("../P_Administrator/wyswietl_pracownik_wizyte.jsp");break;
                 case "wyswietl_klient_wizyte": accPage.addContent("../P_Administrator/wyswietl_klient_wizyte.jsp");break;
                 case "promocje": accPage.addContent("../P_Administrator/promo_manager.jsp"); break;
@@ -80,12 +79,18 @@ public class ControllerAccount extends HttpServlet {
             switch(page){
                 case "zadania_peek": accPage.addContent("../P_Pracownik/zadania_peek.jsp"); break;
                 case "konto": accPage.addContent("../P_Pracownik/accountData_pracownik.jsp"); break;
-                case "wydarzenia": accPage.addContent("../P_Administrator/event_manager.jsp"); break;
+                case "wydarzenia": accPage.addContent("../P_Administrator/placeholder.jsp"); break;
                 case "aktualnosci": accPage.addContent("../P_Pracownik/news_manager.jsp"); break;
                 case "aktualnosci_upload": accPage.addContent("../P_Pracownik/upload_news.jsp"); break;
                 case "nieobecnosci": accPage.addContent("../P_Pracownik/absences_manager.jsp"); break;
                 case "nieobecnosc_upload": accPage.addContent("../P_Pracownik/add_absence.jsp"); break;
-
+                case "wizyty": accPage.addContent("../P_Administrator/admin_wizyty_manager.jsp");break;
+                case "dodaj_wizyte": accPage.addContent("../P_Administrator/worker_wizyta_add.jsp");break;
+                case "wyswietl_today_wizyte": accPage.addContent("../P_Administrator/admin_wizyty_manager_today.jsp");break;
+                case "wyswietl_okres_wizyte": accPage.addContent("../P_Administrator/wyswietl_okres_wizyte.jsp");break;
+                case "wyswietl_okres_wizyte_wynik": accPage.addContent("../P_Administrator/wyswietl_okres_wizyte_wynik.jsp");break;
+                case "wyswietl_pracownik_wizyte": accPage.addContent("../P_Administrator/wyswietl_pracownik_wizyte.jsp");break;
+                case "wyswietl_klient_wizyte": accPage.addContent("../P_Administrator/wyswietl_klient_wizyte.jsp");break;
                 case "produkty": accPage.addContent("../P_Pracownik/products_manager.jsp"); break;
                 case "edit_selling_product": accPage.addContent("../P_Pracownik/edit_product_sell.jsp"); break;
                 case "edit_usage_product": accPage.addContent("../P_Pracownik/edit_product_use.jsp"); break;
@@ -103,6 +108,8 @@ public class ControllerAccount extends HttpServlet {
                 case "wizytyService": accPage.addContent("../P_Klient/visits_servicePick.jsp"); break;
                 case "wizytyWorker": accPage.addContent("../P_Klient/visits_workerPick.jsp"); break;
                 case "wizytyHour": accPage.addContent("../P_Klient/visits_hoursPick.jsp"); break;
+                case "wizyty": accPage.addContent("../P_Klient/klient_wizyty_manager.jsp"); break;
+                case "wyswietl_okres": accPage.addContent("../P_Klient/wyswietl_okres_wizyte.jsp"); break;
                 case "twojebonusy": accPage.addContent("../P_Klient/bonusy.jsp"); break;
                 case "konto": accPage.addContent("../P_Klient/accountData_klient.jsp"); break;
                 case "konto_edit": accPage.addContent("../P_Klient/client_editor.jsp"); break;

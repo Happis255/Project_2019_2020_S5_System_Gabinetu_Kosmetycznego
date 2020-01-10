@@ -2,13 +2,13 @@
     response.setCharacterEncoding("UTF-8");
     request.setCharacterEncoding("UTF-8");
 %>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+
 <!doctype html>
 <head>
     <meta charset="utf-8">
 </head>
-
-
 <div class="footer-clean" style="color:rgb(0,0,0);">
     <footer>
         <div class="container">
@@ -16,19 +16,19 @@
                 <div class="col-sm-4 col-md-3 item">
                     <h3>Przejdź do</h3>
                     <ul>
-                        <li><a href="../ControllerAccount?page=konto">Panel główny</a></li>
-                        <li><a href="../ControllerAccount?page=konto_edit">Edytuj dane</a></li>
-                        <li><a href="../ControllerAccount?page=twojebonusy">Twoje bonusy</a></li>
-                        <li><a href="../P_User/oferta_zakupowa.jsp">Sklep</a></li>
+                        <li><a href="ControllerAccount?page=konto">Panel główny</a></li>
+                        <li><a href="ControllerAccount?page=sprzet">Sprzet</a></li>
+                        <li><a href="ControllerAccount?page=pracownicy">Pracownicy</a></li>
+                        <li><a href="ControllerAccount?page=wizyty">Wizyty</a></li>
                     </ul>
                 </div>
                 <div class="col-sm-4 col-md-3 item">
                     <h3>Przejdź do</h3>
                     <ul>
-                        <li><a href="../ControllerAccount?page=wizytyService">Twoje wizyty</a></li>
-                        <li><a href="../P_User/aktualnosci.jsp">Aktualności</a></li>
-                        <li><a href="../P_User/oferta_zakupowa.jsp">Oferta sprzedażowa</a></li>
-                        <li><a href="../P_User/uslugi.jsp">Oferta usługowa</a></li>
+                        <li><a href="ControllerAccount?page=wydarzenia">Wydarzenia</a></li>
+                        <li><a href="ControllerAccount?page=aktualnosci">Aktualności</a></li>
+                        <li><a href="ControllerAccount?page=promocje">Promocje</a></li>
+                        <li><a href="ControllerAccount?page=raporty">Raporty</a></li>
                     </ul>
                 </div>
                 <div class="col-sm-4 col-md-3 item">
@@ -48,4 +48,3 @@
         </div>
     </footer>
 </div>
-</html>

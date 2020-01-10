@@ -1368,10 +1368,27 @@ public class DataSource {
         return resultSet;
     }
 
-    public void singInWorkerForEvent(int workerId, int eventId){
+    public void singInWorkerForEvent(int workerId, int eventId) throws SQLException {
         PreparedStatement exeStatement;
         exeStatement = statements.get("zapiszPracownikaNaWydarzenie");
+        exeStatement.setInt(1, eventId);
+        exeStatement.setInt(2, workerId);
+        exeStatement.executeUpdate();
 
+    }
+
+    public ResultSet getWorkerName(int id) throws SQLException {
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("pobierz_nazwiska_wydarzenie");
+        exeStatement.setInt(1, id);
+        return exeStatement.executeQuery();
+    }
+
+    public void signOutEvent(int id) throws SQLException {
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("wypiszPracownikaNaWydarzenie");
+        exeStatement.setInt(1, id);
+        exeStatement.executeUpdate();
     }
 
     //Zadania gospodarcze
@@ -1579,6 +1596,54 @@ public class DataSource {
     public ResultSet getTodayWizytyDB() throws SQLException {
         PreparedStatement exeStatement;
         exeStatement = statements.get("pobierz_today_wzity_P");
+        return exeStatement.executeQuery();
+    }
+
+    public ResultSet loadWizytyFroMDatatoData_DB(String data_od, String data_do) throws SQLException {
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("pobierz_wizyty_DataOd_DataDo_P");
+        exeStatement.setDate(1, java.sql.Date.valueOf(data_od));
+        exeStatement.setDate(2, java.sql.Date.valueOf(data_do));
+        return exeStatement.executeQuery();
+    }
+
+    public ResultSet loadWizytyFromToWithClient_DB(String data_od, String data_do, String id_klienta) throws SQLException {
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("loadWizytyFromToWithClient_DB_P");
+        exeStatement.setDate(1, java.sql.Date.valueOf(data_od));
+        exeStatement.setDate(2, java.sql.Date.valueOf(data_do));
+        exeStatement.setInt(3, Integer.parseInt(id_klienta));
+        return exeStatement.executeQuery();
+    }
+
+    public ResultSet loadWizytyFromToWithWorker_DB(String data_od, String data_do, String id_pracownika) throws SQLException {
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("loadWizytyFromToWithWorker_DB_P");
+        exeStatement.setDate(1, java.sql.Date.valueOf(data_od));
+        exeStatement.setDate(2, java.sql.Date.valueOf(data_do));
+        exeStatement.setInt(3, Integer.parseInt(id_pracownika));
+        return exeStatement.executeQuery();
+    }
+
+    public ResultSet getMonthWizytyForClient_DB(int id) throws SQLException {
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("getMonthWizytyForClient_DB_P");
+        exeStatement.setInt(1, id);
+        return exeStatement.executeQuery();
+    }
+
+    public void zaktualizujPunktyDB(String e_mail, int cena) throws SQLException {
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("zaktualizujPunktyDB_P");
+        exeStatement.setString(2, e_mail);
+        exeStatement.setInt(1, cena);
+        exeStatement.executeUpdate();
+    }
+
+    public ResultSet countWyplataID_DB(int id) throws SQLException {
+        PreparedStatement exeStatement;
+        exeStatement = statements.get("countWyplataID_DB_P");
+        exeStatement.setInt(1, id);
         return exeStatement.executeQuery();
     }
 }

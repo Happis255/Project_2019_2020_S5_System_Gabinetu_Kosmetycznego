@@ -16,19 +16,19 @@
                 <div class="col-sm-4 col-md-3 item">
                     <h3>Przejdź do</h3>
                     <ul>
-                        <li><a href="../ControllerAccount?page=konto">Panel główny</a></li>
-                        <li><a href="../ControllerAccount?page=konto_edit">Edytuj dane</a></li>
-                        <li><a href="../ControllerAccount?page=twojebonusy">Twoje bonusy</a></li>
-                        <li><a href="../P_User/oferta_zakupowa.jsp">Sklep</a></li>
+                        <li><a href="ControllerAccount?page=konto">Konto</a></li>
+                        <li><a href="ControllerAccount?page=zadania_peek">Zadania gospodarcze</a></li>
+                        <li><a href="ControllerAccount?page=nieobecnosci">Nieobecności</a></li>
+                        <li><a href="ControllerAccount?page=wizyty">Wizyty</a></li>
                     </ul>
                 </div>
                 <div class="col-sm-4 col-md-3 item">
                     <h3>Przejdź do</h3>
                     <ul>
-                        <li><a href="../ControllerAccount?page=wizytyService">Twoje wizyty</a></li>
-                        <li><a href="../P_User/aktualnosci.jsp">Aktualności</a></li>
-                        <li><a href="../P_User/oferta_zakupowa.jsp">Oferta sprzedażowa</a></li>
-                        <li><a href="../P_User/uslugi.jsp">Oferta usługowa</a></li>
+                        <li><a href="ControllerAccount?page=wydarzenia">Wydarzenia</a></li>
+                        <li><a href="ControllerAccount?page=aktualnosci">Aktualności</a></li>
+                        <li><a href="ControllerAccount?page=produkty">Produkty</a></li>
+                        <li><a href="ControllerAccount?page=raporty">Raporty</a></li>
                     </ul>
                 </div>
                 <div class="col-sm-4 col-md-3 item">

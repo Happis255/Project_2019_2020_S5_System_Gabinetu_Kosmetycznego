@@ -1,8 +1,12 @@
 package myPage.data.dataBase;
 
 import myPage.data.others.TypWydarzenia;
+import myPage.dataSourceDB.DataSource;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
+import java.util.LinkedList;
 
 public class WydarzenieData {
     private int id;
@@ -15,6 +19,7 @@ public class WydarzenieData {
     private Date data_od;
     private Date data_do;
     private int kosz;
+    private DataSource dataSource;
 
     public WydarzenieData(
             int id,
@@ -38,6 +43,7 @@ public class WydarzenieData {
         this.data_od = data_od;
         this.data_do = data_do;
         this.kosz = kosz;
+        dataSource = new DataSource();
     }
 
     public int getId() {
@@ -83,5 +89,19 @@ public class WydarzenieData {
 
     public int getKosz() {
         return kosz;
+    }
+
+    public LinkedList<String> getWorkerName(int id) throws SQLException {
+        LinkedList<String> name = new LinkedList<>();
+        ResultSet result;
+
+        result = dataSource.getWorkerName(id);
+        if(result.next()){
+            name.add(String.valueOf(result.getInt("id_pracownika")));
+            name.add(result.getString("imie"));
+            name.add(result.getString("nazwisko"));
+        }
+
+        return name;
     }
 }
