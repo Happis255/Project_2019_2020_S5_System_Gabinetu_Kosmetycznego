@@ -167,12 +167,12 @@ public class Pracownik extends User {
         if (resultSet.next()) {
             double suma = resultSet.getInt("zarobki");
             System.out.print(suma);
-                if (suma < 3000) return 2000;
+                if (suma < 2600) return 2600;
                 else {
-                    double roznica = suma - 3000;
+                    double roznica = suma - 2600;
                     double dodatkowa_kwota = roznica/2;
-                    return dodatkowa_kwota+2000;
+                    return dodatkowa_kwota+2600;
                 }
-        } else return 2000;
+        } else return 2600;
     }
 }
