@@ -32,6 +32,14 @@
                     e.printStackTrace();
                 }
 
+                if (event.isEmpty() && !TypKonta.getStringVal(sessionData.getAccoutType()).equals("ADMINISTRATOR")){
+                    out.print("<section id=\"baza_uslug\" class=\"bg-light-gray\" style=\"margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:1140px;margin-right:auto;margin-left:auto;border-radius:20px;margin-bottom:187px;\">" +
+                            "<h5 class=\"text-center\" style=\"height:21px;margin-right:50px;margin-left:50px;\">Aktualnie brak wydarzeń w systemie</h5></section>");
+                } else if (event.isEmpty() && TypKonta.getStringVal(sessionData.getAccoutType()).equals("ADMINISTRATOR")){
+                    out.print("<section id=\"baza_uslug\" class=\"bg-light-gray\" style=\"margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:1140px;margin-right:auto;margin-left:auto;border-radius:20px;margin-bottom:137px;\">" +
+                            "<h5 class=\"text-center\" style=\"height:21px;margin-right:50px;margin-left:50px;\">Aktualnie brak wydarzeń w systemie</h5></section>");
+                }
+
                 while (!event.isEmpty()){
                     temp = event.pop();
 
@@ -96,14 +104,16 @@
                 }
             %>
         <section id="baza_uslug" class="bg-light-gray" style="margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:1140px;margin-right:auto;margin-left:auto;border-radius:20px;margin-bottom:30px;">
-            <div class="row">
-                <a href="../ControllerAccount?page=dodaj_wydarzenie"><button type="button" class="btn btn-primary float-none align-self-center" style="width:265px;margin-left: 170px;">Utwórz wydarzenie</button></a>
-                <a><button type="submit" name="opcja" value="zapisz" class="btn btn-primary float-none align-self-center" style="width:265px;margin-left: 17px;">Zapisz się na wydarzenie</button></a>
-                <a><button type="submit" name="opcja" value="wypisz" class="btn btn-primary float-none align-self-center" style="width:265px;margin-left: 17px;">Wypisz pracownika</button></a>
-            </div>
-            <% if (TypKonta.getStringVal(sessionData.getAccoutType()).equals("ADMINISTRATOR"))
-            out.print("<a><button type=\"submit\" name=\"opcja\" value=\"usun_wydarzenie\" class=\"btn btn-primary float-none align-self-center\" style=\"width:265px;    margin-top: 15px;margin-left: 437px;\">Usuń wydarzenie</button></a>");
+            <% if (TypKonta.getStringVal(sessionData.getAccoutType()).equals("ADMINISTRATOR")){
+                out.print(
+                        "            <div class=\"row\">\n" +
+                                "                <a href=\"../ControllerAccount?page=dodaj_wydarzenie\"><button type=\"button\" class=\"btn btn-primary float-none align-self-center\" style=\"width:265px;margin-left: 170px;\">Utwórz wydarzenie</button></a>\n" +
+                                "                <a><button type=\"submit\" name=\"opcja\" value=\"usun_wydarzenie\" class=\"btn btn-primary float-none align-self-center\" style=\"width:265px;;margin-left: 17px;margin-bottom: 12px;\">Usuń wydarzenie</button></a>" +
+                                "<a>             <button type=\"submit\" name=\"opcja\" value=\"wypisz\" class=\"btn btn-primary float-none align-self-center\" style=\"width:265px;margin-left: 17px;\">Wypisz pracownika</button></a>\n" +
+                                "            </div>");
+            }
             %>
+            <a><button type="submit" name="opcja" value="zapisz" class="btn btn-primary float-none align-self-center" style="width:265px;margin-left: 437px;">Zapisz się na wydarzenie</button></a>
     </section>
     </form>
 </html>

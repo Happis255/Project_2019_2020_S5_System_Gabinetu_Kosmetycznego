@@ -6,23 +6,20 @@
 <%@ page import="myPage.basicObjects.Usluga" %>
 <%@ page import="myPage.data.dataBase.UslugaData" %>
 <%@ page import="java.sql.SQLException" %>
-<%@ page import="javax.rmi.ssl.SslRMIClientSocketFactory" %>
 <!DOCTYPE html>
 <html>
-<section id="wizyty_czas" class="bg-light-gray" style="margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:1140px;margin-right:auto;margin-left:auto;border-radius:20px;margin-bottom:30px;">
-    <h6 class="text-center" id="informacja2" style="height:44px;margin-right:50px;margin-left:50px;font-weight: 100;">Wybierz Godzinę Wizyty</h6>
-    <form id="datePicker" action="${pageContext.request.contextPath}/ControllerVisitsAdder" method="post">
-        <table id="tablica_uslug" class="table" cellspacing="0" width="100%"
-               style="text-align: center;margin-bottom: 0;border: 3px solid #FFFFFF;width: 98%;max-width: 98%;margin-left: 12px;background-color: transparent;border-collapse: collapse;">
-            <thead>
-            <tr>
-                <th></th>
-                <th>GODZINA</th>
-                <th>STATUS</th>
-            </tr>
-            </thead>
-            <tbody>
-            <%
+<section id="wizyty_czas" class="bg-light-gray" style="margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:1000px;margin-right:auto;margin-left:auto;border-radius:20px;margin-top: 120px;margin-bottom: 152px;">
+        <h2 class="text-center" style="height:79px;">Tworzenie wizyty</h2>
+        <h5 class="text-center" style="height:21px;margin-right:50px;margin-left:50px;">Wybierz teraz jedynie interesującą Cię godzinę.</h5>
+        <h6 class="text-center" id="RODO" style="height:44px;margin-right:50px;margin-left:50px;">Następnie zatwierdź operację.
+                                                    <br>Jeśli wizyta zostanie pomyślnie utworzona, oczekuj na potwierdzenie e-mail.</h6>
+            <form id="datePicker" action="${pageContext.request.contextPath}/ControllerVisitsAdder" method="post">
+
+            <%  String row ="<select class=\"form-control\" name=\"wybrana_usluga\" value=\"\" required=\"\" style=\"    width: 265px;\n" +
+                        "    position: static;\n" +
+                        "    margin-left: 367px;margin-top: 36px;\">";
+                out.println(row);
+
                 VisitPage visitPage = (VisitPage)request.getSession().getAttribute("VisitPage");
                 Wizyta wizyty = new Wizyta();
                 Usluga uslugi = new Usluga();
@@ -86,38 +83,27 @@
                             czas = h + ":30";
                         tempW = wizytyGodzinami.get(czas);
                         if(tempW != null){
-                            out.println("<tr><td></td>" +
-                                    "<td>" + czas + "</td>" +
-                                    "<td>" + "NIEDOSTEPNY" + "</td>" +
-                                    "</tr>");
+                            row = "<option value=\"\" disabled>" + czas + " - termin zajęty</option>\n";
+                            out.println(row);
                         }else{
-                            out.println("<tr><td> <input type=\"radio\" Name=\"wybrana_usluga\" Value =\"" + czas + "\"></td>" +
-                                    "<td>" + czas + "</td>" +
-                                    "<td>" + "DOSTEPNY" + "</td>" +
-                                    "</tr>");
+                            row = "<option value=\"" + czas +"\">" + czas + " - termin wolny</option>\n";
+                            out.println(row);
                         }
                     }
                 }
                 czas = "17:00";
                 tempW = wizytyGodzinami.get(czas);
                 if(tempW != null){
-                    out.println("<tr><td></td>" +
-                            "<td>" + czas + "</td>" +
-                            "<td>" + "NIEDOSTEPNY" + "</td>" +
-                            "</tr>");
+                    row = "<option value=\"\" disabled>" + czas + " - termin zajęty</option>\n";
+                    out.println(row);
                 }else{
-                    out.println("<tr><td> <input type=\"radio\" Name=\"wybrana_usluga\" Value =\"" + czas + "\"></td>" +
-                            "<td>" + czas + "</td>" +
-                            "<td>" + "DOSTEPNY" + "</td>" +
-                            "</tr>");
+                    row = "<option value=\"" + czas +"\">" + czas + " - termin wolny</option>\n";
+                    out.println(row);
                 }
             %>
-            </tbody>
-        </table>
-        <button class="btn btn-primary" type="submit" style="width:265px;position:static;text-align:center!important;margin-left:437px;margin-top:20px;">Zatwierdź i Wyślij</button>
-        <a href="../ControllerAccount?page=wizytyWorker"><button class="btn btn-primary float-none align-self-center" type="button" style="width:265px;position:static;text-align:center!important;margin-left:437px;margin-top:20px;">Wróć do wyboru Pracownika i Daty</button></a>
+            </select>
+        <button class="btn btn-primary" type="submit" style="width:265px;position:static;text-align:center!important;margin-left:367px;margin-top:20px;">Zatwierdź i wyślij prośbę</button>
+        <a href="../ControllerAccount?page=wizytyWorker"><button class="btn btn-primary float-none align-self-center" type="button" style="width:265px;position:static;text-align:center!important;margin-left:367px;margin-top:20px;">Wybierz ponownie dane</button></a>
     </form>
 </section>
-
-
 </html>
