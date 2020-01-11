@@ -50,7 +50,7 @@
             %>
             </tbody>
         </table>
-        <button class="btn btn-primary" type="submit" style="margin:0;margin-top: 16px;width:265px;margin-left:267px;">Wybierz Usługę</button>
+        <button class="btn btn-primary" type="submit" style="width:265px;position:static;text-align:center!important;margin-left:437px;margin-top:20px;">Wybierz Usługę</button>
     </form>
 </section>
 </html>

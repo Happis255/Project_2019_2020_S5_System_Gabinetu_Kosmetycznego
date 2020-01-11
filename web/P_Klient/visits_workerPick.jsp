@@ -49,9 +49,9 @@
             </tbody>
         </table>
 
-        <input id="data" class="form-control" type="date" name="data-wizyty" required="" style="margin:0;width:500px;margin-left:145px;margin-top:15px;">
+        <input id="data" class="form-control" type="date" name="data-wizyty" required="" style="width:265px;position:static;text-align:center!important;margin-left:437px;margin-top:20px;">
 
-        <button class="btn btn-primary" type="submit" style="margin:0;margin-top: 16px;width:265px;margin-left:267px;">Wybierz Pracownika i Datę</button>
+        <button class="btn btn-primary" type="submit" style="width:265px;position:static;text-align:center!important;margin-left:437px;margin-top:20px;">Wybierz Pracownika i Datę</button>
     </form>
     <a href="../ControllerAccount?page=wizytyService"><button class="btn btn-primary float-none align-self-center" type="button" style="width:265px;position:static;text-align:center!important;margin-left:437px;margin-top:20px;">Wróć do wyboru usługi</button></a>
 

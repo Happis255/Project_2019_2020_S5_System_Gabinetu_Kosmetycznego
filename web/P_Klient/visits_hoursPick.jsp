@@ -13,7 +13,7 @@
     <h6 class="text-center" id="informacja2" style="height:44px;margin-right:50px;margin-left:50px;font-weight: 100;">Wybierz Godzinę Wizyty</h6>
     <form id="datePicker" action="${pageContext.request.contextPath}/ControllerVisitsAdder" method="post">
         <table id="tablica_uslug" class="table" cellspacing="0" width="100%"
-               style="text-align: center;margin-bottom: 0;border: 3px solid #FFFFFF;width: 50%;max-width: 50%;margin-left: 12px;background-color: transparent;border-collapse: collapse;">
+               style="text-align: center;margin-bottom: 0;border: 3px solid #FFFFFF;width: 98%;max-width: 98%;margin-left: 12px;background-color: transparent;border-collapse: collapse;">
             <thead>
             <tr>
                 <th></th>
@@ -49,7 +49,6 @@
                 }
                 wizytyGodzinami.put("17:00", null);
 
-                System.out.println("WIZYTY SIZE:" + wizyty.size());
                 while (!wizyty.isEmpty()){
                     try {
                         tempW = wizyty.pop();
@@ -58,16 +57,15 @@
                         int timePeroids = tempU.getCzas_trwania() / 30;
                         if(tempU.getCzas_trwania() % 30 != 0)
                             timePeroids += 1;
-                        System.out.println("CZAS TRWANIA:" + tempU.getCzas_trwania());
-                        System.out.println("TIME PEROIDS:" + timePeroids);
+
                         for(int h = tempW.getGodzina().getHour() ; h <= 16 && timePeroids > 0;h++){
                             for(int m = tempW.getGodzina().getMinute(); m <=30 && timePeroids > 0; m+=30, timePeroids--){
-                                System.out.println("###" + h + " " + m);
+
                                 if(m == 0)
                                     czas = h + ":00";
                                 else
                                     czas = h + ":30";
-                                System.out.println("@@@" + czas);
+
                                 wizytyGodzinami.replace(czas, new WizytaData(tempW));
                             }
                         }
@@ -79,17 +77,14 @@
                         e.printStackTrace();
                     }
                 }
-                System.out.println(wizytyGodzinami);
 
-                System.out.println("TEMPSW");
                 for(int h = 10; h<=16 ;h++){
                     for(int m = 0; m <=30; m+=30){
                         if(m == 0)
                             czas = h + ":00";
                         else
                             czas = h + ":30";
-                        tempW = wizytyGodzinami.get("czas");
-                        System.out.println(czas + " " + tempW);
+                        tempW = wizytyGodzinami.get(czas);
                         if(tempW != null){
                             out.println("<tr><td></td>" +
                                     "<td>" + czas + "</td>" +
@@ -119,9 +114,10 @@
             %>
             </tbody>
         </table>
-        <button class="btn btn-primary" type="submit" style="margin:0;margin-top: 16px;width:265px;margin-left:267px;">Zatwierdź i Wyślij</button>
+        <button class="btn btn-primary" type="submit" style="width:265px;position:static;text-align:center!important;margin-left:437px;margin-top:20px;">Zatwierdź i Wyślij</button>
+        <a href="../ControllerAccount?page=wizytyWorker"><button class="btn btn-primary float-none align-self-center" type="button" style="width:265px;position:static;text-align:center!important;margin-left:437px;margin-top:20px;">Wróć do wyboru Pracownika i Daty</button></a>
     </form>
 </section>
-<a href="../ControllerAccount?page=wizytyWorker"><button class="btn btn-primary float-none align-self-center" type="button" style="width:265px;position:static;text-align:center!important;margin-left:437px;margin-top:20px;">Wróć do wyboru Pracownika i Daty</button></a>
+
 
 </html>
