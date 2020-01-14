@@ -686,7 +686,7 @@ public class DataSource {
         exeStatement.executeQuery();
     }
 
-    public void CheckUserDB(String e_mail) throws SQLException{
+    public void CheckUserDB(String e_mail) throws SQLException, DBReadWriteException {
         PreparedStatement exeStatement;
         ResultSet resultSet;
 
@@ -695,7 +695,7 @@ public class DataSource {
         resultSet = exeStatement.executeQuery();
 
         if(resultSet.next())
-            throw new SQLException();
+            throw new DBReadWriteException();
     }
 
     public ResultSet getUserDB(String e_mail) throws SQLException{
