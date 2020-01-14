@@ -3,8 +3,8 @@ package myPage.UnitTests;
 import myPage.basicObjects.User;
 import myPage.dataSourceDB.DataSource;
 import myPage.exceptions.DBReadWriteException;
-import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,7 +13,6 @@ import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.fail;
-
 
 class UserTest {
     @Test
