@@ -4,7 +4,7 @@
 <%@ page import="java.sql.SQLException" %>
 <%@ page import="myPage.exceptions.DBReadWriteException" %>
 <%@ page import="myPage.data.dataBase.UslugaData" %>
-<section id="service_approver" class="bg-light-gray" style="margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:800px;margin-right:auto;margin-left:auto;border-radius:20px;margin-bottom: 58px;margin-top: 43px;">
+<section id="service_approver" class="bg-light-gray" style="margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:800px;margin-right:auto;margin-left:auto;border-radius:20px;margin-bottom: 82px;margin-top: 43px;">
     <form method="post" action="${pageContext.request.contextPath}/ControllerWorkerServiceAdder">
     <h2 class="text-center" style="height:79px;">Nadawanie uprawnienia pracownikowi</h2>
     <h5 class="text-center" style="height:21px;margin-right:50px;margin-left:50px;">Aby nadać pracownikowi możliwość wykonywania danego zabiegu,<br>wybierz odpowiedniego pracownika.<br><br></h5>

@@ -23,8 +23,7 @@ public class ControllerNewsRemover extends HttpServlet {
     private HttpSession session;
     private String resultMessage = "";
 
-    String file_directory = "C:\\Users\\Huber\\Desktop\\Project_2019_2020_S5\\out\\artifacts\\projectWebbAppTest2_war_exploded\\assets\\aktualnosci_grafika\\";
-
+    String file_directory = "C:\\Sieci\\2020\\out\\artifacts\\projectWebbAppTest2_war_exploded\\assets\\aktualnosci_grafika\\";    
     private String generateFileName(int a) {
         String rozszerzenie = ".jpg";
         int id = a;

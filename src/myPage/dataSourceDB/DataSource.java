@@ -726,7 +726,6 @@ public class DataSource {
         exeStatement1.setString(12, "-");
         exeStatement1.setString(13, "-");
         exeStatement1.executeUpdate();
-
         PreparedStatement exeStatement2 = statements.get("createClient_P");
         exeStatement2.setString(1, parameters.get("e-mail"));
         exeStatement2.setString(2, parameters.get("haslo"));
@@ -735,14 +734,11 @@ public class DataSource {
         exeStatement2.setString(5, parameters.get("ulica"));
         exeStatement2.setString(6, parameters.get("kod"));
         exeStatement2.setString(7, parameters.get("miejscowosc"));
-
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = dateFormat.parse(parameters.get("data-urodzenia"));
-
         exeStatement2.setDate(8, DateTransformer.getSqlDate(date));
         exeStatement2.setInt(9, Integer.parseInt(parameters.get("telefon")));
         exeStatement2.executeUpdate();
-
         PreparedStatement exeStatement3 = statements.get("assignClientCard_P");
         exeStatement3.setString(1, parameters.get("e-mail"));
         exeStatement3.executeUpdate();

@@ -33,7 +33,7 @@
 </script>
 <!--end of navbar bar-->
 
-    <section id="logowanie" class="bg-light-gray" style="margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:800px;margin-right:auto;margin-left:auto;border-radius:20px;margin-bottom:121px;margin-top:60px;">
+    <section id="logowanie" class="bg-light-gray" style="margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:800px;margin-right:auto;margin-left:auto;border-radius:20px;margin-bottom:168px;margin-top:60px;">
         <form method="post" action="${pageContext.request.contextPath}/UserLogin" onsubmit="code(this)">
             <h2 class="text-center" style="height:53px;">Zaloguj się do systemu</h2>
             <div class="form-group"><label style="font-size:17px;margin-left:123px;">E-Mail</label><input class="form-control" type="email" name="username" required="" placeholder="E-Mail" style="width:500px;margin:0px;margin-left:145px;"><label style="font-size:17px;margin-left:123px;margin-top:16px;">Hasło</label>
@@ -45,9 +45,6 @@
         <form method="post" action="rejestracja.jsp">
             <button class="btn btn-primary" type="submit" style="margin:0;width:265px;margin-left:267px;margin-top:9px;">Zarejestruj się</button>
         </form>
-         <form method="post" action="../index.jsp">
-             <button class="btn btn-primary" type="submit" style="margin:0;width:265px;margin-left:267px;margin-top:9px;">Przywróć hasło</button>
-         </form>
         </div>
     </section>
 

@@ -20,7 +20,7 @@ import java.util.HashMap;
 
 public class ControllerUploadSellingProductWithJPG extends HttpServlet {
 
-    String file_directory = "C:\\Users\\Huber\\Desktop\\Project_2019_2020_S5\\out\\artifacts\\projectWebbAppTest2_war_exploded\\assets\\produkty_grafika\\";
+    String file_directory = "C:\\Sieci\\2020\\out\\artifacts\\projectWebbAppTest2_war_exploded\\assets\\produkty_grafika\\";
 
     private HttpSession session;
     private String resultMessage = "";

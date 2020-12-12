@@ -1,6 +1,6 @@
 <%@ page import="myPage.basicObjects.Pracownik" %>
 <%@ page import="myPage.data.dataBase.PracownikData" %>
-<section id="usuwanie_pracownika" class="bg-light-gray" style="margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:800px;margin-right:auto;margin-left:auto;border-radius:20px;margin-top: 88px;margin-bottom:123px;">
+<section id="usuwanie_pracownika" class="bg-light-gray" style="margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:800px;margin-right:auto;margin-left:auto;border-radius:20px;margin-top: 88px;margin-bottom:147px;">
 <form method="post" action="${pageContext.request.contextPath}/ControllerWorkerRemover">
     <h2 class="text-center" style="height:79px;">Zwalnianie pracownika</h2>
     <h5 class="text-center" style="height:21px;margin-right:50px;margin-left:50px;">Aby usunąć pracownika z systemu, wybierz odpowiedniego pracownika.<br><br></h5>

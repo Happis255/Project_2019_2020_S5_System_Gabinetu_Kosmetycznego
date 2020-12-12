@@ -8,9 +8,9 @@
     session = request.getSession();
     SessionData sessionData = (SessionData) session.getAttribute("userData");
     if(sessionData.getAccoutType() == TypKonta.ADMINISTRATOR)
-        out.print("    <section id=\"upload_news\" class=\"bg-light-gray\" style=\"margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:800px;margin-right:auto;margin-left:auto;border-radius:20px;\">");
+        out.print("    <section id=\"upload_news\" class=\"bg-light-gray\" style=\"margin-bottom:24px;margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:800px;margin-right:auto;margin-left:auto;border-radius:20px;\">");
     else
-        out.print("    <section id=\"upload_news\" class=\"bg-light-gray\" style=\"margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:800px;margin-right:auto;margin-left:auto;border-radius:20px;margin-bottom:24px;\">");
+        out.print("    <section id=\"upload_news\" class=\"bg-light-gray\" style=\"margin-bottom:24px;margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:800px;margin-right:auto;margin-left:auto;border-radius:20px;margin-bottom:24px;\">");
         %>
         <form action="${pageContext.request.contextPath}/UploadNewsWithJPG" method="post" enctype="multipart/form-data">
             <h2 class="text-center" style="height:79px;">Dodaj aktualność</h2>

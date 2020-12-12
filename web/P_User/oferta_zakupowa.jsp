@@ -32,7 +32,7 @@
 <!--end of navbar bar-->
 
 <div>
-        <!--newsy generowane na bieżąco-->
+        <!--produkty generowane na bieżąco-->
         <%
             Produkt produkty = new Produkt();
             ProduktSprzedazowyData temp;
@@ -48,7 +48,7 @@
 
             if (produkty.produkt_sprzedazowyListaEmpty()) {
                 out.println(
-                        "<section id=\"aktualnosci\" class=\"bg-light-gray\" style=\"margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:800px;margin-right:auto;margin-left:auto;border-radius:20px;\">" +
+                        "<section id=\"aktualnosci\" class=\"bg-light-gray\" style=\"margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;margin-bottom:248px;padding-top:20px;max-width:800px;margin-right:auto;margin-left:auto;border-radius:20px;\">" +
                         "<h2 class=\"text-center\" style=\"height:44px;\">Oferta sprzedażowa</h2>" +
                         "<h5 class=\"text-center\" style=\"height:auto;margin-right:50px;margin-left:50px;font-weight:200;margin-bottom:31px;\">W poniższej sekcji znajdziesz wszystkie&nbsp;<br>aktualne produkty możliwe do nabycia w naszym gabinecie!</h5>" +
                         "<hr id=\"linia\" style=\"color: white;border: solid 2px;border-radius: 100px;width:635px;margin-top:auto;margin-bottom:29px;\">" +
@@ -62,7 +62,7 @@
 
                 out.println(
                         "<div>\n" +
-"    <!--newsy generowane na bieżąco-->\n" +
+"    <!--produkty generowane na bieżąco-->\n" +
 "    <section id=\"aktualnosci\" class=\"bg-light-gray\" style=\"margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:800px;margin-right:auto;margin-left:auto;border-radius:20px;\">\n" +
 "        <h2 class=\"text-center\" style=\"height:44px;\">Oferta sprzedażowa</h2>\n" +
 "        <h5 class=\"text-center\" style=\"height:auto;margin-right:50px;margin-left:50px;font-weight:200;margin-bottom:31px;\">W poniższej sekcji znajdziesz wszystkie&nbsp;<br>aktualne produkty możliwe do nabycia w naszym gabinecie!</h5>\n" +

@@ -1,5 +1,5 @@
 
-<section id="status_edder" class="bg-light-gray" style="margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:800px;margin-right:auto;margin-left:auto;border-radius:20px;margin-bottom:30px;">
+<section id="status_edder" class="bg-light-gray" style="margin:0;background-color:rgba(0,0,0,0.11);color:#ffffff;padding-bottom:20px;padding-top:20px;max-width:800px;margin-right:auto;margin-left:auto;border-radius:20px;margin-bottom:54px;">
     <form method="post" action="${pageContext.request.contextPath}/ControllerStatusAdder">
         <h2 class="text-center" style="height:79px;">Dodawanie nowego statusu</h2>
         <h5 class="text-center" style="height:21px;margin-right:50px;margin-left:50px;margin-bottom: 43px;">Aby dodać nowe dane statusu, wypełnij poniższe pola.<br><br></h5>
